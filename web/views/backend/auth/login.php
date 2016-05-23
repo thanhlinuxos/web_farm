@@ -34,12 +34,12 @@
                    
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <input id="user" type="text" class="form-control" name="user" value="" placeholder="User">                                        
+                        <input id="user" type="text" class="form-control" name="u" value="" placeholder="User">                                        
                     </div>
 
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                        <input id="password" type="password" class="form-control" name="password" placeholder="Password">
+                        <input id="password" type="password" class="form-control" name="p" placeholder="Password">
                     </div>                                                                  
 
                     <div class="form-group">
