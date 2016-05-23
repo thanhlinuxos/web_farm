@@ -1,6 +1,6 @@
 
 
-<div class="page-header">
+<div class="page-title">
   <h4>Add user</h4>
 </div>
 

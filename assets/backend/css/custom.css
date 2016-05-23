@@ -14,6 +14,11 @@
     width: 100%;
     height:52px;
 }
+.page-title {
+  padding-bottom: 9px;
+  margin: 0 0 20px 0;
+  border-bottom: 1px solid #eee;
+}
 .wraper {
     margin: 0;
     padding: 15px;
