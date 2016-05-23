@@ -2,7 +2,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Login</title>
+        <title>Farm</title>
         <link href="<?php echo base_url('vendor/bootstrap/css/bootstrap.min.css'); ?>" rel="stylesheet">
         <link href="<?php echo base_url('assets/backend/css/login.css'); ?>" rel="stylesheet">
         <script type="text/javascript" src="<?php echo base_url('vendor/jquery/jquery-2.2.3.min.js'); ?>"></script>      
@@ -10,40 +10,51 @@
     </head>
     <body>
         <div class="container">    
-            <div id="loginbox" class="mainbox col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3"> 
-                <div class="row">                
-                    <div class="iconmelon">
-                        <svg viewBox="0 0 32 32">
-                        <g filter="">
-                        <use xlink:href="#git"></use>
-                        </g>
-                        </svg>
-                    </div>
-                </div>
-                <div class="panel panel-default" >
-                    <div class="panel-heading">
-                        <div class="panel-title text-center">Đăng Nhập Vào Hệ Thống</div>
-                    </div>     
-                    <div class="panel-body" >
-                        <form name="login-form" id="login-form" class="form-horizontal" method="POST">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                <input id="user" type="text" class="form-control" name="user" value="" placeholder="User">                                        
-                            </div>
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                <input id="password" type="password" class="form-control" name="password" placeholder="Password">
-                            </div>                                                                  
-                            <div class="form-group">
-                                <div class="col-sm-12 controls">
-                                    <button type="submit" href="#" class="btn btn-primary pull-right"><i class="glyphicon glyphicon-log-in"></i> Log in</button>                          
-                                </div>
-                            </div>
-                        </form>     
-                    </div>                     
-                </div>  
+        
+    <div id="loginbox" class="mainbox col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3"> 
+        
+        <div class="row">                
+            <div class="iconmelon">
+              <svg viewBox="0 0 32 32">
+                <g filter="">
+                  <use xlink:href="#git"></use>
+                </g>
+              </svg>
             </div>
         </div>
+        
+        <div class="panel panel-default" >
+            <div class="panel-heading">
+                <div class="panel-title text-center">Login</div>
+            </div>     
+
+            <div class="panel-body" >
+
+                <form name="form" id="form" class="form-horizontal" enctype="multipart/form-data" method="POST">
+                   
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input id="user" type="text" class="form-control" name="user" value="" placeholder="User">                                        
+                    </div>
+
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                        <input id="password" type="password" class="form-control" name="password" placeholder="Password">
+                    </div>                                                                  
+
+                    <div class="form-group">
+                        <!-- Button -->
+                        <div class="col-sm-12 controls">
+                            <button type="submit" href="#" class="btn btn-primary pull-right"><i class="glyphicon glyphicon-log-in"></i> Log in</button>                          
+                        </div>
+                    </div>
+
+                </form>     
+
+            </div>                     
+        </div>  
+    </div>
+</div>
         <div id="particles"></div>
     </body>
 </html>
