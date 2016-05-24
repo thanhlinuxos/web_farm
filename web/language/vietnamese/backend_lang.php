@@ -5,7 +5,7 @@ $lang['id'] = 'ID';
 //User
 $lang['user_id'] = 'ID Nhân viên';
 $lang['user_fullname'] = 'Họ Tên';
-$lang['user_username'] = 'Username';
+$lang['user_username'] = 'Tên đăng nhập';
 $lang['user_password'] = 'Password';
 $lang['user_group'] = 'Group';
 $lang['user_phone'] = 'Phone';
