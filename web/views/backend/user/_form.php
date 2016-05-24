@@ -121,5 +121,6 @@
             changeYear: true,
             yearRange : yrRange
         });
+        $.datepicker.setDefaults($.datepicker.regional[regional]);
     });
 </script>

@@ -10,8 +10,9 @@
         <link href="<?php echo base_url('vendor/jquery/ui/jquery-ui.min.css'); ?>" rel="stylesheet">
         <script type="text/javascript" src="<?php echo base_url('vendor/jquery/jquery-2.2.3.min.js'); ?>"></script>
         <script type="text/javascript" src="<?php echo base_url('vendor/jquery/ui/jquery-ui.min.js'); ?>"></script>
-        <script type="text/javascript" src="<?php echo base_url('vendor/jquery/ui/jquery-ui-i18n.min.js'); ?>"></script>
+        <script type="text/javascript" src="<?php echo base_url('vendor/jquery/ui/jquery-ui-i18n.js'); ?>"></script>
         <script type="text/javascript" src="<?php echo base_url('vendor/bootstrap/js/bootstrap.min.js'); ?>"></script>
+        <script type="text/javascript" src="<?php echo base_url('assets/backend/js/script.js'); ?>"></script>
     </head>
     <body>
         <div class="header-fixed-top">
