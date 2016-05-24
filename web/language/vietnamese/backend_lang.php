@@ -3,8 +3,8 @@
 $lang['id'] = 'ID';
 
 //User
-$lang['user_id'] = 'User ID';
-$lang['user_fullname'] = 'Full Name';
+$lang['user_id'] = 'ID Nhân viên';
+$lang['user_fullname'] = 'Họ Tên';
 $lang['user_username'] = 'Username';
 $lang['user_password'] = 'Password';
 $lang['user_group'] = 'Group';
