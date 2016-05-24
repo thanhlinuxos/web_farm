@@ -111,13 +111,12 @@ class CI_Model {
             if (!isset($conditions['deleted'])) {
                 $conditions['deleted'] = 0;
             }
-            
+
             //Query
             $this->db->where($conditions);
             $query = $this->db->get($this->table);
             return $query->row_array();
-        }
-        else {
+        } else {
             show_error("CRUD : Param must be array and not empty");
         }
     }
@@ -137,7 +136,7 @@ class CI_Model {
         }
 
         if (isset($input['where'])) {
-            $this->db->where($input['where']); 
+            $this->db->where($input['where']);
         }
 
         if (isset($input['sort_by'])) {
@@ -188,7 +187,7 @@ class CI_Model {
     public function get_fields() {
         return $this->fields;
     }
-    
+
     /**
      * Count
      * @param type $where
@@ -200,7 +199,7 @@ class CI_Model {
         }
         return $this->db->count_all_results($this->table);
     }
-    
+
     /**
      * Insert Data
      * @param type $input
@@ -216,7 +215,7 @@ class CI_Model {
 
         return $this->db->insert($this->table, $data);
     }
-    
+
     /**
      * Get Insert ID
      * @return number
@@ -224,12 +223,37 @@ class CI_Model {
     public function insert_id() {
         return $this->db->insert_id();
     }
-    
+
     /**
      * 
      */
-    public function update() {
-        
+    public function update($o, $where = array()) {
+        if (!is_array($where) || count($where) == 0) {
+            if (isset($o[$this->key])) {
+                $this->db->where($this->key, $o[$this->key]);
+                unset($o[$this->key]);
+            } else {
+                show_error('CRUD : Can not found value key for update');
+            }
+        } else {
+            foreach ($where as $field => $data) {
+                if (!in_array($field, $this->fields)) {
+                    show_error("CRUD : '$this->table' don't have in '$field'");
+                }
+            }
+            $this->db->where($where);
+        }
+
+        $data = array();
+
+        foreach ($o as $k => $v) {
+
+            if (in_array($k, $this->fields)) {
+                $data[$k] = $v;
+            }
+        }
+
+        return $this->db->update($this->table, $data);
     }
 
     public function update_code($code = "") {

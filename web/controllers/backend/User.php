@@ -1,6 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 class User extends CI_Controller {
+    
+    private $data = array();
 
     public function __construct() {
         parent::__construct();
@@ -13,7 +15,7 @@ class User extends CI_Controller {
     }
 
     public function add() {
-        
+        $this->data['row'] = $this->user_model->default_value(); 
         if($this->input->post('submit'))
         {
             $this->form_validation->set_rules('fullname', 'Full Name', 'required');
@@ -33,22 +35,61 @@ class User extends CI_Controller {
                 }
                 
             }
+            $this->data['row'] = $this->input->post();
         }
-        $this->load->view('backend/layout/header');
-        $this->load->view('backend/user/add');
-        $this->load->view('backend/layout/footer');
+        $this->load->view('backend/layout/header', $this->data);
+        $this->load->view('backend/user/add', $this->data);
+        $this->load->view('backend/layout/footer', $this->data);
     }
 
     public function show($id = NULL) {
-        $this->load->view('backend/layout/header');
-        $this->load->view('backend/user/show');
-        $this->load->view('backend/layout/footer');
+        $user = $this->user_model->get_by(array('id' => $id));
+        if(!$user){
+            $this->session->set_flashdata('msg_error', 'User not exist.');
+            redirect(base_url('acp/user'));
+        }
+        $this->data['row'] = $this->user_model->convert_data($user);
+        $this->load->view('backend/layout/header', $this->data);
+        $this->load->view('backend/user/show', $this->data);
+        $this->load->view('backend/layout/footer', $this->data);
     }
 
     public function edit($id = NULL) {
-        $this->load->view('backend/layout/header');
-        $this->load->view('backend/user/edit');
-        $this->load->view('backend/layout/footer');
+        $user = $this->user_model->get_by(array('id' => $id));
+        if(!$user){
+            $this->session->set_flashdata('msg_error', 'User not exist.');
+            redirect(base_url('acp/user'));
+        }
+        $this->data['row'] = $user;
+        
+        if($this->input->post('submit'))
+        {
+            $post = $this->input->post();
+            $this->form_validation->set_rules('fullname', 'Full Name', 'required');
+            if($post['email'] != $user['email']) {
+                $this->form_validation->set_rules('email', 'Email', 'valid_email|is_unique[th_users.email]');
+            }
+            if($post['username'] != $user['username']) {
+                $this->form_validation->set_rules('username', 'Username', 'is_unique[th_users.username]');
+            }
+            if ($this->form_validation->run() == TRUE)
+            {
+                $post['id'] = $user['id'];
+                $post['password'] = ($post['password'] != '')? md5(md5($post['password'])) : $user['password'];
+                $result = $this->user_model->update($post);
+                if($result)
+                {
+                    $this->session->set_flashdata('msg_success', 'Update user successful.');
+                    redirect('/acp/user/show/'.$user['id']);
+                }
+                
+            }
+            $this->data['row'] = $this->input->post();
+        }
+        
+        $this->load->view('backend/layout/header', $this->data);
+        $this->load->view('backend/user/edit', $this->data);
+        $this->load->view('backend/layout/footer', $this->data);
     }
 
     public function delete() {
