@@ -63,7 +63,6 @@ class CI_Model {
      * @return	void
      */
     public function __construct($table = null) {
-        parent::__construct();
         $this->initialize($table);
         log_message('info', 'Model Class Initialized');
     }
@@ -100,7 +99,7 @@ class CI_Model {
      * @param Array
      * @output a row
      */
-    protected function get_by($conditions = array()) {
+    public function get_by($conditions = array()) {
         if (is_array($conditions) && count($conditions) > 0) {
             foreach ($conditions as $field => $data) {
                 if (!in_array($field, $this->fields)) {
@@ -132,7 +131,7 @@ class CI_Model {
      *              'distinct' => ...)
      * @output rows
      */
-    protected function get_rows($input = array()) {
+    public function get_rows($input = array()) {
         if (isset($input['select'])) {
             $this->db->select($input['select']);
         }
@@ -154,7 +153,7 @@ class CI_Model {
         }
     }
 
-    protected function get_sum($field = '', $where = null) {
+    public function get_sum($field = '', $where = null) {
         if ($field == '') {
             return false;
         }
@@ -179,14 +178,14 @@ class CI_Model {
     /**
      * Get Primary Key
      */
-    protected function get_primary_key() {
+    public function get_primary_key() {
         return $this->key;
     }
 
     /**
      * Get Fields
      */
-    protected function get_fields() {
+    public function get_fields() {
         return $this->fields;
     }
     
@@ -195,7 +194,7 @@ class CI_Model {
      * @param type $where
      * @return number
      */
-    protected function count_all($where = null) {
+    public function count_all($where = null) {
         if (!is_null($where)) {
             $this->db->where($where);
         }
@@ -207,9 +206,8 @@ class CI_Model {
      * @param type $input
      * @return boolean
      */
-    protected function insert($input = array()) {
+    public function insert($input = array()) {
         $data = array();
-
         foreach ($this->fields as $v) {
             if (isset($input[$v])) {
                 $data[$v] = $input[$v];
@@ -223,22 +221,22 @@ class CI_Model {
      * Get Insert ID
      * @return number
      */
-    protected function insert_id() {
+    public function insert_id() {
         return $this->db->insert_id();
     }
     
     /**
      * 
      */
-    protected function update() {
+    public function update() {
         
     }
 
-    protected function update_code($code = "") {
+    public function update_code($code = "") {
         $this->db->query("UPDATE {$this->table} SET code=concat('{$code}',RIGHT(concat('000000',id),6)) WHERE code IS NULL OR code = ''");
     }
 
-    protected function delete() {
+    public function delete() {
         
     }
 

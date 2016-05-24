@@ -2,12 +2,15 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Farm</title>
+        <title>GYAO system</title>
         <link href="<?php echo base_url('vendor/bootstrap/css/bootstrap.min.css'); ?>" rel="stylesheet">
         <link href="<?php echo base_url('vendor/bootstrap/css/bootstrap-theme.min.css'); ?>" rel="stylesheet">
         <link href="<?php echo base_url('vendor/bootstrap/css/docs.min.css'); ?>" rel="stylesheet">
         <link href="<?php echo base_url('assets/backend/css/custom.css'); ?>" rel="stylesheet">
+        <link href="<?php echo base_url('vendor/jquery/ui/jquery-ui.min.css'); ?>" rel="stylesheet">
         <script type="text/javascript" src="<?php echo base_url('vendor/jquery/jquery-2.2.3.min.js'); ?>"></script>
+        <script type="text/javascript" src="<?php echo base_url('vendor/jquery/ui/jquery-ui.min.js'); ?>"></script>
+        <script type="text/javascript" src="<?php echo base_url('vendor/jquery/ui/jquery-ui-i18n.min.js'); ?>"></script>
         <script type="text/javascript" src="<?php echo base_url('vendor/bootstrap/js/bootstrap.min.js'); ?>"></script>
     </head>
     <body>
@@ -34,7 +37,7 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
-                            <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+                            <li class="active"><a href="<?php echo base_url('acp/user');?>">User<span class="sr-only">(current)</span></a></li>
                             <li><a href="#">Link</a></li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
@@ -50,6 +53,7 @@
             </nav>
             <!-- Content -->
             <div class="wraper">
+                <?php $this->load->view('backend/layout/_flash'); ?>
 
 
 
