@@ -257,8 +257,16 @@ class CI_Model {
         $this->db->query("UPDATE {$this->table} SET code=concat('{$code}',RIGHT(concat('000000',id),6)) WHERE code IS NULL OR code = ''");
     }
 
-    public function delete() {
-        
+    public function delete($conditions = array()) {
+        if (is_array($conditions) && count($conditions) > 0) {
+            foreach ($conditions as $field => $data) {
+                if (!in_array($field, $this->fields)) {
+                    show_error("CRUD : '$this->table' don't have in '$field'");
+                }
+            }
+        }
+        $this->db->where($conditions);
+        return $this->db->update($this->table, array('deleted' => time()));
     }
 
     // --------------------------------------------------------------------
