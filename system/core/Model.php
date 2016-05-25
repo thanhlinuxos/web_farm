@@ -49,9 +49,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  */
 class CI_Model {
 
-    /**
-     * 	Var
-     */
     protected $table = null;
     protected $key = null;
     protected $fields = array();
