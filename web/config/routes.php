@@ -12,6 +12,8 @@ $route['acp/logout'] = 'backend/auth/logout';
 
 //User
 $route['acp/user'] = 'backend/user';
+$route['acp/user/page'] = 'backend/user';
+$route['acp/user/page/(:num)'] = 'backend/user';
 $route['acp/user/add'] = 'backend/user/add';
 $route['acp/user/edit/(:num)'] = 'backend/user/edit/$1';
 $route['acp/user/show/(:num)'] = 'backend/user/show/$1';

@@ -131,22 +131,26 @@ class CI_Model {
         if (isset($input['select'])) {
             $this->db->select($input['select']);
         }
+        
+        if (isset($input['distinct'])) {
+            
+        }
 
         if (isset($input['where'])) {
             $this->db->where($input['where']);
         }
 
         if (isset($input['sort_by'])) {
-            
+            $this->db->order_by($input['sort_by']);
         }
 
         if (isset($input['limit'])) {
-            
+            $offset = isset($input['offset']) ? $input['offset'] : 0;
+            $this->db->limit($input['limit'], $offset);
         }
-
-        if (isset($input['distinct'])) {
-            
-        }
+        $query = $this->db->get($this->table);
+        
+        return $query->result_array();
     }
 
     public function get_sum($field = '', $where = null) {

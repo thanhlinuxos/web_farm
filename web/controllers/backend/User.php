@@ -10,9 +10,25 @@ class User extends CI_Controller {
     }
 
     public function index() {
-        $this->load->view('backend/layout/header');
-        $this->load->view('backend/user/index');
-        $this->load->view('backend/layout/footer');
+        
+        $config = $this->pagination->bootstrap_configs();
+        $config['base_url'] = base_url('acp/user/page');
+        $config['total_rows'] = $this->user_model->count_all(array('deleted' => 0));
+        $config['per_page'] = 25;
+        $config['uri_segment'] = 4;
+        $config['use_page_numbers'] = TRUE;
+        $this->pagination->initialize($config);
+        $conditions = array(
+            'where' => array('deleted' => 0),
+            'sort_by' => 'id DESC',
+            'limit' => $config['per_page'],
+            'offset' => $this->uri->segment(4) ? ($this->uri->segment(4) - 1)*$config['per_page'] : 0
+        );
+        $this->data['rows'] = $this->user_model->get_rows($conditions);
+        
+        $this->load->view('backend/layout/header', $this->data);
+        $this->load->view('backend/user/index', $this->data);
+        $this->load->view('backend/layout/footer', $this->data);
     }
 
     public function add() {
@@ -93,8 +109,15 @@ class User extends CI_Controller {
         $this->load->view('backend/layout/footer', $this->data);
     }
 
-    public function delete() {
-        
+    public function delete($id = NULL) {
+        $user = $this->user_model->get_by(array('id' => $id));
+        if(!$user){
+            $this->session->set_flashdata('msg_error', 'User not exist.');
+            redirect(base_url('acp/user'));
+        }
+        $result = $this->user_model->delete(array('id' => $id));
+        $this->session->set_flashdata('msg_info', 'User has been deleted.');
+        redirect(base_url('acp/user'));
     }
 
     public function delete_multi() {
