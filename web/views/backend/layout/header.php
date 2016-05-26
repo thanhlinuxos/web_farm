@@ -2,7 +2,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>GYAO system</title>
+        <title>GYAO System</title>
         <link href="<?php echo base_url('vendor/bootstrap/css/bootstrap.min.css'); ?>" rel="stylesheet">
         <link href="<?php echo base_url('vendor/bootstrap/css/bootstrap-theme.min.css'); ?>" rel="stylesheet">
         <link href="<?php echo base_url('vendor/bootstrap/css/docs.min.css'); ?>" rel="stylesheet">

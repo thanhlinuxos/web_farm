@@ -47,4 +47,8 @@
         </table> 
     </div>
 </div>
-<?php echo $this->pagination->create_links(); ?>
+<div class="row">
+   <div class="col-sm-12 text-center">
+        <?php echo $this->pagination->create_links(); ?>
+   </div>
+</div>
