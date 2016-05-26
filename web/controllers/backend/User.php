@@ -6,6 +6,7 @@ class User extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
+        $this->user_model->is_login();
         $this->lang->load('backend');
     }
 
@@ -42,6 +43,7 @@ class User extends CI_Controller {
             {
                 $post = $this->input->post();
                 $post['password'] = md5(md5($post['password']));
+                $post['change_password'] = 1;
                 $post['created_at'] = time();
                 $result = $this->user_model->insert($post);
                 if($result)
@@ -91,7 +93,15 @@ class User extends CI_Controller {
             if ($this->form_validation->run() == TRUE)
             {
                 $post['id'] = $user['id'];
-                $post['password'] = ($post['password'] != '')? md5(md5($post['password'])) : $user['password'];
+                if($post['password'] != '')
+                {
+                    $post['password'] = md5(md5($post['password']));
+                    $post['change_password'] = 1;
+                }
+                else
+                {
+                    $post['password'] = $user['password'];
+                }
                 $result = $this->user_model->update($post);
                 if($result)
                 {

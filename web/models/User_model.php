@@ -32,10 +32,24 @@ class User_model extends CI_Model {
     
     public function is_login()
     {
-        
+        $user_login = $this->session->userdata('user_login');
+       
+        if(!isset($user_login['id']))
+        {
+            redirect(base_url('acp/login'));
+        }
+        elseif($user_login['change_pass'] == 1)
+        {
+            redirect(base_url('acp/change_password'));
+        }
+        else
+        {
+            
+        }
+        return true;
     }
 
-        public function login($input)
+    public function login($input)
     {
         $result = array('success' => FALSE, 'msg' => '');
         $user = $this->get_by(array('username' => $input['u']));
@@ -63,11 +77,45 @@ class User_model extends CI_Model {
             }
             else
             {
-                $this->session->set_userdata('user_login', array('id' => $user['id'], 'fullname' => $user['fullname']));
+                $session = array(
+                    'id' => $user['id'],
+                    'fullname' => $user['fullname'],
+                    'change_pass' => $user['change_password']
+                );
+                $this->session->set_userdata('user_login', $session);
                 $result['success'] = TRUE;
                 $user['login_fail'] = 0;
                 $this->update($user);
             }
+        }
+        
+        return $result;
+    }
+    
+    public function logout()
+    {
+        $this->session->sess_destroy();
+        redirect(base_url('acp/login'));
+    }
+
+    public function change_password($old_password = '', $new_password = '')
+    {
+        $result = array('success' => FALSE, 'msg' => '');
+        
+        $user_login = $this->session->userdata('user_login');
+        $user = $this->get_by(array('id' => $user_login['id']));
+        if($user['password'] != md5(md5($old_password)))
+        {
+            $result['msg'] = 'Mật khẩu hiện tại không đúng!';
+        }
+        else
+        {
+            $user['password'] = md5(md5($new_password));
+            $user['change_password'] = 0;
+            $this->update($user);
+            $user_login['change_pass'] = 0;
+            $this->session->set_userdata('user_login', $user_login);
+            $result['success'] = TRUE;
         }
         
         return $result;

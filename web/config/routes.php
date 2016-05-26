@@ -9,6 +9,8 @@ $route['dashboard'] = 'frontend/dashboard';
 $route['acp'] = 'backend/dashboard';
 $route['acp/login'] = 'backend/auth/login';
 $route['acp/logout'] = 'backend/auth/logout';
+$route['acp/change_password'] = 'backend/auth/change_password';
+
 
 //User
 $route['acp/user'] = 'backend/user';
