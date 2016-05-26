@@ -52,7 +52,7 @@ class CI_Model {
     protected $table = null;
     protected $key = null;
     protected $fields = array();
-    public $CI = null;
+    protected $CI = null;
 
     /**
      * Class constructor
@@ -248,7 +248,6 @@ class CI_Model {
         $data = array();
 
         foreach ($o as $k => $v) {
-
             if (in_array($k, $this->fields)) {
                 $data[$k] = $v;
             }

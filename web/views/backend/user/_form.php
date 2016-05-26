@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-xs-12">
-        <form class="form-horizontal" role="form" method="POST" autocomplete="off">
+        <form class="form-horizontal" role="form" method="POST" autocomplete="off" enctype="multipart/form-data">
             <div class="form-group <?php if(form_error('fullname')) echo 'has-error'; ?>">
                 <label class="control-label col-sm-2" for="fullname">Full Name:</label>
                 <div class="col-sm-4">

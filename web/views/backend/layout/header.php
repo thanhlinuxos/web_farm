@@ -2,7 +2,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>GYAO system</title>
+        <title>GYAO System</title>
         <link href="<?php echo base_url('vendor/bootstrap/css/bootstrap.min.css'); ?>" rel="stylesheet">
         <link href="<?php echo base_url('vendor/bootstrap/css/bootstrap-theme.min.css'); ?>" rel="stylesheet">
         <link href="<?php echo base_url('vendor/bootstrap/css/docs.min.css'); ?>" rel="stylesheet">
@@ -17,7 +17,8 @@
     <body>
         <div class="header-fixed-top">
             <div class="container-fluid">
-
+                <?php $user_login = $this->session->userdata('user_login'); ?>
+                Xin chao: <?php echo $user_login['fullname']; ?>
             </div>
         </div>
         <div class="header-space"></div>
