@@ -17,7 +17,8 @@
     <body>
         <div class="header-fixed-top">
             <div class="container-fluid">
-
+                <?php $user_login = $this->session->userdata('user_login'); ?>
+                Xin chao: <?php echo $user_login['fullname']; ?>
             </div>
         </div>
         <div class="header-space"></div>
