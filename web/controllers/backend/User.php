@@ -9,8 +9,7 @@ class User extends CI_Controller {
         $this->lang->load('backend');
     }
 
-    public function index() {
-        
+    public function index() {   
         $config = $this->pagination->bootstrap_configs();
         $config['base_url'] = base_url('acp/user/page');
         $config['total_rows'] = $this->user_model->count_all(array('deleted' => 0));
