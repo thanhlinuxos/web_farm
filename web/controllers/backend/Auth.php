@@ -13,6 +13,11 @@ class Auth extends CI_Controller {
 
     public function login() 
     {
+        $user_login = $this->session->userdata('user_login');
+        if($user_login)
+        {
+            redirect(base_url('acp'));
+        }
         $this->data['msg'] = '';
         
         if($this->input->post('submit'))
@@ -41,11 +46,39 @@ class Auth extends CI_Controller {
     
     public function logout()
     {
-        
+        $this->user_model->logout();
     }
     
     public function change_password()
     {
+        $user_login = $this->session->userdata('user_login');
+        if($user_login['change_pass'] == 0)
+        {
+            redirect(base_url('acp'));
+        }
+        
+        $this->data['msg'] = "<small class='help-block'>Ban phai thay doi mat khau trong lan dau dang nhap <br /> hoac khi mat khau duoc thiet lap lai</small>";
+        if($this->input->post('submit'))
+        {
+            $this->form_validation->set_rules('p1', 'password', 'required');
+            $this->form_validation->set_rules('p2', 'password', 'required');
+            $this->form_validation->set_rules('p3', 'password', 'required|matches[p2]');
+            if ($this->form_validation->run() == TRUE)
+            {
+                $post = $this->input->post();
+                $result = $this->user_model->change_password($post['p1'], $post['p2']);
+                
+                if($result['success'])
+                {
+                    $this->session->set_flashdata('msg_success', 'Update password successful.');
+                    redirect(base_url('acp'));
+                }
+                else
+                {
+                     $this->data['msg'] = "<small class='help-block' style='color:red;'>".$result['msg']."</small>";
+                }
+            }
+        }
         $this->load->view('backend/auth/change_password', $this->data);
     }
 
