@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Image_lib 
 {
-    public function upload_one($input_name, $directory, $thumbnail = array())
+    public function upload_one($input_name, $directory, $image = array(), $thumbnail = array())
     {
         $result = array();
         if($_SERVER['REQUEST_METHOD'] == 'POST')
@@ -19,10 +19,10 @@ class Image_lib
                 
                 $config = array(
                     'upload_path' => UPLOADPATH . $directory . '/',
-                    'allowed_types' => 'gif|jpg|png',
-                    'max_size' => '5120', // 5MB
-                    'max_width' => '1024',
-                    'max_height' => '768',
+                    'allowed_types' => isset($image['allowed_types']) ? $image['allowed_types'] : 'gif|jpg|png',
+                    'max_size' => isset($image['max_size']) ? $image['max_size'] : '5120', // 5MB
+                    'max_width' => isset($image['max_width']) ? $image['max_width'] : '1024',
+                    'max_height' => isset($image['max_height']) ? $image['max_height'] : '768',
                     'encrypt_name' => TRUE
                 );
 		$this->load->library('upload', $config);
@@ -46,7 +46,7 @@ class Image_lib
         return $result;
     }
     
-    public function upload_multi($input_name, $directory, $thumbnail = array())
+    public function upload_multi($input_name, $directory, $image = array(), $thumbnail = array())
     {
         $result = array();
         if($_SERVER['REQUEST_METHOD'] == 'POST')
@@ -61,7 +61,7 @@ class Image_lib
                 $_FILES[$input_name]['error']= $files[$input_name]['error'][$i];
                 $_FILES[$input_name]['size']= $files[$input_name]['size'][$i];    
 
-                $result[] = $this->upload_one($input_name, $directory, $thumbnail);
+                $result[] = $this->upload_one($input_name, $directory, $image, $thumbnail);
             }
         }
         return $result;
@@ -74,7 +74,21 @@ class Image_lib
         {
             $this->directory_lib->create($directory . '/thumbnail');
         }
-        
+        $config = array(
+            'image_library' => 'gd2',
+            'source_image'  => UPLOADPATH . $directory . '/' . $image['file_name'],
+            'new_image'     => UPLOADPATH . $directory . '/thumbnail/' . $image['file_name'],
+            'thumb_marker'  => '',
+            'create_thumb'  => TRUE,
+            'maintain_ratio'=> TRUE,
+            'width'	=> isset($thumbnail['width']) ? $thumbnail['width'] : 220,
+            'height'	=> isset($thumbnail['height']) ? $thumbnail['height'] : 180,
+            'quality'	=> isset($thumbnail['quality']) ? $thumbnail['quality'] : 90
+        );
+                
+        $this->load->library('image_lib', $config); 
+
+        $this->image_lib->resize();
         
         return true;
     }
