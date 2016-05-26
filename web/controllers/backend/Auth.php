@@ -43,5 +43,10 @@ class Auth extends CI_Controller {
     {
         
     }
+    
+    public function change_password()
+    {
+        $this->load->view('backend/auth/change_password', $this->data);
+    }
 
 }

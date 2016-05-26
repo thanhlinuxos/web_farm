@@ -32,10 +32,23 @@ class User_model extends CI_Model {
     
     public function is_login()
     {
-        
+        $user_login = $this->session->userdata('user_login');
+        if(!isset($user_login['id']))
+        {
+            redirect(base_url('acp/login'));
+        }
+        elseif($user_login['change_pass'])
+        {
+            redirect(base_url('acp/change_password'));
+        }
+        else
+        {
+            
+        }
+        return true;
     }
 
-        public function login($input)
+    public function login($input)
     {
         $result = array('success' => FALSE, 'msg' => '');
         $user = $this->get_by(array('username' => $input['u']));
@@ -63,7 +76,12 @@ class User_model extends CI_Model {
             }
             else
             {
-                $this->session->set_userdata('user_login', array('id' => $user['id'], 'fullname' => $user['fullname']));
+                $session = array(
+                    'id' => $user['id'],
+                    'fullname' => $user['fullname'],
+                    'change_pass' => $user['change_password']
+                );
+                $this->session->set_userdata('user_login', $session);
                 $result['success'] = TRUE;
                 $user['login_fail'] = 0;
                 $this->update($user);
