@@ -93,10 +93,11 @@
                     <?php echo form_error('username', "<small class='help-block'>", '</small>'); ?>
                 </div>
             </div>
-            <div class="form-group">
+            <div class="form-group <?php if(form_error('password')) echo 'has-error'; ?>">
                 <label class="control-label col-sm-2" for="password">Password:</label>
                 <div class="col-sm-4">
                     <input type="password" name="password" class="form-control" id="password" value="<?php echo set_value('password', ''); ?>" placeholder="Enter Password">
+                    <?php echo form_error('password', "<small class='help-block'>", '</small>'); ?>
                 </div>
             </div>
             <div class="form-group">
