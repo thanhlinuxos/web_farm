@@ -23,5 +23,6 @@ $route['acp/user/delete/(:num)'] = 'backend/user/delete/$1';
 $route['acp/user/delete_multi'] = 'backend/user/delete_multi';
 
 //Default router
+$route['test'] = 'test';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

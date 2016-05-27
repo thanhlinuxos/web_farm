@@ -2,9 +2,24 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class String_lib {
+/**
+ * CodeIgniter String Helpers
+ *
+ * @package		CodeIgniter
+ * @subpackage	Helpers
+ * @category	Helpers
+ * @author		Thanh Nguyen
+ */
 
-    public function remove_vietnamese($str) {
+// ------------------------------------------------------------------------
+
+if( ! function_exists('remove_vietnamese'))
+{
+    /**
+    * @param	string
+    * @return	string
+    */
+    function remove_vietnamese($str) {
         $coDau = array("à", "á", "ạ", "ả", "ã", "â", "ầ", "ấ", "ậ", "ẩ", "ẫ", "ă",
             "ằ", "ắ", "ặ", "ẳ", "ẵ",
             "è", "é", "ẹ", "ẻ", "ẽ", "ê", "ề", "ế", "ệ", "ể", "ễ",
@@ -47,60 +62,74 @@ class String_lib {
 
         return $str;
     }
-
-    public function clean_url($data) {
-        // Remove vietnamese
-        $data = $this->remove_vietnamese($data);
-        // Special characters
-        $char = explode(" ", "&nbsp; &amp; &#092; &quot; & ! @ # $ % ^ & * ( ) _ + = ? < > , .");
-        // Remove special character and replacing space
-        $data = str_replace($char, array("", "", ""), $data);
-        $data = strtolower($data);
-        $data = str_replace(array("/"), array(" "), $data);
-        $data = preg_replace('/[^a-zA-Z0-9 ]/s', '', $data);
-        $data = trim($data);
-        $data = str_replace(array(" "), array("-"), $data);
-        $data = str_replace(array("amp-", "--"), array("", "-"), $data);
-        return $data;
+    
+    
+    if( !function_exists('clean_url'))
+    {
+        /**
+        * @param	string
+        * @return	string
+        */
+        function clean_url($data) {
+            // Remove vietnamese
+            $data = remove_vietnamese($data);
+            // Special characters
+            $char = explode(" ", "&nbsp; &amp; &#092; &quot; & ! @ # $ % ^ & * ( ) _ + = ? < > , .");
+            // Remove special character and replacing space
+            $data = str_replace($char, array("", "", ""), $data);
+            $data = strtolower($data);
+            $data = str_replace(array("/"), array(" "), $data);
+            $data = preg_replace('/[^a-zA-Z0-9 ]/s', '', $data);
+            $data = trim($data);
+            $data = str_replace(array(" "), array("-"), $data);
+            $data = str_replace(array("amp-", "--"), array("", "-"), $data);
+            return $data;
+        }
     }
     
-    public function substr( $string, $from = 0, $to = 40, $type = 0 )
+    if( !function_exists('sub_str'))
     {
+        /**
+        * @param	string
+        * @return	string
+        */
+        function sub_str( $string, $from = 0, $to = 40, $type = 0 )
+        {
 
-        if ($type == 1) {
-            $string = str_replace("&nbsp;", "", $string);
-        }
-
-        // Check for string
-        if (strlen($string) < $to) {
-            return $string;
-        }
-
-        // Continue		
-        $output = substr($string, $from, $to);
-
-        for ($i = 0; $i < 20; $i++) {
-            $to += 1;
-
-            if (substr($output, -1) != " ") {
-                $output = substr($string, $from, $to);
-            } else {
-                break;
+            if ($type == 1) {
+                $string = str_replace("&nbsp;", "", $string);
             }
-        }
 
-        $output = substr($output, 0, strlen($output) - 1);
+            // Check for string
+            if (strlen($string) < $to) {
+                return $string;
+            }
 
-        if (substr($output, -1) == ".") {
+            // Continue		
+            $output = substr($string, $from, $to);
+
+            for ($i = 0; $i < 20; $i++) {
+                $to += 1;
+
+                if (substr($output, -1) != " ") {
+                    $output = substr($string, $from, $to);
+                } else {
+                    break;
+                }
+            }
+
             $output = substr($output, 0, strlen($output) - 1);
-        }
 
-        //if ( strlen($output) > strlen($input) )
-        if (strlen($string) > $to) {
-            $output .= "...";
-        }
+            if (substr($output, -1) == ".") {
+                $output = substr($output, 0, strlen($output) - 1);
+            }
 
-        return $output;
+            //if ( strlen($output) > strlen($input) )
+            if (strlen($string) > $to) {
+                $output .= "...";
+            }
+
+            return $output;
+        }
     }
-
 }
