@@ -13,6 +13,10 @@
         <script type="text/javascript" src="<?php echo base_url('vendor/jquery/ui/jquery-ui-i18n.js'); ?>"></script>
         <script type="text/javascript" src="<?php echo base_url('vendor/bootstrap/js/bootstrap.min.js'); ?>"></script>
         <script type="text/javascript" src="<?php echo base_url('assets/backend/js/script.js'); ?>"></script>
+        <!--[if lt IE 9]>
+            <script src="<?php echo base_url('vendor/bootstrap/js/html5shiv.js'); ?>" type="text/javascript"></script>
+            <script src="<?php echo base_url('vendor/bootstrap/js/respond.min.js'); ?>" type="text/javascript"></script>
+        <![endif]-->
     </head>
     <body>
         <div class="header-fixed-top">
