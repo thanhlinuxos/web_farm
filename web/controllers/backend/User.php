@@ -35,13 +35,17 @@ class User extends CI_Controller {
         $this->data['row'] = $this->user_model->default_value(); 
         if($this->input->post('submit'))
         {
+            $post = $this->input->post();
             $this->form_validation->set_rules('fullname', 'Full Name', 'required');
             $this->form_validation->set_rules('email', 'Email', 'valid_email|is_unique[th_users.email]');
             $this->form_validation->set_rules('username', 'Username', 'is_unique[th_users.username]');
-            
+            if($post['username'] != '')
+            {
+                $this->form_validation->set_rules('password', 'Password', 'required');
+            }
             if ($this->form_validation->run() == TRUE)
             {
-                $post = $this->input->post();
+                
                 $post['password'] = md5(md5($post['password']));
                 $post['change_password'] = 1;
                 $post['created_at'] = time();
@@ -90,6 +94,10 @@ class User extends CI_Controller {
             if($post['username'] != $user['username']) {
                 $this->form_validation->set_rules('username', 'Username', 'is_unique[th_users.username]');
             }
+            if($post['username'] != $user['username'] && $post['username'] != '')
+            {
+                $this->form_validation->set_rules('password', 'Password', 'required');
+            }
             if ($this->form_validation->run() == TRUE)
             {
                 $post['id'] = $user['id'];
@@ -108,7 +116,6 @@ class User extends CI_Controller {
                     $this->session->set_flashdata('msg_success', 'Update user successful.');
                     redirect('/acp/user/show/'.$user['id']);
                 }
-                
             }
             $this->data['row'] = $this->input->post();
         }

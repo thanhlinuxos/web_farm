@@ -87,13 +87,13 @@ if( ! function_exists('remove_vietnamese'))
         }
     }
     
-    if( !function_exists('sub_str'))
+    if( !function_exists('my_substr'))
     {
         /**
         * @param	string
         * @return	string
         */
-        function sub_str( $string, $from = 0, $to = 40, $type = 0 )
+        function my_substr( $string, $from = 0, $to = 40, $type = 0 )
         {
 
             if ($type == 1) {

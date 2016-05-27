@@ -14,7 +14,7 @@ class Test extends CI_Controller {
         if($this->input->post('submit'))
         {
             $this->load->library('image_mylib');
-            $data = $this->image_mylib->upload_multi('test', 'test/test');
+            $data = $this->image_mylib->upload_multi('test', 'test/test', NULL, array('width'=>220, 'height'=>80));
             echo "<pre>";
             print_r($data);
             echo "</pre>";

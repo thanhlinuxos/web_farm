@@ -46,7 +46,7 @@ class Image_mylib
                 
                 $config = array(
                     'upload_path' => UPLOADPATH . $directory . '/',
-                    'allowed_types' => isset($image['allowed_types']) ? $image['allowed_types'] : 'gif|jpg|png',
+                    'allowed_types' => isset($image['allowed_types']) ? $image['allowed_types'] : 'gif|jpg|png|jpeg',
                     'max_size' => isset($image['max_size']) ? $image['max_size'] : '5120', // 5MB
                     'max_width' => isset($image['max_width']) ? $image['max_width'] : '1024',
                     'max_height' => isset($image['max_height']) ? $image['max_height'] : '768',
@@ -112,74 +112,72 @@ class Image_mylib
             create_directory($directory . '/thumbnail');
         }
         
-        $image_source = UPLOADPATH . $directory . '/' . $image['file_name'];
+        $image_src = UPLOADPATH . $directory . '/' . $image['file_name'];
         $image_dest = UPLOADPATH . $directory . '/thumbnail/' . $image['file_name'];
-        if (copy($image_source, $image_dest))
+        
+        switch( $image['image_type'] ) 
         {
-            $this->CI->load->library('image_lib');
-
-            $thumb_width = isset($thumbnail['width']) ? $thumbnail['width'] : 220;
-            $thumb_height = isset($thumbnail['height']) ? $thumbnail['height'] : 180;
-            $thumb_rate = $thumb_width/$thumb_height;
-
-            $image_width = $image['image_width'];
-            $image_height= $image['image_height'];
-            $image_rate = $image_width/$image_height;
-
-            if($image_rate > $thumb_rate)
+            case 'jpg':
+            case 'jpeg':
+                    $image_data = imagecreatefromjpeg($image_src);
+            break;
+            case 'png':
+                    $image_data = imagecreatefrompng($image_src);
+            break;
+            case 'gif':
+                    $image_data = imagecreatefromgif($image_src);
+            break;
+            default:
+                return false;
+            break;
+        }
+        if( $image_data == false ) return false;
+        
+        $thumb_quality = isset($thumbnail['quality']) ? $thumbnail['quality'] : 90;
+        $thumb_width = isset($thumbnail['width']) ? $thumbnail['width'] : 220;
+        $thumb_height = isset($thumbnail['height']) ? $thumbnail['height'] : 180;
+        $thumb_rate = $thumb_width/$thumb_height;
+        $image_rate = $image['image_width']/$image['image_height'];
+        
+        if($image_rate >= $thumb_rate)
+        {
+            $square_size_y = $image['image_height'];
+            $square_size_x = $square_size_y * $thumb_rate;
+            $x=($image['image_width'] - $square_size_x) / 2;
+            $y=0;
+        }
+        else
+        {
+            $square_size_x = $image['image_width'];
+            $square_size_y = $square_size_x / $thumb_rate;
+            $y=($image['image_height'] - $square_size_y) / 2;
+            $x=0;
+        }
+            
+        $canvas = imagecreatetruecolor($thumb_width, $thumb_height);
+        
+        if( imagecopyresampled($canvas,	$image_data, 0, 0, $x, $y, $thumb_width, $thumb_height, $square_size_x, $square_size_y))
+        {
+            switch( $image['image_type'] ) 
             {
-                $size_height = $image['image_height'];
-                $size_width = $size_height * $thumb_rate;
-                $x_axis = ($image['image_width'] - $size_width) / 2;
-                $y_axis = 0;
+                case 'jpg':
+                case 'jpeg':
+                    return imagejpeg($canvas, $image_dest, $thumb_quality);
+                break;
+                case 'png':
+                    return imagepng($canvas, $image_dest);
+                break;
+                case 'gif':
+                    return imagegif($canvas, $image_dest);
+                break;
+                default:
+                    return false;
+                break;
             }
-            else
-            {
-                $size_width = $image['image_width'];
-                $size_height= $size_width / $thumb_rate;
-                $y_axis = ($image['image_height'] - $size_height) / 2;
-                $x_axis = 0;
-            }
-            echo $size_width . '<br>';
-            echo $size_height . '<br>';
-            echo $x_axis . '<br>';
-            echo $y_axis . '<br>';
-            exit;
-            
-            
-            //Crop
-            $this->CI->image_lib->initialize(array(
-                'source_image'      => $image_dest,
-                'x_axis'            => $x_axis,
-                'y_axis'            => $y_axis
-            ));
-            $this->CI->image_lib->crop();
-            $this->CI->image_lib->clear();
-            
-            //Resize
-            $this->CI->image_lib->initialize(array(
-                'source_image'      => $image_dest,
-                'maintain_ratio'    => TRUE,
-                'width'             => $size_width,
-                'height'            => $size_height
-            ));
-            $this->CI->image_lib->resize();    
-
-    //        $config = array(
-    //            'image_library' => 'gd2',
-    //            'source_image'  => UPLOADPATH . $directory . '/' . $image['file_name'],
-    //            'new_image'     => UPLOADPATH . $directory . '/thumbnail/' . $image['file_name'],
-    //            'thumb_marker'  => '',
-    //            'create_thumb'  => TRUE,
-    //            'maintain_ratio'=> TRUE,
-    //            'width'	=> isset($thumbnail['width']) ? $thumbnail['width'] : 220,
-    //            'height'	=> isset($thumbnail['height']) ? $thumbnail['height'] : 180,
-    //            'quality'	=> isset($thumbnail['quality']) ? $thumbnail['quality'] : 90
-    //        );
-    //                
-    //        $this->CI->load->library('image_lib', $config); 
-    //
-    //        $this->CI->image_lib->resize();
+        }
+        else
+        {
+            return false;
         }
         return true;
     }
