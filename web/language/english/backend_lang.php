@@ -2,6 +2,15 @@
 //Common
 $lang['id'] = 'ID';
 
+//Button
+$lang['btn_add'] = 'Add';
+$lang['btn_edit'] = 'Edit';
+$lang['btn_delete'] = 'Delete';
+$lang['btn_login'] = 'Login';
+$lang['btn_back'] = 'Back';
+$lang['btn_save'] = 'Save';
+$lang['btn_change'] = 'Change';
+
 //User
 $lang['user_id'] = 'User ID';
 $lang['user_fullname'] = 'Full Name';
@@ -20,5 +29,9 @@ $lang['user_gender_0'] = 'Female';
 $lang['user_gender_1'] = 'Male';
 $lang['user_status_0'] = 'Lock';
 $lang['user_status_1'] = 'Active';
+$lang['user_list'] = 'Users';
+$lang['user_add'] = 'Add user';
+$lang['user_update'] = 'Update user';
+$lang['user_info'] = 'User information';
 
 

@@ -22,4 +22,8 @@ class Test extends CI_Controller {
         }
         $this->load->view('test', $this->data);
     }
+    
+    public function ajax(){
+        $this->load->view('ajax');
+    }
 }

@@ -21,7 +21,7 @@ $route['acp/user/edit/(:num)'] = 'backend/user/edit/$1';
 $route['acp/user/show/(:num)'] = 'backend/user/show/$1';
 $route['acp/user/delete/(:num)'] = 'backend/user/delete/$1'; 
 $route['acp/user/delete_multi'] = 'backend/user/delete_multi';
-
+$route['acp/user/short_list'] = 'backend/user/short_list';
 //Default router
 $route['test'] = 'test';
 $route['404_override'] = '';
