@@ -116,6 +116,7 @@
                     <tr>
                         <th><?php echo $this->lang->line('user_fullname'); ?></th>
                         <th><?php echo $this->lang->line('user_username'); ?></th>
+                        <th><?php echo $this->lang->line('user_group'); ?></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -126,6 +127,7 @@
                         <tr>
                             <td><a href="<?php echo base_url('acp/user/show/'.$row['id']); ?>"><?php echo $row['fullname']?></a></td>
                             <td><?php echo $row['username']?></td>
+                            <td><?php echo $row['group']?></td>
                         </tr>
                 <?php
                     }
@@ -138,7 +140,7 @@
         ?>
             <div class="row">
                 <div class="col-sm-12 text-center">
-                    <button onclick="ajax_short_list('user', 2);" class="btn btn-primary">&gt;&gt;</button>
+                    <button onclick="ajax_short_list('acp/user/short_list', 2);" class="btn btn-primary">&gt;&gt;</button>
                 </div>
              </div>
         <?php
