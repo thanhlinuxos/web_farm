@@ -1,13 +1,11 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-class User extends CI_Controller {
+class User extends MY_Controller {
     
     private $data = array();
 
     public function __construct() {
         parent::__construct();
-        $this->user_model->is_login();
-        $this->lang->load('backend');
         $this->data['limit_short'] = 13;
     }
 
