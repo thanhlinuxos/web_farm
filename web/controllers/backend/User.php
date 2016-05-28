@@ -11,8 +11,11 @@ class User extends CI_Controller {
         $this->data['limit_short'] = 13;
     }
 
-    public function index() {   
-        $config = $this->pagination->bootstrap_configs();
+    public function index() 
+    {
+        $this->load->library('pagination_mylib');
+        
+        $config = $this->pagination_mylib->bootstrap_configs();
         $config['base_url'] = base_url('acp/user/page');
         $config['total_rows'] = $this->user_model->count_all(array('deleted' => 0));
         $config['per_page'] = 25;
@@ -63,6 +66,7 @@ class User extends CI_Controller {
         
         //List
         $conditions = array(
+            'select' => 'id, fullname, username, group',
             'where' => array('deleted' => 0),
             'sort_by' => 'id DESC',
             'limit' => $this->data['limit_short'],
@@ -134,6 +138,7 @@ class User extends CI_Controller {
         
         //List
         $conditions = array(
+            'select' => 'id, fullname, username, group',
             'where' => array('deleted' => 0),
             'sort_by' => 'id DESC',
             'limit' => $this->data['limit_short'],
@@ -165,6 +170,7 @@ class User extends CI_Controller {
     public function short_list() 
     {
         $conditions = array(
+            'select' => 'id, fullname, username, group',
             'where' => array('deleted' => 0),
             'sort_by' => 'id DESC',
             'limit' => $this->data['limit_short'],
