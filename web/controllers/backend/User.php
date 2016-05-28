@@ -8,6 +8,7 @@ class User extends CI_Controller {
         parent::__construct();
         $this->user_model->is_login();
         $this->lang->load('backend');
+        $this->data['limit_short'] = 13;
     }
 
     public function index() {   
@@ -59,6 +60,17 @@ class User extends CI_Controller {
             }
             $this->data['row'] = $this->input->post();
         }
+        
+        //List
+        $conditions = array(
+            'where' => array('deleted' => 0),
+            'sort_by' => 'id DESC',
+            'limit' => $this->data['limit_short'],
+            'offset' => 0
+        );
+        $this->data['rows'] = $this->user_model->get_rows($conditions);
+        $this->data['show_more'] = $this->user_model->count_all(array('deleted' => 0)) > $this->data['limit_short'] ? TRUE : FALSE;
+        
         $this->load->view('backend/layout/header', $this->data);
         $this->load->view('backend/user/add', $this->data);
         $this->load->view('backend/layout/footer', $this->data);
@@ -120,6 +132,16 @@ class User extends CI_Controller {
             $this->data['row'] = $this->input->post();
         }
         
+        //List
+        $conditions = array(
+            'where' => array('deleted' => 0),
+            'sort_by' => 'id DESC',
+            'limit' => $this->data['limit_short'],
+            'offset' => 0
+        );
+        $this->data['rows'] = $this->user_model->get_rows($conditions);
+        $this->data['show_more'] = $this->user_model->count_all(array('deleted' => 0)) > $this->data['limit_short'] ? TRUE : FALSE;
+        
         $this->load->view('backend/layout/header', $this->data);
         $this->load->view('backend/user/edit', $this->data);
         $this->load->view('backend/layout/footer', $this->data);
@@ -138,6 +160,35 @@ class User extends CI_Controller {
 
     public function delete_multi() {
         
+    }
+    
+    public function short_list() 
+    {
+        $conditions = array(
+            'where' => array('deleted' => 0),
+            'sort_by' => 'id DESC',
+            'limit' => $this->data['limit_short'],
+            'offset' => isset($_POST['page']) ? ($_POST['page'] - 1)*$this->data['limit_short'] : 0
+        );
+        $this->data['rows'] = $this->user_model->get_rows($conditions);
+         
+        $count_all = $this->user_model->count_all(array('deleted' => 0));
+        $this->data['btn_next'] = $this->data['btn_prev'] = FALSE;
+        if($_POST['page'] > 1)
+        {
+            if(ceil($count_all/$this->data['limit_short']) > $_POST['page'])
+            {
+                $this->data['btn_next'] = $_POST['page'] + 1;
+            }
+            $this->data['btn_prev'] = $_POST['page'] - 1;
+        }
+        else
+        {
+            $this->data['btn_next'] = $_POST['page'] + 1;
+        }
+       
+        
+        $this->load->view('backend/user/short_list', $this->data);    
     }
 
 }

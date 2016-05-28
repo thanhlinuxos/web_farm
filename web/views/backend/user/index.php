@@ -1,5 +1,5 @@
 <div class="page-title">
-  <h4>Users</h4>
+  <h4><?php echo $this->lang->line('user_list'); ?></h4>
 </div>
 
 <div class="row">
@@ -16,7 +16,7 @@
                     <th><?php echo $this->lang->line('user_gender'); ?></th>
                     <th><?php echo $this->lang->line('user_birthday'); ?></th>
                     <th><?php echo $this->lang->line('user_status'); ?></th>
-                    <th><a href="<?php echo base_url('acp/user/add');?>" class="btn btn-success btn-md">Add</a></th>
+                    <th><a href="<?php echo base_url('acp/user/add');?>" class="btn btn-success btn-md"><?php echo $this->lang->line('btn_add'); ?></a></th>
                 </tr>
             </thead>
             <tbody>
@@ -36,8 +36,8 @@
                         <td><?php echo $row['birthday']?></td>
                         <td><?php echo $row['status_']?></td>
                         <td>
-                            <a href="<?php echo base_url('acp/user/edit/'.$row['id']);?>" class="btn btn-warning btn-md">Edit</a>
-                            <a href="<?php echo base_url('acp/user/delete/'.$row['id']);?>" class="btn btn-danger btn-md" onclick="return confirm('Are you sure?');">Delete</a>
+                            <a href="<?php echo base_url('acp/user/edit/'.$row['id']);?>" class="btn btn-warning btn-md"><?php echo $this->lang->line('btn_edit'); ?></a>
+                            <a href="<?php echo base_url('acp/user/delete/'.$row['id']);?>" class="btn btn-danger btn-md" onclick="return confirm('Are you sure?');"><?php echo $this->lang->line('btn_delete'); ?></a>
                         </td>
                     </tr>
             <?php
