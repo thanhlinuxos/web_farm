@@ -33,5 +33,22 @@ $lang['user_list'] = 'Users';
 $lang['user_add'] = 'Add user';
 $lang['user_update'] = 'Update user';
 $lang['user_info'] = 'User information';
+$lang['user_has_been_updated'] = 'The user account has been updated!';
+$lang['user_has_been_deleted'] = 'The user account has been deleted!';
+$lang['user_has_been_created'] = 'The user account has been created!';
+$lang['user_has_been_locked'] = 'The user has been locked';
+$lang['user_not_exist'] = 'User not exist';
 
-
+//Authenticate
+$lang['auth_login'] = 'Login';
+$lang['auth_user'] = 'Username';
+$lang['auth_pass'] = 'Password';
+$lang['auth_login_to_system'] = 'Login to system';
+$lang['auth_password_not_available'] = 'The password not available';
+$lang['auth_password_has_been_updated'] = 'The password has been updated';
+$lang['auth_change_password_message'] = "<small class='help-block'>The user's password must be changed after logging on the first time <br /> or has been reset</small>";
+$lang['auth_change_password'] = 'Change Password';
+$lang['auth_current_pasword'] = 'Current Password';
+$lang['auth_new_password'] = 'New Password';
+$lang['auth_confirm_password'] = 'Confirm Password';
+$lang['auth_change_now'] = 'Change Now';

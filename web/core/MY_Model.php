@@ -189,7 +189,8 @@ class MY_Model extends CI_Model
     }
 
     /**
-     * 
+     * Update data
+     * @return boolean
      */
     public function update($o, $where = array()) {
         if (!is_array($where) || count($where) == 0) {

@@ -19,6 +19,6 @@ class MY_Controller extends CI_Controller
         parent::__construct();
 
         $this->user_model->is_login();
-        $this->lang->load('backend');
+        $this->lang->load('backend');       
     }
 }

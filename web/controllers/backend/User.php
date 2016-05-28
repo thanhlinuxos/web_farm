@@ -38,12 +38,12 @@ class User extends MY_Controller {
         if($this->input->post('submit'))
         {
             $post = $this->input->post();
-            $this->form_validation->set_rules('fullname', 'Full Name', 'required');
-            $this->form_validation->set_rules('email', 'Email', 'valid_email|is_unique[th_users.email]');
-            $this->form_validation->set_rules('username', 'Username', 'is_unique[th_users.username]');
+            $this->form_validation->set_rules('fullname', $this->lang->line('user_fullname'), 'required');
+            $this->form_validation->set_rules('email', $this->lang->line('user_email'), 'valid_email|is_unique[th_users.email]');
+            $this->form_validation->set_rules('username', $this->lang->line('user_username'), 'is_unique[th_users.username]');
             if($post['username'] != '')
             {
-                $this->form_validation->set_rules('password', 'Password', 'required');
+                $this->form_validation->set_rules('password', $this->lang->line('user_password'), 'required');
             }
             if ($this->form_validation->run() == TRUE)
             {
@@ -54,7 +54,7 @@ class User extends MY_Controller {
                 $result = $this->user_model->insert($post);
                 if($result)
                 {
-                    $this->session->set_flashdata('msg_success', 'Create user successful.');
+                    $this->session->set_flashdata('msg_success', $this->lang->line('user_has_been_updated'));
                     redirect('/acp/user/show/'.$this->user_model->insert_id());
                 }
                 
@@ -81,7 +81,7 @@ class User extends MY_Controller {
     public function show($id = NULL) {
         $user = $this->user_model->get_by(array('id' => $id));
         if(!$user){
-            $this->session->set_flashdata('msg_error', 'User not exist.');
+            $this->session->set_flashdata('msg_error', $this->lang->line('user_not_exist'));
             redirect(base_url('acp/user'));
         }
         $this->data['row'] = $this->user_model->convert_data($user);
@@ -93,7 +93,7 @@ class User extends MY_Controller {
     public function edit($id = NULL) {
         $user = $this->user_model->get_by(array('id' => $id));
         if(!$user){
-            $this->session->set_flashdata('msg_error', 'User not exist.');
+            $this->session->set_flashdata('msg_error', $this->lang->line('user_not_exist'));
             redirect(base_url('acp/user'));
         }
         $this->data['row'] = $user;
@@ -101,16 +101,16 @@ class User extends MY_Controller {
         if($this->input->post('submit'))
         {
             $post = $this->input->post();
-            $this->form_validation->set_rules('fullname', 'Full Name', 'required');
+            $this->form_validation->set_rules('fullname', $this->lang->line('user_fullname'), 'required');
             if($post['email'] != $user['email']) {
-                $this->form_validation->set_rules('email', 'Email', 'valid_email|is_unique[th_users.email]');
+                $this->form_validation->set_rules('email', $this->lang->line('user_email'), 'valid_email|is_unique[th_users.email]');
             }
             if($post['username'] != $user['username']) {
-                $this->form_validation->set_rules('username', 'Username', 'is_unique[th_users.username]');
+                $this->form_validation->set_rules('username', $this->lang->line('user_username'), 'is_unique[th_users.username]');
             }
             if($post['username'] != $user['username'] && $post['username'] != '')
             {
-                $this->form_validation->set_rules('password', 'Password', 'required');
+                $this->form_validation->set_rules('password', $this->lang->line('user_password'), 'required');
             }
             if ($this->form_validation->run() == TRUE)
             {
@@ -127,7 +127,7 @@ class User extends MY_Controller {
                 $result = $this->user_model->update($post);
                 if($result)
                 {
-                    $this->session->set_flashdata('msg_success', 'Update user successful.');
+                    $this->session->set_flashdata('msg_success', $this->lang->line('user_has_been_updated'));
                     redirect('/acp/user/show/'.$user['id']);
                 }
             }
@@ -153,11 +153,11 @@ class User extends MY_Controller {
     public function delete($id = NULL) {
         $user = $this->user_model->get_by(array('id' => $id));
         if(!$user){
-            $this->session->set_flashdata('msg_error', 'User not exist.');
+            $this->session->set_flashdata('msg_error', $this->lang->line('user_not_exist'));
             redirect(base_url('acp/user'));
         }
         $result = $this->user_model->delete(array('id' => $id));
-        $this->session->set_flashdata('msg_info', 'User has been deleted.');
+        $this->session->set_flashdata('msg_info', $this->lang->line('user_has_been_updated'));
         redirect(base_url('acp/user'));
     }
 
