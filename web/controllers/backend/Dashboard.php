@@ -2,12 +2,10 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Dashboard extends CI_Controller {
+class Dashboard extends MY_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->user_model->is_login();
-        $this->lang->load('backend');
     }
 
     public function index() {
