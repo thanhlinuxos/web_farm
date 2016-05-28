@@ -7,6 +7,7 @@ class User extends MY_Controller {
     public function __construct() {
         parent::__construct();
         $this->data['limit_short'] = 13;
+        print_r($this->config->item('admin'));
     }
 
     public function index() 

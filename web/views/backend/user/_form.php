@@ -110,46 +110,37 @@
         </form>
     </div>
     <div class="col-xs-5" >
-        <div id="short-list">
-            <table class="table table-striped table-hover table-bordered">
-                <thead>
+        <table class="table table-striped table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th><?php echo $this->lang->line('user_permission_module'); ?></th>
+                    <th><?php echo $this->lang->line('user_permission_action'); ?></th>
+                </tr>
+            </thead>
+            <tbody>
+            <?php
+                foreach($rows as $row)
+                {
+            ?>
                     <tr>
-                        <th><?php echo $this->lang->line('user_fullname'); ?></th>
-                        <th><?php echo $this->lang->line('user_username'); ?></th>
-                        <th><?php echo $this->lang->line('user_group'); ?></th>
+                        <td><?php echo $row['username']?></td>
+                        <td>
+                            <label class="checkbox-inline">
+                                <input type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-size="small" value="1"> Add
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="checkbox" checked data-toggle="toggle" data-onstyle="warning" data-size="small" value="1"> Edit
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="checkbox" checked data-toggle="toggle" data-onstyle="danger" data-size="small" value="1"> Delete
+                            </label>
+                        </td>
                     </tr>
-                </thead>
-                <tbody>
-                <?php
-                    foreach($rows as $row)
-                    {
-                ?>
-                        <tr>
-                            <td><a href="<?php echo base_url('acp/user/show/'.$row['id']); ?>"><?php echo $row['fullname']?></a></td>
-                            <td><?php echo $row['username']?></td>
-                            <td><?php echo $row['group']?></td>
-                        </tr>
-                <?php
-                    }
-                ?>
-                </tbody>
-            </table> 
-        <?php
-            if($show_more)
-            {
-        ?>
-            <div class="row">
-                <div class="col-sm-12 text-center">
-                    <button onclick="ajax_short_list('acp/user/short_list', 2);" class="btn btn-primary">&gt;&gt;</button>
-                </div>
-             </div>
-        <?php
-            }
-        ?> 
-        </div>
-        <div id="loading_short_list" style="width: 100%; height: 40%; text-align: center; display: none; padding-top: 150px;">
-            <img src="<?php echo base_url('assets/backend/img/loading-circle.gif');?>" />
-        </div>
+            <?php
+                }
+            ?>
+            </tbody>
+        </table>
     </div>
 </div>
 
