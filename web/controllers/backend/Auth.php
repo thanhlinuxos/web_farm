@@ -91,4 +91,9 @@ class Auth extends CI_Controller {
         }
         $this->load->view('backend/auth/group_permission', $this->data);
     }
+    
+    public function deny()
+    {
+        $this->load->view('backend/auth/deny', $this->data);
+    }
 }

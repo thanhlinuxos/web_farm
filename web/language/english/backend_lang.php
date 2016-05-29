@@ -55,3 +55,5 @@ $lang['auth_current_pasword'] = 'Current Password';
 $lang['auth_new_password'] = 'New Password';
 $lang['auth_confirm_password'] = 'Confirm Password';
 $lang['auth_change_now'] = 'Change Now';
+$lang['auth_do_not_have_permission'] = "You don't have permission to access this page!";
+$lang['auth_back_to_dashboad'] = 'Back to Dashboad';

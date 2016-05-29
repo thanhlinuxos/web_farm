@@ -78,10 +78,17 @@ class User_model extends MY_Model
             }
             else
             {
+                $permissions = ($user['permission'] != NULL) ? unserialize($user['permission']) : array();
+                $tmp = array();
+                foreach ($permissions as $k => $v)
+                {
+                    $tmp[$k] = explode('|', $v);
+                }
                 $session = array(
                     'id' => $user['id'],
                     'fullname' => $user['fullname'],
-                    'change_pass' => $user['change_password']
+                    'change_pass' => $user['change_password'],
+                    'permission' => $tmp
                 );
                 $this->session->set_userdata('user_login', $session);
                 $result['success'] = TRUE;
@@ -97,6 +104,26 @@ class User_model extends MY_Model
     {
         $this->session->sess_destroy();
         redirect(base_url('acp/login'));
+    }
+    
+    public function check_permission($controller, $action)
+    {
+        if($controller == 'dashboard' && $action == 'index') {
+            return TRUE;
+        }
+        $user_login = $this->session->userdata('user_login');
+        $permission = $user_login['permission'];
+        $allow = FALSE;
+        if(isset($permission[$controller])) {
+            if(in_array($action, $permission[$controller])) {
+                $allow = TRUE;
+            }
+        }
+      
+        if(!$allow) {
+            redirect(base_url('acp/deny'));
+        }
+        return TRUE;
     }
 
     public function change_password($old_password = '', $new_password = '')

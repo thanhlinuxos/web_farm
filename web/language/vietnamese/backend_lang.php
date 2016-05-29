@@ -55,3 +55,5 @@ $lang['auth_current_pasword'] = 'Mật khẩu hiện tại';
 $lang['auth_new_password'] = 'Mật khẩu mới';
 $lang['auth_confirm_password'] = 'Xác nhận mật khẩu';
 $lang['auth_change_now'] = 'Cập nhật';
+$lang['auth_do_not_have_permission'] = "Bạn không có quyền truy cập vào trang này!";
+$lang['auth_back_to_dashboad'] = 'Quay lại bảng điều khiển';
