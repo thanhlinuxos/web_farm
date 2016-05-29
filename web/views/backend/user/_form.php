@@ -1,6 +1,7 @@
 <div class="row">
-    <div class="col-xs-7">
-        <form class="form-horizontal" role="form" method="POST" autocomplete="off" enctype="multipart/form-data">
+    <form class="form-horizontal" role="form" method="POST" autocomplete="off" enctype="multipart/form-data">
+    <div class="col-xs-6">
+        
             <div class="form-group <?php if(form_error('fullname')) echo 'has-error'; ?>">
                 <label class="control-label col-sm-3" for="fullname"><?php echo $this->lang->line('user_fullname'); ?>:</label>
                 <div class="col-sm-9">
@@ -11,21 +12,18 @@
             <div class="form-group">
                 <label class="control-label col-sm-3" for="group"><?php echo $this->lang->line('user_group'); ?>:</label>
                 <div class="col-sm-9"> 
-                    <label class="radio-inline">
-                        <input type="radio" name="group" value="admin" <?php echo set_radio('group', 'admin', $row['group'] == 'admin'); ?>> Admin
-                    </label>
-                    <label class="radio-inline">
-                        <input type="radio" name="group" value="manager" <?php echo set_radio('group', 'manager', $row['group'] == 'manager'); ?>> Manager
-                    </label>
-                    <label class="radio-inline">
-                        <input type="radio" name="group" value="technical" <?php echo set_radio('group', 'technical', $row['group'] == 'technical'); ?>> Technical
-                    </label>
-                    <label class="radio-inline">
-                        <input type="radio" name="group" value="accountancy" <?php echo set_radio('group', 'accountancy', $row['group'] == 'accountancy'); ?>> Accountancy
-                    </label>
-                    <label class="radio-inline">
-                        <input type="radio" name="group" value="employee" <?php echo set_radio('group', 'employee', $row['group'] == 'employee'); ?>> Employee
-                    </label>
+                <?php
+                    $groups = $this->config->item('groups');
+                    foreach($groups as $group)
+                    {
+                ?>
+                        <label class="radio-inline">
+                            <input type="radio" name="group" value="<?php echo $group;?>" <?php echo set_radio('group', $group, $row['group'] == $group); ?> onchange="ajax_get_group_permission(this.value);">
+                            <?php echo $group;?>
+                        </label>
+                <?php    
+                    }
+                ?>
                 </div>  
             </div>
             <div class="form-group">
@@ -107,9 +105,9 @@
                 </div>
             </div>
             
-        </form>
+        
     </div>
-    <div class="col-xs-5" >
+    <div class="col-xs-6" id="user_permission">
         <table class="table table-striped table-hover table-bordered">
             <thead>
                 <tr>
@@ -119,21 +117,49 @@
             </thead>
             <tbody>
             <?php
-                foreach($rows as $row)
+                $permission = $this->config->item('permission');
+                foreach($permission['list'] as $k => $v)
                 {
             ?>
                     <tr>
-                        <td><?php echo $row['username']?></td>
+                        <td><?php echo $k; ?></td>
                         <td>
-                            <label class="checkbox-inline">
-                                <input type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-size="small" value="1"> Add
-                            </label>
-                            <label class="checkbox-inline">
-                                <input type="checkbox" checked data-toggle="toggle" data-onstyle="warning" data-size="small" value="1"> Edit
-                            </label>
-                            <label class="checkbox-inline">
-                                <input type="checkbox" checked data-toggle="toggle" data-onstyle="danger" data-size="small" value="1"> Delete
-                            </label>
+                        <?php 
+                            $actions = explode('|', $v);
+                            foreach ($actions as $action)        
+                            {
+                                $checked = '';
+                                $disabled = (in_array($k, array('permission')) && in_array($action, array('add'))) ? 'disabled' : '';
+                                if(isset($permission_group[$k]))
+                                {
+                                    $action_group = explode('|', $permission_group[$k]);
+                                    if(in_array($action, $action_group))
+                                    {
+                                        $checked = 'checked';
+                                    }
+                                }
+                                switch ($action)
+                                {
+                                    case 'add':
+                                        $onstyle = 'success';
+                                        break;
+                                    case 'edit':
+                                        $onstyle = 'warning';
+                                        break;
+                                    case 'delete':
+                                        $onstyle = 'danger';
+                                        break;
+                                    default :
+                                        $onstyle = 'default';
+                                }
+                        ?>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" name="permissions[]" data-toggle="toggle" data-onstyle="<?php echo $onstyle; ?>" data-size="small" value="<?php echo $k.'-'.$action; ?>" <?php echo $checked; ?> <?php echo $disabled; ?>>
+                                    <?php echo $action; ?>
+                                </label>
+                        <?php    
+                            }
+                        ?>    
                         </td>
                     </tr>
             <?php
@@ -142,6 +168,7 @@
             </tbody>
         </table>
     </div>
+    </form>
 </div>
 
 <script type="text/javascript">

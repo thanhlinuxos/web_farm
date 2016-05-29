@@ -7,7 +7,7 @@ class User extends MY_Controller {
     public function __construct() {
         parent::__construct();
         $this->data['limit_short'] = 13;
-        print_r($this->config->item('admin'));
+        
     }
 
     public function index() 
@@ -36,6 +36,10 @@ class User extends MY_Controller {
 
     public function add() {
         $this->data['row'] = $this->user_model->default_value(); 
+        //Permission
+        $permission = $this->config->item('permission');
+        $this->data['permission_group'] = $permission[$this->data['row']['group']];
+        
         if($this->input->post('submit'))
         {
             $post = $this->input->post();
@@ -46,12 +50,30 @@ class User extends MY_Controller {
             {
                 $this->form_validation->set_rules('password', $this->lang->line('user_password'), 'required');
             }
-            if ($this->form_validation->run() == TRUE)
+            
+            //Permission
+            if(isset($post['permissions']))
             {
+                $tmp = array();
+                foreach ($post['permissions'] as $permission) {
+
+                    $permission = explode('-', $permission);
+
+                    if(isset($tmp[$permission[0]])){
+                        $tmp[$permission[0]] .= '|'.$permission[1];
+                    } else {
+                        $tmp[$permission[0]] = $permission[1];
+                    }
+                }
+                $post['permission'] = serialize($tmp);
+            }
                 
+            if ($this->form_validation->run() == TRUE)
+            {           
                 $post['password'] = md5(md5($post['password']));
                 $post['change_password'] = 1;
                 $post['created_at'] = time();
+                
                 $result = $this->user_model->insert($post);
                 if($result)
                 {
@@ -60,19 +82,10 @@ class User extends MY_Controller {
                 }
                 
             }
-            $this->data['row'] = $this->input->post();
+            $this->data['row'] = $post;
+            //Permission
+            $this->data['permission_group'] = (isset($this->data['row']['permission'])) ? unserialize($this->data['row']['permission']) : array();
         }
-        
-        //List
-        $conditions = array(
-            'select' => 'id, fullname, username, group',
-            'where' => array('deleted' => 0),
-            'sort_by' => 'id DESC',
-            'limit' => $this->data['limit_short'],
-            'offset' => 0
-        );
-        $this->data['rows'] = $this->user_model->get_rows($conditions);
-        $this->data['show_more'] = $this->user_model->count_all(array('deleted' => 0)) > $this->data['limit_short'] ? TRUE : FALSE;
         
         $this->load->view('backend/layout/header', $this->data);
         $this->load->view('backend/user/add', $this->data);
@@ -113,6 +126,24 @@ class User extends MY_Controller {
             {
                 $this->form_validation->set_rules('password', $this->lang->line('user_password'), 'required');
             }
+            
+            //Permission
+            if(isset($post['permissions']))
+            {
+                $tmp = array();
+                foreach ($post['permissions'] as $permission) {
+
+                    $permission = explode('-', $permission);
+
+                    if(isset($tmp[$permission[0]])){
+                        $tmp[$permission[0]] .= '|'.$permission[1];
+                    } else {
+                        $tmp[$permission[0]] = $permission[1];
+                    }
+                }
+                $post['permission'] = serialize($tmp);
+            }
+            
             if ($this->form_validation->run() == TRUE)
             {
                 $post['id'] = $user['id'];
@@ -132,19 +163,11 @@ class User extends MY_Controller {
                     redirect('/acp/user/show/'.$user['id']);
                 }
             }
-            $this->data['row'] = $this->input->post();
+            $this->data['row'] = $post;
         }
         
-        //List
-        $conditions = array(
-            'select' => 'id, fullname, username, group',
-            'where' => array('deleted' => 0),
-            'sort_by' => 'id DESC',
-            'limit' => $this->data['limit_short'],
-            'offset' => 0
-        );
-        $this->data['rows'] = $this->user_model->get_rows($conditions);
-        $this->data['show_more'] = $this->user_model->count_all(array('deleted' => 0)) > $this->data['limit_short'] ? TRUE : FALSE;
+        //Permission
+        $this->data['permission_group'] = (isset($this->data['row']['permission'])) ? unserialize($this->data['row']['permission']) : array();
         
         $this->load->view('backend/layout/header', $this->data);
         $this->load->view('backend/user/edit', $this->data);

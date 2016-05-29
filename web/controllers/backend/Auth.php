@@ -82,5 +82,14 @@ class Auth extends CI_Controller {
         }
         $this->load->view('backend/auth/change_password', $this->data);
     }
-
+    
+    public function group_permission()
+    {
+        if($this->input->post('group_name'))
+        {
+            $permission = $this->config->item('permission');
+            $this->data['permission_group'] = $permission[$this->input->post('group_name')];
+        }
+        $this->load->view('backend/auth/group_permission', $this->data);
+    }
 }
