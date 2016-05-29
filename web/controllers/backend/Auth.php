@@ -6,7 +6,6 @@ class Auth extends CI_Controller {
     
     private $data = array();
 
-
     public function __construct() {
         parent::__construct();
         $this->lang->load('backend');

@@ -1,14 +1,17 @@
 <?php
 
-/**
- * CodeIgniter
- * @package	CodeIgniter
- * @author	Thanh Nguyen
- * @copyright	Copyright (c) 2016
- * @since	Version 1.0.0
- * @filesource
- */
 defined('BASEPATH') OR exit('No direct script access allowed');
+
+/**
+ * Application Model Class
+ *
+ * CodeIgniter will be assigned to.
+ *
+ * @package     CodeIgniter
+ * @subpackage	Core Model
+ * @category	My Model
+ * @author	Thanh Nguyen
+ */
 
 class MY_Model extends CI_Model
 {
