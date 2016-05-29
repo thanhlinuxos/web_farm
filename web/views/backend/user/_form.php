@@ -87,14 +87,14 @@
             <div class="form-group <?php if(form_error('username')) echo 'has-error'; ?>">
                 <label class="control-label col-sm-3" for="username"><?php echo $this->lang->line('user_username'); ?>:</label>
                 <div class="col-sm-9">
-                    <input type="text" name="username" class="form-control" id="username" value="<?php echo set_value('username', $row['username']); ?>" placeholder="Enter Username">
+                    <input type="text" name="username" class="form-control" id="username" value="<?php echo set_value('username', $row['username']); ?>" placeholder="Enter Username" autocomplete="off">
                     <?php echo form_error('username', "<small class='help-block'>", '</small>'); ?>
                 </div>
             </div>
             <div class="form-group <?php if(form_error('password')) echo 'has-error'; ?>">
                 <label class="control-label col-sm-3" for="password"><?php echo $this->lang->line('user_password'); ?>:</label>
                 <div class="col-sm-9">
-                    <input type="password" name="password" class="form-control" id="password" value="<?php echo set_value('password', ''); ?>" placeholder="Enter Password">
+                    <input type="password" name="password" class="form-control" id="password" value="<?php echo set_value('password', ''); ?>" placeholder="Enter Password" autocomplete="off">
                     <?php echo form_error('password', "<small class='help-block'>", '</small>'); ?>
                 </div>
             </div>
