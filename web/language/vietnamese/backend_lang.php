@@ -33,5 +33,25 @@ $lang['user_list'] = 'Danh sách nhân viên';
 $lang['user_add'] = 'Thêm nhân viên';
 $lang['user_update'] = 'Cập nhật nhân viên';
 $lang['user_info'] = 'Thông tin nhân viên';
+$lang['user_permission'] = 'Phân quyền nhân viên';
+$lang['user_permission_module'] = 'Trang';
+$lang['user_permission_action'] = 'Chức năng';
+$lang['user_has_been_updated'] = 'Nhân viên đã được cập nhật!';
+$lang['user_has_been_deleted'] = 'Nhân viên đã bị xóa!';
+$lang['user_has_been_created'] = 'Nhân viên đã được tạo!';
+$lang['user_has_been_locked'] = 'Nhân viên đã bị khóa!';
+$lang['user_not_exist'] = 'Nhân viên không tồn tại trong hệ thống!';
 
-
+//Authenticate
+$lang['auth_login'] = 'Đăng nhập';
+$lang['auth_user'] = 'Tên đăng nhập';
+$lang['auth_pass'] = 'Mật khẩu';
+$lang['auth_login_to_system'] = 'Đăng nhập vào hệ thống';
+$lang['auth_password_not_available'] = 'Mật khẩu không đúng!';
+$lang['auth_password_has_been_updated'] = 'Mật khẩu đã được cập nhật!';
+$lang['auth_change_password_message'] = "<small class='help-block'>Bạn phải thay đổi mật khẩu sau khi đăng nhập lần đầu <br /> hoặc khi mật khẩu được thiết lập lại</small>";
+$lang['auth_change_password'] = 'Đổi mật khẩu';
+$lang['auth_current_pasword'] = 'Mật khẩu hiện tại';
+$lang['auth_new_password'] = 'Mật khẩu mới';
+$lang['auth_confirm_password'] = 'Xác nhận mật khẩu';
+$lang['auth_change_now'] = 'Cập nhật';

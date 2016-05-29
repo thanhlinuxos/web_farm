@@ -7,6 +7,7 @@ class User extends MY_Controller {
     public function __construct() {
         parent::__construct();
         $this->data['limit_short'] = 13;
+        
     }
 
     public function index() 
@@ -35,43 +36,56 @@ class User extends MY_Controller {
 
     public function add() {
         $this->data['row'] = $this->user_model->default_value(); 
+        //Permission
+        $permission = $this->config->item('permission');
+        $this->data['permission_group'] = $permission[$this->data['row']['group']];
+        
         if($this->input->post('submit'))
         {
             $post = $this->input->post();
-            $this->form_validation->set_rules('fullname', 'Full Name', 'required');
-            $this->form_validation->set_rules('email', 'Email', 'valid_email|is_unique[th_users.email]');
-            $this->form_validation->set_rules('username', 'Username', 'is_unique[th_users.username]');
+            $this->form_validation->set_rules('fullname', $this->lang->line('user_fullname'), 'required');
+            $this->form_validation->set_rules('email', $this->lang->line('user_email'), 'valid_email|is_unique[th_users.email]');
+            $this->form_validation->set_rules('username', $this->lang->line('user_username'), 'is_unique[th_users.username]');
             if($post['username'] != '')
             {
-                $this->form_validation->set_rules('password', 'Password', 'required');
+                $this->form_validation->set_rules('password', $this->lang->line('user_password'), 'required');
             }
-            if ($this->form_validation->run() == TRUE)
+            
+            //Permission
+            if(isset($post['permissions']))
             {
+                $tmp = array();
+                foreach ($post['permissions'] as $permission) {
+
+                    $permission = explode('-', $permission);
+
+                    if(isset($tmp[$permission[0]])){
+                        $tmp[$permission[0]] .= '|'.$permission[1];
+                    } else {
+                        $tmp[$permission[0]] = $permission[1];
+                    }
+                }
+                $post['permission'] = serialize($tmp);
+            }
                 
+            if ($this->form_validation->run() == TRUE)
+            {           
                 $post['password'] = md5(md5($post['password']));
                 $post['change_password'] = 1;
                 $post['created_at'] = time();
+                
                 $result = $this->user_model->insert($post);
                 if($result)
                 {
-                    $this->session->set_flashdata('msg_success', 'Create user successful.');
+                    $this->session->set_flashdata('msg_success', $this->lang->line('user_has_been_updated'));
                     redirect('/acp/user/show/'.$this->user_model->insert_id());
                 }
                 
             }
-            $this->data['row'] = $this->input->post();
+            $this->data['row'] = $post;
+            //Permission
+            $this->data['permission_group'] = (isset($this->data['row']['permission'])) ? unserialize($this->data['row']['permission']) : array();
         }
-        
-        //List
-        $conditions = array(
-            'select' => 'id, fullname, username, group',
-            'where' => array('deleted' => 0),
-            'sort_by' => 'id DESC',
-            'limit' => $this->data['limit_short'],
-            'offset' => 0
-        );
-        $this->data['rows'] = $this->user_model->get_rows($conditions);
-        $this->data['show_more'] = $this->user_model->count_all(array('deleted' => 0)) > $this->data['limit_short'] ? TRUE : FALSE;
         
         $this->load->view('backend/layout/header', $this->data);
         $this->load->view('backend/user/add', $this->data);
@@ -81,7 +95,7 @@ class User extends MY_Controller {
     public function show($id = NULL) {
         $user = $this->user_model->get_by(array('id' => $id));
         if(!$user){
-            $this->session->set_flashdata('msg_error', 'User not exist.');
+            $this->session->set_flashdata('msg_error', $this->lang->line('user_not_exist'));
             redirect(base_url('acp/user'));
         }
         $this->data['row'] = $this->user_model->convert_data($user);
@@ -93,7 +107,7 @@ class User extends MY_Controller {
     public function edit($id = NULL) {
         $user = $this->user_model->get_by(array('id' => $id));
         if(!$user){
-            $this->session->set_flashdata('msg_error', 'User not exist.');
+            $this->session->set_flashdata('msg_error', $this->lang->line('user_not_exist'));
             redirect(base_url('acp/user'));
         }
         $this->data['row'] = $user;
@@ -101,17 +115,35 @@ class User extends MY_Controller {
         if($this->input->post('submit'))
         {
             $post = $this->input->post();
-            $this->form_validation->set_rules('fullname', 'Full Name', 'required');
+            $this->form_validation->set_rules('fullname', $this->lang->line('user_fullname'), 'required');
             if($post['email'] != $user['email']) {
-                $this->form_validation->set_rules('email', 'Email', 'valid_email|is_unique[th_users.email]');
+                $this->form_validation->set_rules('email', $this->lang->line('user_email'), 'valid_email|is_unique[th_users.email]');
             }
             if($post['username'] != $user['username']) {
-                $this->form_validation->set_rules('username', 'Username', 'is_unique[th_users.username]');
+                $this->form_validation->set_rules('username', $this->lang->line('user_username'), 'is_unique[th_users.username]');
             }
             if($post['username'] != $user['username'] && $post['username'] != '')
             {
-                $this->form_validation->set_rules('password', 'Password', 'required');
+                $this->form_validation->set_rules('password', $this->lang->line('user_password'), 'required');
             }
+            
+            //Permission
+            if(isset($post['permissions']))
+            {
+                $tmp = array();
+                foreach ($post['permissions'] as $permission) {
+
+                    $permission = explode('-', $permission);
+
+                    if(isset($tmp[$permission[0]])){
+                        $tmp[$permission[0]] .= '|'.$permission[1];
+                    } else {
+                        $tmp[$permission[0]] = $permission[1];
+                    }
+                }
+                $post['permission'] = serialize($tmp);
+            }
+            
             if ($this->form_validation->run() == TRUE)
             {
                 $post['id'] = $user['id'];
@@ -127,23 +159,15 @@ class User extends MY_Controller {
                 $result = $this->user_model->update($post);
                 if($result)
                 {
-                    $this->session->set_flashdata('msg_success', 'Update user successful.');
+                    $this->session->set_flashdata('msg_success', $this->lang->line('user_has_been_updated'));
                     redirect('/acp/user/show/'.$user['id']);
                 }
             }
-            $this->data['row'] = $this->input->post();
+            $this->data['row'] = $post;
         }
         
-        //List
-        $conditions = array(
-            'select' => 'id, fullname, username, group',
-            'where' => array('deleted' => 0),
-            'sort_by' => 'id DESC',
-            'limit' => $this->data['limit_short'],
-            'offset' => 0
-        );
-        $this->data['rows'] = $this->user_model->get_rows($conditions);
-        $this->data['show_more'] = $this->user_model->count_all(array('deleted' => 0)) > $this->data['limit_short'] ? TRUE : FALSE;
+        //Permission
+        $this->data['permission_group'] = (isset($this->data['row']['permission'])) ? unserialize($this->data['row']['permission']) : array();
         
         $this->load->view('backend/layout/header', $this->data);
         $this->load->view('backend/user/edit', $this->data);
@@ -153,11 +177,11 @@ class User extends MY_Controller {
     public function delete($id = NULL) {
         $user = $this->user_model->get_by(array('id' => $id));
         if(!$user){
-            $this->session->set_flashdata('msg_error', 'User not exist.');
+            $this->session->set_flashdata('msg_error', $this->lang->line('user_not_exist'));
             redirect(base_url('acp/user'));
         }
         $result = $this->user_model->delete(array('id' => $id));
-        $this->session->set_flashdata('msg_info', 'User has been deleted.');
+        $this->session->set_flashdata('msg_info', $this->lang->line('user_has_been_updated'));
         redirect(base_url('acp/user'));
     }
 

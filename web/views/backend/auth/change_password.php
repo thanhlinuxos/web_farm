@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="robots" content="noindex">
-        <title>Change Password</title> 
+        <title><?php echo $this->lang->line('auth_change_password'); ?></title> 
         <link href="<?php echo base_url('vendor/bootstrap/css/bootstrap.min.css'); ?>" rel="stylesheet">
         <style type="text/css">
             body {
@@ -93,7 +93,7 @@
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-12">
-                                    <a href="#" class="active">Change Password</a>
+                                    <a href="#" class="active"><?php echo $this->lang->line('auth_change_password'); ?></a>
                                 </div>
                             </div>
                             <hr>
@@ -111,21 +111,21 @@
                                 <div class="col-lg-12">
                                     <form name="form" method="POST" role="form">
                                         <div class="form-group <?php if(form_error('p1')) echo 'has-error'; ?>">
-                                            <input type="password" name="p1" class="form-control" value="<?php echo set_value('p1')?>" placeholder="Current Password">
+                                            <input type="password" name="p1" class="form-control" value="<?php echo set_value('p1')?>" placeholder="<?php echo $this->lang->line('auth_current_pasword'); ?>">
                                             <?php echo form_error('p1', "<small class='help-block'>", '</small>'); ?>
                                         </div>
                                         <div class="form-group <?php if(form_error('p2')) echo 'has-error'; ?>">
-                                            <input type="password" name="p2" class="form-control" value="<?php echo set_value('p2')?>" placeholder="New Password">
+                                            <input type="password" name="p2" class="form-control" value="<?php echo set_value('p2')?>" placeholder="<?php echo $this->lang->line('auth_new_password'); ?>">
                                             <?php echo form_error('p2', "<small class='help-block'>", '</small>'); ?>
                                         </div>
                                         <div class="form-group <?php if(form_error('p3')) echo 'has-error'; ?>">
-                                            <input type="password" name="p3" class="form-control" value="<?php echo set_value('p3')?>" placeholder="Confirm Password">
+                                            <input type="password" name="p3" class="form-control" value="<?php echo set_value('p3')?>" placeholder="<?php echo $this->lang->line('auth_confirm_password'); ?>">
                                             <?php echo form_error('p3', "<small class='help-block'>", '</small>'); ?>
                                         </div>
                                         <div class="form-group">
                                             <div class="row">
                                                 <div class="col-sm-6 col-sm-offset-3">
-                                                    <input type="submit" name="submit" class="form-control btn btn-register" value="Change Now">
+                                                    <input type="submit" name="submit" class="form-control btn btn-register" value="<?php echo $this->lang->line('auth_change_now'); ?>">
                                                 </div>
                                             </div>
                                         </div>

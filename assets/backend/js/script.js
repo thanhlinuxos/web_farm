@@ -19,3 +19,18 @@ function ajax_short_list(url, num)
 
     });
 }
+
+function ajax_get_group_permission(group_name)
+{
+    $.ajax({
+        url: BASE_URL + 'acp/auth/group_permission',
+        method: "POST",
+        data: {group_name: group_name},
+        beforeSend: function(){},
+        success: function(response) {
+            $('#user_permission').html(response);
+            $('input[type=checkbox][data-toggle^=toggle]').bootstrapToggle();
+        }
+
+    });
+}

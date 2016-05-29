@@ -56,7 +56,7 @@ class User_model extends MY_Model
         $user = $this->get_by(array('username' => $input['u']));
         if(!$user)
         {
-            $result['msg'] = 'Tai khoan khong ton tai!';
+            $result['msg'] = $this->lang->line('user_not_exist');
         }
         else
         {
@@ -64,17 +64,17 @@ class User_model extends MY_Model
             {
                 $user['status'] = 0;
                 $this->update($user);
-                $result['msg'] = 'Tai khoan da bi khoa!';
+                $result['msg'] = $this->lang->line('user_has_been_locked');
             }
             elseif($user['status'] == 0)
             {
-                $result['msg'] = 'Tai khoan da bi khoa!';
+                $result['msg'] = $this->lang->line('user_has_been_locked');
             }
             elseif($user['password'] != md5(md5($input['p'])))
             {
                 $user['login_fail'] += 1;
                 $this->update($user);
-                $result['msg'] = 'Mat khau khong dung!';
+                $result['msg'] = $this->lang->line('auth_password_not_available');
             }
             else
             {
@@ -107,7 +107,7 @@ class User_model extends MY_Model
         $user = $this->get_by(array('id' => $user_login['id']));
         if($user['password'] != md5(md5($old_password)))
         {
-            $result['msg'] = 'Mật khẩu hiện tại không đúng!';
+            $result['msg'] = $this->lang->line('auth_password_not_available');
         }
         else
         {

@@ -1,6 +1,7 @@
 <div class="row">
-    <div class="col-xs-7">
-        <form class="form-horizontal" role="form" method="POST" autocomplete="off" enctype="multipart/form-data">
+    <form class="form-horizontal" role="form" method="POST" autocomplete="off" enctype="multipart/form-data">
+    <div class="col-xs-6">
+        
             <div class="form-group <?php if(form_error('fullname')) echo 'has-error'; ?>">
                 <label class="control-label col-sm-3" for="fullname"><?php echo $this->lang->line('user_fullname'); ?>:</label>
                 <div class="col-sm-9">
@@ -11,21 +12,18 @@
             <div class="form-group">
                 <label class="control-label col-sm-3" for="group"><?php echo $this->lang->line('user_group'); ?>:</label>
                 <div class="col-sm-9"> 
-                    <label class="radio-inline">
-                        <input type="radio" name="group" value="admin" <?php echo set_radio('group', 'admin', $row['group'] == 'admin'); ?>> Admin
-                    </label>
-                    <label class="radio-inline">
-                        <input type="radio" name="group" value="manager" <?php echo set_radio('group', 'manager', $row['group'] == 'manager'); ?>> Manager
-                    </label>
-                    <label class="radio-inline">
-                        <input type="radio" name="group" value="technical" <?php echo set_radio('group', 'technical', $row['group'] == 'technical'); ?>> Technical
-                    </label>
-                    <label class="radio-inline">
-                        <input type="radio" name="group" value="accountancy" <?php echo set_radio('group', 'accountancy', $row['group'] == 'accountancy'); ?>> Accountancy
-                    </label>
-                    <label class="radio-inline">
-                        <input type="radio" name="group" value="employee" <?php echo set_radio('group', 'employee', $row['group'] == 'employee'); ?>> Employee
-                    </label>
+                <?php
+                    $groups = $this->config->item('groups');
+                    foreach($groups as $group)
+                    {
+                ?>
+                        <label class="radio-inline">
+                            <input type="radio" name="group" value="<?php echo $group;?>" <?php echo set_radio('group', $group, $row['group'] == $group); ?> onchange="ajax_get_group_permission(this.value);">
+                            <?php echo $group;?>
+                        </label>
+                <?php    
+                    }
+                ?>
                 </div>  
             </div>
             <div class="form-group">
@@ -107,50 +105,70 @@
                 </div>
             </div>
             
-        </form>
+        
     </div>
-    <div class="col-xs-5" >
-        <div id="short-list">
-            <table class="table table-striped table-hover table-bordered">
-                <thead>
+    <div class="col-xs-6" id="user_permission">
+        <table class="table table-striped table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th><?php echo $this->lang->line('user_permission_module'); ?></th>
+                    <th><?php echo $this->lang->line('user_permission_action'); ?></th>
+                </tr>
+            </thead>
+            <tbody>
+            <?php
+                $permission = $this->config->item('permission');
+                foreach($permission['list'] as $k => $v)
+                {
+            ?>
                     <tr>
-                        <th><?php echo $this->lang->line('user_fullname'); ?></th>
-                        <th><?php echo $this->lang->line('user_username'); ?></th>
-                        <th><?php echo $this->lang->line('user_group'); ?></th>
+                        <td><?php echo $k; ?></td>
+                        <td>
+                        <?php 
+                            $actions = explode('|', $v);
+                            foreach ($actions as $action)        
+                            {
+                                $checked = '';
+                                $disabled = (in_array($k, array('permission')) && in_array($action, array('add'))) ? 'disabled' : '';
+                                if(isset($permission_group[$k]))
+                                {
+                                    $action_group = explode('|', $permission_group[$k]);
+                                    if(in_array($action, $action_group))
+                                    {
+                                        $checked = 'checked';
+                                    }
+                                }
+                                switch ($action)
+                                {
+                                    case 'add':
+                                        $onstyle = 'success';
+                                        break;
+                                    case 'edit':
+                                        $onstyle = 'warning';
+                                        break;
+                                    case 'delete':
+                                        $onstyle = 'danger';
+                                        break;
+                                    default :
+                                        $onstyle = 'default';
+                                }
+                        ?>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" name="permissions[]" data-toggle="toggle" data-onstyle="<?php echo $onstyle; ?>" data-size="small" value="<?php echo $k.'-'.$action; ?>" <?php echo $checked; ?> <?php echo $disabled; ?>>
+                                    <?php echo $action; ?>
+                                </label>
+                        <?php    
+                            }
+                        ?>    
+                        </td>
                     </tr>
-                </thead>
-                <tbody>
-                <?php
-                    foreach($rows as $row)
-                    {
-                ?>
-                        <tr>
-                            <td><a href="<?php echo base_url('acp/user/show/'.$row['id']); ?>"><?php echo $row['fullname']?></a></td>
-                            <td><?php echo $row['username']?></td>
-                            <td><?php echo $row['group']?></td>
-                        </tr>
-                <?php
-                    }
-                ?>
-                </tbody>
-            </table> 
-        <?php
-            if($show_more)
-            {
-        ?>
-            <div class="row">
-                <div class="col-sm-12 text-center">
-                    <button onclick="ajax_short_list('acp/user/short_list', 2);" class="btn btn-primary">&gt;&gt;</button>
-                </div>
-             </div>
-        <?php
-            }
-        ?> 
-        </div>
-        <div id="loading_short_list" style="width: 100%; height: 40%; text-align: center; display: none; padding-top: 150px;">
-            <img src="<?php echo base_url('assets/backend/img/loading-circle.gif');?>" />
-        </div>
+            <?php
+                }
+            ?>
+            </tbody>
+        </table>
     </div>
+    </form>
 </div>
 
 <script type="text/javascript">
