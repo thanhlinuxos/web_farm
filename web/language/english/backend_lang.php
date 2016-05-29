@@ -44,6 +44,7 @@ $lang['user_not_exist'] = 'User not exist';
 
 //Authenticate
 $lang['auth_login'] = 'Login';
+$lang['auth_logout'] = 'Logout';
 $lang['auth_user'] = 'Username';
 $lang['auth_pass'] = 'Password';
 $lang['auth_login_to_system'] = 'Login to system';
@@ -57,3 +58,10 @@ $lang['auth_confirm_password'] = 'Confirm Password';
 $lang['auth_change_now'] = 'Change Now';
 $lang['auth_do_not_have_permission'] = "You don't have permission to access this page!";
 $lang['auth_back_to_dashboad'] = 'Back to Dashboad';
+
+//Permission
+$lang['permission_index'] = 'Read';
+$lang['permission_add'] = 'Create';
+$lang['permission_edit'] = 'Update';
+$lang['permission_show'] = 'Show';
+$lang['permission_delete'] = 'Delete';

@@ -16,7 +16,7 @@ $config = array(
     'permission' => array(
         'list' => array(
             'user' => 'index|add|edit|show|delete',
-            'permission' => 'index|add|show|edit',
+            'permission' => 'index|add|edit|show',
             'agency' => 'index|add|edit|show|delete',
             'land' => 'index|add|edit|show|delete',
             'duple' => 'index|add|edit|show|delete',
@@ -27,7 +27,7 @@ $config = array(
         ),
         'admin' => array(
             'user' => 'index|add|edit|show|delete',
-            'permission' => 'index|edit',
+            'permission' => 'edit',
             'agency' => 'index|add|edit|show|delete',
             'land' => 'index|add|edit|show|delete',
             'duple' => 'index|add|edit|show|delete',

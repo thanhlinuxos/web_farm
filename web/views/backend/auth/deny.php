@@ -56,7 +56,7 @@
                             <div class="row">
                                 <div class="col-xs-12">
                                     <img src="<?php echo base_url('assets/backend/img/icon/warning_32x32.png'); ?>" />
-                                    <?php echo $this->lang->line('auth_do_not_have_permission'); ?>
+                                    <h4><?php echo $this->lang->line('auth_do_not_have_permission'); ?></h4>
                                 </div>
                             </div>
                             <hr>
