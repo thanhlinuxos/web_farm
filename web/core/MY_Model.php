@@ -215,6 +215,12 @@ class MY_Model extends CI_Model
     public function insert_id() {
         return $this->db->insert_id();
     }
+    
+    public function next_id() {
+        $query = $this->db->query("SELECT Auto_increment FROM information_schema.tables WHERE table_name='".$this->table."'");
+        $row = $query->row_array();
+        return $row['Auto_increment'];
+    }
 
     /**
      * Update data
