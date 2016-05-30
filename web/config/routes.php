@@ -35,3 +35,11 @@ $route['acp/branch/add'] = 'backend/branch/add';
 $route['acp/branch/edit/(:num)'] = 'backend/branch/edit/$1';
 $route['acp/branch/show/(:num)'] = 'backend/branch/show/$1';
 $route['acp/branch/delete/(:num)'] = 'backend/branch/delete/$1';
+//Lands
+$route['acp/land'] = 'backend/land';
+$route['acp/land/page'] = 'backend/land';
+$route['acp/land/page/(:num)'] = 'backend/land';
+$route['acp/land/add'] = 'backend/land/add';
+$route['acp/land/edit/(:num)'] = 'backend/land/edit/$1';
+$route['acp/land/show/(:num)'] = 'backend/land/show/$1';
+$route['acp/land/delete/(:num)'] = 'backend/land/delete/$1';

@@ -16,7 +16,6 @@
             <td class="col-sm-2 text-right active"><strong><?php echo $this->lang->line('branch_phone'); ?>: </strong></td>
             <td class="col-sm-10"><?php echo $row['phone']; ?></td>
         </tr>
-
     </tbody>
 </table>
 <div class="row">
