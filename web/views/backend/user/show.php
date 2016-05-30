@@ -20,6 +20,12 @@
             <td class="col-sm-10"><?php echo $row['phone']; ?></td>
         </tr>
         <tr>
+            <td class="col-sm-2 text-right active"><strong><?php echo $this->lang->line('user_image'); ?>:</strong></td>
+            <td class="col-sm-10">
+                <img src="<?php echo $row['image_']; ?>" width="150" />
+            </td>
+        </tr>
+        <tr>
             <td class="col-sm-2 text-right active"><strong><?php echo $this->lang->line('user_email'); ?>:</strong></td>
             <td class="col-sm-10"><?php echo $row['email']; ?></td>
         </tr>
