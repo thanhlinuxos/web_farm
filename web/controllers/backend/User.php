@@ -107,8 +107,8 @@ class User extends MY_Controller {
         $this->load->view('backend/layout/footer', $this->data);
     }
 
-    public function show($id = NULL) {
-        $user = $this->user_model->get_by(array('id' => $id));
+    public function show($id = 0) {
+        $user = $this->user_model->get_by($id);
         if(!$user){
             $this->session->set_flashdata('msg_error', $this->lang->line('user_not_exist'));
             redirect(base_url('acp/user'));
@@ -119,8 +119,8 @@ class User extends MY_Controller {
         $this->load->view('backend/layout/footer', $this->data);
     }
 
-    public function edit($id = NULL) {
-        $user = $this->user_model->get_by(array('id' => $id));
+    public function edit($id = 0) {
+        $user = $this->user_model->get_by($id);
         if(!$user){
             $this->session->set_flashdata('msg_error', $this->lang->line('user_not_exist'));
             redirect(base_url('acp/user'));
@@ -206,8 +206,8 @@ class User extends MY_Controller {
         $this->load->view('backend/layout/footer', $this->data);
     }
 
-    public function delete($id = NULL) {
-        $user = $this->user_model->get_by(array('id' => $id));
+    public function delete($id = 0) {
+        $user = $this->user_model->get_by($id);
         if(!$user){
             $this->session->set_flashdata('msg_error', $this->lang->line('user_not_exist'));
             redirect(base_url('acp/user'));

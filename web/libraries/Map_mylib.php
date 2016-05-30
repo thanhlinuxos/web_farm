@@ -7,7 +7,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  *
  * @package		CodeIgniter
  * @subpackage	Libraries
- * @category	Directory
+ * @category	Map
  * @author		Thanh Nguyen
  */
 

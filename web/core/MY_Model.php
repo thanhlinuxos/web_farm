@@ -59,37 +59,39 @@ class MY_Model extends CI_Model
 
     /**
      * Get one row
-     * @param Array
+     * @param Array OR Numberic
      * @output a row
      */
     public function get_by($conditions = array()) {
-        if (is_array($conditions) && count($conditions) > 0) {
+        if(is_numeric($conditions)) {
+            $this->db->where($this->key, $conditions);
+            $this->db->where('deleted', 0);
+        }else if (is_array($conditions) && count($conditions) > 0) {
             foreach ($conditions as $field => $data) {
                 if (!in_array($field, $this->fields)) {
                     show_error("CRUD : '$this->table' don't have in '$field'");
                 }
             }
-
             //Check delete status
             if (!isset($conditions['deleted'])) {
                 $conditions['deleted'] = 0;
             }
-
-            //Query
             $this->db->where($conditions);
-            $query = $this->db->get($this->table);
-            return $query->row_array();
         } else {
-            show_error("CRUD : Param must be array and not empty");
+            show_error("CRUD : Param must be Array OR Numberic and NOT empty!");
         }
+          
+        $query = $this->db->get($this->table);
+        return $query->row_array();
     }
 
     /**
      * @param Array(
-     *              'select' => ...
-     *              'where' => ...
-     *              'sort_by' => ...
-     *              'limit' => ...
+     *              'select' => string
+     *              'where' => array or string
+     *              'like' => array(field, match, type)
+     *              'sort_by' => string
+     *              'limit' => numberic
      *              'distinct' => ...)
      * @output rows
      */
@@ -105,6 +107,23 @@ class MY_Model extends CI_Model
         if (isset($input['where'])) {
             $this->db->where($input['where']);
         }
+        
+        if (isset($input['like'])) {
+            if(is_array($input['like'][0])) {
+                $tmp = array();
+                foreach($input['like'][0] as $field) {
+                    $tmp[$field] = $input['like'][1];
+                }
+                $this->db->like($tmp);
+            } else {
+                if(isset($input['like'][2]) && in_array($input['like'][2], array('before', 'after', 'both'))) {
+                    $this->db->like($input['like'][0], $input['like'][1], $input['like'][2]); 
+                } else {
+                    $this->db->like($input['like'][0], $input['like'][1]); 
+                }
+                
+            }
+        }
 
         if (isset($input['sort_by'])) {
             $this->db->order_by($input['sort_by']);
@@ -119,6 +138,10 @@ class MY_Model extends CI_Model
         return $query->result_array();
     }
 
+    /**
+     * Get sum
+     * return @numberic
+     */
     public function get_sum($field = '', $where = null) {
         if ($field == '') {
             return false;
@@ -143,6 +166,7 @@ class MY_Model extends CI_Model
 
     /**
      * Get Primary Key
+     * return @string
      */
     public function get_primary_key() {
         return $this->key;
@@ -150,6 +174,7 @@ class MY_Model extends CI_Model
 
     /**
      * Get Fields
+     * return @array
      */
     public function get_fields() {
         return $this->fields;
@@ -226,7 +251,11 @@ class MY_Model extends CI_Model
     public function update_code($code = "") {
         $this->db->query("UPDATE {$this->table} SET code=concat('{$code}',RIGHT(concat('000000',id),6)) WHERE code IS NULL OR code = ''");
     }
-
+    
+    /**
+     * Update deleted = time()
+     * @return boolean
+     */
     public function delete($conditions = array()) {
         if (is_array($conditions) && count($conditions) > 0) {
             foreach ($conditions as $field => $data) {
