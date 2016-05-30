@@ -2,7 +2,7 @@
     <form class="form-horizontal" role="form" method="POST" autocomplete="off" enctype="multipart/form-data">
         <div class="col-xs-12">
 
-            <div class="form-group ">
+            <div class="form-group has-error">
                 <label class="control-label col-sm-3" for="name"><?php echo $this->lang->line('branch_name');?></label>
                 <div class="col-sm-9">
                     <input type="text" name="name" class="form-control" id="name" value="<?php echo set_value('name', $row['name']); ?>" placeholder="Enter Name">
