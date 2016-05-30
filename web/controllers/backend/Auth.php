@@ -6,7 +6,6 @@ class Auth extends CI_Controller {
     
     private $data = array();
 
-
     public function __construct() {
         parent::__construct();
         $this->lang->load('backend');
@@ -91,5 +90,10 @@ class Auth extends CI_Controller {
             $this->data['permission_group'] = $permission[$this->input->post('group_name')];
         }
         $this->load->view('backend/auth/group_permission', $this->data);
+    }
+    
+    public function deny()
+    {
+        $this->load->view('backend/auth/deny', $this->data);
     }
 }

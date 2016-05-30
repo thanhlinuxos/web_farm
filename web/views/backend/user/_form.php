@@ -1,6 +1,6 @@
 <div class="row">
     <form class="form-horizontal" role="form" method="POST" autocomplete="off" enctype="multipart/form-data">
-    <div class="col-xs-6">
+    <div class="col-xs-4">
         
             <div class="form-group <?php if(form_error('fullname')) echo 'has-error'; ?>">
                 <label class="control-label col-sm-3" for="fullname"><?php echo $this->lang->line('user_fullname'); ?>:</label>
@@ -87,14 +87,14 @@
             <div class="form-group <?php if(form_error('username')) echo 'has-error'; ?>">
                 <label class="control-label col-sm-3" for="username"><?php echo $this->lang->line('user_username'); ?>:</label>
                 <div class="col-sm-9">
-                    <input type="text" name="username" class="form-control" id="username" value="<?php echo set_value('username', $row['username']); ?>" placeholder="Enter Username">
+                    <input type="text" name="username" class="form-control" id="username" value="<?php echo set_value('username', $row['username']); ?>" placeholder="Enter Username" autocomplete="off">
                     <?php echo form_error('username', "<small class='help-block'>", '</small>'); ?>
                 </div>
             </div>
             <div class="form-group <?php if(form_error('password')) echo 'has-error'; ?>">
                 <label class="control-label col-sm-3" for="password"><?php echo $this->lang->line('user_password'); ?>:</label>
                 <div class="col-sm-9">
-                    <input type="password" name="password" class="form-control" id="password" value="<?php echo set_value('password', ''); ?>" placeholder="Enter Password">
+                    <input type="password" name="password" class="form-control" id="password" value="<?php echo set_value('password', ''); ?>" placeholder="Enter Password" autocomplete="off">
                     <?php echo form_error('password', "<small class='help-block'>", '</small>'); ?>
                 </div>
             </div>
@@ -107,7 +107,7 @@
             
         
     </div>
-    <div class="col-xs-6" id="user_permission">
+    <div class="col-xs-8" id="user_permission">
         <table class="table table-striped table-hover table-bordered">
             <thead>
                 <tr>
@@ -129,7 +129,7 @@
                             foreach ($actions as $action)        
                             {
                                 $checked = '';
-                                $disabled = (in_array($k, array('permission')) && in_array($action, array('add'))) ? 'disabled' : '';
+                                $disabled = (in_array($k, array('permission')) && in_array($action, array('index','add','show'))) ? 'disabled' : '';
                                 if(isset($permission_group[$k]))
                                 {
                                     $action_group = explode('|', $permission_group[$k]);
@@ -140,11 +140,17 @@
                                 }
                                 switch ($action)
                                 {
+                                    case 'index':
+                                        $onstyle = 'info';
+                                        break;
                                     case 'add':
                                         $onstyle = 'success';
                                         break;
                                     case 'edit':
                                         $onstyle = 'warning';
+                                        break;
+                                    case 'show':
+                                        $onstyle = 'info';
                                         break;
                                     case 'delete':
                                         $onstyle = 'danger';
@@ -154,8 +160,8 @@
                                 }
                         ?>
                                 <label class="checkbox-inline">
-                                    <input type="checkbox" name="permissions[]" data-toggle="toggle" data-onstyle="<?php echo $onstyle; ?>" data-size="small" value="<?php echo $k.'-'.$action; ?>" <?php echo $checked; ?> <?php echo $disabled; ?>>
-                                    <?php echo $action; ?>
+                                    <input type="checkbox" name="permissions[]" data-toggle="toggle" data-onstyle="<?php echo $onstyle; ?>" data-size="mini" value="<?php echo $k.'-'.$action; ?>" <?php echo $checked; ?> <?php echo $disabled; ?>>
+                                    <?php echo $this->lang->line('permission_'.$action); ?>
                                 </label>
                         <?php    
                             }

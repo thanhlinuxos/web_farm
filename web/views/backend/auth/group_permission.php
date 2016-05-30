@@ -19,7 +19,7 @@
                     foreach ($actions as $action)        
                     {
                         $checked = '';
-                        $disabled = (in_array($k, array('permission')) && in_array($action, array('add'))) ? 'disabled' : '';
+                        $disabled = (in_array($k, array('permission')) && in_array($action, array('index','add','show'))) ? 'disabled' : '';
                         if(isset($permission_group[$k]))
                         {
                             $action_group = explode('|', $permission_group[$k]);
@@ -30,11 +30,17 @@
                         }
                         switch ($action)
                         {
+                            case 'index':
+                                $onstyle = 'info';
+                                break;
                             case 'add':
                                 $onstyle = 'success';
                                 break;
                             case 'edit':
                                 $onstyle = 'warning';
+                                break;
+                            case 'show':
+                                $onstyle = 'info';
                                 break;
                             case 'delete':
                                 $onstyle = 'danger';
@@ -44,8 +50,8 @@
                         }
                 ?>
                         <label class="checkbox-inline">
-                            <input type="checkbox" name="permissions[]" data-toggle="toggle" data-onstyle="<?php echo $onstyle; ?>" data-size="small" value="<?php echo $k.'-'.$action; ?>" <?php echo $checked; ?> <?php echo $disabled; ?>>
-                            <?php echo $action; ?>
+                            <input type="checkbox" name="permissions[]" data-toggle="toggle" data-onstyle="<?php echo $onstyle; ?>" data-size="mini" value="<?php echo $k.'-'.$action; ?>" <?php echo $checked; ?> <?php echo $disabled; ?>>
+                            <?php echo $this->lang->line('permission_'.$action); ?>
                         </label>
                 <?php    
                     }

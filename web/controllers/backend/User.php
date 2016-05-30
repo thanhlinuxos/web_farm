@@ -1,13 +1,10 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 class User extends MY_Controller {
-    
-    private $data = array();
 
     public function __construct() {
         parent::__construct();
         $this->data['limit_short'] = 13;
-        
     }
 
     public function index() 
