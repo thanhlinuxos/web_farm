@@ -10,6 +10,7 @@ class User_model extends MY_Model
     {
         return array(
             'id' => NUll,
+            'branch_id' => '',
             'fullname' => '',
             'username' => '',
             'group' => 'employee',
