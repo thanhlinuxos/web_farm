@@ -70,7 +70,6 @@ class User extends MY_Controller {
                 $post['password'] = md5(md5($post['password']));
                 $post['change_password'] = 1;
                 $post['created_at'] = time();
-                
                 $result = $this->user_model->insert($post);
                 if($result)
                 {

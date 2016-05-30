@@ -65,3 +65,13 @@ $lang['permission_add'] = 'Tạo mới';
 $lang['permission_edit'] = 'Cập nhật';
 $lang['permission_show'] = 'Xem chi tiết';
 $lang['permission_delete'] = 'Xóa';
+
+//Branches
+$lang['branch_id'] = 'ID Nhánh';
+$lang['branch_name'] = 'Tên Nhánh';
+$lang['branch_address'] = 'Địa Chỉ';
+$lang['branch_phone'] = 'Điện Thoại';
+$lang['branch_list'] = 'Danh Sách Chi Nhánh';
+$lang['branch_add'] = 'Thêm Chi Nhánh';
+$lang['branch_edit'] = 'Cập Nhật Chi Nhánh';
+$lang['branch_info'] = 'Thông Tin Chi Nhánh';
