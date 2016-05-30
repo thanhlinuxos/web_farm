@@ -66,3 +66,17 @@ $lang['permission_add'] = 'Tạo mới';
 $lang['permission_edit'] = 'Cập nhật';
 $lang['permission_show'] = 'Xem chi tiết';
 $lang['permission_delete'] = 'Xóa';
+
+//Branches
+$lang['branch_id'] = 'ID Nhánh';
+$lang['branch_name'] = 'Tên nhánh';
+$lang['branch_address'] = 'Địa chỉ';
+$lang['branch_phone'] = 'Điện thoại';
+$lang['branch_list'] = 'Danh aách chi nhánh';
+$lang['branch_add'] = 'Thêm chi nhánh';
+$lang['branch_edit'] = 'Cập nhật chi nhánh';
+$lang['branch_info'] = 'Thông tin chi nhánh';
+$lang['branch_has_been_updated'] = 'Chi nhánh đã được cập nhật!';
+$lang['branch_has_been_created'] = 'Chi nhánh đã được tạo!';
+$lang['branch_has_been_deleted'] = 'Chi nhánh đã bị xóa!';
+$lang['branch_not_exist'] = 'Chi Nhánh không tồn tại trong hệ thống!';

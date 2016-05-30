@@ -93,14 +93,12 @@ class User extends MY_Controller {
                     {
                         $this->session->set_flashdata('msg_success', $this->lang->line('user_has_been_updated'));
                         redirect('/acp/user/show/'.$this->user_model->insert_id());
-                    }
+                    }                
                 }
-                    
-                
+                $this->data['row'] = $this->user_model->convert_data($post);
+                //Permission
+                $this->data['permission_group'] = (isset($this->data['row']['permission'])) ? unserialize($this->data['row']['permission']) : array();
             }
-            $this->data['row'] = $this->user_model->convert_data($post);
-            //Permission
-            $this->data['permission_group'] = (isset($this->data['row']['permission'])) ? unserialize($this->data['row']['permission']) : array();
         }
         $this->data['branchs'] = $this->branch_model->get_rows(array('where' => array('deleted' => 0), 'sort_by' => 'id ASC'));
         
