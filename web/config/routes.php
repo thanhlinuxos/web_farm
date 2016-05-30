@@ -4,7 +4,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'index';
 $route['dashboard'] = 'frontend/dashboard';
 
-
 /******************** ACP *************************/
 $route['acp'] = 'backend/dashboard';
 $route['acp/login'] = 'backend/auth/login';
@@ -23,10 +22,7 @@ $route['acp/user/show/(:num)'] = 'backend/user/show/$1';
 $route['acp/user/delete/(:num)'] = 'backend/user/delete/$1'; 
 $route['acp/user/delete_multi'] = 'backend/user/delete_multi';
 $route['acp/user/short_list'] = 'backend/user/short_list';
-//Default router
-$route['test'] = 'test';
-$route['404_override'] = '';
-$route['translate_uri_dashes'] = FALSE;
+
 //Branch
 $route['acp/branch'] = 'backend/branch';
 $route['acp/branch/page'] = 'backend/branch';
@@ -35,6 +31,7 @@ $route['acp/branch/add'] = 'backend/branch/add';
 $route['acp/branch/edit/(:num)'] = 'backend/branch/edit/$1';
 $route['acp/branch/show/(:num)'] = 'backend/branch/show/$1';
 $route['acp/branch/delete/(:num)'] = 'backend/branch/delete/$1';
+
 //Lands
 $route['acp/land'] = 'backend/land';
 $route['acp/land/page'] = 'backend/land';
@@ -43,3 +40,8 @@ $route['acp/land/add'] = 'backend/land/add';
 $route['acp/land/edit/(:num)'] = 'backend/land/edit/$1';
 $route['acp/land/show/(:num)'] = 'backend/land/show/$1';
 $route['acp/land/delete/(:num)'] = 'backend/land/delete/$1';
+
+//Default router
+$route['test'] = 'test';
+$route['404_override'] = '';
+$route['translate_uri_dashes'] = FALSE;
