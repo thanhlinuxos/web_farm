@@ -17,6 +17,7 @@ $lang['user_fullname'] = 'Full Name';
 $lang['user_username'] = 'Username';
 $lang['user_password'] = 'Password';
 $lang['user_group'] = 'Group';
+$lang['user_image'] = 'Avatar';
 $lang['user_phone'] = 'Phone';
 $lang['user_email'] = 'email';
 $lang['user_address'] = 'Address';
