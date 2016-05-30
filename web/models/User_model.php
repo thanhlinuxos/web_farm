@@ -13,6 +13,7 @@ class User_model extends MY_Model
             'fullname' => '',
             'username' => '',
             'group' => 'employee',
+            'image_' => base_url('assets/backend/img/icon/no_avatar_256x256.png'),
             'phone' => '',
             'email' => '',
             'address' => '',
@@ -25,9 +26,16 @@ class User_model extends MY_Model
     
     public function convert_data($data = array())
     {
+        $data['image_'] = base_url('assets/backend/img/icon/no_avatar_256x256.png');
+        if(isset($data['image']) && file_exists(UPLOADPATH . 'user/thumbnail/'.$data['image'])) {
+            $data['image_'] = base_url('uploads/user/thumbnail/'.$data['image']);
+        }
+        
         $data['gender_'] = $this->lang->line('user_gender_'.$data['gender']);
         $data['status_'] = $this->lang->line('user_status_'.$data['status']);
-        $data['created_at_'] = date('d-m-Y H:i', $data['created_at']);
+        if(isset($data['created_at'])) {
+            $data['created_at_'] = date('d-m-Y H:i', $data['created_at']);
+        }
         return $data;
     }
     

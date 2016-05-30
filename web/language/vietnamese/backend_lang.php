@@ -17,6 +17,7 @@ $lang['user_fullname'] = 'Họ Tên';
 $lang['user_username'] = 'Tên đăng nhập';
 $lang['user_password'] = 'Mật khẩu';
 $lang['user_group'] = 'Nhóm';
+$lang['user_image'] = 'Ảnh đại diện';
 $lang['user_phone'] = 'Điện thoại';
 $lang['user_email'] = 'Email';
 $lang['user_address'] = 'Địa chỉ';

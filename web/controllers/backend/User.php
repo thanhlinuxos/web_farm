@@ -4,6 +4,7 @@ class User extends MY_Controller {
 
     public function __construct() {
         parent::__construct();
+        $this->data['per_page'] = 25;
         $this->data['limit_short'] = 13;
     }
 
@@ -14,7 +15,7 @@ class User extends MY_Controller {
         $config = $this->pagination_mylib->bootstrap_configs();
         $config['base_url'] = base_url('acp/user/page');
         $config['total_rows'] = $this->user_model->count_all(array('deleted' => 0));
-        $config['per_page'] = 25;
+        $config['per_page'] = $this->data['per_page'];
         $config['uri_segment'] = 4;
         $config['use_page_numbers'] = TRUE;
         $this->pagination->initialize($config);
@@ -66,17 +67,34 @@ class User extends MY_Controller {
             }
                 
             if ($this->form_validation->run() == TRUE)
-            {           
-                $post['password'] = md5(md5($post['password']));
-                $post['change_password'] = 1;
-                $post['created_at'] = time();
-                
-                $result = $this->user_model->insert($post);
-                if($result)
-                {
-                    $this->session->set_flashdata('msg_success', $this->lang->line('user_has_been_updated'));
-                    redirect('/acp/user/show/'.$this->user_model->insert_id());
+            {
+                $success = TRUE;
+                //Image
+                if($_FILES['image']['name']) {
+                    $this->load->library('image_mylib');
+                    $image = $this->image_mylib->upload_one('image', 'user', NULL, array('width'=>256, 'height'=>256));
+                    if(isset($image['error'])) {
+                        $this->data['image_error'] = $image['error'];
+                        $success = FALSE;
+                    } else {
+                        $post['image'] = $image['file_name'];
+                    }
                 }
+                //Continue
+                if($success) {
+                    //More data
+                    $post['password'] = md5(md5($post['password']));
+                    $post['change_password'] = 1;
+                    $post['created_at'] = time();
+
+                    $result = $this->user_model->insert($post);
+                    if($result)
+                    {
+                        $this->session->set_flashdata('msg_success', $this->lang->line('user_has_been_updated'));
+                        redirect('/acp/user/show/'.$this->user_model->insert_id());
+                    }
+                }
+                    
                 
             }
             $this->data['row'] = $post;
@@ -107,7 +125,7 @@ class User extends MY_Controller {
             $this->session->set_flashdata('msg_error', $this->lang->line('user_not_exist'));
             redirect(base_url('acp/user'));
         }
-        $this->data['row'] = $user;
+        $this->data['row'] = $this->user_model->convert_data($user);
         
         if($this->input->post('submit'))
         {
@@ -143,24 +161,39 @@ class User extends MY_Controller {
             
             if ($this->form_validation->run() == TRUE)
             {
-                $post['id'] = $user['id'];
-                if($post['password'] != '')
-                {
-                    $post['password'] = md5(md5($post['password']));
-                    $post['change_password'] = 1;
+                $success = TRUE;
+                //Image
+                if($_FILES['image']['name']) {
+                    $this->load->library('image_mylib');
+                    $image = $this->image_mylib->upload_one('image', 'user', NULL, array('width'=>256, 'height'=>256));
+                    if(isset($image['error'])) {
+                        $this->data['image_error'] = $image['error'];
+                        $success = FALSE;
+                    } else {
+                        $post['image'] = $image['file_name'];
+                    }
                 }
-                else
-                {
-                    $post['password'] = $user['password'];
-                }
-                $result = $this->user_model->update($post);
-                if($result)
-                {
-                    $this->session->set_flashdata('msg_success', $this->lang->line('user_has_been_updated'));
-                    redirect('/acp/user/show/'.$user['id']);
+                //Continue
+                if($success) {
+                    $post['id'] = $user['id'];
+                    if($post['password'] != '')
+                    {
+                        $post['password'] = md5(md5($post['password']));
+                        $post['change_password'] = 1;
+                    }
+                    else
+                    {
+                        $post['password'] = $user['password'];
+                    }
+                    $result = $this->user_model->update($post);
+                    if($result)
+                    {
+                        $this->session->set_flashdata('msg_success', $this->lang->line('user_has_been_updated'));
+                        redirect('/acp/user/show/'.$user['id']);
+                    }
                 }
             }
-            $this->data['row'] = $post;
+            $this->data['row'] = $this->user_model->convert_data($post);
         }
         
         //Permission
