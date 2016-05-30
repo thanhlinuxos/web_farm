@@ -14,7 +14,7 @@ class Image_mylib
     /**
     * Class constructor
     *
-    * Loads the Directory_mylib file.
+    * Loads the Image_mylib file.
     *
     * @uses	CI_Lang::$is_loaded
     *

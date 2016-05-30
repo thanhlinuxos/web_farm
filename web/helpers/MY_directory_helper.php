@@ -5,10 +5,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * CodeIgniter Directory Helpers
  *
- * @package		CodeIgniter
+ * @package	CodeIgniter
  * @subpackage	Helpers
  * @category	Helpers
- * @author		Thanh Nguyen
+ * @author	Thanh Nguyen
  */
 
 // ------------------------------------------------------------------------
@@ -18,7 +18,6 @@ if ( ! function_exists('directory_exist'))
     /**
      * Check directory exist
      *
-     * @param	mixed	will be cast as int
      * @param	string
      * @return	boolean
      */
@@ -33,7 +32,6 @@ if ( ! function_exists('create_directory'))
     /**
      * Create directory
      *
-     * @param	mixed	will be cast as int
      * @param	string
      * @return	string
      */

@@ -5,10 +5,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * CodeIgniter Number Helpers
  *
- * @package		CodeIgniter
+ * @package	CodeIgniter
  * @subpackage	Helpers
  * @category	Helpers
- * @author		Thanh Nguyen
+ * @author	Thanh Nguyen
  */
 
 // ------------------------------------------------------------------------
@@ -18,7 +18,6 @@ if ( ! function_exists('currency_vnd'))
     /**
      * Formats a numbers as currency
      *
-     * @param	mixed	will be cast as int
      * @param	int
      * @return	string
      */
@@ -35,7 +34,6 @@ if ( ! function_exists('currency_dola'))
     /**
      * Formats a numbers as currency
      *
-     * @param	mixed	will be cast as int
      * @param	int
      * @return	string
      */

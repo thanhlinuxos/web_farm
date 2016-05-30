@@ -51,9 +51,9 @@ class Branch extends MY_Controller {
         $this->load->view('backend/layout/footer', $this->data);
     }
     
-    public function show($id = NULL)
+    public function show($id = 0)
     {
-        $branch = $this->branch_model->get_by(array('id' => $id));
+        $branch = $this->branch_model->get_by($id);
         if(!$branch){
             $this->session->set_flashdata('msg_error', $this->lang->line('branch_not_exist'));
             redirect(base_url('acp/branch'));
@@ -63,9 +63,9 @@ class Branch extends MY_Controller {
         $this->load->view('backend/branch/show', $this->data);
         $this->load->view('backend/layout/footer', $this->data);
     }
-    public function edit($id = NULL)
+    public function edit($id = 0)
     {
-        $branch = $this->branch_model->get_by(array('id' => $id));
+        $branch = $this->branch_model->get_by($id);
         if(!$branch)
         {
             $this->session->set_flashdata('msg_error', $this->lang->line('branch_not_exist'));
@@ -93,8 +93,8 @@ class Branch extends MY_Controller {
         $this->load->view('backend/layout/footer', $this->data);
     }
     
-    public function delete($id = NULL) {
-        $branch = $this->branch_model->get_by(array('id' => $id));
+    public function delete($id = 0) {
+        $branch = $this->branch_model->get_by($id);
         if(!$branch){
             $this->session->set_flashdata('msg_success', $this->lang->line('branch_not_exist'));
             redirect(base_url('acp/branch'));

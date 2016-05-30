@@ -5,10 +5,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * CodeIgniter String Helpers
  *
- * @package		CodeIgniter
+ * @package	CodeIgniter
  * @subpackage	Helpers
  * @category	Helpers
- * @author		Thanh Nguyen
+ * @author	Thanh Nguyen
  */
 
 // ------------------------------------------------------------------------
