@@ -1,6 +1,22 @@
 <div class="row">
     <form class="form-horizontal" role="form" method="POST" autocomplete="off" enctype="multipart/form-data">
     <div class="col-xs-4">
+        <div class="form-group <?php if(form_error('branch_id')) echo 'has-error'; ?>">
+            <label class="control-label col-sm-3" for="branch_id"><?php echo $this->lang->line('branch_name'); ?>:</label>
+            <div class="col-sm-9">
+                <select class="form-control" id="branch_id" name="branch_id">
+                    <option value="">Please select branch</option>
+                <?php
+                    foreach($branchs as $branch) {
+                ?>
+                    <option value="<?php echo $branch['id'];?>" <?php echo set_select('branch_id', $branch['id'], $row['branch_id'] == $branch['id']); ?>><?php echo $branch['name'];?></option>
+                <?php
+                    }
+                ?>    
+                </select>
+                <?php echo form_error('branch_id', "<small class='help-block'>", '</small>'); ?>
+            </div>
+        </div>
         <div class="form-group <?php if(form_error('fullname')) echo 'has-error'; ?>">
             <label class="control-label col-sm-3" for="fullname"><?php echo $this->lang->line('user_fullname'); ?>:</label>
             <div class="col-sm-9">

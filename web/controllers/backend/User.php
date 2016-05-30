@@ -41,6 +41,7 @@ class User extends MY_Controller {
         if($this->input->post('submit'))
         {
             $post = $this->input->post();
+            $this->form_validation->set_rules('branch_id', $this->lang->line('branch_name'), 'required|numeric');
             $this->form_validation->set_rules('fullname', $this->lang->line('user_fullname'), 'required');
             $this->form_validation->set_rules('email', $this->lang->line('user_email'), 'valid_email|is_unique[th_users.email]');
             $this->form_validation->set_rules('username', $this->lang->line('user_username'), 'is_unique[th_users.username]');
@@ -97,10 +98,11 @@ class User extends MY_Controller {
                     
                 
             }
-            $this->data['row'] = $post;
+            $this->data['row'] = $this->user_model->convert_data($post);
             //Permission
             $this->data['permission_group'] = (isset($this->data['row']['permission'])) ? unserialize($this->data['row']['permission']) : array();
         }
+        $this->data['branchs'] = $this->branch_model->get_rows(array('where' => array('deleted' => 0), 'sort_by' => 'id ASC'));
         
         $this->load->view('backend/layout/header', $this->data);
         $this->load->view('backend/user/add', $this->data);
@@ -130,6 +132,7 @@ class User extends MY_Controller {
         if($this->input->post('submit'))
         {
             $post = $this->input->post();
+            $this->form_validation->set_rules('branch_id', $this->lang->line('branch_name'), 'required|numeric');
             $this->form_validation->set_rules('fullname', $this->lang->line('user_fullname'), 'required');
             if($post['email'] != $user['email']) {
                 $this->form_validation->set_rules('email', $this->lang->line('user_email'), 'valid_email|is_unique[th_users.email]');
@@ -199,6 +202,7 @@ class User extends MY_Controller {
         //Permission
         $this->data['permission_group'] = (isset($this->data['row']['permission'])) ? unserialize($this->data['row']['permission']) : array();
         
+        $this->data['branchs'] = $this->branch_model->get_rows(array('where' => array('deleted' => 0), 'sort_by' => 'id ASC'));
         $this->load->view('backend/layout/header', $this->data);
         $this->load->view('backend/user/edit', $this->data);
         $this->load->view('backend/layout/footer', $this->data);
