@@ -181,6 +181,17 @@ class MY_Model extends CI_Model
         
         return $query->result_array();
     }
+    
+    public function get_query($str = '', $type = TRUE)
+    {
+        if($str != '')
+        {
+            $query = $this->db->query($str);
+        
+            return $type ? $query->result_array() : $query->row_array();
+        }
+        return FALSE;
+    }
 
     /**
      * Get sum

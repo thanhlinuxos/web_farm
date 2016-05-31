@@ -6,9 +6,8 @@ class Branch extends MY_Controller {
         parent::__construct();
         $this->data['per_page'] = 25;
     }
-    public function index(){
-        $this->load->library('pagination_mylib');
-        
+    public function index()
+    {   
         $config = $this->pagination_mylib->bootstrap_configs();
         $config['base_url'] = base_url('acp/branch/page');
         $config['total_rows'] = $this->branch_model->count_all(array('deleted' => 0));

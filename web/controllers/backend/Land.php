@@ -9,8 +9,6 @@ class Land extends MY_Controller {
     
     public function index()
     {
-        $this->load->library('pagination_mylib');
-        
         $config = $this->pagination_mylib->bootstrap_configs();
         $config['base_url'] = base_url('acp/land/page');
         $config['total_rows'] = $this->land_model->count_all(array('deleted' => 0));

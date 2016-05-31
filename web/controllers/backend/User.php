@@ -9,9 +9,7 @@ class User extends MY_Controller {
     }
 
     public function index() 
-    {
-        $this->load->library('pagination_mylib');
-        
+    {   
         $config = $this->pagination_mylib->bootstrap_configs();
         $config['base_url'] = base_url('acp/user/page');
         $config['total_rows'] = $this->user_model->count_all(array('deleted' => 0));
@@ -39,17 +37,23 @@ class User extends MY_Controller {
             $this->session->set_userdata('user_search', array('keyword' => $post['keyword'], 'branch_id' => $post['branch_id']));
         }
         $user_search = $this->session->userdata('user_search');
-        $conditions = array();
-        if($user_search['keyword']) {
-            $conditions['like'] = array('username', $user_search['keyword']);
-            $conditions['or_like'] = array('fullname', $user_search['keyword']);
-        }
-        //OR LiKE
-        if($user_search['branch_id']) {
-            $conditions['where'] = array('branch_id' => $user_search['branch_id']);
-        }
-        $this->data['rows'] = $this->user_model->get_rows($conditions);
-        //echo $this->db->last_query();exit;
+        //Query string
+        $sql_like = $user_search['keyword'] ? "(`username` LIKE '%".$user_search['keyword']."%' ESCAPE '!' OR  `fullname` LIKE '%".$user_search['keyword']."%' ESCAPE '!' ) AND " : '';
+        $sql_where = $user_search['branch_id'] ? "branch_id = '".$user_search['branch_id']."' AND " : '';
+        //Count
+        $count_all = $this->user_model->get_query("SELECT COUNT(id) FROM th_users WHERE $sql_like $sql_where deleted = 0", FALSE);
+        //Pagination
+        $config = $this->pagination_mylib->bootstrap_configs();
+        $config['base_url'] = base_url('acp/user/search/page');
+        $config['total_rows'] = $count_all['COUNT(id)'];
+        $config['per_page'] = $this->data['per_page'];
+        $config['uri_segment'] = 5;
+        $config['use_page_numbers'] = TRUE;
+        $this->pagination->initialize($config);
+        //List
+        $offset = $this->uri->segment(5) ? ($this->uri->segment(5) - 1)*$config['per_page'] : 0;
+        $this->data['rows'] = $this->user_model->get_query("SELECT * FROM th_users WHERE $sql_like $sql_where deleted = 0 LIMIT ".$config['per_page']." OFFSET " . $offset);
+
         $this->data['branches'] = $this->branch_model->get_rows();
         $this->load->view('backend/layout/header', $this->data);
         $this->load->view('backend/user/index', $this->data);
