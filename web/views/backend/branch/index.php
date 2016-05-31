@@ -1,5 +1,5 @@
 <div class="page-title">
-  <h4><?php echo $this->lang->line('user_list'); ?></h4>
+  <h4><?php echo $this->lang->line('branch_list'); ?></h4>
 </div>
 
 <div class="row">
@@ -18,17 +18,16 @@
             <?php
                 foreach($rows as $row)
                 {
-                    $row = $this->user_model->convert_data($row);
             ?>
                     <tr>
-                        <td><a href="<?php echo base_url('acp/user/show/'.$row['id']); ?>"><?php echo $row['id'];?></a></td>
+                        <td><a href="<?php echo base_url('acp/branch/show/'.$row['id']); ?>"><?php echo $row['id'];?></a></td>
                         <td><?php echo $row['name'];?></td>
                         <td><?php echo $row['address'];?></td>
                         <td><?php echo $row['phone'];?></td>
                         
                         <td>
-                            <a href="<?php echo base_url('acp/user/edit/'.$row['id']);?>" class="btn btn-warning btn-xs"><?php echo $this->lang->line('btn_edit'); ?></a>
-                            <a href="<?php echo base_url('acp/user/delete/'.$row['id']);?>" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure?');"><?php echo $this->lang->line('btn_delete'); ?></a>
+                            <a href="<?php echo base_url('acp/branch/edit/'.$row['id']);?>" class="btn btn-warning btn-xs"><?php echo $this->lang->line('btn_edit'); ?></a>
+                            <a href="<?php echo base_url('acp/branch/delete/'.$row['id']);?>" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure?');"><?php echo $this->lang->line('btn_delete'); ?></a>
                         </td>
                     </tr>
             <?php

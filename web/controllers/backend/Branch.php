@@ -89,5 +89,14 @@ class Branch extends MY_Controller {
         $this->load->view('backend/branch/edit', $this->data);
         $this->load->view('backend/layout/footer', $this->data);
     }
+    
+    public function delete($id = NULL) {
+        $branch = $this->branch_model->get_by(array('id' => $id));
+        if(!$branch){
+            redirect(base_url('acp/branch'));
+        }
+        $result = $this->branch_model->delete(array('id' => $id));
+        redirect(base_url('acp/branch'));
+    }
 }
 
