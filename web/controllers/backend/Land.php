@@ -4,7 +4,7 @@ class Land extends MY_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->data['per_page'] = 2;
+        $this->data['per_page'] = 25;
         $this->data['limit_short'] = 13;
     }
     
@@ -101,7 +101,6 @@ class Land extends MY_Controller {
     function edit($id = NULL)
     {
         $land = $this->land_model->get_by(array('id' => $id));
-        $branchs = $this->data['branchs'] = $this->branch_model->get_rows(array('where' => array('deleted' => 0), 'sort_by' => 'id ASC'));
         if(!$land){
             $this->session->set_flashdata('msg_error', $this->lang->line('land_not_exist'));
             redirect(base_url('acp/land'));
@@ -147,7 +146,7 @@ class Land extends MY_Controller {
         }
         
         $this->data['row'] = $this->land_model->convert_data($land);
-        $this->data['branchs'] = $branchs;
+        $this->data['branchs'] = $this->branch_model->get_rows(array('where' => array('deleted' => 0), 'sort_by' => 'id ASC'));
         
         $this->load->view('backend/layout/header', $this->data);
         $this->load->view('backend/land/edit', $this->data);
