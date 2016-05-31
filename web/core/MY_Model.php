@@ -338,7 +338,7 @@ class MY_Model extends CI_Model
     }
     
     /**
-     * Get All query
+     * Get All Query String
      * @return array
      */
     public function all_query()
