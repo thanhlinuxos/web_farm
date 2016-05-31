@@ -337,6 +337,10 @@ class MY_Model extends CI_Model
         return $this->db->update($this->table, array('deleted' => time()));
     }
     
+    /**
+     * Get All query
+     * @return array
+     */
     public function all_query()
     {
         $result = array();
