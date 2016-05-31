@@ -80,6 +80,7 @@ $lang['branch_has_been_updated'] = 'Chi nhánh đã được cập nhật!';
 $lang['branch_has_been_created'] = 'Chi nhánh đã được tạo!';
 $lang['branch_has_been_deleted'] = 'Chi nhánh đã bị xóa!';
 $lang['branch_not_exist'] = 'Chi Nhánh không tồn tại trong hệ thống!';
+$lang['branch_please_select'] = 'Vui lòng chọn chi nhánh!';
 
 //Land
 $lang['land_id'] = 'ID đất';
@@ -95,4 +96,4 @@ $lang['land_has_been_updated'] = 'Lô đất đã được cập nhật!';
 $lang['land_has_been_created'] = 'Lô đất đã được tạo!';
 $lang['land_has_been_deleted'] = 'Lô đất đã bị xóa!';
 $lang['land_not_exist'] = 'Lô đất không tồn tại trong hệ thống!';
-$lang['land_select_image'] = 'Vui lòng chọn hình!';
+$lang['land_please_select_image'] = 'Vui lòng chọn hình!';

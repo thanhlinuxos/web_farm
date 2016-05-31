@@ -60,7 +60,7 @@ class Land extends MY_Controller {
                     }
                 }
                 else {
-                        $this->data['image_error'] = $this->lang->line('land_select_image');
+                        $this->data['image_error'] = $this->lang->line('land_please_select_image');
                         $success = FALSE;
                 }
                 //Continue

@@ -5,7 +5,7 @@
             <label class="control-label col-sm-3" for="branch_id"><?php echo $this->lang->line('branch_name'); ?>:</label>
             <div class="col-sm-9">
                 <select class="form-control" id="branch_id" name="branch_id">
-                    <option value="">Please select branch</option>
+                    <option value=""><?php echo $this->lang->line('branch_please_select'); ?></option>
                 <?php
                     foreach($branchs as $branch) {
                 ?>
