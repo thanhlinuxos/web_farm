@@ -44,6 +44,15 @@ $route['acp/land/edit/(:num)'] = 'backend/land/edit/$1';
 $route['acp/land/show/(:num)'] = 'backend/land/show/$1';
 $route['acp/land/delete/(:num)'] = 'backend/land/delete/$1';
 
+//Duple
+$route['acp/duple'] = 'backend/duple';
+$route['acp/duple/page'] = 'backend/duple';
+$route['acp/duple/page/(:num)'] = 'backend/duple';
+$route['acp/duple/add'] = 'backend/duple/add';
+$route['acp/duple/edit/(:num)'] = 'backend/duple/edit/$1';
+$route['acp/duple/show/(:num)'] = 'backend/duple/show/$1';
+$route['acp/duple/delete/(:num)'] = 'backend/duple/delete/$1';
+
 //Default router
 $route['test'] = 'test';
 $route['404_override'] = '';

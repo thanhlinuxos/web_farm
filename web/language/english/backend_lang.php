@@ -98,3 +98,16 @@ $lang['land_has_been_created'] = 'The land has been created!';
 $lang['land_has_been_deleted'] = 'The land has been deleted!';
 $lang['land_not_exist'] = 'The land not exist!';
 $lang['land_please_select_image'] = 'Please select image!';
+
+//Duple
+$lang['duple_id'] = 'ID đôi';
+$lang['duple_name'] = 'Tên đôi';
+$lang['duple_ordinal'] = 'Số thứ tự';
+$lang['duple_list'] = 'Danh sách đôi';
+$lang['duple_add'] = 'Thêm đôi';
+$lang['duple_edit'] = 'Cập nhật đôi';
+$lang['duple_info'] = 'Thông tin đôi';
+$lang['duple_has_been_updated'] = 'Đôi đã được cập nhật!';
+$lang['duple_has_been_created'] = 'Đôi đã được tạo!';
+$lang['duple_has_been_deleted'] = 'Đôi đã bị xóa!';
+$lang['duple_not_exist'] = 'Đôi không tồn tại trong hệ thống!';

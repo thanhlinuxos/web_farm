@@ -9,6 +9,7 @@
                 <tr>
                     <th><?php echo $this->lang->line('id'); ?></th>
                     <th><?php echo $this->lang->line('land_name'); ?></th>
+                    <th><?php echo $this->lang->line('branch_name'); ?></th>
                     <th><?php echo $this->lang->line('land_axis_x'); ?></th>
                     <th><?php echo $this->lang->line('land_axis_y'); ?></th>
                     <th><?php echo $this->lang->line('land_image'); ?></th>
@@ -24,6 +25,7 @@
                     <tr>
                         <td><a href="<?php echo base_url('acp/branch/show/'.$row['id']); ?>"><?php echo $row['id'];?></a></td>
                         <td><?php echo $row['name'];?></td>
+                        <td><?php echo $row['branch_name'];?></td>
                         <td><?php echo $row['axis_x'];?></td>
                         <td><?php echo $row['axis_y'];?></td>
                         <td><img src="<?php echo $row['image_'];?>" width="70"></td>

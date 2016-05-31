@@ -35,7 +35,7 @@
             <label class="control-label col-sm-3" for="axis_y"><?php echo $this->lang->line('land_axis_y'); ?>:</label>
             <div class="col-sm-9">
                 <input type="text" name="axis_y" class="form-control" id="axis_y" value="<?php echo set_value('axis_y', $row['axis_y']); ?>" placeholder="Enter Axis_y">
-                <?php echo form_error('name', "<small class='help-block'>", '</small>'); ?>
+                <?php echo form_error('axis_y', "<small class='help-block'>", '</small>'); ?>
             </div>
         </div>
         <div class="form-group <?php if(isset($image_error)) echo 'has-error'; ?>">
