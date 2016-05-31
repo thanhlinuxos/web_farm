@@ -11,16 +11,19 @@ class Test extends CI_Controller {
     
     public function index()
     {
-        if($this->input->post('submit'))
-        {
-            $this->load->library('image_mylib');
-            $data = $this->image_mylib->upload_multi('test', 'test/test', NULL, array('width'=>220, 'height'=>80));
-            echo "<pre>";
-            print_r($data);
-            echo "</pre>";
-            
-        }
-        $this->load->view('test', $this->data);
+        $this->user_model->get_rows(array(
+            'joins' => array(
+                            array('th_branches', 'th_branches.id = th_users.branch_id'),
+                            array('th_lands', 'th_branches.id = th_lands.branch_id'),
+                        )
+            //'select' => '1',
+            //'distinct' => '',
+            //'where' => array('id !=' => 0, 'fullname' => 'abc'),
+            //'like' => array(array('username', 'fullname'), 'test'),
+            //'group_by' => 'fullname',
+        ));
+        echo $this->db->last_query();
+        //$this->load->view('test', $this->data);
     }
     
     public function ajax(){

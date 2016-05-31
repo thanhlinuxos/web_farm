@@ -78,7 +78,7 @@ class MY_Model extends CI_Model
             }
             $this->db->where($conditions);
         } else {
-            show_error("CRUD : Param must be Array OR Numberic and NOT empty!");
+            show_error("CRUD : Param must be ARRAY OR NUMBERIC and NOT empty!");
         }
           
         $query = $this->db->get($this->table);
@@ -86,43 +86,77 @@ class MY_Model extends CI_Model
     }
 
     /**
-     * @param Array(
+     * @param Array( 
      *              'select' => string
+     *              'distinct' => boolean
+     *              'join' => array(table_name, condition, type)
+     *              'joins' => array(array(table_name1, condition1, type1),
+     *                               array(table_name2, condition2, type2)
+     *                               .....
+     *                               )
      *              'where' => array or string
      *              'like' => array(field, match, type)
      *              'sort_by' => string
      *              'limit' => numberic
-     *              'distinct' => ...)
+     *              )
      * @output rows
      */
     public function get_rows($input = array()) {
         if (isset($input['select'])) {
-            $this->db->select($input['select']);
+            if(is_string($input['select']) && $input['select']) {
+                $this->db->select($input['select']);
+            } else {
+                show_error("CRUD : Param SELECT must be STRING and NOT empty!");
+            }
         }
         
-        if (isset($input['distinct'])) {
-            
+        if (isset($input['distinct']) && $input['distinct'] === TRUE) {
+            if(is_bool($input['distinct'])) {
+                $this->db->distinct();
+            } else {
+                show_error("CRUD : Param DISTINCT must be BOOLEAN!");
+            }  
+        }
+        
+        if(isset($input['join']) && is_array($input['join'])) {
+            $input['join'][2] = isset($input['join'][2]) ? $input['join'][2] : NULL;
+            $this->db->join($input['join'][0], $input['join'][1], $input['join'][2]);
+        }
+        
+        if(isset($input['joins']) && is_array($input['joins'])) {
+            foreach ($input['joins'] as $join) {
+                $join[2] = isset($join[2]) ? $join[2] : NULL;
+                $this->db->join($join[0], $join[1], $join[2]);
+            }
         }
 
         if (isset($input['where'])) {
-            $this->db->where($input['where']);
+            if((is_array($input['where']) && count($input['where']) > 0) || (is_string($input['where']) && $input['where'])) {
+                $this->db->where($input['where']);
+            } else {
+                show_error("CRUD : Param WHERE must be ARRAY OR STRING and NOT empty!");
+            }
         }
         
         if (isset($input['like'])) {
-            if(is_array($input['like'][0])) {
+            if(is_array($input['like'][0]) && count($input['like'][0]) > 0) {
                 $tmp = array();
                 foreach($input['like'][0] as $field) {
                     $tmp[$field] = $input['like'][1];
                 }
                 $this->db->like($tmp);
             } else {
-                if(isset($input['like'][2]) && in_array($input['like'][2], array('before', 'after', 'both'))) {
-                    $this->db->like($input['like'][0], $input['like'][1], $input['like'][2]); 
-                } else {
-                    $this->db->like($input['like'][0], $input['like'][1]); 
-                }
-                
+                $input['like'][2] = (isset($input['like'][2]) && in_array($input['like'][2], array('before', 'after', 'both'))) ? $input['like'][2]: NULL;
+                $this->db->like($input['like'][0], $input['like'][1], $input['like'][2]);
             }
+        }
+        
+        if(isset($input['group_by'])) {
+            if((is_array($input['group_by']) && count($input['group_by']) > 0) || (is_string($input['group_by']) && $input['group_by'])) {
+                $this->db->group_by($input['group_by']);
+            } else {
+                show_error("CRUD : Param GROUP BY must be ARRAY OR STRING and NOT empty!");
+            }  
         }
 
         if (isset($input['sort_by'])) {
@@ -130,8 +164,13 @@ class MY_Model extends CI_Model
         }
 
         if (isset($input['limit'])) {
-            $offset = isset($input['offset']) ? $input['offset'] : 0;
-            $this->db->limit($input['limit'], $offset);
+            if(is_numeric($input['limit'])) {
+                $offset = isset($input['offset']) ? intval($input['offset']) : 0;
+                $this->db->limit($input['limit'], $offset);
+            } else {
+                show_error("CRUD : Param LIMIT must be NUMBER!");
+            }
+            
         }
         $query = $this->db->get($this->table);
         
@@ -254,8 +293,13 @@ class MY_Model extends CI_Model
         return $this->db->update($this->table, $data);
     }
 
+    /**
+     * Update code
+     * @return boolean
+     */
     public function update_code($code = "") {
         $this->db->query("UPDATE {$this->table} SET code=concat('{$code}',RIGHT(concat('000000',id),6)) WHERE code IS NULL OR code = ''");
+        return TRUE;
     }
     
     /**
