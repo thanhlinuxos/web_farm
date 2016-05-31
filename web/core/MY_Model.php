@@ -336,6 +336,17 @@ class MY_Model extends CI_Model
         
         return $this->db->update($this->table, array('deleted' => time()));
     }
+    
+    public function all_query()
+    {
+        $result = array();
+        $times = $this->db->query_times; 
+        foreach ($this->db->queries as $key => $query) {
+            $result[] = "Execution Time: " . $times[$key] . " -> " . $query;
+        }
+        
+        return $result;
+    }
 
     // --------------------------------------------------------------------
 

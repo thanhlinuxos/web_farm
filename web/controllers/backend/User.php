@@ -28,6 +28,7 @@ class User extends MY_Controller {
         $this->load->view('backend/layout/header', $this->data);
         $this->load->view('backend/user/index', $this->data);
         $this->load->view('backend/layout/footer', $this->data);
+        //print_r($this->user_model->all_query());
     }
     
     public function search()
