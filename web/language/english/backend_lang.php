@@ -80,3 +80,19 @@ $lang['branch_has_been_updated'] = 'Chi nhánh đã được cập nhật!';
 $lang['branch_has_been_created'] = 'Chi nhánh đã được tạo!';
 $lang['branch_has_been_deleted'] = 'Chi nhánh đã bị xóa!';
 $lang['branch_not_exist'] = 'Chi Nhánh không tồn tại trong hệ thống!';
+
+//Land
+$lang['land_id'] = 'ID đất';
+$lang['land_name'] = 'Tên lô đất';
+$lang['land_axis_x'] = 'Trục x';
+$lang['land_axis_y'] = 'Trục y';
+$lang['land_image'] = 'Hình';
+$lang['land_list'] = 'Danh sách lô dất';
+$lang['land_add'] = 'Thêm lô đất';
+$lang['land_edit'] = 'Cập nhật lô đất';
+$lang['land_info'] = 'Thông tin lô đất';
+$lang['land_has_been_updated'] = 'Lô đất đã được cập nhật!';
+$lang['land_has_been_created'] = 'Lô đất đã được tạo!';
+$lang['land_has_been_deleted'] = 'Lô đất đã bị xóa!';
+$lang['land_not_exist'] = 'Lô đất không tồn tại trong hệ thống!';
+$lang['land_select_image'] = 'Vui lòng chọn hình!';
