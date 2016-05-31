@@ -6,7 +6,7 @@ class Branch_model extends MY_Model
         parent::__construct('branches');
         
     }
-     public function default_value()
+    public function default_value()
     {
         return array(
             'id' => NUll,

@@ -263,14 +263,17 @@ class MY_Model extends CI_Model
      * @return boolean
      */
     public function delete($conditions = array()) {
-        if (is_array($conditions) && count($conditions) > 0) {
+        if(is_numeric($conditions)) {
+            $this->db->where($this->key, $conditions);
+        }else if (is_array($conditions) && count($conditions) > 0) {
             foreach ($conditions as $field => $data) {
                 if (!in_array($field, $this->fields)) {
                     show_error("CRUD : '$this->table' don't have in '$field'");
                 }
             }
+            $this->db->where($conditions);
         }
-        $this->db->where($conditions);
+        
         return $this->db->update($this->table, array('deleted' => time()));
     }
 

@@ -4,7 +4,7 @@ class Branch extends MY_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->data['limit_short'] = 13;
+        $this->data['per_page'] = 25;
     }
     public function index(){
         $this->load->library('pagination_mylib');
@@ -12,7 +12,7 @@ class Branch extends MY_Controller {
         $config = $this->pagination_mylib->bootstrap_configs();
         $config['base_url'] = base_url('acp/branch/page');
         $config['total_rows'] = $this->branch_model->count_all(array('deleted' => 0));
-        $config['per_page'] = 25;
+        $config['per_page'] = $this->data['per_page'];
         $config['uri_segment'] = 4;
         $config['use_page_numbers'] = TRUE;
         $this->pagination->initialize($config);
@@ -99,7 +99,7 @@ class Branch extends MY_Controller {
             $this->session->set_flashdata('msg_success', $this->lang->line('branch_not_exist'));
             redirect(base_url('acp/branch'));
         }
-        $result = $this->branch_model->delete(array('id' => $id));
+        $result = $this->branch_model->delete($id);
         $this->session->set_flashdata('msg_success', $this->lang->line('branch_has_been_deleted'));
         redirect(base_url('acp/branch'));
     }

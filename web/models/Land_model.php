@@ -14,14 +14,14 @@ class Land_model extends MY_Model
             'name' => '',
             'axis_x' => '',
             'axis_y' => '',
-            'image_' => base_url('assets/backend/img/icon/no_avatar_256x256.png'),
+            'image_' => base_url('assets/backend/img/icon/no_image_256x256.png'),
             
         );
     }
     
     public function convert_data($data = array())
     {
-        $data['image_'] = base_url('assets/backend/img/icon/no_avatar_256x256.png');
+        $data['image_'] = base_url('assets/backend/img/icon/no_image_256x256.png');
         if(isset($data['image'])) {
             $data['image_'] = base_url('uploads/land/'.$data['image']);
         }

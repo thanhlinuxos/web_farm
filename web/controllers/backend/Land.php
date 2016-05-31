@@ -5,7 +5,6 @@ class Land extends MY_Controller {
     public function __construct() {
         parent::__construct();
         $this->data['per_page'] = 25;
-        $this->data['limit_short'] = 13;
     }
     
     public function index()
@@ -83,9 +82,9 @@ class Land extends MY_Controller {
         $this->load->view('backend/layout/footer', $this->data);
     }
     
-    public function show($id = NULL)
+    public function show($id = 0)
     {
-        $land = $this->land_model->get_by(array('id' => $id));
+        $land = $this->land_model->get_by($id);
         $branch = $this->branch_model->get_by(array('id' => $land['branch_id']));
         if(!$land){
             $this->session->set_flashdata('msg_error', $this->lang->line('land_not_exist'));
@@ -98,9 +97,9 @@ class Land extends MY_Controller {
         $this->load->view('backend/layout/footer', $this->data);
     }
     
-    function edit($id = NULL)
+    function edit($id = 0)
     {
-        $land = $this->land_model->get_by(array('id' => $id));
+        $land = $this->land_model->get_by($id);
         if(!$land){
             $this->session->set_flashdata('msg_error', $this->lang->line('land_not_exist'));
             redirect(base_url('acp/land'));
@@ -130,7 +129,7 @@ class Land extends MY_Controller {
                     }
                 }
                 else {
-                      $post['image'] = $land['image'] ;
+                     //$post['image'] = $land['image'] ;
                 }
                 //Continue
                 if($success) {
@@ -153,13 +152,13 @@ class Land extends MY_Controller {
         $this->load->view('backend/layout/footer', $this->data);
     }
     
-    public function delete($id = NULL) {
-        $land = $this->land_model->get_by(array('id' => $id));
+    public function delete($id = 0) {
+        $land = $this->land_model->get_by($id);
         if(!$land){
             $this->session->set_flashdata('msg_error', $this->lang->line('land_not_exist'));
             redirect(base_url('acp/land'));
         }
-        $result = $this->land_model->delete(array('id' => $id));
+        $result = $this->land_model->delete($id);
         $this->session->set_flashdata('msg_info', $this->lang->line('land_has_been_updated'));
         redirect(base_url('acp/land'));
     }
