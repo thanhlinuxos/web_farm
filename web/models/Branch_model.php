@@ -12,8 +12,7 @@ class Branch_model extends MY_Model
             'id' => NUll,
             'name' => '',
             'address' => '',
-            'phone' => '',
-            'delete' => ''
+            'phone' => ''
         );
     }
 }

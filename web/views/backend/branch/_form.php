@@ -3,14 +3,14 @@
         <div class="col-xs-12">
 
             <div class="form-group ">
-                <label class="control-label col-sm-3" for="fullname"><?php echo $this->lang->line('branch_name');?></label>
+                <label class="control-label col-sm-3" for="name"><?php echo $this->lang->line('branch_name');?></label>
                 <div class="col-sm-9">
                     <input type="text" name="name" class="form-control" id="name" value="<?php echo set_value('name', $row['name']); ?>" placeholder="Enter Name">
                     <?php echo form_error('name', "<small class='help-block'>", '</small>'); ?>
                 </div>
             </div>
             <div class="form-group">
-                <label class="control-label col-sm-3" for="phone"><?php echo $this->lang->line('branch_address');?>:</label>
+                <label class="control-label col-sm-3" for="address"><?php echo $this->lang->line('branch_address');?>:</label>
                 <div class="col-sm-9">
                     <input type="text" name="address" class="form-control" id="address" value="<?php echo set_value('address', $row['address']); ?>" placeholder="Enter Address">
                 </div>

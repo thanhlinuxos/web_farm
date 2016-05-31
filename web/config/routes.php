@@ -29,9 +29,9 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 //Branch
 $route['acp/branch'] = 'backend/branch';
+$route['acp/branch/page'] = 'backend/branch';
+$route['acp/branch/page/(:num)'] = 'backend/branch';
 $route['acp/branch/add'] = 'backend/branch/add';
 $route['acp/branch/edit/(:num)'] = 'backend/branch/edit/$1';
 $route['acp/branch/show/(:num)'] = 'backend/branch/show/$1';
 $route['acp/branch/delete/(:num)'] = 'backend/branch/delete/$1';
-$route['acp/branch/page'] = 'backend/branch';
-$route['acp/branch/page/(:num)'] = 'backend/branch';

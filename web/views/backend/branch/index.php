@@ -24,7 +24,6 @@
                         <td><?php echo $row['name'];?></td>
                         <td><?php echo $row['address'];?></td>
                         <td><?php echo $row['phone'];?></td>
-                        
                         <td>
                             <a href="<?php echo base_url('acp/branch/edit/'.$row['id']);?>" class="btn btn-warning btn-xs"><?php echo $this->lang->line('btn_edit'); ?></a>
                             <a href="<?php echo base_url('acp/branch/delete/'.$row['id']);?>" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure?');"><?php echo $this->lang->line('btn_delete'); ?></a>

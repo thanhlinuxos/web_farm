@@ -5,7 +5,6 @@ class Branch extends MY_Controller {
     public function __construct() {
         parent::__construct();
         $this->data['limit_short'] = 13;
-        $this->load->model('branch_model');
     }
     public function index(){
         $this->load->library('pagination_mylib');
@@ -13,7 +12,7 @@ class Branch extends MY_Controller {
         $config = $this->pagination_mylib->bootstrap_configs();
         $config['base_url'] = base_url('acp/branch/page');
         $config['total_rows'] = $this->branch_model->count_all(array('deleted' => 0));
-        $config['per_page'] = 2;
+        $config['per_page'] = 25;
         $config['uri_segment'] = 4;
         $config['use_page_numbers'] = TRUE;
         $this->pagination->initialize($config);
@@ -42,6 +41,7 @@ class Branch extends MY_Controller {
                 $result = $this->branch_model->insert($post);
                 if($result)
                 {
+                    $this->session->set_flashdata('msg_success', $this->lang->line('branch_has_been_created'));
                     redirect('/acp/branch/show/'.$this->branch_model->insert_id());
                 }
             }
@@ -55,6 +55,7 @@ class Branch extends MY_Controller {
     {
         $branch = $this->branch_model->get_by(array('id' => $id));
         if(!$branch){
+            $this->session->set_flashdata('msg_error', $this->lang->line('branch_not_exist'));
             redirect(base_url('acp/branch'));
         }
         $this->data['row'] = $branch;
@@ -67,6 +68,7 @@ class Branch extends MY_Controller {
         $branch = $this->branch_model->get_by(array('id' => $id));
         if(!$branch)
         {
+            $this->session->set_flashdata('msg_error', $this->lang->line('branch_not_exist'));
             redirect(base_url('acp/branch'));
         }
         if($this->input->post('submit'))
@@ -79,6 +81,7 @@ class Branch extends MY_Controller {
                 $result = $this->branch_model->update($post);
                 if($result)
                 {
+                    $this->session->set_flashdata('msg_success', $this->lang->line('branch_has_been_updated'));
                     redirect('/acp/branch/show/'.$id);
                 }
            }
@@ -93,9 +96,11 @@ class Branch extends MY_Controller {
     public function delete($id = NULL) {
         $branch = $this->branch_model->get_by(array('id' => $id));
         if(!$branch){
+            $this->session->set_flashdata('msg_success', $this->lang->line('branch_not_exist'));
             redirect(base_url('acp/branch'));
         }
         $result = $this->branch_model->delete(array('id' => $id));
+        $this->session->set_flashdata('msg_success', $this->lang->line('branch_has_been_deleted'));
         redirect(base_url('acp/branch'));
     }
 }
