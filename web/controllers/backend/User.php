@@ -26,7 +26,31 @@ class User extends MY_Controller {
             'offset' => $this->uri->segment(4) ? ($this->uri->segment(4) - 1)*$config['per_page'] : 0
         );
         $this->data['rows'] = $this->user_model->get_rows($conditions);
-        
+        $this->data['branches'] = $this->branch_model->get_rows();
+        $this->load->view('backend/layout/header', $this->data);
+        $this->load->view('backend/user/index', $this->data);
+        $this->load->view('backend/layout/footer', $this->data);
+    }
+    
+    public function search()
+    {
+        if($this->input->post('submit')) {
+            $post = $this->input->post();
+            $this->session->set_userdata('user_search', array('keyword' => $post['keyword'], 'branch_id' => $post['branch_id']));
+        }
+        $user_search = $this->session->userdata('user_search');
+        $conditions = array();
+        if($user_search['keyword']) {
+            $conditions['like'] = array('username', $user_search['keyword']);
+            $conditions['or_like'] = array('fullname', $user_search['keyword']);
+        }
+        //OR LiKE
+        if($user_search['branch_id']) {
+            $conditions['where'] = array('branch_id' => $user_search['branch_id']);
+        }
+        $this->data['rows'] = $this->user_model->get_rows($conditions);
+        //echo $this->db->last_query();exit;
+        $this->data['branches'] = $this->branch_model->get_rows();
         $this->load->view('backend/layout/header', $this->data);
         $this->load->view('backend/user/index', $this->data);
         $this->load->view('backend/layout/footer', $this->data);

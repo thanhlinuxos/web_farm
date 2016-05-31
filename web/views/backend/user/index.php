@@ -1,7 +1,7 @@
 <div class="page-title">
   <h4><?php echo $this->lang->line('user_list'); ?></h4>
 </div>
-
+<?php $this->load->view('backend/user/_search'); ?>
 <div class="row">
     <div class="col-xs-12">
         <table class="table table-striped table-hover table-bordered">

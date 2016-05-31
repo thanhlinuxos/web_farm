@@ -10,6 +10,7 @@ $lang['btn_login'] = 'Đăng nhập';
 $lang['btn_back'] = 'Quay lại';
 $lang['btn_save'] = 'Lưu';
 $lang['btn_change'] = 'Thay đổi';
+$lang['btn_search'] = 'Tìm kiếm';
 
 //User
 $lang['user_id'] = 'ID Nhân viên';

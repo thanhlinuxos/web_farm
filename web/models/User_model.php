@@ -117,7 +117,7 @@ class User_model extends MY_Model
     
     public function check_permission($controller, $action)
     {
-        if($controller == 'dashboard' && $action == 'index') {
+        if($controller == 'dashboard' || in_array($action, array('search'))) {
             return TRUE;
         }
         $user_login = $this->session->userdata('user_login');

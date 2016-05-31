@@ -151,6 +151,11 @@ class MY_Model extends CI_Model
             }
         }
         
+        if(isset($input['or_like'])) {
+            $input['or_like'][2] = (isset($input['or_like'][2]) && in_array($input['or_like'][2], array('before', 'after', 'both'))) ? $input['or_like'][2]: NULL;
+            $this->db->or_like($input['or_like'][0], $input['or_like'][1], $input['or_like'][2]);
+        }
+        
         if(isset($input['group_by'])) {
             if((is_array($input['group_by']) && count($input['group_by']) > 0) || (is_string($input['group_by']) && $input['group_by'])) {
                 $this->db->group_by($input['group_by']);

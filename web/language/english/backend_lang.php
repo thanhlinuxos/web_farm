@@ -10,6 +10,7 @@ $lang['btn_login'] = 'Login';
 $lang['btn_back'] = 'Back';
 $lang['btn_save'] = 'Save';
 $lang['btn_change'] = 'Change';
+$lang['btn_search'] = 'Search';
 
 //User
 $lang['user_id'] = 'User ID';
