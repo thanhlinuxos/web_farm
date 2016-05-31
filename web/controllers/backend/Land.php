@@ -159,7 +159,7 @@ class Land extends MY_Controller {
             redirect(base_url('acp/land'));
         }
         $result = $this->land_model->delete($id);
-        $this->session->set_flashdata('msg_info', $this->lang->line('land_has_been_updated'));
+        $this->session->set_flashdata('msg_info', $this->lang->line('land_has_been_deleted'));
         redirect(base_url('acp/land'));
     }
     

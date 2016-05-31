@@ -213,7 +213,7 @@ class User extends MY_Controller {
             redirect(base_url('acp/user'));
         }
         $result = $this->user_model->delete($id);
-        $this->session->set_flashdata('msg_info', $this->lang->line('user_has_been_updated'));
+        $this->session->set_flashdata('msg_info', $this->lang->line('user_has_been_deleted'));
         redirect(base_url('acp/user'));
     }
 

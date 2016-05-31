@@ -51,7 +51,6 @@
                         <ul class="nav navbar-nav">
                             <li class="<?php if($menu_active == 'dashboard') echo 'active'; ?>"><a href="<?php echo base_url('acp');?>">Dashboard</a></li>
                             <li class="<?php if($menu_active == 'user') echo 'active'; ?>"><a href="<?php echo base_url('acp/user');?>">User</a></li>
-                            <li><a href="#">Link</a></li>
                             <li class="<?php if($menu_active == 'branch') echo 'active'; ?>"><a href="<?php echo base_url('acp/branch')?>">Branch</a></li>
                             <li class="<?php if($menu_active == 'land') echo 'active'; ?>"><a href="<?php echo base_url('acp/land')?>">Land</a></li>
                             <li class="dropdown">
