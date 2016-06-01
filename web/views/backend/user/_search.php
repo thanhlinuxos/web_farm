@@ -4,7 +4,7 @@
 <!-- Search Form -->
 <div class="row form-group">
     <form name="search-form" method="POST" action="<?php echo base_url('acp/user/search'); ?>">
-        <div class="col-sm-2">
+        <div class="col-sm-3">
             <input type="text" name="keyword" class="form-control" value="<?php echo $user_search['keyword']; ?>" placeholder="Enter Full Name OR Username">
         </div>
         <div class="col-sm-2">
