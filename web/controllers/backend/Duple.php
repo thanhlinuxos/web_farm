@@ -45,6 +45,10 @@ class Duple extends MY_Controller {
                 $result = $this->duple_model->insert($post);
                 if($result)
                 {
+                    //Logs
+                    $duple = $this->duple_model->get_by($this->duple_model->insert_id());
+                    $this->logs_model->write('duple_add', $duple);
+                    //Redirect
                     $this->session->set_flashdata('msg_success', $this->lang->line('duple_has_been_created'));
                     redirect('/acp/duple/show/'.$this->duple_model->insert_id());
                 }
@@ -93,6 +97,9 @@ class Duple extends MY_Controller {
                 $result = $this->duple_model->update($post);
                 if($result)
                 {
+                    //Logs
+                    $this->logs_model->write('duple_edit', $post, $duple);
+                    //Redirect
                     $this->session->set_flashdata('msg_success', $this->lang->line('duple_has_been_update'));
                     redirect('/acp/duple/show/'.$id);
                 }
@@ -115,6 +122,10 @@ class Duple extends MY_Controller {
            redirect('/acp/duple'); 
         }
         $result = $this->duple_model->delete($id);
+        if($result) {
+            //Logs
+            $this->logs_model->write('duple_delete', $duple);
+        }
         $this->session->set_flashdata('msg_info', $this->lang->line('duple_has_been_deleted'));
         redirect(base_url('acp/duple'));
     }

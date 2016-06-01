@@ -85,16 +85,19 @@ class Land extends MY_Controller {
                     } else {
                         $post['image'] = $image['file_name'];
                     }
-                }
-                else {
-                        $this->data['image_error'] = $this->lang->line('land_please_select_image');
-                        $success = FALSE;
+                } else {
+                    $this->data['image_error'] = $this->lang->line('land_please_select_image');
+                    $success = FALSE;
                 }
                 //Continue
                 if($success) {
                     $result = $this->land_model->insert($post);
                     if($result)
                     {
+                        //Logs
+                        $land = $this->land_model->get_by($this->land_model->insert_id());
+                        $this->logs_model->write('land_add', $land);
+                        //Redirect
                         $this->session->set_flashdata('msg_success', $this->lang->line('land_has_been_created'));
                         redirect('/acp/land/show/'.$this->land_model->insert_id());
                     }                
@@ -155,15 +158,16 @@ class Land extends MY_Controller {
                         unlink(UPLOADPATH.'land/'.$land['image']);
                     }
                 }
-                else {
-                     //$post['image'] = $land['image'] ;
-                }
+                
                 //Continue
                 if($success) {
                     $post['id'] = $id;
                     $result = $this->land_model->update($post);
                     if($result)
                     {
+                        //Logs
+                        $this->logs_model->write('land_edit', $post, $land);
+                        //Redirect
                         $this->session->set_flashdata('msg_success', $this->lang->line('user_has_been_updated'));
                         redirect('/acp/land/show/'.$id);
                     }                
@@ -186,6 +190,10 @@ class Land extends MY_Controller {
             redirect(base_url('acp/land'));
         }
         $result = $this->land_model->delete($id);
+        if($result) {
+            //Logs
+            $this->logs_model->write('land_delete', $land);
+        }
         $this->session->set_flashdata('msg_info', $this->lang->line('land_has_been_deleted'));
         redirect(base_url('acp/land'));
     }
