@@ -9,7 +9,7 @@ class User extends MY_Controller {
     }
 
     public function index() 
-    {   
+    {
         $config = $this->pagination_mylib->bootstrap_configs();
         $config['base_url'] = base_url('acp/user/page');
         $config['total_rows'] = $this->user_model->count_all(array('deleted' => 0));
@@ -120,14 +120,18 @@ class User extends MY_Controller {
                     $result = $this->user_model->insert($post);
                     if($result)
                     {
+                        //Logs
+                        $user = $this->user_model->get_by($this->user_model->insert_id());
+                        $this->logs_model->write('user_add', $user);
+                        //Redirect
                         $this->session->set_flashdata('msg_success', $this->lang->line('user_has_been_updated'));
                         redirect('/acp/user/show/'.$this->user_model->insert_id());
                     }                
                 }
-                $this->data['row'] = $this->user_model->convert_data($post);
-                //Permission
-                $this->data['permission_group'] = (isset($this->data['row']['permission'])) ? unserialize($this->data['row']['permission']) : array();
             }
+            $this->data['row'] = $this->user_model->convert_data($post);
+            //Permission
+            $this->data['permission_group'] = (isset($this->data['row']['permission'])) ? unserialize($this->data['row']['permission']) : array();
         }
         $this->data['branchs'] = $this->branch_model->get_rows(array('where' => array('deleted' => 0), 'sort_by' => 'id ASC'));
         
@@ -218,6 +222,9 @@ class User extends MY_Controller {
                     $result = $this->user_model->update($post);
                     if($result)
                     {
+                        //Logs
+                        $this->logs_model->write('user_update', $post, $user);
+                        //Redirect
                         $this->session->set_flashdata('msg_success', $this->lang->line('user_has_been_updated'));
                         redirect('/acp/user/show/'.$user['id']);
                     }
@@ -242,6 +249,10 @@ class User extends MY_Controller {
             redirect(base_url('acp/user'));
         }
         $result = $this->user_model->delete($id);
+        if($result) {
+            //Logs
+            $this->logs_model->write('user_delete', $user);
+        }
         $this->session->set_flashdata('msg_info', $this->lang->line('user_has_been_deleted'));
         redirect(base_url('acp/user'));
     }

@@ -78,7 +78,7 @@ class MY_Model extends CI_Model
             }
             $this->db->where($conditions);
         } else {
-            show_error("CRUD : Param must be ARRAY OR NUMBERIC and NOT empty!");
+            show_error("Method: get_by() CRUD : Param must be ARRAY OR NUMBERIC and NOT empty!");
         }
           
         $query = $this->db->get($this->table);
@@ -106,7 +106,7 @@ class MY_Model extends CI_Model
             if(is_string($input['select']) && $input['select']) {
                 $this->db->select($input['select']);
             } else {
-                show_error("CRUD : Param SELECT must be STRING and NOT empty!");
+                show_error("Method: get_row() CRUD : Param SELECT must be STRING and NOT empty!");
             }
         }
         
@@ -114,7 +114,7 @@ class MY_Model extends CI_Model
             if(is_bool($input['distinct'])) {
                 $this->db->distinct();
             } else {
-                show_error("CRUD : Param DISTINCT must be BOOLEAN!");
+                show_error("Method: get_row() CRUD : Param DISTINCT must be BOOLEAN!");
             }  
         }
         
@@ -134,7 +134,7 @@ class MY_Model extends CI_Model
             if((is_array($input['where']) && count($input['where']) > 0) || (is_string($input['where']) && $input['where'])) {
                 $this->db->where($input['where']);
             } else {
-                show_error("CRUD : Param WHERE must be ARRAY OR STRING and NOT empty!");
+                show_error("Method: get_row() CRUD : Param WHERE must be ARRAY OR STRING and NOT empty!");
             }
         }
         
@@ -160,7 +160,7 @@ class MY_Model extends CI_Model
             if((is_array($input['group_by']) && count($input['group_by']) > 0) || (is_string($input['group_by']) && $input['group_by'])) {
                 $this->db->group_by($input['group_by']);
             } else {
-                show_error("CRUD : Param GROUP BY must be ARRAY OR STRING and NOT empty!");
+                show_error("Method: get_row() CRUD : Param GROUP BY must be ARRAY OR STRING and NOT empty!");
             }  
         }
 
@@ -173,7 +173,7 @@ class MY_Model extends CI_Model
                 $offset = isset($input['offset']) ? intval($input['offset']) : 0;
                 $this->db->limit($input['limit'], $offset);
             } else {
-                show_error("CRUD : Param LIMIT must be NUMBER!");
+                show_error("Method: get_row() CRUD : Param LIMIT must be NUMBER!");
             }
             
         }
@@ -203,7 +203,7 @@ class MY_Model extends CI_Model
         }
 
         if (!in_array($field, $this->fields)) {
-            show_error("CRUD : '$field' not in fields of table '$this->table'");
+            show_error("Method: get_sum() CRUD : '$field' not in fields of table '$this->table'");
         }
 
         if (!is_null($where)) {
@@ -287,7 +287,7 @@ class MY_Model extends CI_Model
                 $this->db->where($this->key, $o[$this->key]);
                 unset($o[$this->key]);
             } else {
-                show_error('CRUD : Can not found value key for update');
+                show_error('Method: update() CRUD : Can not found value key for update');
             }
         } else {
             foreach ($where as $field => $data) {
@@ -367,7 +367,7 @@ class MY_Model extends CI_Model
             //$agruments = array_merge(array($this->table), $agruments);
             return call_user_func_array(array($this->db, $method), $agruments);
         } else {
-            show_error("CRUD : Method '$method' not found");
+            show_error("Method: __call() CRUD : Method '$method' not found");
         }
     }
 
