@@ -223,7 +223,7 @@ class User extends MY_Controller {
                     if($result)
                     {
                         //Logs
-                        $this->logs_model->write('user_update', $post, $user);
+                        $this->logs_model->write('user_edit', $post, $user);
                         //Redirect
                         $this->session->set_flashdata('msg_success', $this->lang->line('user_has_been_updated'));
                         redirect('/acp/user/show/'.$user['id']);
