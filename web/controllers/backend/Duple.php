@@ -8,8 +8,6 @@ class Duple extends MY_Controller {
     }
     public function index()
     {
-        $this->load->library('pagination_mylib');
-        
         $config = $this->pagination_mylib->bootstrap_configs();
         $config['base_url'] = base_url('acp/duple/page');
         $config['total_rows'] = $this->duple_model->count_all(array('deleted' => 0));
@@ -43,6 +41,7 @@ class Duple extends MY_Controller {
             $this->form_validation->set_rules('ordinal', $this->lang->line('duple_ordinal'), 'required');
             if ($this->form_validation->run() == TRUE)
             {
+                $post['ordinal'] = $post['ordinal'] ? $post['ordinal'] :$this->duple_model->next_id(); 
                 $result = $this->duple_model->insert($post);
                 if($result)
                 {
