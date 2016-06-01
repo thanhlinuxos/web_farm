@@ -1,7 +1,7 @@
 <div class="page-title">
   <h4><?php echo $this->lang->line('land_list'); ?></h4>
 </div>
-
+<?php $this->load->view('backend/land/_search'); ?>
 <div class="row">
     <div class="col-xs-12">
         <table class="table table-striped table-hover table-bordered">

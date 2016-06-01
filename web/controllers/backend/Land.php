@@ -30,6 +30,37 @@ class Land extends MY_Controller {
         $this->load->view('backend/land/index', $this->data);
         $this->load->view('backend/layout/footer', $this->data);
     }
+    
+    public function search()
+    {
+        if($this->input->post('submit'))
+        {
+            $post = $this->input->post();
+            $this->session->set_userdata('land_search', array('keyword' => $post['keyword'] , 'branch_id' => $post['branch_id']));
+        }
+        $land_search = $this->session->userdata('land_search');
+        //Query string
+        $sql_like = $land_search['keyword']?"(`name` LIKE '%".$land_search['keyword']."%' ESCAPE '!' ) AND" : "";
+        $sql_where = $land_search['branch_id'] ? "branch_id = '".$land_search['branch_id']."' AND ": "";
+        //Count
+        $count_all = $this->land_model->get_query("SELECT COUNT(id) FROM th_lands WHERE $sql_like $sql_where deleted = 0", FALSE);
+         //Pagination
+        $config = $this->pagination_mylib->bootstrap_configs();
+        $config['base_url'] = base_url('acp/land/search/page');
+        $config['total_rows'] = $count_all['COUNT(id)'];
+        $config['per_page'] = $this->data['per_page'];
+        $config['uri_segment'] = 5;
+        $config['use_page_numbers'] = TRUE;
+        $this->pagination->initialize($config);
+        //list
+        $offset = $this->uri->segment(5) ? ($this->uri->segment(5) - 1)*$config['per_page'] : 0;
+        $this->data['rows'] = $this->land_model->get_query("SELECT * FROM th_lands WHERE $sql_like $sql_where deleted = 0 LIMIT ".$config['per_page']." OFFSET " . $offset);
+
+        $this->data['branches'] = $this->branch_model->get_rows(array('where' => array('deleted' => 0)));
+        $this->load->view('backend/layout/header', $this->data);
+        $this->load->view('backend/land/index', $this->data);
+        $this->load->view('backend/layout/footer', $this->data);
+    }
 
     public function add()
     {
