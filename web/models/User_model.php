@@ -31,8 +31,10 @@ class User_model extends MY_Model
         if(isset($data['image']) && file_exists(UPLOADPATH . 'user/thumbnail/'.$data['image'])) {
             $data['image_'] = base_url('uploads/user/thumbnail/'.$data['image']);
         }
-        $branch = $this->branch_model->get_by($data['branch_id']);
-        $data['branch_name'] = $branch ? $branch['name'] : '';
+        if(is_numeric($data['branch_id'])) {
+            $branch = $this->branch_model->get_by($data['branch_id']);
+            $data['branch_name'] = $branch ? $branch['name'] : '';
+        }
         $data['gender_'] = $this->lang->line('user_gender_'.$data['gender']);
         $data['status_'] = $this->lang->line('user_status_'.$data['status']);
         if(isset($data['created_at'])) {
