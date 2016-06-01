@@ -17,7 +17,7 @@ class Logs_model extends MY_Model
         return $data;
     }
 
-        public function write($action_key, $new_data = NULL, $old_data = NULL)
+    public function write($action_key, $new_data = NULL, $old_data = NULL)
     {
         if($action_key && $new_data) 
         {
