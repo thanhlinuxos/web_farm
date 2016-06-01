@@ -15,4 +15,6 @@ class Branch_model extends MY_Model
             'phone' => ''
         );
     }
+    
+    
 }
