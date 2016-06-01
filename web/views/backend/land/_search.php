@@ -15,7 +15,7 @@
             {
             ?>    
                 <option value="<?php echo $branch['id']?>" <?php echo set_select('branch_id', $branch['id'], $land_search['branch_id'] == $branch['id']); ?>>
-                    <?php echo $branch['name']?>
+                    <?php echo $branch['name'];?>
                 </option>
             <?php
             }
