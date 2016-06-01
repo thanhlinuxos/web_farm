@@ -10,6 +10,7 @@ $lang['btn_login'] = 'Đăng nhập';
 $lang['btn_back'] = 'Quay lại';
 $lang['btn_save'] = 'Lưu';
 $lang['btn_change'] = 'Thay đổi';
+$lang['btn_search'] = 'Tìm kiếm';
 
 //User
 $lang['user_id'] = 'ID Nhân viên';
@@ -17,6 +18,7 @@ $lang['user_fullname'] = 'Họ Tên';
 $lang['user_username'] = 'Tên đăng nhập';
 $lang['user_password'] = 'Mật khẩu';
 $lang['user_group'] = 'Nhóm';
+$lang['user_image'] = 'Ảnh đại diện';
 $lang['user_phone'] = 'Điện thoại';
 $lang['user_email'] = 'Email';
 $lang['user_address'] = 'Địa chỉ';
@@ -32,6 +34,7 @@ $lang['user_status_1'] = 'Hoạt động';
 $lang['user_list'] = 'Danh sách nhân viên';
 $lang['user_add'] = 'Thêm nhân viên';
 $lang['user_update'] = 'Cập nhật nhân viên';
+$lang['user_delete'] = 'Xóa nhân viên';
 $lang['user_info'] = 'Thông tin nhân viên';
 $lang['user_permission'] = 'Phân quyền nhân viên';
 $lang['user_permission_module'] = 'Trang';
@@ -65,3 +68,56 @@ $lang['permission_add'] = 'Tạo mới';
 $lang['permission_edit'] = 'Cập nhật';
 $lang['permission_show'] = 'Xem chi tiết';
 $lang['permission_delete'] = 'Xóa';
+
+//Branches
+$lang['branch_id'] = 'ID Nhánh';
+$lang['branch_name'] = 'Tên nhánh';
+$lang['branch_address'] = 'Địa chỉ';
+$lang['branch_phone'] = 'Điện thoại';
+$lang['branch_list'] = 'Danh sách chi nhánh';
+$lang['branch_add'] = 'Thêm chi nhánh';
+$lang['branch_edit'] = 'Cập nhật chi nhánh';
+$lang['branch_info'] = 'Thông tin chi nhánh';
+$lang['branch_has_been_updated'] = 'Chi nhánh đã được cập nhật!';
+$lang['branch_has_been_created'] = 'Chi nhánh đã được tạo!';
+$lang['branch_has_been_deleted'] = 'Chi nhánh đã bị xóa!';
+$lang['branch_not_exist'] = 'Chi Nhánh không tồn tại trong hệ thống!';
+$lang['branch_please_select'] = 'Vui lòng chọn chi nhánh!';
+
+//Land
+$lang['land_id'] = 'ID đất';
+$lang['land_name'] = 'Tên lô đất';
+$lang['land_axis_x'] = 'Trục x';
+$lang['land_axis_y'] = 'Trục y';
+$lang['land_image'] = 'Hình';
+$lang['land_list'] = 'Danh sách lô dất';
+$lang['land_add'] = 'Thêm lô đất';
+$lang['land_edit'] = 'Cập nhật lô đất';
+$lang['land_info'] = 'Thông tin lô đất';
+$lang['land_has_been_updated'] = 'Lô đất đã được cập nhật!';
+$lang['land_has_been_created'] = 'Lô đất đã được tạo!';
+$lang['land_has_been_deleted'] = 'Lô đất đã bị xóa!';
+$lang['land_not_exist'] = 'Lô đất không tồn tại trong hệ thống!';
+$lang['land_please_select_image'] = 'Vui lòng chọn hình!';
+
+//Duple
+$lang['duple_id'] = 'ID đôi';
+$lang['duple_name'] = 'Tên đôi';
+$lang['duple_ordinal'] = 'Số thứ tự';
+$lang['duple_list'] = 'Danh sách đôi';
+$lang['duple_add'] = 'Thêm đôi';
+$lang['duple_edit'] = 'Cập nhật đôi';
+$lang['duple_info'] = 'Thông tin đôi';
+$lang['duple_has_been_updated'] = 'Đôi đã được cập nhật!';
+$lang['duple_has_been_created'] = 'Đôi đã được tạo!';
+$lang['duple_has_been_deleted'] = 'Đôi đã bị xóa!';
+$lang['duple_not_exist'] = 'Đôi không tồn tại trong hệ thống!';
+
+//Logs
+$lang['logs_id'] = 'ID';
+$lang['logs_action_key'] = 'Hành động';
+$lang['logs_content'] = 'Nội dung';
+$lang['logs_ip'] = 'Địa chỉ IP';
+$lang['logs_browser'] = 'Trình duyệt';
+$lang['logs_created_at'] = 'Ngày tạo';
+$lang['logs_info'] = 'Thông tin lịch sử';

@@ -13,11 +13,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * Pagination Class
  *
- * @package		CodeIgniter
+ * @package	CodeIgniter
  * @subpackage	Libraries
  * @category	Pagination
- * @author		EllisLab Dev Team
- * @link		https://codeigniter.com/user_guide/libraries/pagination.html
+ * @author	Thanh Nguyen
  */
 class Pagination_mylib {
     

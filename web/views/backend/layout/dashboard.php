@@ -1,11 +1,14 @@
 
 
 <div class="page-title">
-  <h4>Add user</h4>
+  <h4>Title</h4>
 </div>
 
 <div class="row">
   <div class="col-xs-12">
+      <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+	  Launch demo modal
+	</button>
     <form class="form-horizontal" role="form">
       <div class="form-group">
         <label class="control-label col-sm-2" for="email">Email:</label>

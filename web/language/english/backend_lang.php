@@ -10,6 +10,7 @@ $lang['btn_login'] = 'Login';
 $lang['btn_back'] = 'Back';
 $lang['btn_save'] = 'Save';
 $lang['btn_change'] = 'Change';
+$lang['btn_search'] = 'Search';
 
 //User
 $lang['user_id'] = 'User ID';
@@ -17,6 +18,7 @@ $lang['user_fullname'] = 'Full Name';
 $lang['user_username'] = 'Username';
 $lang['user_password'] = 'Password';
 $lang['user_group'] = 'Group';
+$lang['user_image'] = 'Avatar';
 $lang['user_phone'] = 'Phone';
 $lang['user_email'] = 'email';
 $lang['user_address'] = 'Address';
@@ -32,7 +34,8 @@ $lang['user_status_1'] = 'Active';
 $lang['user_list'] = 'Users';
 $lang['user_add'] = 'Add user';
 $lang['user_update'] = 'Update user';
-$lang['user_info'] = 'User information';
+$lang['user_delete'] = 'Delete user';
+$lang['user_info'] = 'User infomation';
 $lang['user_permission'] = 'User permission';
 $lang['user_permission_module'] = 'Menu';
 $lang['user_permission_action'] = 'Action';
@@ -40,7 +43,7 @@ $lang['user_has_been_updated'] = 'The user account has been updated!';
 $lang['user_has_been_deleted'] = 'The user account has been deleted!';
 $lang['user_has_been_created'] = 'The user account has been created!';
 $lang['user_has_been_locked'] = 'The user has been locked';
-$lang['user_not_exist'] = 'User not exist';
+$lang['user_not_exist'] = 'The user not exist';
 
 //Authenticate
 $lang['auth_login'] = 'Login';
@@ -65,3 +68,56 @@ $lang['permission_add'] = 'Create';
 $lang['permission_edit'] = 'Update';
 $lang['permission_show'] = 'Show';
 $lang['permission_delete'] = 'Delete';
+
+//Branches
+$lang['branch_id'] = 'Branch ID';
+$lang['branch_name'] = 'Branch Name';
+$lang['branch_address'] = 'Address';
+$lang['branch_phone'] = 'Homephone';
+$lang['branch_list'] = 'Branch List';
+$lang['branch_add'] = 'Branch Add';
+$lang['branch_edit'] = 'Branch Update';
+$lang['branch_info'] = 'Branch Infomation';
+$lang['branch_has_been_updated'] = 'The branch has been updated!';
+$lang['branch_has_been_created'] = 'The branch has been created!';
+$lang['branch_has_been_deleted'] = 'The branch has been deleted!';
+$lang['branch_not_exist'] = 'The branch not exist!';
+$lang['branch_please_select'] = 'Please select branch!';
+
+//Land
+$lang['land_id'] = 'Land ID';
+$lang['land_name'] = 'Land Name';
+$lang['land_axis_x'] = 'X axis';
+$lang['land_axis_y'] = 'Y axis';
+$lang['land_image'] = 'Image';
+$lang['land_list'] = 'Land List';
+$lang['land_add'] = 'Land Add';
+$lang['land_edit'] = 'Land Update';
+$lang['land_info'] = 'Land Infomation';
+$lang['land_has_been_updated'] = 'The land has been updated!';
+$lang['land_has_been_created'] = 'The land has been created!';
+$lang['land_has_been_deleted'] = 'The land has been deleted!';
+$lang['land_not_exist'] = 'The land not exist!';
+$lang['land_please_select_image'] = 'Please select image!';
+
+//Duple
+$lang['duple_id'] = 'ID đôi';
+$lang['duple_name'] = 'Tên đôi';
+$lang['duple_ordinal'] = 'Số thứ tự';
+$lang['duple_list'] = 'Danh sách đôi';
+$lang['duple_add'] = 'Thêm đôi';
+$lang['duple_edit'] = 'Cập nhật đôi';
+$lang['duple_info'] = 'Thông tin đôi';
+$lang['duple_has_been_updated'] = 'Đôi đã được cập nhật!';
+$lang['duple_has_been_created'] = 'Đôi đã được tạo!';
+$lang['duple_has_been_deleted'] = 'Đôi đã bị xóa!';
+$lang['duple_not_exist'] = 'Đôi không tồn tại trong hệ thống!';
+
+//Logs
+$lang['logs_id'] = 'Logs ID';
+$lang['logs_action_key'] = 'Action';
+$lang['logs_content'] = 'Content';
+$lang['logs_ip'] = 'IP Address';
+$lang['logs_browser'] = 'Browser';
+$lang['logs_created_at'] = 'Created At';
+$lang['logs_info'] = 'Logs infomation';

@@ -1,7 +1,7 @@
 <div class="page-title">
   <h4><?php echo $this->lang->line('user_list'); ?></h4>
 </div>
-
+<?php $this->load->view('backend/user/_search'); ?>
 <div class="row">
     <div class="col-xs-12">
         <table class="table table-striped table-hover table-bordered">
@@ -13,7 +13,7 @@
                     <th><?php echo $this->lang->line('user_group'); ?></th>
                     <th><?php echo $this->lang->line('user_phone'); ?></th>
                     <th><?php echo $this->lang->line('user_gender'); ?></th>
-                    <th><?php echo $this->lang->line('user_birthday'); ?></th>
+                    <th><?php echo $this->lang->line('branch_name'); ?></th>
                     <th><?php echo $this->lang->line('user_status'); ?></th>
                     <th><a href="<?php echo base_url('acp/user/add');?>" class="btn btn-success btn-sm"><?php echo $this->lang->line('btn_add'); ?></a></th>
                 </tr>
@@ -31,11 +31,11 @@
                         <td><?php echo $row['group']?></td>
                         <td><?php echo $row['phone']?></td>
                         <td><?php echo $row['gender_']?></td>
-                        <td><?php echo $row['birthday']?></td>
+                        <td><?php echo $row['branch_name']?></td>
                         <td><?php echo $row['status_']?></td>
                         <td>
                             <a href="<?php echo base_url('acp/user/edit/'.$row['id']);?>" class="btn btn-warning btn-xs"><?php echo $this->lang->line('btn_edit'); ?></a>
-                            <a href="<?php echo base_url('acp/user/delete/'.$row['id']);?>" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure?');"><?php echo $this->lang->line('btn_delete'); ?></a>
+                            <button class="btn btn-danger btn-xs" onclick="delete_confirm('Delete User', 'Are you sure?', 'acp/user/delete/<?php echo $row['id'];?>')"><?php echo $this->lang->line('btn_delete'); ?></button>
                         </td>
                     </tr>
             <?php

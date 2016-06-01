@@ -10,9 +10,11 @@ class User_model extends MY_Model
     {
         return array(
             'id' => NUll,
+            'branch_id' => '',
             'fullname' => '',
             'username' => '',
             'group' => 'employee',
+            'image_' => base_url('assets/backend/img/icon/no_avatar_256x256.png'),
             'phone' => '',
             'email' => '',
             'address' => '',
@@ -25,9 +27,19 @@ class User_model extends MY_Model
     
     public function convert_data($data = array())
     {
+        $data['image_'] = base_url('assets/backend/img/icon/no_avatar_256x256.png');
+        if(isset($data['image']) && file_exists(UPLOADPATH . 'user/thumbnail/'.$data['image'])) {
+            $data['image_'] = base_url('uploads/user/thumbnail/'.$data['image']);
+        }
+        if(is_numeric($data['branch_id'])) {
+            $branch = $this->branch_model->get_by($data['branch_id']);
+            $data['branch_name'] = $branch ? $branch['name'] : '';
+        }
         $data['gender_'] = $this->lang->line('user_gender_'.$data['gender']);
         $data['status_'] = $this->lang->line('user_status_'.$data['status']);
-        $data['created_at_'] = date('d-m-Y H:i', $data['created_at']);
+        if(isset($data['created_at'])) {
+            $data['created_at_'] = date('d-m-Y H:i', $data['created_at']);
+        }
         return $data;
     }
     
@@ -86,6 +98,7 @@ class User_model extends MY_Model
                 }
                 $session = array(
                     'id' => $user['id'],
+                    'username' => $user['username'],
                     'fullname' => $user['fullname'],
                     'change_pass' => $user['change_password'],
                     'permission' => $tmp
@@ -108,7 +121,7 @@ class User_model extends MY_Model
     
     public function check_permission($controller, $action)
     {
-        if($controller == 'dashboard' && $action == 'index') {
+        if($controller == 'dashboard' || in_array($action, array('search'))) {
             return TRUE;
         }
         $user_login = $this->session->userdata('user_login');
