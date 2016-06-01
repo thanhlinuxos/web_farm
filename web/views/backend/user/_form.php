@@ -159,7 +159,9 @@
                             foreach ($actions as $action)        
                             {
                                 $checked = '';
-                                $disabled = (in_array($k, array('permission')) && in_array($action, array('index','add','show'))) ? 'disabled' : '';
+                                $disabled_rule_1 = in_array($k, array('permission')) && in_array($action, array('index','add','show'));
+                                $disabled_rule_2 = in_array($k, array('logs')) && in_array($action, array('add','edit'));
+                                $disabled = ($disabled_rule_1 || $disabled_rule_2) ? 'disabled' : '';
                                 if(isset($permission_group[$k]))
                                 {
                                     $action_group = explode('|', $permission_group[$k]);

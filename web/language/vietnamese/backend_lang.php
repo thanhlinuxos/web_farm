@@ -34,6 +34,7 @@ $lang['user_status_1'] = 'Hoạt động';
 $lang['user_list'] = 'Danh sách nhân viên';
 $lang['user_add'] = 'Thêm nhân viên';
 $lang['user_update'] = 'Cập nhật nhân viên';
+$lang['user_delete'] = 'Xóa nhân viên';
 $lang['user_info'] = 'Thông tin nhân viên';
 $lang['user_permission'] = 'Phân quyền nhân viên';
 $lang['user_permission_module'] = 'Trang';
@@ -111,3 +112,12 @@ $lang['duple_has_been_updated'] = 'Đôi đã được cập nhật!';
 $lang['duple_has_been_created'] = 'Đôi đã được tạo!';
 $lang['duple_has_been_deleted'] = 'Đôi đã bị xóa!';
 $lang['duple_not_exist'] = 'Đôi không tồn tại trong hệ thống!';
+
+//Logs
+$lang['logs_id'] = 'ID';
+$lang['logs_action_key'] = 'Hành động';
+$lang['logs_content'] = 'Nội dung';
+$lang['logs_ip'] = 'Địa chỉ IP';
+$lang['logs_browser'] = 'Trình duyệt';
+$lang['logs_created_at'] = 'Ngày tạo';
+$lang['logs_info'] = 'Thông tin lịch sử';

@@ -54,6 +54,7 @@
                             <li class="<?php if($menu_active == 'branch') echo 'active'; ?>"><a href="<?php echo base_url('acp/branch')?>">Branch</a></li>
                             <li class="<?php if($menu_active == 'land') echo 'active'; ?>"><a href="<?php echo base_url('acp/land')?>">Land</a></li>
                             <li class="<?php if($menu_active == 'duple') echo 'active'; ?>"><a href="<?php echo base_url('acp/duple')?>">Duple</a></li>
+                            <li class="<?php if($menu_active == 'logs') echo 'active'; ?>"><a href="<?php echo base_url('acp/logs')?>">Logs</a></li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
                                 <ul class="dropdown-menu">

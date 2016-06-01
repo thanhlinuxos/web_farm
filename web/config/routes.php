@@ -53,6 +53,12 @@ $route['acp/duple/edit/(:num)'] = 'backend/duple/edit/$1';
 $route['acp/duple/show/(:num)'] = 'backend/duple/show/$1';
 $route['acp/duple/delete/(:num)'] = 'backend/duple/delete/$1';
 
+//Logs
+$route['acp/logs'] = 'backend/logs';
+$route['acp/logs/page'] = 'backend/logs';
+$route['acp/logs/page/(:num)'] = 'backend/logs';
+$route['acp/logs/show/(:num)'] = 'backend/logs/show/$1';
+
 //Default router
 $route['test'] = 'test';
 $route['404_override'] = '';

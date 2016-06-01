@@ -34,6 +34,7 @@ $lang['user_status_1'] = 'Active';
 $lang['user_list'] = 'Users';
 $lang['user_add'] = 'Add user';
 $lang['user_update'] = 'Update user';
+$lang['user_delete'] = 'Delete user';
 $lang['user_info'] = 'User infomation';
 $lang['user_permission'] = 'User permission';
 $lang['user_permission_module'] = 'Menu';
@@ -111,3 +112,12 @@ $lang['duple_has_been_updated'] = 'Đôi đã được cập nhật!';
 $lang['duple_has_been_created'] = 'Đôi đã được tạo!';
 $lang['duple_has_been_deleted'] = 'Đôi đã bị xóa!';
 $lang['duple_not_exist'] = 'Đôi không tồn tại trong hệ thống!';
+
+//Logs
+$lang['logs_id'] = 'Logs ID';
+$lang['logs_action_key'] = 'Action';
+$lang['logs_content'] = 'Content';
+$lang['logs_ip'] = 'IP Address';
+$lang['logs_browser'] = 'Browser';
+$lang['logs_created_at'] = 'Created At';
+$lang['logs_info'] = 'Logs infomation';
