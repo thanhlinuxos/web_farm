@@ -39,7 +39,7 @@
             </tr>
         </table>
         <script type="text/javascript">
-            setTimeout('Redirect()', 2000);
+            setTimeout('Redirect()', 1700);
             function Redirect()
             {
                 location.href = "<?php echo $url; ?>";
