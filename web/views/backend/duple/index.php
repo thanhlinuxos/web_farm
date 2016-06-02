@@ -27,7 +27,9 @@
                         <td><?php echo $row['ordinal'];?></td>
                         <td>
                             <a href="<?php echo base_url('acp/duple/edit/'.$row['id']);?>" class="btn btn-warning btn-xs"><?php echo $this->lang->line('btn_edit'); ?></a>
-                            <a href="<?php echo base_url('acp/duple/delete/'.$row['id']);?>" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure?');"><?php echo $this->lang->line('btn_delete'); ?></a>
+                            <button class="btn btn-danger btn-xs" onclick="delete_confirm('Delete Duple', 'Are you sure?', 'acp/duple/delete/<?php echo $row['id'];?>')">
+                                <?php echo $this->lang->line('btn_delete'); ?>
+                            </button>
                         </td>
                     </tr>
             <?php

@@ -39,7 +39,9 @@
                         <td>
                             <a href="<?php echo base_url('acp/land/sortable/'.$row['id']);?>" class="btn btn-info btn-xs <?php if($total_duple[0]['COUNT(id)'] < 2) echo 'disabled'; ?>"><?php echo $this->lang->line('land_sortable'); ?></a>
                             <a href="<?php echo base_url('acp/land/edit/'.$row['id']);?>" class="btn btn-warning btn-xs"><?php echo $this->lang->line('btn_edit'); ?></a>
-                            <a href="<?php echo base_url('acp/land/delete/'.$row['id']);?>" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure?');"><?php echo $this->lang->line('btn_delete'); ?></a>
+                            <button class="btn btn-danger btn-xs" onclick="delete_confirm('Delete Land', 'Are you sure?', 'acp/land/delete/<?php echo $row['id'];?>')">
+                                <?php echo $this->lang->line('btn_delete'); ?>
+                            </button>
                         </td>
                     </tr>
             <?php
