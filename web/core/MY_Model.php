@@ -133,6 +133,7 @@ class MY_Model extends CI_Model
         if (isset($input['where'])) {
             if((is_array($input['where']) && count($input['where']) > 0) || (is_string($input['where']) && $input['where'])) {
                 $this->db->where($input['where']);
+                $this->db->where('deleted', 0);
             } else {
                 show_error("Method: get_row() CRUD : Param WHERE must be ARRAY OR STRING and NOT empty!");
             }
