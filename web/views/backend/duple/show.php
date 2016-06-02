@@ -16,6 +16,10 @@
             <td class="col-sm-2 text-right active"><strong><?php echo $this->lang->line('duple_ordinal'); ?>: </strong></td>
             <td class="col-sm-10"><?php echo $row['ordinal'];?></td>
         </tr>
+        <tr>
+            <td class="col-sm-2 text-right active">So hang</td>
+            <td class="col-sm-10"></td>
+        </tr>
     </tbody>
 </table>
 <div class="row">

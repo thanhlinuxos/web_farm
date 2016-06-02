@@ -2,7 +2,14 @@
                 if(ENVIRONMENT == 'development')
                 {
             ?>
-                <div class="well well-lg">
+                <script>
+                    function show_all_query()
+                    {
+                        $("#show_all_query").show();
+                    }
+                </script>
+                <button type="button" class="btn btn-primary" onclick="show_all_query();">Show All Query</button>
+                <div class="well well-lg" style="display: none;" id="show_all_query">
                     <?php
                         $queries = $this->user_model->all_query();
                         foreach ($queries as $query) {
