@@ -51,16 +51,23 @@
                         <ul class="nav navbar-nav">
                             <li class="<?php if($menu_active == 'dashboard') echo 'active'; ?>"><a href="<?php echo base_url('acp');?>">Dashboard</a></li>
                             <li class="<?php if($menu_active == 'user') echo 'active'; ?>"><a href="<?php echo base_url('acp/user');?>">User</a></li>
-                            <li class="<?php if($menu_active == 'branch') echo 'active'; ?>"><a href="<?php echo base_url('acp/branch')?>">Branch</a></li>
-                            <li class="<?php if($menu_active == 'land') echo 'active'; ?>"><a href="<?php echo base_url('acp/land')?>">Land</a></li>
-                            <li class="<?php if($menu_active == 'duple') echo 'active'; ?>"><a href="<?php echo base_url('acp/duple')?>">Duple</a></li>
-                            <li class="<?php if($menu_active == 'logs') echo 'active'; ?>"><a href="<?php echo base_url('acp/logs')?>">Logs</a></li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                            <li class="dropdown <?php if(in_array($menu_active, array('branch', 'land', 'duple'))) echo 'active'; ?>">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                    Farm <span class="caret"></span>
+                                </a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="#">Action</a></li>
-                                    <li><a href="#">Another action</a></li>
-                                    <li><a href="#">Something else here</a></li>
+                                    <li class="<?php if($menu_active == 'branch') echo 'active'; ?>"><a href="<?php echo base_url('acp/branch')?>">Branch</a></li>
+                                    <li class="<?php if($menu_active == 'land') echo 'active'; ?>"><a href="<?php echo base_url('acp/land')?>">Land</a></li>
+                                    <li class="<?php if($menu_active == 'duple') echo 'active'; ?>"><a href="<?php echo base_url('acp/duple')?>">Duple</a></li>
+                                    
+                                </ul>
+                            </li>
+                            <li class="dropdown <?php if(in_array($menu_active, array('logs'))) echo 'active'; ?>">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                    System <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li class="<?php if($menu_active == 'logs') echo 'active'; ?>"><a href="<?php echo base_url('acp/logs')?>">Logs</a></li>
                                 </ul>
                             </li>
                         </ul>

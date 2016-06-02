@@ -1,8 +1,26 @@
 <style>
-    #sortable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
-    #sortable ul { display: inline; }
-    #sortable li { margin: 0 5px 5px 5px; padding: 5px; font-size: 1.2em; height: 10em; float:left;}
-    .ui-state-highlight { height: 1.5em; width: 3em; line-height: 1.2em; }
+    #sortable {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        width: 60%;
+    }
+    #sortable ul { 
+        display: inline;
+    }
+    #sortable li {
+        margin: 0 5px 5px 5px;
+        padding: 5px;
+        font-size: 1.2em;
+        height: 10em;
+        float:left;
+        cursor: pointer;
+    }
+    .ui-state-highlight {
+        height: 1.5em;
+        width: 3em;
+        line-height: 1.2em;
+    }
 </style>
 <script>
     $(document).ready(function(){
@@ -32,16 +50,30 @@
 
 <div class="row">
     <div class="col-xs-12">
+    <?php
+    if(count($duples)) {
+    ?>    
         <ul id="sortable">
         <?php
             foreach ($duples as $duple)
             {
         ?>
-            <li id="row-<?php echo $duple['id'];?>" class="ui-state-default"><?php echo $duple['name'];?></li>
+            <li id="row-<?php echo $duple['id'];?>" class="ui-state-default">
+                <a href="<?php echo base_url('acp/duple/show/'.$duple['id']);?>"><?php echo $duple['name'];?></a>
+            </li>
         <?php
             }
         ?>    
         </ul>
+    <?php
+    } else {
+    ?>
+        <div class="alert alert-info">
+            <strong>[Info]</strong> Lô đất này chưa có đôi!
+        </div>
+    <?php    
+    }
+    ?>    
     </div>
 </div>
 <div class="alert alert-info fade in" id="sortable_info" style="display: none;">
