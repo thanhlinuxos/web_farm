@@ -23,13 +23,14 @@
                     $row = $this->land_model->convert_data($row);
             ?>
                     <tr>
-                        <td><a href="<?php echo base_url('acp/branch/show/'.$row['id']); ?>"><?php echo $row['id'];?></a></td>
+                        <td><a href="<?php echo base_url('acp/land/show/'.$row['id']); ?>"><?php echo $row['id'];?></a></td>
                         <td><?php echo $row['name'];?></td>
                         <td><?php echo $row['branch_name'];?></td>
                         <td><?php echo $row['axis_x'];?></td>
                         <td><?php echo $row['axis_y'];?></td>
                         <td><img src="<?php echo $row['image_'];?>" width="70"></td>
                         <td>
+                            <a href="<?php echo base_url('acp/land/sortable/'.$row['id']);?>" class="btn btn-info btn-xs"><?php echo $this->lang->line('land_sortable'); ?></a>
                             <a href="<?php echo base_url('acp/land/edit/'.$row['id']);?>" class="btn btn-warning btn-xs"><?php echo $this->lang->line('btn_edit'); ?></a>
                             <a href="<?php echo base_url('acp/land/delete/'.$row['id']);?>" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure?');"><?php echo $this->lang->line('btn_delete'); ?></a>
                         </td>

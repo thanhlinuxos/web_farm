@@ -101,6 +101,7 @@ $lang['land_has_been_created'] = 'Lô đất đã được tạo!';
 $lang['land_has_been_deleted'] = 'Lô đất đã bị xóa!';
 $lang['land_not_exist'] = 'Lô đất không tồn tại trong hệ thống!';
 $lang['land_please_select_image'] = 'Vui lòng chọn hình!';
+$lang['land_sortable'] = 'Sắp xếp đôi';
 
 //Duple
 $lang['duple_id'] = 'ID đôi';
