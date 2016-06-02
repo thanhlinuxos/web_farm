@@ -23,8 +23,7 @@ class Output_mylib
     public function __construct()
     {
             $this->CI =& get_instance();
-            $this->CI->load->helper('directory');
-            log_message('info', 'Image_mylib Class Initialized');
+            log_message('info', 'Output_mylib Class Initialized');
     }
     
     public function response($data = array())
