@@ -1,11 +1,11 @@
 <?php
-    $user_search = $this->session->userdata('user_search');
+    $land_search = $this->session->userdata('land_search');
 ?>
 <!-- Search Form -->
 <div class="row form-group">
-    <form name="search-form" method="POST" action="<?php echo base_url('acp/user/search'); ?>">
-        <div class="col-sm-3">
-            <input type="text" name="keyword" class="form-control" value="<?php echo $user_search['keyword']; ?>" placeholder="Enter Full Name OR Username">
+    <form name="search-form" method="POST" action="<?php echo base_url('acp/land/search'); ?>">
+        <div class="col-sm-2">
+            <input type="text" name="keyword" class="form-control" value="<?php echo $land_search['keyword']; ?>" placeholder="Enter Name">
         </div>
         <div class="col-sm-2">
             <select class="form-control" id="branch_id" name="branch_id">
@@ -14,8 +14,8 @@
             foreach ($branches as $branch)
             {
             ?>    
-                <option value="<?php echo $branch['id']?>" <?php echo set_select('branch_id', $branch['id'], $user_search['branch_id'] == $branch['id']); ?>>
-                    <?php echo $branch['name']?>
+                <option value="<?php echo $branch['id']?>" <?php echo set_select('branch_id', $branch['id'], $land_search['branch_id'] == $branch['id']); ?>>
+                    <?php echo $branch['name'];?>
                 </option>
             <?php
             }

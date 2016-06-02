@@ -43,6 +43,10 @@ $route['acp/land/add'] = 'backend/land/add';
 $route['acp/land/edit/(:num)'] = 'backend/land/edit/$1';
 $route['acp/land/show/(:num)'] = 'backend/land/show/$1';
 $route['acp/land/delete/(:num)'] = 'backend/land/delete/$1';
+$route['acp/land/search'] = 'backend/land/search';
+$route['acp/land/search/page'] = 'backend/land/search';
+$route['acp/land/search/page/(:num)'] = 'backend/land/search';
+$route['acp/land/sortable/(:num)'] = 'backend/land/sortable/$1';
 
 //Duple
 $route['acp/duple'] = 'backend/duple';

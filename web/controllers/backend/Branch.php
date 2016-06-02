@@ -40,6 +40,10 @@ class Branch extends MY_Controller {
                 $result = $this->branch_model->insert($post);
                 if($result)
                 {
+                    //Logs
+                    $branch = $this->branch_model->get_by($this->branch_model->insert_id());
+                    $this->logs_model->write('branch_add', $branch);
+                    //Redirect   
                     $this->session->set_flashdata('msg_success', $this->lang->line('branch_has_been_created'));
                     redirect('/acp/branch/show/'.$this->branch_model->insert_id());
                 }
@@ -80,6 +84,9 @@ class Branch extends MY_Controller {
                 $result = $this->branch_model->update($post);
                 if($result)
                 {
+                    //Logs
+                    $this->logs_model->write('branch_edit', $post, $branch);
+                    //Redirect
                     $this->session->set_flashdata('msg_success', $this->lang->line('branch_has_been_updated'));
                     redirect('/acp/branch/show/'.$id);
                 }
@@ -99,6 +106,10 @@ class Branch extends MY_Controller {
             redirect(base_url('acp/branch'));
         }
         $result = $this->branch_model->delete($id);
+        if($result) {
+            //Logs
+            $this->logs_model->write('branch_delete', $branch);
+        }
         $this->session->set_flashdata('msg_success', $this->lang->line('branch_has_been_deleted'));
         redirect(base_url('acp/branch'));
     }

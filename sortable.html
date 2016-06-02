@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>jQuery UI Sortable - Default functionality</title>
+  <link href="http://web_farm.local/vendor/jquery/ui/jquery-ui.min.css" rel="stylesheet">
+  <script type="text/javascript" src="http://web_farm.local/vendor/jquery/jquery-2.2.3.min.js"></script>
+        <script type="text/javascript" src="http://web_farm.local/vendor/jquery/ui/jquery-ui.min.js"></script>
+
+  <style>
+  body {
+	font-family: "Trebuchet MS", "Helvetica", "Arial",  "Verdana", "sans-serif";
+	font-size: 62.5%;
+}
+  #sortable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
+  #sortable li { margin: 0 5px 5px 5px; padding: 5px; font-size: 1.2em; height: 1.5em; float:left;}
+  html>body #sortable li { height: 1.5em; line-height: 1.2em; }
+  .ui-state-highlight { height: 1.5em; line-height: 1.2em; }
+  </style>
+  <script>
+  $(document).ready(function(){
+	$( "#sortable" ).sortable({
+		placeholder: "ui-state-highlight",
+		axis: 'x',
+		update: function (event, ui) {
+			var data = $(this).sortable('serialize');
+			console.log(data);
+			$.ajax({
+				data: data,
+				type: 'POST',
+				url: 'http://web_farm.local/acp'
+			});
+		}
+    });
+    $( "#sortable" ).disableSelection();
+  });
+ 
+  </script>
+</head>
+<body>
+ 
+<ul id="sortable" style="display: inline;">
+  <li id="row-1" class="ui-state-default">Item 1</li>
+  <li id="row-2" class="ui-state-default">Item 2</li>
+  <li id="row-3" class="ui-state-default">Item 3</li>
+  <li id="row-4" class="ui-state-default">Item 4</li>
+  <li id="row-5" class="ui-state-default">Item 5</li>
+  <li id="row-6" class="ui-state-default">Item 6</li>
+  <li id="row-7" class="ui-state-default">Item 7</li>
+</ul>
+ 
+ 
+ 
+</body>
+</html>

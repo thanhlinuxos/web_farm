@@ -23,9 +23,38 @@ class Land extends MY_Controller {
             'offset' => $this->uri->segment(4) ? ($this->uri->segment(4) - 1)*$config['per_page'] : 0
         );
         
-        $rows = $this->land_model->get_rows($conditions);
-        $this->data['rows'] = $rows;
-        
+        $this->data['rows'] = $this->land_model->get_rows($conditions);
+        $this->data['branches'] = $this->branch_model->get_rows(array('where' => array('deleted' => 0), 'sort_by' => 'id ASC'));
+        $this->load->view('backend/layout/header', $this->data);
+        $this->load->view('backend/land/index', $this->data);
+        $this->load->view('backend/layout/footer', $this->data);
+    }
+    
+     public function search()
+    {    
+        if($this->input->post('submit')) {
+            $post = $this->input->post();
+            $this->session->set_userdata('land_search', array('keyword' => $post['keyword'] , 'branch_id' => $post['branch_id']));
+        }
+        $land_search = $this->session->userdata('land_search');
+        //Query string
+        $sql_like = $land_search['keyword']?"(`name` LIKE '%".$land_search['keyword']."%' ESCAPE '!' ) AND " : "";
+        $sql_where = $land_search['branch_id'] ? "branch_id = '".$land_search['branch_id']."' AND " : '';
+        //Count
+        $count_all = $this->land_model->get_query("SELECT COUNT(id) FROM th_lands WHERE $sql_like $sql_where deleted = 0", FALSE);
+         //Pagination
+        $config = $this->pagination_mylib->bootstrap_configs();
+        $config['base_url'] = base_url('acp/land/search/page');
+        $config['total_rows'] = $count_all['COUNT(id)'];
+        $config['per_page'] = $this->data['per_page'];
+        $config['uri_segment'] = 5;
+        $config['use_page_numbers'] = TRUE;
+        $this->pagination->initialize($config);
+        //list
+        $offset = $this->uri->segment(5) ? ($this->uri->segment(5) - 1)*$config['per_page'] : 0;
+        $this->data['rows'] = $this->land_model->get_query("SELECT * FROM th_lands WHERE $sql_like $sql_where deleted = 0 LIMIT ".$config['per_page']." OFFSET " . $offset);
+
+        $this->data['branches'] = $this->branch_model->get_rows(array('where' => array('deleted' => 0), 'sort_by' => 'id ASC'));
         $this->load->view('backend/layout/header', $this->data);
         $this->load->view('backend/land/index', $this->data);
         $this->load->view('backend/layout/footer', $this->data);
@@ -56,16 +85,19 @@ class Land extends MY_Controller {
                     } else {
                         $post['image'] = $image['file_name'];
                     }
-                }
-                else {
-                        $this->data['image_error'] = $this->lang->line('land_please_select_image');
-                        $success = FALSE;
+                } else {
+                    $this->data['image_error'] = $this->lang->line('land_please_select_image');
+                    $success = FALSE;
                 }
                 //Continue
                 if($success) {
                     $result = $this->land_model->insert($post);
                     if($result)
                     {
+                        //Logs
+                        $land = $this->land_model->get_by($this->land_model->insert_id());
+                        $this->logs_model->write('land_add', $land);
+                        //Redirect
                         $this->session->set_flashdata('msg_success', $this->lang->line('land_has_been_created'));
                         redirect('/acp/land/show/'.$this->land_model->insert_id());
                     }                
@@ -126,15 +158,16 @@ class Land extends MY_Controller {
                         unlink(UPLOADPATH.'land/'.$land['image']);
                     }
                 }
-                else {
-                     //$post['image'] = $land['image'] ;
-                }
+                
                 //Continue
                 if($success) {
                     $post['id'] = $id;
                     $result = $this->land_model->update($post);
                     if($result)
                     {
+                        //Logs
+                        $this->logs_model->write('land_edit', $post, $land);
+                        //Redirect
                         $this->session->set_flashdata('msg_success', $this->lang->line('user_has_been_updated'));
                         redirect('/acp/land/show/'.$id);
                     }                
@@ -157,8 +190,43 @@ class Land extends MY_Controller {
             redirect(base_url('acp/land'));
         }
         $result = $this->land_model->delete($id);
+        if($result) {
+            //Logs
+            $this->logs_model->write('land_delete', $land);
+        }
         $this->session->set_flashdata('msg_info', $this->lang->line('land_has_been_deleted'));
         redirect(base_url('acp/land'));
+    }
+    
+    public function sortable($id = 0)
+    {
+        $land = $this->land_model->get_by($id);
+        if(!$land){
+            if( $this->input->method(TRUE) == 'POST') {
+                $this->output_mylib->response(array('success' => FALSE, 'msg' => $this->lang->line('land_not_exist')));
+            } else {
+                $this->session->set_flashdata('msg_error', $this->lang->line('land_not_exist'));
+                redirect(base_url('acp/land'));
+            }
+        }
+        
+        if( $this->input->method(TRUE) == 'POST')
+        {
+            $rows =$this->input->post('row');
+            foreach ($rows as $k => $v) {
+                $duple = $this->duple_model->get_by($v);
+                if($duple) {
+                    $duple['ordinal'] = $k + 1;
+                    $this->duple_model->update($duple);
+                }
+            }
+            $this->output_mylib->response(array('success' => TRUE, 'msg' => 'Sap xep doi thanh cong'));
+        }
+        $this->data['land'] = $land;
+        $this->data['duples'] = $this->duple_model->get_rows(array('where' => array('land_id' => $id), 'sort_by' => 'ordinal ASC'));
+        $this->load->view('backend/layout/header', $this->data);
+        $this->load->view('backend/land/sortable', $this->data);
+        $this->load->view('backend/layout/footer', $this->data);
     }
     
 }
