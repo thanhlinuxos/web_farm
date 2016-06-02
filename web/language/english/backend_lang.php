@@ -101,6 +101,7 @@ $lang['land_has_been_created'] = 'The land has been created!';
 $lang['land_has_been_deleted'] = 'The land has been deleted!';
 $lang['land_not_exist'] = 'The land not exist!';
 $lang['land_please_select_image'] = 'Please select image!';
+$lang['land_sortable'] = 'Sort duple';
 
 //Duple
 $lang['duple_id'] = 'ID đôi';

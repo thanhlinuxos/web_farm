@@ -25,9 +25,10 @@ class Land_model extends MY_Model
         if(isset($data['image'])) {
             $data['image_'] = base_url('uploads/land/'.$data['image']);
         }
-        
+       
         $branch = $this->branch_model->get_by($data['branch_id']);
         $data['branch_name'] = $branch ? $branch['name'] : '';
+       
         return $data;
     }
 }

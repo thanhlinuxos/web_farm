@@ -198,4 +198,35 @@ class Land extends MY_Controller {
         redirect(base_url('acp/land'));
     }
     
+    public function sortable($id = 0)
+    {
+        $land = $this->land_model->get_by($id);
+        if(!$land){
+            if( $this->input->method(TRUE) == 'POST') {
+                $this->output_mylib->response(array('success' => FALSE, 'msg' => $this->lang->line('land_not_exist')));
+            } else {
+                $this->session->set_flashdata('msg_error', $this->lang->line('land_not_exist'));
+                redirect(base_url('acp/land'));
+            }
+        }
+        
+        if( $this->input->method(TRUE) == 'POST')
+        {
+            $rows =$this->input->post('row');
+            foreach ($rows as $k => $v) {
+                $duple = $this->duple_model->get_by($v);
+                if($duple) {
+                    $duple['ordinal'] = $k + 1;
+                    $this->duple_model->update($duple);
+                }
+            }
+            $this->output_mylib->response(array('success' => TRUE, 'msg' => 'Sap xep doi thanh cong'));
+        }
+        $this->data['land'] = $land;
+        $this->data['duples'] = $this->duple_model->get_rows(array('where' => array('land_id' => $id), 'sort_by' => 'ordinal ASC'));
+        $this->load->view('backend/layout/header', $this->data);
+        $this->load->view('backend/land/sortable', $this->data);
+        $this->load->view('backend/layout/footer', $this->data);
+    }
+    
 }
