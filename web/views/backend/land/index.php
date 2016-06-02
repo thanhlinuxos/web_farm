@@ -10,6 +10,7 @@
                     <th><?php echo $this->lang->line('id'); ?></th>
                     <th><?php echo $this->lang->line('land_name'); ?></th>
                     <th><?php echo $this->lang->line('branch_name'); ?></th>
+                    <td>Tổng số đôi</td>
                     <th><?php echo $this->lang->line('land_axis_x'); ?></th>
                     <th><?php echo $this->lang->line('land_axis_y'); ?></th>
                     <th><?php echo $this->lang->line('land_image'); ?></th>
@@ -21,16 +22,22 @@
                 foreach($rows as $row)
                 {   
                     $row = $this->land_model->convert_data($row);
+                    $total_duple = $this->duple_model->get_rows(array('select' => 'COUNT(id)', 'where' => array('land_id' => $row['id'], 'deleted' => 0)));
             ?>
                     <tr>
                         <td><a href="<?php echo base_url('acp/land/show/'.$row['id']); ?>"><?php echo $row['id'];?></a></td>
                         <td><?php echo $row['name'];?></td>
                         <td><?php echo $row['branch_name'];?></td>
+                        <td>
+                            <a href="<?php echo base_url('acp/duple/search?land_id='.$row['id']); ?>">
+                                <?php echo $total_duple[0]['COUNT(id)']; ?>
+                            </a> 
+                        </td>
                         <td><?php echo $row['axis_x'];?></td>
                         <td><?php echo $row['axis_y'];?></td>
                         <td><img src="<?php echo $row['image_'];?>" width="70"></td>
                         <td>
-                            <a href="<?php echo base_url('acp/land/sortable/'.$row['id']);?>" class="btn btn-info btn-xs"><?php echo $this->lang->line('land_sortable'); ?></a>
+                            <a href="<?php echo base_url('acp/land/sortable/'.$row['id']);?>" class="btn btn-info btn-xs <?php if($total_duple[0]['COUNT(id)'] < 2) echo 'disabled'; ?>"><?php echo $this->lang->line('land_sortable'); ?></a>
                             <a href="<?php echo base_url('acp/land/edit/'.$row['id']);?>" class="btn btn-warning btn-xs"><?php echo $this->lang->line('btn_edit'); ?></a>
                             <a href="<?php echo base_url('acp/land/delete/'.$row['id']);?>" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure?');"><?php echo $this->lang->line('btn_delete'); ?></a>
                         </td>

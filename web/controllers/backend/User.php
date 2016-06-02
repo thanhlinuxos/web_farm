@@ -10,6 +10,9 @@ class User extends MY_Controller {
 
     public function index() 
     {
+        //Reset search
+        $this->session->set_userdata('user_search', array('keyword' => '', 'branch_id' => ''));
+        //Get config for pagination
         $config = $this->pagination_mylib->bootstrap_configs();
         $config['base_url'] = base_url('acp/user/page');
         $config['total_rows'] = $this->user_model->count_all(array('deleted' => 0));

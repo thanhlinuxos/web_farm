@@ -9,6 +9,7 @@
                 <tr>
                     <th><?php echo $this->lang->line('id'); ?></th>
                     <th><?php echo $this->lang->line('branch_name'); ?></th>
+                    <th>Tổng số lô</th>
                     <th><?php echo $this->lang->line('branch_address'); ?></th>
                     <th><?php echo $this->lang->line('branch_phone'); ?></th>
                     <th><a href="<?php echo base_url('acp/branch/add');?>" class="btn btn-success btn-sm"><?php echo $this->lang->line('btn_add'); ?></a></th>
@@ -18,10 +19,16 @@
             <?php
                 foreach($rows as $row)
                 {
+                    $total_land = $this->land_model->get_rows(array('select' => 'COUNT(id)', 'where' => array('branch_id' => $row['id'], 'deleted' => 0)));
             ?>
                     <tr>
                         <td><a href="<?php echo base_url('acp/branch/show/'.$row['id']); ?>"><?php echo $row['id'];?></a></td>
                         <td><?php echo $row['name'];?></td>
+                        <td>
+                            <a href="<?php echo base_url('acp/land/search?branch_id='.$row['id']); ?>">
+                                <?php echo $total_land[0]['COUNT(id)']; ?>
+                            </a>  
+                        </td>
                         <td><?php echo $row['address'];?></td>
                         <td><?php echo $row['phone'];?></td>
                         <td>
