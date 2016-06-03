@@ -7,4 +7,4 @@ $autoload['drivers'] = array();
 $autoload['helper'] = array('url', 'form');
 $autoload['config'] = array('my_config');
 $autoload['language'] = array();
-$autoload['model'] = array('user_model','branch_model','land_model','duple_model', 'logs_model');
+$autoload['model'] = array('user_model','branch_model','land_model','duple_model','row_model', 'logs_model');

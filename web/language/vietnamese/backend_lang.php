@@ -117,6 +117,20 @@ $lang['duple_has_been_created'] = 'Đôi đã được tạo!';
 $lang['duple_has_been_deleted'] = 'Đôi đã bị xóa!';
 $lang['duple_not_exist'] = 'Đôi không tồn tại trong hệ thống!';
 
+//Rows
+$lang['row_id'] = 'ID Hàng';
+$lang['row_name'] = 'Tên hàng';
+$lang['row_ordinal'] = 'Số thứ tự';
+$lang['row_list'] = 'Danh sách hàng';
+$lang['row_add'] = 'Thêm hàng';
+$lang['row_edit'] = 'Cập nhật hàng';
+$lang['row_delete'] = 'Xóa hàng';
+$lang['row_info'] = 'Thông tin hàng';
+$lang['row_has_been_updated'] = 'Hàng đã được cập nhật!';
+$lang['row_has_been_created'] = 'Hàng đã được tạo!';
+$lang['row_has_been_deleted'] = 'Hàng đã bị xóa!';
+$lang['row_not_exist'] = 'Hàng không tồn tại trong hệ thống!';
+
 //Logs
 $lang['logs_id'] = 'ID';
 $lang['logs_action_key'] = 'Hành động';

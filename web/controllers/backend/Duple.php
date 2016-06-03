@@ -50,7 +50,7 @@ class Duple extends MY_Controller {
                     $this->logs_model->write('duple_add', $duple);
                     //Redirect
                     $this->session->set_flashdata('msg_success', $this->lang->line('duple_has_been_created'));
-                    redirect('/acp/duple/show/'.$this->duple_model->insert_id());
+                    redirect('/acp/duple/show/'.$duple['id']);
                 }
             }
         }
