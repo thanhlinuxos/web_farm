@@ -117,6 +117,15 @@ $lang['duple_has_been_created'] = 'Đôi đã được tạo!';
 $lang['duple_has_been_deleted'] = 'Đôi đã bị xóa!';
 $lang['duple_not_exist'] = 'Đôi không tồn tại trong hệ thống!';
 
+//Tree
+$lang['tree_id'] = 'Tree ID';
+$lang['tree_code'] = 'CODE';
+$lang['tree_status'] = 'Status';
+$lang['tree_has_been_updated'] = 'The tree has been updated!';
+$lang['tree_has_been_deleted'] = 'The tree has been deleted!';
+$lang['tree_has_been_created'] = 'The tree has been created!';
+$lang['tree_quantity'] = 'Tree quantity';
+
 //Logs
 $lang['logs_id'] = 'Logs ID';
 $lang['logs_action_key'] = 'Action';

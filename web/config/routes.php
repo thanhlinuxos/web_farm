@@ -63,6 +63,15 @@ $route['acp/logs/page'] = 'backend/logs';
 $route['acp/logs/page/(:num)'] = 'backend/logs';
 $route['acp/logs/show/(:num)'] = 'backend/logs/show/$1';
 
+//Tree
+$route['acp/tree'] = 'backend/tree';
+$route['acp/tree/page'] = 'backend/tree';
+$route['acp/tree/page/(:num)'] = 'backend/tree';
+$route['acp/tree/add'] = 'backend/tree/add';
+$route['acp/tree/edit/(:num)'] = 'backend/tree/edit/$1';
+$route['acp/tree/show/(:num)'] = 'backend/tree/show/$1';
+$route['acp/tree/delete/(:num)'] = 'backend/tree/delete/$1'; 
+
 //Default router
 $route['test'] = 'test';
 $route['404_override'] = '';
