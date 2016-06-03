@@ -105,7 +105,7 @@ class Land extends MY_Controller {
                         $this->logs_model->write('land_add', $land);
                         //Redirect
                         $this->session->set_flashdata('msg_success', $this->lang->line('land_has_been_created'));
-                        redirect('/acp/land/show/'.$this->land_model->insert_id());
+                        redirect('/acp/land/show/'.$land['id']);
                     }                
                 }
                 $this->data['row'] = $this->land_model->convert_data($post);

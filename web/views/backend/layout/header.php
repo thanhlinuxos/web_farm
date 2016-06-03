@@ -59,6 +59,7 @@
                                     <li class="<?php if($menu_active == 'branch') echo 'active'; ?>"><a href="<?php echo base_url('acp/branch')?>">Branch</a></li>
                                     <li class="<?php if($menu_active == 'land') echo 'active'; ?>"><a href="<?php echo base_url('acp/land')?>">Land</a></li>
                                     <li class="<?php if($menu_active == 'duple') echo 'active'; ?>"><a href="<?php echo base_url('acp/duple')?>">Duple</a></li>
+                                    <li class="<?php if($menu_active == 'row') echo 'active'; ?>"><a href="<?php echo base_url('acp/row')?>">Row</a></li>
                                     <li class="<?php if($menu_active == 'tree') echo 'active'; ?>"><a href="<?php echo base_url('acp/tree')?>">Tree</a></li>
                                 </ul>
                             </li>
