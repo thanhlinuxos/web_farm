@@ -1,8 +1,14 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
+//Default
 $route['default_controller'] = 'index';
+
+/****************** FRONT END *********************/
 $route['dashboard'] = 'frontend/dashboard';
+$route['login'] = 'frontend/auth/login';
+$route['logout'] = 'frontend/auth/logout';
+$route['change_password'] = 'frontend/auth/change_password';
+$route['deny'] = 'frontend/auth/deny';
 
 /******************** ACP *************************/
 $route['acp'] = 'backend/dashboard';
