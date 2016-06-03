@@ -21,9 +21,8 @@ class Logs extends MY_Controller {
             'limit' => $config['per_page'],
             'offset' => $this->uri->segment(4) ? ($this->uri->segment(4) - 1)*$config['per_page'] : 0
         );
-        
-        $rows = $this->logs_model->get_rows($conditions);
-        $this->data['rows'] = $rows;
+
+        $this->data['rows'] = $this->logs_model->get_rows($conditions);
         
         $this->load->view('backend/layout/header', $this->data);
         $this->load->view('backend/logs/index', $this->data);

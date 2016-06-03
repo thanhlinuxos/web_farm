@@ -51,7 +51,7 @@
                         <ul class="nav navbar-nav">
                             <li class="<?php if($menu_active == 'dashboard') echo 'active'; ?>"><a href="<?php echo base_url('acp');?>">Dashboard</a></li>
                             <li class="<?php if($menu_active == 'user') echo 'active'; ?>"><a href="<?php echo base_url('acp/user');?>">User</a></li>
-                            <li class="dropdown <?php if(in_array($menu_active, array('branch', 'land', 'duple'))) echo 'active'; ?>">
+                            <li class="dropdown <?php if(in_array($menu_active, array('branch', 'land', 'duple', 'tree'))) echo 'active'; ?>">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                     Farm <span class="caret"></span>
                                 </a>
@@ -59,7 +59,7 @@
                                     <li class="<?php if($menu_active == 'branch') echo 'active'; ?>"><a href="<?php echo base_url('acp/branch')?>">Branch</a></li>
                                     <li class="<?php if($menu_active == 'land') echo 'active'; ?>"><a href="<?php echo base_url('acp/land')?>">Land</a></li>
                                     <li class="<?php if($menu_active == 'duple') echo 'active'; ?>"><a href="<?php echo base_url('acp/duple')?>">Duple</a></li>
-                                    
+                                    <li class="<?php if($menu_active == 'tree') echo 'active'; ?>"><a href="<?php echo base_url('acp/tree')?>">Tree</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown <?php if(in_array($menu_active, array('logs'))) echo 'active'; ?>">

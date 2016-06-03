@@ -117,6 +117,15 @@ $lang['duple_has_been_created'] = 'Đôi đã được tạo!';
 $lang['duple_has_been_deleted'] = 'Đôi đã bị xóa!';
 $lang['duple_not_exist'] = 'Đôi không tồn tại trong hệ thống!';
 
+//Tree
+$lang['tree_id'] = 'ID cây trồng';
+$lang['tree_code'] = 'Mã Code';
+$lang['tree_status'] = 'Trạng thái';
+$lang['tree_has_been_updated'] = 'Cây trồng đã được cập nhật!';
+$lang['tree_has_been_deleted'] = 'Cây trồng đã bị xóa!';
+$lang['tree_has_been_created'] = 'Cây trồng đã được tạo!';
+$lang['tree_quantity'] = 'Số lượng cây trồng';
+
 //Logs
 $lang['logs_id'] = 'ID';
 $lang['logs_action_key'] = 'Hành động';
