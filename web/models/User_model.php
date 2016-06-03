@@ -43,7 +43,51 @@ class User_model extends MY_Model
         return $data;
     }
     
-    public function is_login()
+    public function check_permission($controller, $action)
+    {
+        if($controller == 'dashboard' || in_array($action, array('search', 'sortable'))) {
+            return TRUE;
+        }
+        $user_login = $this->session->userdata('user_login');
+        $permission = $user_login['permission'];
+        $allow = FALSE;
+        if(isset($permission[$controller])) {
+            if(in_array($action, $permission[$controller])) {
+                $allow = TRUE;
+            }
+        }
+      
+        if(!$allow) {
+            redirect(base_url('acp/deny'));
+        }
+        return TRUE;
+    }
+
+    public function change_password($old_password = '', $new_password = '')
+    {
+        $result = array('success' => FALSE, 'msg' => '');
+        
+        $user_login = $this->session->userdata('user_login');
+        $user = $this->get_by(array('id' => $user_login['id']));
+        if($user['password'] != md5(md5($old_password)))
+        {
+            $result['msg'] = $this->lang->line('auth_password_not_available');
+        }
+        else
+        {
+            $user['password'] = md5(md5($new_password));
+            $user['change_password'] = 0;
+            $this->update($user);
+            $user_login['change_pass'] = 0;
+            $this->session->set_userdata('user_login', $user_login);
+            $result['success'] = TRUE;
+        }
+        
+        return $result;
+    }
+    
+    /******************* BACKEND *********************/
+    public function backend_is_login()
     {
         $user_login = $this->session->userdata('user_login');
        
@@ -62,7 +106,7 @@ class User_model extends MY_Model
         return true;
     }
 
-    public function login($input)
+    public function backend_login($input)
     {
         $result = array('success' => FALSE, 'msg' => '');
         $user = $this->get_by(array('username' => $input['u']));
@@ -113,52 +157,9 @@ class User_model extends MY_Model
         return $result;
     }
     
-    public function logout()
+    public function backend_logout()
     {
         $this->session->sess_destroy();
         redirect(base_url('acp/login'));
-    }
-    
-    public function check_permission($controller, $action)
-    {
-        if($controller == 'dashboard' || in_array($action, array('search', 'sortable'))) {
-            return TRUE;
-        }
-        $user_login = $this->session->userdata('user_login');
-        $permission = $user_login['permission'];
-        $allow = FALSE;
-        if(isset($permission[$controller])) {
-            if(in_array($action, $permission[$controller])) {
-                $allow = TRUE;
-            }
-        }
-      
-        if(!$allow) {
-            redirect(base_url('acp/deny'));
-        }
-        return TRUE;
-    }
-
-    public function change_password($old_password = '', $new_password = '')
-    {
-        $result = array('success' => FALSE, 'msg' => '');
-        
-        $user_login = $this->session->userdata('user_login');
-        $user = $this->get_by(array('id' => $user_login['id']));
-        if($user['password'] != md5(md5($old_password)))
-        {
-            $result['msg'] = $this->lang->line('auth_password_not_available');
-        }
-        else
-        {
-            $user['password'] = md5(md5($new_password));
-            $user['change_password'] = 0;
-            $this->update($user);
-            $user_login['change_pass'] = 0;
-            $this->session->set_userdata('user_login', $user_login);
-            $result['success'] = TRUE;
-        }
-        
-        return $result;
     }
 }

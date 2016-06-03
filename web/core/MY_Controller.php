@@ -18,7 +18,7 @@ class MY_Controller extends CI_Controller
     
     public function __construct() {
         parent::__construct();
-        $this->user_model->is_login();
+        $this->user_model->backend_is_login();
         $this->user_model->check_permission($this->router->fetch_class(), $this->router->fetch_method());
         $this->lang->load('backend');  
         $this->data['menu_active'] = $this->router->fetch_class();
