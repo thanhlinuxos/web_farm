@@ -33,7 +33,17 @@
                             <div class="input-group <?php if(form_error('p')) echo 'has-error'; ?>">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
                                 <input id="password" type="password" class="form-control" name="p" value="<?php echo set_value('p')?>" placeholder="<?php echo $this->lang->line('auth_pass'); ?>">
-                            </div>                                                                  
+                            </div>
+                            <div class="input-group">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <?php echo $capcha_image; ?>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input id="capcha" type="text" class="form-control" name="capcha" value="" placeholder="CAPCHA">
+                                    </div>
+                                </div>
+                            </div> 
                             <div class="form-group">
                                 <!-- Button -->
                                 <div class="col-sm-12 controls has-error">
