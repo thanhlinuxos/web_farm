@@ -63,6 +63,19 @@ $route['acp/duple/edit/(:num)'] = 'backend/duple/edit/$1';
 $route['acp/duple/show/(:num)'] = 'backend/duple/show/$1';
 $route['acp/duple/delete/(:num)'] = 'backend/duple/delete/$1';
 
+//Row
+$route['acp/row'] = 'backend/row';
+$route['acp/row/page'] = 'backend/row';
+$route['acp/row/page/(:num)'] = 'backend/row';
+$route['acp/row/add'] = 'backend/row/add';
+$route['acp/row/edit/(:num)'] = 'backend/row/edit/$1';
+$route['acp/row/show/(:num)'] = 'backend/row/show/$1';
+$route['acp/row/delete/(:num)'] = 'backend/row/delete/$1';
+$route['acp/row/search'] = 'backend/row/search';
+$route['acp/row/search/page'] = 'backend/row/search';
+$route['acp/row/search/page/(:num)'] = 'backend/row/search';
+$route['acp/row/sortable/(:num)'] = 'backend/row/sortable/$1';
+
 //Logs
 $route['acp/logs'] = 'backend/logs';
 $route['acp/logs/page'] = 'backend/logs';
