@@ -43,6 +43,7 @@ $lang['user_has_been_updated'] = 'The user account has been updated!';
 $lang['user_has_been_deleted'] = 'The user account has been deleted!';
 $lang['user_has_been_created'] = 'The user account has been created!';
 $lang['user_has_been_locked'] = 'The user has been locked';
+$lang['user_has_been_deny'] = 'The user has been deny!';
 $lang['user_not_exist'] = 'The user not exist';
 
 //Authenticate

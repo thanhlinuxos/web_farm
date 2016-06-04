@@ -217,7 +217,7 @@ class Land extends MY_Controller {
         
         if( $this->input->method(TRUE) == 'POST')
         {
-            $rows =$this->input->post('row');
+            $rows = $this->input->post('row');
             foreach ($rows as $k => $v) {
                 $duple = $this->duple_model->get_by($v);
                 if($duple) {
@@ -232,6 +232,14 @@ class Land extends MY_Controller {
         $this->load->view('backend/layout/header', $this->data);
         $this->load->view('backend/land/sortable', $this->data);
         $this->load->view('backend/layout/footer', $this->data);
+    }
+    
+    public function li_list()
+    {
+        $post = $this->input->post();
+        $branch_id = isset($post['branch_id']) ? $post['branch_id'] : 0;
+        $this->data['rows'] = $this->land_model->get_rows(array('where' => array('branch_id' => $branch_id)));
+        $this->load->view('backend/land/li_list', $this->data);
     }
     
 }

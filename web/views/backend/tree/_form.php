@@ -2,11 +2,10 @@
 <div class="row">
     <div class="col-xs-12">
     <form class="form-horizontal" role="form" method="POST" autocomplete="off" enctype="multipart/form-data">
-    
         <div class="form-group <?php if(form_error('branch_id')) echo 'has-error'; ?>">
             <label class="control-label col-sm-3" for="branch_id"><?php echo $this->lang->line('branch_name'); ?>:</label>
             <div class="col-sm-9">
-                <select class="form-control" id="branch_id" name="branch_id">
+                <select class="form-control" id="branch_id" name="branch_id" onchange="get_land_li(this.value);">
                     <option value=""><?php echo $this->lang->line('branch_please_select'); ?></option>
                 <?php
                     foreach($branchs as $branch) {
@@ -22,7 +21,7 @@
         <div class="form-group <?php if(form_error('land_id')) echo 'has-error'; ?>">
             <label class="control-label col-sm-3" for="land_id"><?php echo $this->lang->line('land_name'); ?>:</label>
             <div class="col-sm-9">
-                <select class="form-control" id="land_id" name="land_id">
+                <select class="form-control" id="land_id" name="land_id" onchange="get_duple_li(this.value)">
                     <option value=""><?php echo $this->lang->line('branch_please_select'); ?></option>
                 <?php
                     foreach($lands as $land) {
@@ -38,7 +37,7 @@
         <div class="form-group <?php if(form_error('duple_id')) echo 'has-error'; ?>">
             <label class="control-label col-sm-3" for="duple_id"><?php echo $this->lang->line('duple_name'); ?>:</label>
             <div class="col-sm-9">
-                <select class="form-control" id="duple_id" name="duple_id">
+                <select class="form-control" id="duple_id" name="duple_id" onchange="get_row_li(this.value)">
                     <option value=""><?php echo $this->lang->line('branch_please_select'); ?></option>
                 <?php
                     foreach($duples as $duple) {

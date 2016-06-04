@@ -43,6 +43,7 @@ $lang['user_has_been_updated'] = 'Nhân viên đã được cập nhật!';
 $lang['user_has_been_deleted'] = 'Nhân viên đã bị xóa!';
 $lang['user_has_been_created'] = 'Nhân viên đã được tạo!';
 $lang['user_has_been_locked'] = 'Nhân viên đã bị khóa!';
+$lang['user_has_been_deny'] = 'Tài khoản không có quyền hạn truy cập!';
 $lang['user_not_exist'] = 'Nhân viên không tồn tại trong hệ thống!';
 
 //Authenticate

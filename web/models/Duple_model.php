@@ -10,10 +10,10 @@ class Duple_model extends MY_Model
     {
         return array(
             'id' => NUll,
+            'branch_id' => '',
             'land_id' => '',
             'name' => '',
             'ordinal' => ''
-            
         );
  
     }

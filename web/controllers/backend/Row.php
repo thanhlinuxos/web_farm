@@ -163,5 +163,13 @@ class Row extends MY_Controller {
         $this->session->set_flashdata('msg_info', $this->lang->line('row_has_been_deleted'));
         redirect(base_url('acp/row'));
     }
+    
+    public function li_list()
+    {
+        $post = $this->input->post();
+        $duple_id = isset($post['duple_id']) ? $post['duple_id'] : 0;
+        $this->data['rows'] = $this->row_model->get_rows(array('where' => array('duple_id' => $duple_id)));
+        $this->load->view('backend/row/li_list', $this->data);
+    }
 }
 
