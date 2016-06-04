@@ -11,12 +11,13 @@ class Row_model extends MY_Model
     {
         return array(
             'id' => NUll,
+            'branch_id' => '',
+            'land_id' => '',
             'duple_id' => '',
             'name' => '',
             'ordinal' => ''
             
         );
- 
     }
     
     public function convert_data($data = array())    

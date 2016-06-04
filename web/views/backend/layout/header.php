@@ -22,8 +22,8 @@
     <body>
         <div class="header-fixed-top">
             <div class="container-fluid">
-                <?php $user_login = $this->session->userdata('user_login'); ?>
-                Xin chao: <?php echo $user_login['fullname']; ?>
+                <?php $USER_LOGIN = $this->session->userdata('user_login'); ?>
+                Xin chao: <?php echo $USER_LOGIN['fullname']; ?>
                 <div class="pull-right">
                     <a class="btn btn-default" href="<?php echo base_url('acp/logout'); ?>">
                         <span class="glyphicon glyphicon-log-out"></span> <?php echo $this->lang->line('auth_logout'); ?>

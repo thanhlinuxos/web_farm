@@ -40,7 +40,7 @@
                 margin-top: 60px;
             }
 
-            form[role=login] {
+            #login-form {
                 color: #5d5d5d;
                 background: #f2f2f2;
                 padding: 26px;
@@ -48,17 +48,29 @@
                 -moz-border-radius: 10px;
                 -webkit-border-radius: 10px;
             }
-            form[role=login] img {
+            #login-form .logo {
                 display: block;
                 margin: 0 auto;
                 margin-bottom: 35px;
             }
-            form[role=login] input,
-            form[role=login] button {
+            #login-form input,
+            #login-form button {
                 font-size: 18px;
                 margin: 16px 0;
             }
-            form[role=login] > div {
+            #login-form .capcha_input{
+                font-size: 18px;
+                margin: 16px 0;
+                width: 52%;
+                float: left;
+                margin: 0 0 16px 5px !important;
+            }
+            #login-form .capcha_image {
+                width: 45%;
+                height: 45px;
+                float: left;
+            }
+            #login-form > div {
                 text-align: center;
             }
         </style>
@@ -70,11 +82,12 @@
 
                 <div class="col-md-4">
                     <section class="login-form">
-                        <form method="post" action="#" role="login">
-                            <img src="http://i.imgur.com/RcmcLv4.png" class="img-responsive" alt="" />
-                            <input type="text" name="u" placeholder="Username" required class="form-control input-lg" value="" />
-                            <input type="password" class="form-control input-lg" id="password" placeholder="Password" required="" />
-                            <div class="pwstrength_viewport_progress"></div>
+                        <form method="post" name="login-form" id="login-form">
+                            <img src="<?php echo base_url('assets/frontend/img/login_image.png');?>" class="img-responsive logo" alt="" />
+                            <input type="text" class="form-control input-lg" name="u" value="" placeholder="Username" required />
+                            <input type="password" class="form-control input-lg" name="p" value="" placeholder="Password" required />
+                            <img src="http://web_farm.local/capcha/1465018599.8264.jpg" class="capcha_image" alt=" ">
+                            <input type="text" class="form-control input-lg capcha_input" value="" placeholder="CAPCHA">
                             <button type="submit" name="go" class="btn btn-lg btn-primary btn-block">Login</button>
                             <div>
                                 <a href="#">Criar conta</a> or <a href="#">Esqueci minha senha</a>

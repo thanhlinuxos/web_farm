@@ -45,7 +45,7 @@ class User_model extends MY_Model
     
     public function check_permission($controller, $action)
     {
-        if($controller == 'dashboard' || in_array($action, array('search', 'sortable'))) {
+        if($controller == 'dashboard' || in_array($action, array('search', 'sortable', 'li_list'))) {
             return TRUE;
         }
         $user_login = $this->session->userdata('user_login');
@@ -95,6 +95,10 @@ class User_model extends MY_Model
         {
             redirect(base_url('acp/login'));
         }
+        elseif($user_login['is_admin'] != 1)
+        {
+            redirect(base_url('deny'));
+        }
         elseif($user_login['change_pass'] == 1)
         {
             redirect(base_url('acp/change_password'));
@@ -122,6 +126,10 @@ class User_model extends MY_Model
                 $this->update($user);
                 $result['msg'] = $this->lang->line('user_has_been_locked');
             }
+            elseif ($user['group'] != 'admin')
+            {
+                $result['msg'] = $this->lang->line('user_has_been_deny');
+            }
             elseif($user['status'] == 0)
             {
                 $result['msg'] = $this->lang->line('user_has_been_locked');
@@ -144,6 +152,7 @@ class User_model extends MY_Model
                     'id' => $user['id'],
                     'username' => $user['username'],
                     'fullname' => $user['fullname'],
+                    'is_admin' => 1,
                     'change_pass' => $user['change_password'],
                     'permission' => $tmp
                 );

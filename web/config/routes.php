@@ -53,6 +53,7 @@ $route['acp/land/search'] = 'backend/land/search';
 $route['acp/land/search/page'] = 'backend/land/search';
 $route['acp/land/search/page/(:num)'] = 'backend/land/search';
 $route['acp/land/sortable/(:num)'] = 'backend/land/sortable/$1';
+$route['acp/land/li_list'] = 'backend/land/li_list';
 
 //Duple
 $route['acp/duple'] = 'backend/duple';
@@ -62,6 +63,10 @@ $route['acp/duple/add'] = 'backend/duple/add';
 $route['acp/duple/edit/(:num)'] = 'backend/duple/edit/$1';
 $route['acp/duple/show/(:num)'] = 'backend/duple/show/$1';
 $route['acp/duple/delete/(:num)'] = 'backend/duple/delete/$1';
+$route['acp/duple/search'] = 'backend/duple/search';
+$route['acp/duple/search/page'] = 'backend/duple/search';
+$route['acp/duple/search/page/(:num)'] = 'backend/duple/search';
+$route['acp/duple/li_list'] = 'backend/duple/li_list';
 
 //Row
 $route['acp/row'] = 'backend/row';
@@ -75,6 +80,7 @@ $route['acp/row/search'] = 'backend/row/search';
 $route['acp/row/search/page'] = 'backend/row/search';
 $route['acp/row/search/page/(:num)'] = 'backend/row/search';
 $route['acp/row/sortable/(:num)'] = 'backend/row/sortable/$1';
+$route['acp/row/li_list'] = 'backend/row/li_list';
 
 //Logs
 $route['acp/logs'] = 'backend/logs';
