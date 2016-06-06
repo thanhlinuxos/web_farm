@@ -86,7 +86,7 @@ class Auth extends CI_Controller {
     {
         $user_login = $this->session->userdata('user_login');
        
-        if($user_login['change_password'] == 0)
+        if($user_login['change_pass'] == 0)
         {
             redirect(base_url('dashboard'));
         }
@@ -94,9 +94,9 @@ class Auth extends CI_Controller {
         $this->data['msg'] = $this->lang->line('auth_change_password_message');
         if($this->input->post('submit'))
         {
-            $this->form_validation->setrules('p1', $this->lang->line('auth_current_pasword'), 'required');
-            $this->form_validation->setrules('p2', $this->lang->line('auth_new_password'), 'required');
-            $this->form_validation->setrules('p3', $this->lang->line('auth_confirm_password'), 'required|matches[p2]');
+            $this->form_validation->set_rules('p1', $this->lang->line('auth_current_pasword'), 'required');
+            $this->form_validation->set_rules('p2', $this->lang->line('auth_new_password'), 'required');
+            $this->form_validation->set_rules('p3', $this->lang->line('auth_confirm_password'), 'required|matches[p2]');
             if($this->form_validation->run() == true)
             {
                 $post = $this->input->post();
