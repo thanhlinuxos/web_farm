@@ -93,7 +93,7 @@
                             <div class="capcha_image"><?php echo $capcha_image;?></div>
                             <div><input type="text" name="capcha" class="form-control input-lg capcha_input" value="" placeholder="CAPCHA"></div>
                             <?php echo $msg; ?>
-                            <button type="submit" name="go" value="go" class="btn btn-lg btn-primary btn-block">Login</button> 
+                            <button type="submit" name="submit" value="submit" class="btn btn-lg btn-primary btn-block">Login</button> 
                             <div>
                                 <a href="#">Criar conta</a> or <a href="#">Esqueci minha senha</a>
                             </div>
