@@ -18,6 +18,8 @@ $route['acp/change_password'] = 'backend/auth/change_password';
 $route['acp/auth/group_permission'] = 'backend/auth/group_permission';
 $route['acp/deny'] = 'backend/auth/deny';
 
+$route['acp/code'] = 'backend/code';
+
 //User
 $route['acp/user'] = 'backend/user';
 $route['acp/user/page'] = 'backend/user';
