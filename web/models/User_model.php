@@ -172,15 +172,15 @@ class User_model extends MY_Model
         redirect(base_url('acp/login'));
     }
     
-    //login frontend
+    /******************* FRONTEND *********************/
     public function frontend_is_login()
-    {
+    {  
         $user_login = $this->session->userdata('user_login');
-       
+        
         if(!isset($user_login['id']))
         {
             redirect(base_url('login'));
-        }    
+        }
         elseif($user_login['change_pass'] == 1)
         {
             redirect(base_url('change_password'));
@@ -230,6 +230,8 @@ class User_model extends MY_Model
                     'id' => $user['id'],
                     'username' => $user['username'],
                     'fullname' => $user['fullname'],
+                   ' branch_id' => $user['branch_id'],
+                    'is_admin' => ($user['group'] == 'admin') ? 1 : 0,
                     'change_pass' => $user['change_password'],
                     'permission' => $tmp
                 );
