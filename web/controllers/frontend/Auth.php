@@ -95,5 +95,10 @@ class Auth extends CI_Controller {
         }
         $this->load->view('frontend/auth/change_password', $this->data);
     }
+    
+    public function deny()
+    {
+        $this->load->view('frontend/auth/deny', $this->data);
+    }
 
 }

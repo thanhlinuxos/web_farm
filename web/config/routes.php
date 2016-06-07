@@ -9,6 +9,7 @@ $route['login'] = 'frontend/auth/login';
 $route['logout'] = 'frontend/auth/logout';
 $route['change_password'] = 'frontend/auth/change_password';
 $route['deny'] = 'frontend/auth/deny';
+$route['deny'] = 'frontend/auth/deny';
 
 /******************** ACP *************************/
 $route['acp'] = 'backend/dashboard';
