@@ -35,8 +35,9 @@ class Auth extends CI_Controller {
                         //Logs
                         $this->logs_model->write('auth_login_to_system', array('page' => 'Staff'));
                         //Loading
-                        //$this->load->view('backend/auth/loading', array('msg' => $this->lang->line('auth_login_to_system'), 'url' => '/acp'));
-                        redirect(base_url('dashboard'));
+                        $current_uri = $this->session->userdata('current_uri');
+                        $url = $current_uri ? base_url($current_uri) : base_url();
+                        $this->load->view('frontend/auth/loading', array('msg' => $this->lang->line('auth_login_to_system'), 'url' => $url));
                         return true;
                     } else {
                         $this->data['msg'] = $result['msg'];

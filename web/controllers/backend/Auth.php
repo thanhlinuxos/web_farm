@@ -41,7 +41,9 @@ class Auth extends CI_Controller {
                         //Logs
                         $this->logs_model->write('auth_login_to_system', array('page' => 'Admin'));
                         //Loading
-                        $this->load->view('backend/auth/loading', array('msg' => $this->lang->line('auth_login_to_system'), 'url' => '/acp'));
+                        $current_uri = $this->session->userdata('current_uri');
+                        $url = $current_uri ? base_url($current_uri) : base_url('acp');
+                        $this->load->view('backend/auth/loading', array('msg' => $this->lang->line('auth_login_to_system'), 'url' => $url));
                         return true;
                     }
                     else
@@ -109,7 +111,8 @@ class Auth extends CI_Controller {
                     $this->logs_model->write('auth_change_password_successfully', array('page' => 'Admin'));
                     // Redirect    
                     $this->session->set_flashdata('msg_success', $this->lang->line('auth_password_has_been_updated'));
-                    redirect(base_url('acp'));
+                    $url = $current_uri ? base_url($current_uri) : base_url('acp');
+                    redirect($url);
                 }
                 else
                 {

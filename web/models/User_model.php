@@ -90,7 +90,7 @@ class User_model extends MY_Model
     public function backend_is_login()
     {
         $user_login = $this->session->userdata('user_login');
-       
+        $this->session->set_userdata('current_uri', $this->uri->uri_string());
         if(!isset($user_login['id']))
         {
             redirect(base_url('acp/login'));
@@ -105,7 +105,7 @@ class User_model extends MY_Model
         }
         else
         {
-            
+            $this->session->set_userdata('current_uri', '');
         }
         return true;
     }
@@ -176,7 +176,7 @@ class User_model extends MY_Model
     public function frontend_is_login()
     {  
         $user_login = $this->session->userdata('user_login');
-        
+        $this->session->set_userdata('current_uri', $this->uri->uri_string());
         if(!isset($user_login['id']))
         {
             redirect(base_url('login'));
@@ -187,7 +187,7 @@ class User_model extends MY_Model
         }
         else
         {
-            
+            $this->session->set_userdata('current_uri', '');
         }
         return true;
     }
