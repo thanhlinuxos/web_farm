@@ -6,6 +6,7 @@
         <link href="<?php echo base_url('vendor/bootstrap/css/bootstrap.min.css'); ?>" rel="stylesheet">
         <link href="<?php echo base_url('vendor/bootstrap/css/bootstrap-theme.min.css'); ?>" rel="stylesheet">
         <link href="<?php echo base_url('vendor/bootstrap/css/bootstrap-toggle.min.css'); ?>" rel="stylesheet">
+        <link href="<?php echo base_url('vendor/select2/css/select2.min.css'); ?>" rel="stylesheet">
         <link href="<?php echo base_url('assets/backend/css/custom.css'); ?>" rel="stylesheet">
         <link href="<?php echo base_url('vendor/jquery/ui/jquery-ui.min.css'); ?>" rel="stylesheet">
         <script type="text/javascript" src="<?php echo base_url('vendor/jquery/jquery-2.2.3.min.js'); ?>"></script>
@@ -13,6 +14,7 @@
         <script type="text/javascript" src="<?php echo base_url('vendor/jquery/ui/jquery-ui-i18n.js'); ?>"></script>
         <script type="text/javascript" src="<?php echo base_url('vendor/bootstrap/js/bootstrap.min.js'); ?>"></script>
         <script type="text/javascript" src="<?php echo base_url('vendor/bootstrap/js/bootstrap-toggle.min.js'); ?>"></script>
+        <script type="text/javascript" src="<?php echo base_url('vendor/select2/js/select2.min.js'); ?>"></script>
         <script type="text/javascript" src="<?php echo base_url('assets/backend/js/script.js'); ?>"></script>
         <!--[if lt IE 9]>
             <script src="<?php echo base_url('vendor/bootstrap/js/html5shiv.js'); ?>" type="text/javascript"></script>

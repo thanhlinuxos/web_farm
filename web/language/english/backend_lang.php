@@ -52,6 +52,8 @@ $lang['auth_logout'] = 'Logout';
 $lang['auth_user'] = 'Username';
 $lang['auth_pass'] = 'Password';
 $lang['auth_login_to_system'] = 'Login to system';
+$lang['auth_logout_from_sytem'] = 'Logout from system';
+$lang['auth_change_password_successfully'] = 'Change password successfully';
 $lang['auth_password_not_available'] = 'The password not available';
 $lang['auth_password_has_been_updated'] = 'The password has been updated';
 $lang['auth_change_password_message'] = "<small class='help-block'>The user's password must be changed after logging on the first time <br /> or has been reset</small>";

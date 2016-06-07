@@ -38,6 +38,9 @@ class Auth extends CI_Controller {
                     $result = $this->user_model->backend_login($post);
                     if($result['success'])
                     {
+                        //Logs
+                        $this->logs_model->write('auth_login_to_system', array('page' => 'Admin'));
+                        //Loading
                         $this->load->view('backend/auth/loading', array('msg' => $this->lang->line('auth_login_to_system'), 'url' => '/acp'));
                         return true;
                     }
@@ -76,6 +79,8 @@ class Auth extends CI_Controller {
     
     public function logout()
     {
+        //Logs
+        $this->logs_model->write('auth_logout_from_sytem', array('page' => 'Admin'));
         $this->user_model->backend_logout();
     }
     
@@ -100,6 +105,9 @@ class Auth extends CI_Controller {
                 
                 if($result['success'])
                 {
+                    // Logs
+                    $this->logs_model->write('auth_change_password_successfully', array('page' => 'Admin'));
+                    // Redirect    
                     $this->session->set_flashdata('msg_success', $this->lang->line('auth_password_has_been_updated'));
                     redirect(base_url('acp'));
                 }

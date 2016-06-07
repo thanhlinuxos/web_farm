@@ -32,6 +32,9 @@ class Auth extends CI_Controller {
                 if ($this->capcha_model->validation($post['capcha'])) {
                     $result = $this->user_model->frontend_login($post);
                     if ($result['success']) {
+                        //Logs
+                        $this->logs_model->write('auth_login_to_system', array('page' => 'Staff'));
+                        //Loading
                         //$this->load->view('backend/auth/loading', array('msg' => $this->lang->line('auth_login_to_system'), 'url' => '/acp'));
                         redirect(base_url('dashboard'));
                         return true;
@@ -66,6 +69,8 @@ class Auth extends CI_Controller {
     }
 
     public function logout() {
+        //Logs
+        $this->logs_model->write('auth_logout_from_sytem', array('page' => 'Staff'));
         $this->user_model->frontend_logout();
     }
 
@@ -86,6 +91,9 @@ class Auth extends CI_Controller {
                 $post = $this->input->post();
                 $result = $this->user_model->change_password($post['p1'], $post['p2']);
                 if ($result['success']) {
+                    // Logs
+                    $this->logs_model->write('auth_change_password_successfully', array('page' => 'Staff'));
+                    // Redirect  
                     $this->session->set_flashdata('msg_success', $this->lang->line('auth_password_has_been_updated'));
                     redirect(base_url('dashboard'));
                 } else {
