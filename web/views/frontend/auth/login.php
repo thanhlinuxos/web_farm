@@ -39,7 +39,9 @@
             .login-form {
                 margin-top: 60px;
             }
-
+            .has-error {
+                border: 1px solid #f00;
+            }
             #login-form {
                 color: #5d5d5d;
                 background: #f2f2f2;
@@ -61,13 +63,11 @@
             #login-form .capcha_input{
                 font-size: 18px;
                 margin: 16px 0;
-                width: 52%;
+                width: 50%;
                 float: left;
                 margin: 0 0 16px 5px !important;
             }
-            #login-form .capcha_image {
-                width: 45%;
-                height: 45px;
+            #login-form .capcha_image {  
                 float: left;
             }
             #login-form > div {
@@ -82,13 +82,18 @@
 
                 <div class="col-md-4">
                     <section class="login-form">
-                        <form method="post" name="login-form" id="login-form">
+                        <form method="post" name="login-form" id="login-form" autocomplete="off">
                             <img src="<?php echo base_url('assets/frontend/img/login_image.png');?>" class="img-responsive logo" alt="" />
-                            <input type="text" class="form-control input-lg" name="u" value="" placeholder="Username" required />
-                            <input type="password" class="form-control input-lg" name="p" value="" placeholder="Password" required />
-                            <img src="http://web_farm.local/capcha/1465018599.8264.jpg" class="capcha_image" alt=" ">
-                            <input type="text" class="form-control input-lg capcha_input" value="" placeholder="CAPCHA">
-                            <button type="submit" name="go" class="btn btn-lg btn-primary btn-block">Login</button>
+                            <div>
+                                <input type="text" class="form-control input-lg <?php if(form_error('u')) echo 'has-error'; ?>" name="u" value="<?php echo set_value('u');?>" placeholder="Username"/>
+                            </div>
+                            <div>
+                                <input type="password" class="form-control input-lg <?php if(form_error('p')) echo 'has-error'; ?>" name="p" value="<?php echo set_value('p');?>" placeholder="Password" />
+                            </div>
+                            <div class="capcha_image"><?php echo $capcha_image;?></div>
+                            <div><input type="text" name="capcha" class="form-control input-lg capcha_input" value="" placeholder="CAPCHA"></div>
+                            <?php echo $msg; ?>
+                            <button type="submit" name="submit" value="submit" class="btn btn-lg btn-primary btn-block">Login</button> 
                             <div>
                                 <a href="#">Criar conta</a> or <a href="#">Esqueci minha senha</a>
                             </div>

@@ -9,6 +9,7 @@ $route['login'] = 'frontend/auth/login';
 $route['logout'] = 'frontend/auth/logout';
 $route['change_password'] = 'frontend/auth/change_password';
 $route['deny'] = 'frontend/auth/deny';
+$route['deny'] = 'frontend/auth/deny';
 
 /******************** ACP *************************/
 $route['acp'] = 'backend/dashboard';
@@ -17,6 +18,8 @@ $route['acp/logout'] = 'backend/auth/logout';
 $route['acp/change_password'] = 'backend/auth/change_password';
 $route['acp/auth/group_permission'] = 'backend/auth/group_permission';
 $route['acp/deny'] = 'backend/auth/deny';
+
+$route['acp/code'] = 'backend/code';
 
 //User
 $route['acp/user'] = 'backend/user';
