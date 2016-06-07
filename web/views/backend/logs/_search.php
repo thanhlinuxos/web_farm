@@ -55,8 +55,6 @@
 </script>
 <script type="text/javascript">
     $(function () {
-        var dateToday = new Date();
-        var yrRange = (dateToday.getFullYear() - 80) + ":" + (dateToday.getFullYear() - 10);
         $( ".datepicker" ).datepicker({
             dateFormat: 'dd-mm-yy',
             maxDate: 0,
@@ -65,4 +63,17 @@
         });
         $.datepicker.setDefaults($.datepicker.regional[REGIONAL]);
     });
+    
+    $(function () {
+        $("#from_date").on("change", function (e) {
+            var from_data = $("#from_date").datepicker('getDate');
+            var day = Math.ceil((from_data - new Date())/86400000);
+            console.log(day);
+            
+        });
+        $("#to_date").on("change", function (e) {
+            
+        });
+    });
+    
 </script>
