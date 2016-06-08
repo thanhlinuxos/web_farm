@@ -73,6 +73,7 @@ class Auth extends CI_Controller {
         //Logs
         $this->logs_model->write('auth_logout_from_sytem', array('page' => 'Staff'));
         $this->user_model->frontend_logout();
+        $this->load->view('frontend/auth/loading', array('msg' => $this->lang->line('auth_logout_from_sytem'), 'url' => base_url('login')));
     }
 
     public function change_password() {

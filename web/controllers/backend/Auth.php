@@ -84,6 +84,7 @@ class Auth extends CI_Controller {
         //Logs
         $this->logs_model->write('auth_logout_from_sytem', array('page' => 'Admin'));
         $this->user_model->backend_logout();
+        $this->load->view('backend/auth/loading', array('msg' => $this->lang->line('auth_logout_from_sytem'), 'url' => base_url('acp/login')));
     }
     
     public function change_password()

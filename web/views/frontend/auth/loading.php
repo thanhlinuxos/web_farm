@@ -32,7 +32,7 @@
                 <td width="50%" align="center">
                     <div class="page_transfer">
                         <b><?php echo $msg; ?></b>
-                        <br /><br /><img src="<?php echo base_url('assets/backend/img/loading-bar.gif'); ?>">
+                        <br /><br /><img src="<?php echo base_url('assets/frontend/img/preloader.gif'); ?>">
                             <br /><br />(<a href="<?php echo $url; ?>">Bấm vào đây nếu hệ thống không tự chuyển.</a>)
                     </div>
                 </td>

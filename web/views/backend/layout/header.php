@@ -27,6 +27,7 @@
                 <?php $USER_LOGIN = $this->session->userdata('user_login'); ?>
                 Xin chao: <?php echo $USER_LOGIN['fullname']; ?>
                 <div class="pull-right">
+                    <a class="btn btn-success" href="<?php echo base_url('dashboard');?>"><span class="glyphicon glyphicon-log-out"></span> UCP</a>
                     <a class="btn btn-default" href="<?php echo base_url('acp/logout'); ?>">
                         <span class="glyphicon glyphicon-log-out"></span> <?php echo $this->lang->line('auth_logout'); ?>
                     </a>

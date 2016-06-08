@@ -9,8 +9,9 @@ class Dashboard extends MY_Controller {
     }
 
     public function index() {
-        $this->load->view('frontend/layout/header');
-        $this->load->view('frontend/layout/footer');
+        $this->load->view('frontend/layout/header', $this->data);
+        $this->load->view('frontend/layout/dashboard', $this->data);
+        $this->load->view('frontend/layout/footer', $this->data);
     }
 
 }
