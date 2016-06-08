@@ -43,85 +43,9 @@ class User_model extends MY_Model
         return $data;
     }
     
-    public function is_login()
-    {
-        $user_login = $this->session->userdata('user_login');
-       
-        if(!isset($user_login['id']))
-        {
-            redirect(base_url('acp/login'));
-        }
-        elseif($user_login['change_pass'] == 1)
-        {
-            redirect(base_url('acp/change_password'));
-        }
-        else
-        {
-            
-        }
-        return true;
-    }
-
-    public function login($input)
-    {
-        $result = array('success' => FALSE, 'msg' => '');
-        $user = $this->get_by(array('username' => $input['u']));
-        if(!$user)
-        {
-            $result['msg'] = $this->lang->line('user_not_exist');
-        }
-        else
-        {
-            if($user['login_fail'] >= 5)
-            {
-                $user['status'] = 0;
-                $this->update($user);
-                $result['msg'] = $this->lang->line('user_has_been_locked');
-            }
-            elseif($user['status'] == 0)
-            {
-                $result['msg'] = $this->lang->line('user_has_been_locked');
-            }
-            elseif($user['password'] != md5(md5($input['p'])))
-            {
-                $user['login_fail'] += 1;
-                $this->update($user);
-                $result['msg'] = $this->lang->line('auth_password_not_available');
-            }
-            else
-            {
-                $permissions = ($user['permission'] != NULL) ? unserialize($user['permission']) : array();
-                $tmp = array();
-                foreach ($permissions as $k => $v)
-                {
-                    $tmp[$k] = explode('|', $v);
-                }
-                $session = array(
-                    'id' => $user['id'],
-                    'username' => $user['username'],
-                    'fullname' => $user['fullname'],
-                    'change_pass' => $user['change_password'],
-                    'permission' => $tmp
-                );
-                $this->session->set_userdata('user_login', $session);
-                $result['success'] = TRUE;
-                $user['login_fail'] = 0;
-                $this->update($user);
-            }
-        }
-        
-        return $result;
-    }
-    
-    public function logout()
-    {
-        $this->session->sess_destroy();
-        redirect(base_url('acp/login'));
-    }
-    
     public function check_permission($controller, $action)
     {
-        if($controller == 'dashboard' || in_array($action, array('search', 'sortable'))) {
+        if($controller == 'dashboard' || in_array($action, array('search', 'sortable', 'li_list'))) {
             return TRUE;
         }
         $user_login = $this->session->userdata('user_login');
@@ -160,5 +84,170 @@ class User_model extends MY_Model
         }
         
         return $result;
+    }
+    
+    /******************* BACKEND *********************/
+    public function backend_is_login()
+    {
+        $user_login = $this->session->userdata('user_login');
+        $this->session->set_userdata('current_uri', $this->uri->uri_string());
+        if(!isset($user_login['id']))
+        {
+            redirect(base_url('acp/login'));
+        }
+        elseif($user_login['is_admin'] != 1)
+        {
+            redirect(base_url('deny'));
+        }
+        elseif($user_login['change_pass'] == 1)
+        {
+            redirect(base_url('acp/change_password'));
+        }
+        else
+        {
+            $this->session->set_userdata('current_uri', '');
+        }
+        return true;
+    }
+
+    public function backend_login($input)
+    {
+        $result = array('success' => FALSE, 'msg' => '');
+        $user = $this->get_by(array('username' => $input['u']));
+        if(!$user)
+        {
+            $result['msg'] = $this->lang->line('user_not_exist');
+        }
+        else
+        {
+            if($user['login_fail'] >= 5)
+            {
+                $user['status'] = 0;
+                $this->update($user);
+                $result['msg'] = $this->lang->line('user_has_been_locked');
+            }
+            elseif ($user['group'] != 'admin')
+            {
+                $result['msg'] = $this->lang->line('user_has_been_deny');
+            }
+            elseif($user['status'] == 0)
+            {
+                $result['msg'] = $this->lang->line('user_has_been_locked');
+            }
+            elseif($user['password'] != md5(md5($input['p'])))
+            {
+                $user['login_fail'] += 1;
+                $this->update($user);
+                $result['msg'] = $this->lang->line('auth_password_not_available');
+            }
+            else
+            {
+                $permissions = ($user['permission'] != NULL) ? unserialize($user['permission']) : array();
+                $tmp = array();
+                foreach ($permissions as $k => $v)
+                {
+                    $tmp[$k] = explode('|', $v);
+                }
+                $session = array(
+                    'id' => $user['id'],
+                    'username' => $user['username'],
+                    'fullname' => $user['fullname'],
+                    'branch_id' => $user['branch_id'],
+                    'group' => $user['group'],
+                    'is_admin' => 1,
+                    'change_pass' => $user['change_password'],
+                    'permission' => $tmp
+                );
+                $this->session->set_userdata('user_login', $session);
+                $result['success'] = TRUE;
+                $user['login_fail'] = 0;
+                $this->update($user);
+            }
+        }
+        
+        return $result;
+    }
+    
+    public function backend_logout()
+    {
+        $this->session->sess_destroy();
+    }
+    
+    /******************* FRONTEND *********************/
+    public function frontend_is_login()
+    {  
+        $user_login = $this->session->userdata('user_login');
+        $this->session->set_userdata('current_uri', $this->uri->uri_string());
+        if(!isset($user_login['id']))
+        {
+            redirect(base_url('login'));
+        }
+        elseif($user_login['change_pass'] == 1)
+        {
+            redirect(base_url('change_password'));
+        }
+        else
+        {
+            $this->session->set_userdata('current_uri', '');
+        }
+        return true;
+    }
+    
+    public function frontend_login($input)
+    {
+        $result = array('success' => FALSE, 'msg' => '');
+        $user = $this->get_by(array('username' => $input['u']));
+        if(!$user)
+        {
+            $result['msg'] = $this->lang->line('user_not_exist');
+        }
+        else
+        {
+            if($user['login_fail'] >= 5)
+            {
+                $user['status'] = 0;
+                $this->update($user);
+                $result['msg'] = $this->lang->line('user_has_been_locked');
+            }
+            elseif($user['status'] == 0)
+            {
+                 $result['msg'] = $this->lang->line('user_has_been_locked');
+            }
+            elseif($user['password'] != md5(md5($input['p'])))
+            {
+                $user['login_fail'] += 1;
+                $this->update($user);
+                $result['msg'] = $this->lang->line('auth_password_not_available');
+            }
+            else
+            {
+                $permissions = ($user['permission'] != NULL) ? unserialize($user['permission']) : array();
+                $tmp = array();
+                foreach ($permissions as $k => $v)
+                {
+                    $tmp[$k] = explode('|', $v);
+                }
+                $session = array(
+                    'id' => $user['id'],
+                    'username' => $user['username'],
+                    'fullname' => $user['fullname'],
+                    'branch_id' => $user['branch_id'],
+                    'group' => $user['group'],
+                    'is_admin' => ($user['group'] == 'admin') ? 1 : 0,
+                    'change_pass' => $user['change_password'],
+                    'permission' => $tmp
+                );
+                $this->session->set_userdata('user_login', $session);
+                $result['success'] = TRUE;
+                $user['login_fail'] = 0;
+                $this->update($user);  
+            }
+        } 
+        return $result;
+    }
+    
+    public function frontend_logout()
+    {
+        $this->session->sess_destroy();
     }
 }

@@ -6,6 +6,7 @@
         <link href="<?php echo base_url('vendor/bootstrap/css/bootstrap.min.css'); ?>" rel="stylesheet">
         <link href="<?php echo base_url('vendor/bootstrap/css/bootstrap-theme.min.css'); ?>" rel="stylesheet">
         <link href="<?php echo base_url('vendor/bootstrap/css/bootstrap-toggle.min.css'); ?>" rel="stylesheet">
+        <link href="<?php echo base_url('vendor/select2/css/select2.min.css'); ?>" rel="stylesheet">
         <link href="<?php echo base_url('assets/backend/css/custom.css'); ?>" rel="stylesheet">
         <link href="<?php echo base_url('vendor/jquery/ui/jquery-ui.min.css'); ?>" rel="stylesheet">
         <script type="text/javascript" src="<?php echo base_url('vendor/jquery/jquery-2.2.3.min.js'); ?>"></script>
@@ -13,6 +14,7 @@
         <script type="text/javascript" src="<?php echo base_url('vendor/jquery/ui/jquery-ui-i18n.js'); ?>"></script>
         <script type="text/javascript" src="<?php echo base_url('vendor/bootstrap/js/bootstrap.min.js'); ?>"></script>
         <script type="text/javascript" src="<?php echo base_url('vendor/bootstrap/js/bootstrap-toggle.min.js'); ?>"></script>
+        <script type="text/javascript" src="<?php echo base_url('vendor/select2/js/select2.min.js'); ?>"></script>
         <script type="text/javascript" src="<?php echo base_url('assets/backend/js/script.js'); ?>"></script>
         <!--[if lt IE 9]>
             <script src="<?php echo base_url('vendor/bootstrap/js/html5shiv.js'); ?>" type="text/javascript"></script>
@@ -22,9 +24,10 @@
     <body>
         <div class="header-fixed-top">
             <div class="container-fluid">
-                <?php $user_login = $this->session->userdata('user_login'); ?>
-                Xin chao: <?php echo $user_login['fullname']; ?>
+                <?php $USER_LOGIN = $this->session->userdata('user_login'); ?>
+                Xin chao: <?php echo $USER_LOGIN['fullname']; ?>
                 <div class="pull-right">
+                    <a class="btn btn-success" href="<?php echo base_url('dashboard');?>"><span class="glyphicon glyphicon-log-out"></span> UCP</a>
                     <a class="btn btn-default" href="<?php echo base_url('acp/logout'); ?>">
                         <span class="glyphicon glyphicon-log-out"></span> <?php echo $this->lang->line('auth_logout'); ?>
                     </a>
@@ -51,16 +54,24 @@
                         <ul class="nav navbar-nav">
                             <li class="<?php if($menu_active == 'dashboard') echo 'active'; ?>"><a href="<?php echo base_url('acp');?>">Dashboard</a></li>
                             <li class="<?php if($menu_active == 'user') echo 'active'; ?>"><a href="<?php echo base_url('acp/user');?>">User</a></li>
-                            <li class="<?php if($menu_active == 'branch') echo 'active'; ?>"><a href="<?php echo base_url('acp/branch')?>">Branch</a></li>
-                            <li class="<?php if($menu_active == 'land') echo 'active'; ?>"><a href="<?php echo base_url('acp/land')?>">Land</a></li>
-                            <li class="<?php if($menu_active == 'duple') echo 'active'; ?>"><a href="<?php echo base_url('acp/duple')?>">Duple</a></li>
-                            <li class="<?php if($menu_active == 'logs') echo 'active'; ?>"><a href="<?php echo base_url('acp/logs')?>">Logs</a></li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                            <li class="dropdown <?php if(in_array($menu_active, array('branch', 'land', 'duple', 'tree'))) echo 'active'; ?>">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                    Farm <span class="caret"></span>
+                                </a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="#">Action</a></li>
-                                    <li><a href="#">Another action</a></li>
-                                    <li><a href="#">Something else here</a></li>
+                                    <li class="<?php if($menu_active == 'branch') echo 'active'; ?>"><a href="<?php echo base_url('acp/branch')?>">Branch</a></li>
+                                    <li class="<?php if($menu_active == 'land') echo 'active'; ?>"><a href="<?php echo base_url('acp/land')?>">Land</a></li>
+                                    <li class="<?php if($menu_active == 'duple') echo 'active'; ?>"><a href="<?php echo base_url('acp/duple')?>">Duple</a></li>
+                                    <li class="<?php if($menu_active == 'row') echo 'active'; ?>"><a href="<?php echo base_url('acp/row')?>">Row</a></li>
+                                    <li class="<?php if($menu_active == 'tree') echo 'active'; ?>"><a href="<?php echo base_url('acp/tree')?>">Tree</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown <?php if(in_array($menu_active, array('logs'))) echo 'active'; ?>">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                    System <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li class="<?php if($menu_active == 'logs') echo 'active'; ?>"><a href="<?php echo base_url('acp/logs')?>">Logs</a></li>
                                 </ul>
                             </li>
                         </ul>

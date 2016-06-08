@@ -13,6 +13,9 @@ class Auth extends CI_Controller {
 
     public function login() 
     {
+        $this->load->model('capcha_model');
+        
+        //Check exist Login
         $user_login = $this->session->userdata('user_login');
         if($user_login)
         {
@@ -20,33 +23,68 @@ class Auth extends CI_Controller {
         }
         $this->data['msg'] = '';
         
+        //Submit
         if($this->input->post('submit'))
         {
             $this->form_validation->set_rules('u', $this->lang->line('auth_user'), 'required');
             $this->form_validation->set_rules('p', $this->lang->line('auth_pass'), 'required');
+            $post = $this->input->post();
             
             if ($this->form_validation->run() == TRUE)
             {
-                $post = $this->input->post();
-                $result = $this->user_model->login($post);
-                if($result['success'])
+                if($this->capcha_model->validation($post['capcha']))
                 {
-                    $this->load->view('backend/auth/loading', array('msg' => $this->lang->line('auth_login_to_system'), 'url' => '/acp'));
-                    return true;
+
+                    $result = $this->user_model->backend_login($post);
+                    if($result['success'])
+                    {
+                        //Logs
+                        $this->logs_model->write('auth_login_to_system', array('page' => 'Admin'));
+                        //Loading
+                        $current_uri = $this->session->userdata('current_uri');
+                        $url = $current_uri ? base_url($current_uri) : base_url('acp');
+                        $this->load->view('backend/auth/loading', array('msg' => $this->lang->line('auth_login_to_system'), 'url' => $url));
+                        return true;
+                    }
+                    else
+                    {
+                        $this->data['msg'] = $result['msg'];
+                    }
                 }
                 else
                 {
-                    $this->data['msg'] = $result['msg'];
-                }
+                    $this->data['msg'] = "Mã Capcha không đúng!";
+                }    
             }
+                
         }
+        //Render view
+        $this->load->helper('captcha');
         
+        $vals = array('word' => random_string('numeric', 6),
+                        'img_path' => FCPATH . 'capcha/',
+                        'img_url' => base_url('capcha'),
+                        'font_path' => FCPATH . 'vendor/font/captcha/captcha5.ttf',
+                        'img_width' => 160,
+                        'img_height' => 34,
+                        'expiration' => 300 // 5 minus
+                    );
+        $capcha = create_captcha($vals);
+        $data = array('captcha_time' => $capcha['time'],
+                        'ip_address' => $this->input->ip_address(),
+                        'word' => $capcha['word']
+                    );
+        $this->capcha_model->insert($data);
+        $this->data['capcha_image'] = $capcha['image'];
         $this->load->view('backend/auth/login', $this->data);
     }
     
     public function logout()
     {
-        $this->user_model->logout();
+        //Logs
+        $this->logs_model->write('auth_logout_from_sytem', array('page' => 'Admin'));
+        $this->user_model->backend_logout();
+        $this->load->view('backend/auth/loading', array('msg' => $this->lang->line('auth_logout_from_sytem'), 'url' => base_url('acp/login')));
     }
     
     public function change_password()
@@ -70,8 +108,12 @@ class Auth extends CI_Controller {
                 
                 if($result['success'])
                 {
+                    // Logs
+                    $this->logs_model->write('auth_change_password_successfully', array('page' => 'Admin'));
+                    // Redirect    
                     $this->session->set_flashdata('msg_success', $this->lang->line('auth_password_has_been_updated'));
-                    redirect(base_url('acp'));
+                    $url = $current_uri ? base_url($current_uri) : base_url('acp');
+                    redirect($url);
                 }
                 else
                 {

@@ -24,6 +24,10 @@
             <td class="col-sm-2 text-right active"><strong><?php echo $this->lang->line('land_image'); ?>: </strong></td>
             <td class="col-sm-10"><img src="<?php echo $row['image_'];?>" width="120" /></td>
         </tr>
+        <tr>
+            <td class="col-sm-2 text-right active">Danh sach doi</td>
+            <td class="col-sm-10"></td>
+        </tr>
     </tbody>
 </table>
 <div class="row">

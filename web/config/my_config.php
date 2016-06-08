@@ -26,6 +26,7 @@ $config = array(
             'processes_forest' => 'index|add|edit|show|delete',
             'soil_preparation' => 'index|add|edit|show|delete',
             'materials' => 'index|add|edit|show|delete',
+            'code' => 'index'
         ),
         'admin' => array(
             'user' => 'index|add|edit|show|delete',
@@ -39,6 +40,7 @@ $config = array(
             'processes_forest' => 'index|add|edit|show|delete',
             'soil_preparation' => 'index|add|edit|show|delete',
             'materials' => 'index|add|edit|show|delete',
+            'code' => 'index'
         ),
         'manager' => array(
             'user' => 'index|add|show|edit',

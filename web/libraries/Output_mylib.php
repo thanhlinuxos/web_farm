@@ -11,6 +11,11 @@ class Output_mylib
       */
     protected $CI;
     
+    public $mime_type = 'application/json';
+    
+    public $charset = 'UTF-8';
+
+    public $status = 200;
     /**
     * Class constructor
     *
@@ -22,15 +27,40 @@ class Output_mylib
     */
     public function __construct()
     {
-            $this->CI =& get_instance();
-            log_message('info', 'Output_mylib Class Initialized');
+        $this->CI =& get_instance();
+        log_message('info', 'Output_mylib Class Initialized');
     }
     
-    public function response($data = array())
+    public function response($data = array(), $mime_type = NULL, $charset = NULL, $status = NULL)
     {
-        $out = $this->CI->output->set_content_type('application/json')->set_output(json_encode($data));
+        if($mime_type != NULL) {
+            if(!in_array($mime_type, array('application/json', 'application/xml', 'text/plain', 'css', 'jpeg'))) {
+                show_error("MIME TYPE: $mime_type not available!");
+            }
+            $this->mime_type = $mime_type;
+        }
+        if($charset != NULL) {
+            if(!in_array($charset, array('UTF-8'))) {
+                show_error("CHARSET: $charset not available!");
+            }
+            $this->charset = $charset;
+        }
+        if($status != NULL) {
+            $this->status = $status;
+        }
+        $this->CI->output->set_status_header($this->status);
+        $this->CI->output->set_content_type($this->mime_type, $this->charset);
+        switch ($this->mime_type)
+        {
+            case 'application/json':
+                $out = $this->CI->output->set_output(json_encode($data));
+                break;
+            default :
+                show_error("Response must be have MIME TYPE!");
+        }
+        
         echo $out->final_output;
-        exit;
+        exit($this->status);
     }
     
 }

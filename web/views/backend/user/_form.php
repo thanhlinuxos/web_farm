@@ -92,7 +92,7 @@
             <label class="control-label col-sm-3" for="birthday"><?php echo $this->lang->line('user_birthday'); ?>:</label>
             <div class="col-sm-9">
                 <div class='input-group date' >
-                    <input type='text' name="birthday" class="form-control datepicker" name="birthday" id='birthday' value="<?php echo set_value('birthday', $row['birthday']); ?>" placeholder="Chose birthday" readonly="readonly" />
+                    <input type='text' name="birthday" class="form-control datepicker" id='birthday' value="<?php echo set_value('birthday', $row['birthday']); ?>" placeholder="Chose birthday" readonly="readonly" />
                 </div>
             </div>
         </div>

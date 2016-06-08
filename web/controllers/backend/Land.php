@@ -9,6 +9,9 @@ class Land extends MY_Controller {
     
     public function index()
     {
+        //Reset search
+        $this->session->set_userdata('land_search', array('keyword' => '' , 'branch_id' => ''));
+        //Get config for pagination
         $config = $this->pagination_mylib->bootstrap_configs();
         $config['base_url'] = base_url('acp/land/page');
         $config['total_rows'] = $this->land_model->count_all(array('deleted' => 0));
@@ -30,8 +33,11 @@ class Land extends MY_Controller {
         $this->load->view('backend/layout/footer', $this->data);
     }
     
-     public function search()
-    {    
+    public function search()
+    {
+        if($this->input->get('branch_id')) {
+            $this->session->set_userdata('land_search', array('keyword' => '' , 'branch_id' => $this->input->get('branch_id')));
+        }
         if($this->input->post('submit')) {
             $post = $this->input->post();
             $this->session->set_userdata('land_search', array('keyword' => $post['keyword'] , 'branch_id' => $post['branch_id']));
@@ -99,7 +105,7 @@ class Land extends MY_Controller {
                         $this->logs_model->write('land_add', $land);
                         //Redirect
                         $this->session->set_flashdata('msg_success', $this->lang->line('land_has_been_created'));
-                        redirect('/acp/land/show/'.$this->land_model->insert_id());
+                        redirect('/acp/land/show/'.$land['id']);
                     }                
                 }
                 $this->data['row'] = $this->land_model->convert_data($post);
@@ -115,13 +121,12 @@ class Land extends MY_Controller {
     public function show($id = 0)
     {
         $land = $this->land_model->get_by($id);
-        $branch = $this->branch_model->get_by(array('id' => $land['branch_id']));
         if(!$land){
             $this->session->set_flashdata('msg_error', $this->lang->line('land_not_exist'));
             redirect(base_url('acp/land'));
         }
         $this->data['row'] = $this->land_model->convert_data($land);
-        $this->data['row_branch'] = $branch;
+        $this->data['row_branch'] = $this->branch_model->get_by(array('id' => $land['branch_id']));
         $this->load->view('backend/layout/header', $this->data);
         $this->load->view('backend/land/show', $this->data);
         $this->load->view('backend/layout/footer', $this->data);
@@ -212,7 +217,7 @@ class Land extends MY_Controller {
         
         if( $this->input->method(TRUE) == 'POST')
         {
-            $rows =$this->input->post('row');
+            $rows = $this->input->post('row');
             foreach ($rows as $k => $v) {
                 $duple = $this->duple_model->get_by($v);
                 if($duple) {
@@ -227,6 +232,14 @@ class Land extends MY_Controller {
         $this->load->view('backend/layout/header', $this->data);
         $this->load->view('backend/land/sortable', $this->data);
         $this->load->view('backend/layout/footer', $this->data);
+    }
+    
+    public function li_list()
+    {
+        $post = $this->input->post();
+        $branch_id = isset($post['branch_id']) ? $post['branch_id'] : 0;
+        $this->data['rows'] = $this->land_model->get_rows(array('where' => array('branch_id' => $branch_id)));
+        $this->load->view('backend/land/li_list', $this->data);
     }
     
 }

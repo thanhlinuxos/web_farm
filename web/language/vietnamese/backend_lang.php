@@ -43,6 +43,7 @@ $lang['user_has_been_updated'] = 'Nhân viên đã được cập nhật!';
 $lang['user_has_been_deleted'] = 'Nhân viên đã bị xóa!';
 $lang['user_has_been_created'] = 'Nhân viên đã được tạo!';
 $lang['user_has_been_locked'] = 'Nhân viên đã bị khóa!';
+$lang['user_has_been_deny'] = 'Tài khoản không có quyền hạn truy cập!';
 $lang['user_not_exist'] = 'Nhân viên không tồn tại trong hệ thống!';
 
 //Authenticate
@@ -51,6 +52,8 @@ $lang['auth_logout'] = 'Thoát';
 $lang['auth_user'] = 'Tên đăng nhập';
 $lang['auth_pass'] = 'Mật khẩu';
 $lang['auth_login_to_system'] = 'Đăng nhập vào hệ thống';
+$lang['auth_logout_from_sytem'] = 'Đăng xuất khỏi hệ thống';
+$lang['auth_change_password_successfully'] = 'Đổi mật khẩu thành công';
 $lang['auth_password_not_available'] = 'Mật khẩu không đúng!';
 $lang['auth_password_has_been_updated'] = 'Mật khẩu đã được cập nhật!';
 $lang['auth_change_password_message'] = "<small class='help-block'>Bạn phải thay đổi mật khẩu sau khi đăng nhập lần đầu <br /> hoặc khi mật khẩu được thiết lập lại</small>";
@@ -117,6 +120,29 @@ $lang['duple_has_been_created'] = 'Đôi đã được tạo!';
 $lang['duple_has_been_deleted'] = 'Đôi đã bị xóa!';
 $lang['duple_not_exist'] = 'Đôi không tồn tại trong hệ thống!';
 
+//Rows
+$lang['row_id'] = 'ID Hàng';
+$lang['row_name'] = 'Tên hàng';
+$lang['row_ordinal'] = 'Số thứ tự';
+$lang['row_list'] = 'Danh sách hàng';
+$lang['row_add'] = 'Thêm hàng';
+$lang['row_edit'] = 'Cập nhật hàng';
+$lang['row_delete'] = 'Xóa hàng';
+$lang['row_info'] = 'Thông tin hàng';
+$lang['row_has_been_updated'] = 'Hàng đã được cập nhật!';
+$lang['row_has_been_created'] = 'Hàng đã được tạo!';
+$lang['row_has_been_deleted'] = 'Hàng đã bị xóa!';
+$lang['row_not_exist'] = 'Hàng không tồn tại trong hệ thống!';
+
+//Tree
+$lang['tree_id'] = 'ID cây trồng';
+$lang['tree_code'] = 'Mã Code';
+$lang['tree_status'] = 'Trạng thái';
+$lang['tree_has_been_updated'] = 'Cây trồng đã được cập nhật!';
+$lang['tree_has_been_deleted'] = 'Cây trồng đã bị xóa!';
+$lang['tree_has_been_created'] = 'Cây trồng đã được tạo!';
+$lang['tree_quantity'] = 'Số lượng cây trồng';
+
 //Logs
 $lang['logs_id'] = 'ID';
 $lang['logs_action_key'] = 'Hành động';
@@ -125,3 +151,4 @@ $lang['logs_ip'] = 'Địa chỉ IP';
 $lang['logs_browser'] = 'Trình duyệt';
 $lang['logs_created_at'] = 'Ngày tạo';
 $lang['logs_info'] = 'Thông tin lịch sử';
+$lang['logs_list'] = 'Lịch sử hệ thống';

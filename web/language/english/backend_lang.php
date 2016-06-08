@@ -43,6 +43,7 @@ $lang['user_has_been_updated'] = 'The user account has been updated!';
 $lang['user_has_been_deleted'] = 'The user account has been deleted!';
 $lang['user_has_been_created'] = 'The user account has been created!';
 $lang['user_has_been_locked'] = 'The user has been locked';
+$lang['user_has_been_deny'] = 'The user has been deny!';
 $lang['user_not_exist'] = 'The user not exist';
 
 //Authenticate
@@ -51,6 +52,8 @@ $lang['auth_logout'] = 'Logout';
 $lang['auth_user'] = 'Username';
 $lang['auth_pass'] = 'Password';
 $lang['auth_login_to_system'] = 'Login to system';
+$lang['auth_logout_from_sytem'] = 'Logout from system';
+$lang['auth_change_password_successfully'] = 'Change password successfully';
 $lang['auth_password_not_available'] = 'The password not available';
 $lang['auth_password_has_been_updated'] = 'The password has been updated';
 $lang['auth_change_password_message'] = "<small class='help-block'>The user's password must be changed after logging on the first time <br /> or has been reset</small>";
@@ -116,6 +119,29 @@ $lang['duple_has_been_updated'] = 'Đôi đã được cập nhật!';
 $lang['duple_has_been_created'] = 'Đôi đã được tạo!';
 $lang['duple_has_been_deleted'] = 'Đôi đã bị xóa!';
 $lang['duple_not_exist'] = 'Đôi không tồn tại trong hệ thống!';
+
+//Rows
+$lang['row_id'] = 'ID Hàng';
+$lang['row_name'] = 'Tên hàng';
+$lang['row_ordinal'] = 'Số thứ tự';
+$lang['row_list'] = 'Danh sách hàng';
+$lang['row_add'] = 'Thêm hàng';
+$lang['row_edit'] = 'Cập nhật hàng';
+$lang['row_delete'] = 'Xóa hàng';
+$lang['row_info'] = 'Thông tin hàng';
+$lang['row_has_been_updated'] = 'Hàng đã được cập nhật!';
+$lang['row_has_been_created'] = 'Hàng đã được tạo!';
+$lang['row_has_been_deleted'] = 'Hàng đã bị xóa!';
+$lang['row_not_exist'] = 'Hàng không tồn tại trong hệ thống!';
+
+//Tree
+$lang['tree_id'] = 'Tree ID';
+$lang['tree_code'] = 'CODE';
+$lang['tree_status'] = 'Status';
+$lang['tree_has_been_updated'] = 'The tree has been updated!';
+$lang['tree_has_been_deleted'] = 'The tree has been deleted!';
+$lang['tree_has_been_created'] = 'The tree has been created!';
+$lang['tree_quantity'] = 'Tree quantity';
 
 //Logs
 $lang['logs_id'] = 'Logs ID';
