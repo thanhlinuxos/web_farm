@@ -23,12 +23,21 @@ class Logs extends MY_Controller {
         );
 
         $this->data['rows'] = $this->logs_model->get_rows($conditions);
+        $this->data['actions'] = $this->logs_model->get_rows(array('select' => 'action_key', 'distinct' => TRUE, 'sort_by' => 'action_key ASC'));
+        $this->data['users'] = $this->logs_model->get_rows(array('select' => 'username', 'distinct' => TRUE, 'sort_by' => 'username ASC'));
+        $this->load->view('backend/layout/header', $this->data);
+        $this->load->view('backend/logs/index', $this->data);
+        $this->load->view('backend/layout/footer', $this->data);
+    }
+    
+    public function search()
+    {
         
         $this->load->view('backend/layout/header', $this->data);
         $this->load->view('backend/logs/index', $this->data);
         $this->load->view('backend/layout/footer', $this->data);
     }
-   
+
     public function show($id = 0)
     {
         $logs = $this->logs_model->get_by($id);

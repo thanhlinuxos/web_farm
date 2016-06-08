@@ -18,9 +18,14 @@ class MY_Controller extends CI_Controller
     
     public function __construct() {
         parent::__construct();
-        $this->uri->segment(1) == 'acp'? $this->user_model->backend_is_login() : $this->user_model->frontend_is_login();
+        if($this->uri->segment(1) == 'acp') {
+            $this->user_model->backend_is_login();
+            $this->lang->load('backend');
+        } else {
+            $this->user_model->frontend_is_login();
+            $this->lang->load('frontend');
+        }
         $this->user_model->check_permission($this->router->fetch_class(), $this->router->fetch_method());
-        $this->lang->load('backend');  
         $this->data['menu_active'] = $this->router->fetch_class();
     }
 }

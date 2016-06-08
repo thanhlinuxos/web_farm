@@ -32,8 +32,12 @@ class Auth extends CI_Controller {
                 if ($this->capcha_model->validation($post['capcha'])) {
                     $result = $this->user_model->frontend_login($post);
                     if ($result['success']) {
-                        //$this->load->view('backend/auth/loading', array('msg' => $this->lang->line('auth_login_to_system'), 'url' => '/acp'));
-                        redirect(base_url('dashboard'));
+                        //Logs
+                        $this->logs_model->write('auth_login_to_system', array('page' => 'Staff'));
+                        //Loading
+                        $current_uri = $this->session->userdata('current_uri');
+                        $url = $current_uri ? base_url($current_uri) : base_url();
+                        $this->load->view('frontend/auth/loading', array('msg' => $this->lang->line('auth_login_to_system'), 'url' => $url));
                         return true;
                     } else {
                         $this->data['msg'] = $result['msg'];
@@ -66,7 +70,10 @@ class Auth extends CI_Controller {
     }
 
     public function logout() {
+        //Logs
+        $this->logs_model->write('auth_logout_from_sytem', array('page' => 'Staff'));
         $this->user_model->frontend_logout();
+        $this->load->view('frontend/auth/loading', array('msg' => $this->lang->line('auth_logout_from_sytem'), 'url' => base_url('login')));
     }
 
     public function change_password() {
@@ -86,6 +93,9 @@ class Auth extends CI_Controller {
                 $post = $this->input->post();
                 $result = $this->user_model->change_password($post['p1'], $post['p2']);
                 if ($result['success']) {
+                    // Logs
+                    $this->logs_model->write('auth_change_password_successfully', array('page' => 'Staff'));
+                    // Redirect  
                     $this->session->set_flashdata('msg_success', $this->lang->line('auth_password_has_been_updated'));
                     redirect(base_url('dashboard'));
                 } else {

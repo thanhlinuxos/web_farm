@@ -9,7 +9,6 @@ $route['login'] = 'frontend/auth/login';
 $route['logout'] = 'frontend/auth/logout';
 $route['change_password'] = 'frontend/auth/change_password';
 $route['deny'] = 'frontend/auth/deny';
-$route['deny'] = 'frontend/auth/deny';
 
 /******************** ACP *************************/
 $route['acp'] = 'backend/dashboard';
@@ -18,7 +17,6 @@ $route['acp/logout'] = 'backend/auth/logout';
 $route['acp/change_password'] = 'backend/auth/change_password';
 $route['acp/auth/group_permission'] = 'backend/auth/group_permission';
 $route['acp/deny'] = 'backend/auth/deny';
-
 $route['acp/code'] = 'backend/code';
 
 //User
@@ -89,6 +87,9 @@ $route['acp/row/li_list'] = 'backend/row/li_list';
 $route['acp/logs'] = 'backend/logs';
 $route['acp/logs/page'] = 'backend/logs';
 $route['acp/logs/page/(:num)'] = 'backend/logs';
+$route['acp/logs/search'] = 'backend/logs/search';
+$route['acp/logs/search/page'] = 'backend/logs/search';
+$route['acp/logs/search/page/(:num)'] = 'backend/logs/search';
 $route['acp/logs/show/(:num)'] = 'backend/logs/show/$1';
 
 //Tree

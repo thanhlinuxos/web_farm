@@ -11,6 +11,7 @@ $lang['auth_logout'] = 'Thoát';
 $lang['auth_user'] = 'Tên đăng nhập';
 $lang['auth_pass'] = 'Mật khẩu';
 $lang['auth_login_to_system'] = 'Đăng nhập vào hệ thống';
+$lang['auth_logout_from_sytem'] = 'Đăng xuất khỏi hệ thống';
 $lang['auth_password_not_available'] = 'Mật khẩu không đúng!';
 $lang['auth_password_has_been_updated'] = 'Mật khẩu đã được cập nhật!';
 $lang['auth_change_password_message'] = "<small class='help-block'>Bạn phải thay đổi mật khẩu sau khi đăng nhập lần đầu <br /> hoặc khi mật khẩu được thiết lập lại</small>";

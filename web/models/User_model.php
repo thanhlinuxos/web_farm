@@ -90,7 +90,7 @@ class User_model extends MY_Model
     public function backend_is_login()
     {
         $user_login = $this->session->userdata('user_login');
-       
+        $this->session->set_userdata('current_uri', $this->uri->uri_string());
         if(!isset($user_login['id']))
         {
             redirect(base_url('acp/login'));
@@ -105,7 +105,7 @@ class User_model extends MY_Model
         }
         else
         {
-            
+            $this->session->set_userdata('current_uri', '');
         }
         return true;
     }
@@ -152,6 +152,8 @@ class User_model extends MY_Model
                     'id' => $user['id'],
                     'username' => $user['username'],
                     'fullname' => $user['fullname'],
+                    'branch_id' => $user['branch_id'],
+                    'group' => $user['group'],
                     'is_admin' => 1,
                     'change_pass' => $user['change_password'],
                     'permission' => $tmp
@@ -169,14 +171,13 @@ class User_model extends MY_Model
     public function backend_logout()
     {
         $this->session->sess_destroy();
-        redirect(base_url('acp/login'));
     }
     
     /******************* FRONTEND *********************/
     public function frontend_is_login()
     {  
         $user_login = $this->session->userdata('user_login');
-        
+        $this->session->set_userdata('current_uri', $this->uri->uri_string());
         if(!isset($user_login['id']))
         {
             redirect(base_url('login'));
@@ -187,7 +188,7 @@ class User_model extends MY_Model
         }
         else
         {
-            
+            $this->session->set_userdata('current_uri', '');
         }
         return true;
     }
@@ -230,7 +231,8 @@ class User_model extends MY_Model
                     'id' => $user['id'],
                     'username' => $user['username'],
                     'fullname' => $user['fullname'],
-                   ' branch_id' => $user['branch_id'],
+                    'branch_id' => $user['branch_id'],
+                    'group' => $user['group'],
                     'is_admin' => ($user['group'] == 'admin') ? 1 : 0,
                     'change_pass' => $user['change_password'],
                     'permission' => $tmp
@@ -247,6 +249,5 @@ class User_model extends MY_Model
     public function frontend_logout()
     {
         $this->session->sess_destroy();
-        redirect(base_url('login'));
     }
 }
