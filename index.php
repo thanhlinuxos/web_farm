@@ -244,9 +244,6 @@ if ( function_exists('date_default_timezone_set') ) {
 
 	// Name of the "system" directory
 	define('SYSDIR', basename(BASEPATH));
-        
-        // Path to the upload directory
-        define('UPLOADPATH', FCPATH . 'uploads/');
 
 	// The path to the "application" directory
 	if (is_dir($application_folder))

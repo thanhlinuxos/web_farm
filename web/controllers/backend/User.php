@@ -123,12 +123,13 @@ class User extends MY_Controller {
                     $result = $this->user_model->insert($post);
                     if($result)
                     {
+                        $user_id = $this->user_model->insert_id();
                         //Logs
-                        $user = $this->user_model->get_by($this->user_model->insert_id());
+                        $user = $this->user_model->get_by($user_id);
                         $this->logs_model->write('user_add', $user);
                         //Redirect
-                        $this->session->set_flashdata('msg_success', $this->lang->line('user_has_been_updated'));
-                        redirect('/acp/user/show/'.$this->user_model->insert_id());
+                        $this->session->set_flashdata('msg_success', $this->lang->line('user_has_been_created'));
+                        redirect('/acp/user/show/'.$user_id);
                     }                
                 }
             }
