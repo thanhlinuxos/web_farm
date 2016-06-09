@@ -80,12 +80,13 @@ class Row extends MY_Controller {
                 $result = $this->row_model->insert($post);
                 if($result)
                 {
+                    $row_id = $this->row_model->insert_id();
                     //Logs
-                    $row = $this->row_model->get_by($this->row_model->insert_id());
+                    $row = $this->row_model->get_by($row_id);
                     $this->logs_model->write('row_add', $row);
                     //Redirect
                     $this->session->set_flashdata('msg_success', $this->lang->line('row_has_been_created'));
-                    redirect('/acp/row/show/'.$row['id']);
+                    redirect('/acp/row/show/'.$row_id);
                 }
             }
         }
