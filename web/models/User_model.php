@@ -45,7 +45,7 @@ class User_model extends MY_Model
     
     public function check_permission($controller, $action)
     {
-        if($controller == 'dashboard' || in_array($action, array('search', 'sortable', 'li_list'))) {
+        if(in_array($controller, array('dashboard', 'whisper')) || in_array($action, array('search', 'sortable', 'li_list'))) {
             return TRUE;
         }
         $user_login = $this->session->userdata('user_login');
@@ -84,6 +84,11 @@ class User_model extends MY_Model
         }
         
         return $result;
+    }
+    
+    public function logout()
+    {
+        $this->session->sess_destroy();
     }
     
     /******************* BACKEND *********************/
@@ -168,10 +173,7 @@ class User_model extends MY_Model
         return $result;
     }
     
-    public function backend_logout()
-    {
-        $this->session->sess_destroy();
-    }
+    
     
     /******************* FRONTEND *********************/
     public function frontend_is_login()
@@ -244,10 +246,5 @@ class User_model extends MY_Model
             }
         } 
         return $result;
-    }
-    
-    public function frontend_logout()
-    {
-        $this->session->sess_destroy();
     }
 }
