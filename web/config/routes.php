@@ -101,6 +101,13 @@ $route['acp/tree/edit/(:num)'] = 'backend/tree/edit/$1';
 $route['acp/tree/show/(:num)'] = 'backend/tree/show/$1';
 $route['acp/tree/delete/(:num)'] = 'backend/tree/delete/$1'; 
 
+// Whisper
+$route['acp/whisper'] = 'backend/whisper';
+$route['acp/whisper/page'] = 'backend/whisper';
+$route['acp/whisper/page/(:num)'] = 'backend/whisper';
+$route['acp/whisper/add'] = 'backend/whisper/add';
+$route['acp/whisper/delete/(:num)'] = 'backend/whisper/delete/$1'; 
+
 //Default router
 $route['test'] = 'test';
 $route['404_override'] = '';
