@@ -90,6 +90,7 @@
             <div class="col-sm-3"></div>
             <div class="col-sm-9">
                 <button type="submit" name="submit" value="submit" class="btn btn-primary"><?php echo $this->lang->line('btn_save'); ?></button>
+                <input type="hidden" name="<?php echo  $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash();?>" />
             </div>
         </div>
         </form>
