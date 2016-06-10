@@ -16,11 +16,11 @@ class Code extends MY_Controller {
     public function __construct() {
         parent::__construct();
         $this->font = FCPATH . 'vendor/font/captcha/captcha5.ttf';
+        require_once APPPATH . 'third_party/barcode.php';
     }
     
     public function index()
     {
-        $this->load->library('barcode');
         // -------------------------------------------------- //
         //            ALLOCATE GD RESSOURCE
         // -------------------------------------------------- //
