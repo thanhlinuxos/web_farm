@@ -28,17 +28,30 @@ class Test extends CI_Controller {
         //$this->load->view('test', $this->data);
         
         //  Create object of Simple_html_dom class
-        $html = new Simple_html_dom();
-
-        //  Use Simple_html_dom class function load_file
-        $html->load_file('http://vnexpress.net');
-
-        //  Use Simple_html_dom class function
-        foreach ($html->find('.title_news') as $element) {
-            print_r($element->find('a'));
-            exit;
-        }
+//        $html = new Simple_html_dom();
+//
+//        //  Use Simple_html_dom class function load_file
+//        $html->load_file('http://vnexpress.net');
+//
+//        //  Use Simple_html_dom class function
+//        foreach ($html->find('.title_news') as $element) {
+//            print_r($element->find('a'));
+//            exit;
+//        }
         
+//        $this->load->library('encrypt');
+//        $msg = "My secret message It's important for you to know that the encoded messages the encryption function generates will ";
+//
+//        $encrypted_string = $this->encrypt->encode($msg);
+//        echo $encrypted_string;
+//        echo "<br>";
+//        echo $this->encrypt->decode($encrypted_string);
+        
+        $this->load->library('table');
+
+        $query = $this->db->query("SELECT * FROM th_branches");
+
+        echo $this->table->generate($query);
     }
     
     public function ajax(){

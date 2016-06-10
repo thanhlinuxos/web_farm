@@ -108,6 +108,7 @@ $route['acp/whisper/page/(:num)'] = 'backend/whisper';
 $route['acp/whisper/add'] = 'backend/whisper/add';
 $route['acp/whisper/delete/(:num)'] = 'backend/whisper/delete/$1'; 
 
+$route['acp/migration'] = 'backend/migrate';
 //Default router
 $route['test'] = 'test';
 $route['404_override'] = '';

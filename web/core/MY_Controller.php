@@ -18,6 +18,7 @@ class MY_Controller extends CI_Controller
     
     public function __construct() {
         parent::__construct();
+        
         if($this->uri->segment(1) == 'acp') {
             $this->user_model->backend_is_login();
             $this->lang->load('backend');
