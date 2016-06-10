@@ -13,6 +13,7 @@ class Logs_model extends MY_Model
                 $data['created_at_'] = date('d-m-Y H:i', $data['created_at']);
             }
             $data['action_key_'] = $this->lang->line($data['action_key']);
+            $data['content_'] = wordwrap($data['content'], 120, "<br />\n", true);
         }
         return $data;
     }

@@ -6,3 +6,4 @@
 /composer.json
 /web/cache/*
 /web/config/production/*
+/web/logs/*

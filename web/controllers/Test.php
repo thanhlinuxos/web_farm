@@ -7,23 +7,37 @@ class Test extends CI_Controller {
     
     public function __construct() {
         parent::__construct();
+        //  Path to simple_html_dom
+        require_once APPPATH . 'third_party/simple_html_dom.php';
     }
     
     public function index()
     {
-        $this->user_model->get_rows(array(
-            'joins' => array(
-                            array('th_branches', 'th_branches.id = th_users.branch_id'),
-                            array('th_lands', 'th_branches.id = th_lands.branch_id'),
-                        )
+//        $this->user_model->get_rows(array(
+//            'joins' => array(
+//                            array('th_branches', 'th_branches.id = th_users.branch_id'),
+//                            array('th_lands', 'th_branches.id = th_lands.branch_id'),
+//                        )
             //'select' => '1',
             //'distinct' => '',
             //'where' => array('id !=' => 0, 'fullname' => 'abc'),
             //'like' => array(array('username', 'fullname'), 'test'),
             //'group_by' => 'fullname',
-        ));
-        echo $this->db->last_query();
+//        ));
+//        echo $this->db->last_query();
         //$this->load->view('test', $this->data);
+        
+        //  Create object of Simple_html_dom class
+        $html = new Simple_html_dom();
+
+        //  Use Simple_html_dom class function load_file
+        $html->load_file('http://vnexpress.net');
+
+        //  Use Simple_html_dom class function
+        foreach ($html->find('.title_news') as $element) {
+            print_r($element); echo '<br>';
+        }
+        
     }
     
     public function ajax(){
