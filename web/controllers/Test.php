@@ -35,7 +35,8 @@ class Test extends CI_Controller {
 
         //  Use Simple_html_dom class function
         foreach ($html->find('.title_news') as $element) {
-            print_r($element); echo '<br>';
+            print_r($element->find('a'));
+            exit;
         }
         
     }
