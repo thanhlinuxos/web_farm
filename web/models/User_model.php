@@ -45,7 +45,7 @@ class User_model extends MY_Model
     
     public function check_permission($controller, $action)
     {
-        if(in_array($controller, array('dashboard', 'whisper')) || in_array($action, array('search', 'sortable', 'li_list'))) {
+        if(in_array($controller, array('dashboard', 'whisper', 'unit_test')) || in_array($action, array('search', 'sortable', 'li_list'))) {
             return TRUE;
         }
         $user_login = $this->session->userdata('user_login');

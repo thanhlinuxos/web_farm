@@ -62,7 +62,7 @@ class Auth extends CI_Controller {
         $this->load->helper('captcha');
         
         $vals = array('word' => random_string('numeric', 6),
-                        'img_path' => FCPATH . 'capcha/',
+                        'img_path' => CAPTCHAPATH,
                         'img_url' => base_url('capcha'),
                         'font_path' => FCPATH . 'vendor/font/captcha/captcha5.ttf',
                         'img_width' => 160,

@@ -149,5 +149,6 @@ $lang['logs_action_key'] = 'Action';
 $lang['logs_content'] = 'Content';
 $lang['logs_ip'] = 'IP Address';
 $lang['logs_browser'] = 'Browser';
+$lang['logs_os'] = 'OS';
 $lang['logs_created_at'] = 'Created At';
 $lang['logs_info'] = 'Logs infomation';
