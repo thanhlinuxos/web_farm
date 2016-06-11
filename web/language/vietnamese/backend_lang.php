@@ -149,6 +149,7 @@ $lang['logs_action_key'] = 'Hành động';
 $lang['logs_content'] = 'Nội dung';
 $lang['logs_ip'] = 'Địa chỉ IP';
 $lang['logs_browser'] = 'Trình duyệt';
+$lang['logs_os'] = 'Hệ điều hành';
 $lang['logs_created_at'] = 'Ngày tạo';
 $lang['logs_info'] = 'Thông tin lịch sử';
 $lang['logs_list'] = 'Lịch sử hệ thống';

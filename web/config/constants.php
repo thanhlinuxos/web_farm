@@ -86,7 +86,9 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 
 /*
 |--------------------------------------------------------------------------
-| Path to the upload directory
+| My define
 |--------------------------------------------------------------------------
 */
 define('UPLOADPATH', FCPATH . 'uploads/');
+define('ZIPPATH', FCPATH . 'zip/');
+define('CAPTCHAPATH', FCPATH . 'capcha/');

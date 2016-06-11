@@ -47,11 +47,27 @@ class Test extends CI_Controller {
 //        echo "<br>";
 //        echo $this->encrypt->decode($encrypted_string);
         
-        $this->load->library('table');
+//        $this->load->library('table');
+//
+//        $query = $this->db->query("SELECT * FROM th_branches");
+//
+//        echo $this->table->generate($query);
+        
+//        $this->load->library('typography');
+//        $string = "<span>ádasdsa \n dasdads";
+//        echo $this->typography->nl2br_except_pre($string);
+        
+        $this->load->library('zip');
+        $name = 'mydata1.txt';
+        $data = 'A Data String!';
 
-        $query = $this->db->query("SELECT * FROM th_branches");
+        $this->zip->add_data($name, $data);
 
-        echo $this->table->generate($query);
+        // Write the zip file to a folder on your server. Name it "my_backup.zip"
+        $this->zip->archive(FCPATH . 'zip/my_backup.zip'); 
+
+        // Download the file to your desktop. Name it "my_backup.zip"
+        $this->zip->download('my_backup.zip');
     }
     
     public function ajax(){
