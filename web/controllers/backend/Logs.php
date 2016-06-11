@@ -52,4 +52,29 @@ class Logs extends MY_Controller {
         $this->load->view('backend/logs/show', $this->data);
         $this->load->view('backend/layout/footer', $this->data);
     }
+    
+    public function server()
+    {
+        $this->load->helper('file');
+        $this->load->library('typography');
+        
+        if($this->input->post('submit'))
+        {
+            $this->session->set_userdata('logs_server_search', $this->input->post('date'));
+        }
+        $logs_search = $this->session->userdata('logs_server_search');
+        $date = $logs_search ? $logs_search : date('d-m-Y');
+        $datetime = DateTime::createFromFormat('d-m-Y', $date);
+        $logs_path = LOGSPATH . 'log-'.$datetime->format('Y-m-d').'.php';
+        if(file_exists($logs_path)) {
+            $logs = read_file($logs_path);
+        } else {
+            $logs = "Không có tập tin Logs vào ngày: " . $date;
+        }
+        
+        $this->data['row'] = array('logs' => $this->typography->nl2br_except_pre($logs), 'date' => $date);
+        $this->load->view('backend/layout/header', $this->data);
+        $this->load->view('backend/logs/server', $this->data);
+        $this->load->view('backend/layout/footer', $this->data);
+    }
 }

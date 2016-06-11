@@ -92,3 +92,4 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 define('UPLOADPATH', FCPATH . 'uploads/');
 define('ZIPPATH', FCPATH . 'zip/');
 define('CAPTCHAPATH', FCPATH . 'capcha/');
+define('LOGSPATH', FCPATH . 'web/logs/');

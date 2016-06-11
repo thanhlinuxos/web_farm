@@ -38,18 +38,19 @@ class Logs_model extends MY_Model
                     }
                 }
             }
-            $this->load->library('user_agent');
-            if ($this->agent->is_browser()) {
-                $agent = $this->agent->browser().' '.$this->agent->version();
-            } elseif ($this->agent->is_robot()) {
-                $agent = $this->agent->robot();
-            } elseif ($this->agent->is_mobile()) {
-                $agent = $this->agent->mobile();
-            } else{
-                $agent = 'Unidentified User Agent';
-            }
+            
             if($write) {
                 $user_login = $this->session->userdata('user_login');
+                $this->load->library('user_agent');
+                if ($this->agent->is_browser()) {
+                    $agent = $this->agent->browser().' '.$this->agent->version();
+                } elseif ($this->agent->is_robot()) {
+                    $agent = $this->agent->robot();
+                } elseif ($this->agent->is_mobile()) {
+                    $agent = $this->agent->mobile();
+                } else{
+                    $agent = 'Unidentified User Agent';
+                }
                 $data = array(
                     'action_key' => $action_key,
                     'content' => $content,

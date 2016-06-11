@@ -153,3 +153,4 @@ $lang['logs_os'] = 'Hệ điều hành';
 $lang['logs_created_at'] = 'Ngày tạo';
 $lang['logs_info'] = 'Thông tin lịch sử';
 $lang['logs_list'] = 'Lịch sử hệ thống';
+$lang['logs_server'] = 'Lịch sử máy chủ';
