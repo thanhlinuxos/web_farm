@@ -152,3 +152,4 @@ $lang['logs_browser'] = 'Browser';
 $lang['logs_os'] = 'OS';
 $lang['logs_created_at'] = 'Created At';
 $lang['logs_info'] = 'Logs infomation';
+$lang['logs_server'] = 'Server Logs';

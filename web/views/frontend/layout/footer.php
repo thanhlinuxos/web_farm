@@ -1,8 +1,6 @@
             <?php
                 if(ENVIRONMENT == 'development')
                 {
-                    echo 'PROCESS TIME: ' . $this->benchmark->elapsed_time(). '<br>';
-                    echo 'MEMORY USAGE: ' . $this->benchmark->memory_usage(). '<br>';
             ?>
                 <script>
                     function show_all_query()
@@ -37,6 +35,11 @@
                 }
             ?>
             </div><!-- /wraper-->
+            <div style="margin-top: 10px; color: #029f5b;">
+                <?php
+                    echo 'PROCESS TIME: <strong>' . $this->benchmark->elapsed_time(). '</strong> - MEMORY USAGE: <strong>' . $this->benchmark->memory_usage().'</strong>';
+                ?>
+            </div>
         </div> <!-- /container-fluid -->
     </body>
 </html>
