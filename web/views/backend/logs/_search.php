@@ -44,6 +44,7 @@
             <button type="submit" name="submit" value="submit" class="btn btn-default">
                 <span class="glyphicon glyphicon-search"></span> <?php echo $this->lang->line('btn_search');?>
             </button>
+            <input type="hidden" name="<?php echo  $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash();?>" />
         </div>
     </form>
 </div>
@@ -57,23 +58,35 @@
     $(function () {
         $( ".datepicker" ).datepicker({
             dateFormat: 'dd-mm-yy',
-            maxDate: 0,
             changeMonth: true,
-            changeYear: true
+            changeYear: true,
+            beforeShow: customRange
         });
         $.datepicker.setDefaults($.datepicker.regional[REGIONAL]);
     });
     
-    $(function () {
-        $("#from_date").on("change", function (e) {
+    function customRange(){
+        var dateMin = null;
+	var dateMax = 0;
+        
+        if(this.id == 'from_date') {
+            var to_data = $("#to_date").datepicker('getDate');
+            if(to_data !== null) {
+                dateMax = Math.ceil((to_data - new Date())/86400000);
+            }
+        }
+        
+        if(this.id == 'to_date') {
             var from_data = $("#from_date").datepicker('getDate');
-            var day = Math.ceil((from_data - new Date())/86400000);
-            console.log(day);
-            
-        });
-        $("#to_date").on("change", function (e) {
-            
-        });
-    });
+            if(to_data !== null) {
+                dateMin = Math.ceil((from_data - new Date())/86400000);
+            }
+        }
+        
+        return {
+            minDate: dateMin,
+            maxDate: dateMax
+        }; 
+    }
     
 </script>

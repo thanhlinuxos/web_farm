@@ -32,6 +32,37 @@ class Logs extends MY_Controller {
     
     public function search()
     {
+        if($this->input->post('submit'))
+        {
+            $post = $this->input->post();
+            $this->session->set_userdata('logs_search', array('from_date' => $post['from_date'], 'to_date' => $post['to_date']));
+        }
+        
+        $logs_search = $this->session->userdata('logs_search');
+        
+        $sql = '';
+        if($logs_search['from_date']) {
+            $from_date = DateTime::createFromFormat('d-m-Y,H:i:s', $logs_search['from_date'].',0:00:00');
+            var_dump($from_date);exit;
+            $sql .= "created_at >= '".strtotime($from_date->date)."' AND ";
+        }
+        if($logs_search['to_date']) {
+            $to_date = DateTime::createFromFormat('d-m-Y,H:i:s', $logs_search['to_date'].',23:59:59');
+            $sql .= "created_at <= '".strtotime($to_date->date)."' AND ";
+        }
+        //Count
+        $count_all = $this->logs_model->get_query("SELECT COUNT(id) FROM th_logs WHERE $sql deleted = 0", FALSE);
+        //Pagination
+        $config = $this->pagination_mylib->bootstrap_configs();
+        $config['base_url'] = base_url('acp/logs/search/page');
+        $config['total_rows'] = $count_all['COUNT(id)'];
+        $config['per_page'] = $this->data['per_page'];
+        $config['uri_segment'] = 5;
+        $config['use_page_numbers'] = TRUE;
+        $this->pagination->initialize($config);
+        //List
+        $offset = $this->uri->segment(5) ? ($this->uri->segment(5) - 1)*$config['per_page'] : 0;
+        $this->data['rows'] = $this->logs_model->get_query("SELECT * FROM th_logs WHERE $sql deleted = 0 LIMIT ".$config['per_page']." OFFSET " . $offset);
         
         $this->load->view('backend/layout/header', $this->data);
         $this->load->view('backend/logs/index', $this->data);
@@ -65,7 +96,7 @@ class Logs extends MY_Controller {
         $logs_search = $this->session->userdata('logs_server_search');
         $date = $logs_search ? $logs_search : date('d-m-Y');
         $datetime = DateTime::createFromFormat('d-m-Y', $date);
-        $logs_path = LOGSPATH . 'log-'.$datetime->format('Y-m-d').'.php';
+        $logs_path = LOGSPATH . $datetime->format('Y') . '/' . $datetime->format('m') . '/log-'.$datetime->format('Y-m-d').'.txt';
         if(file_exists($logs_path)) {
             $logs = read_file($logs_path);
         } else {
