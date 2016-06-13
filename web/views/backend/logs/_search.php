@@ -5,7 +5,7 @@
 <div class="row form-group">
     <form name="search-form" method="POST" action="<?php echo base_url('acp/logs/search'); ?>">
         <div class="col-sm-2">
-            <select class="form-control select2" id="action_key" name="action_key">
+            <select class="form-control" id="action_key" name="action_key">
                 <option value="">---</option>
             <?php 
             foreach ($actions as $action)
@@ -20,14 +20,14 @@
             </select>
         </div>
         <div class="col-sm-2">
-            <select class="form-control select2" id="action_key" name="username">
+            <select class="form-control" id="user_id" name="user_id">
                 <option value="">---</option>
             <?php 
             foreach ($users as $u)
             {
             ?>    
-                <option value="<?php echo $u['username']?>" <?php echo set_select('username', $u['username'], $logs_search['username'] == $u['username']); ?>>
-                    <?php echo $u['username'];?>
+                <option value="<?php echo $u['user_id']?>" <?php echo set_select('user_id', $u['user_id'], $logs_search['user_id'] == $u['user_id']); ?>>
+                    <?php echo '['.$u['username'].'] '.$u['fullname'];?>
                 </option>
             <?php
             }
@@ -35,24 +35,31 @@
             </select>
         </div>
         <div class="col-sm-2">
-            <input type='text' name="from_date" class="form-control datepicker" id='from_date' value="" placeholder="From" readonly="readonly" />
+            <input type='text' name="from_date" class="form-control datepicker" id='from_date' value="<?php echo $logs_search['from_date']; ?>" placeholder="From" readonly="readonly" />
         </div>
         <div class="col-sm-2">
-            <input type='text' name="to_date" class="form-control datepicker" id='to_date' value="" placeholder="To" readonly="readonly" />
+            <input type='text' name="to_date" class="form-control datepicker" id='to_date' value="<?php echo $logs_search['to_date']; ?>" placeholder="To" readonly="readonly" />
         </div>
         <div class="col-sm-2">
             <button type="submit" name="submit" value="submit" class="btn btn-default">
                 <span class="glyphicon glyphicon-search"></span> <?php echo $this->lang->line('btn_search');?>
             </button>
-            <input type="hidden" name="<?php echo  $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash();?>" />
+            <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash();?>" />
         </div>
     </form>
 </div>
 <script type="text/javascript">
-    $(".select2").select2({
-        placeholder: "Chon hanh dong",
-        allowClear: true
+    $(document).ready(function(){
+        $("#action_key").select2({
+            placeholder: "Chon hanh dong",
+            allowClear: true
+        });
+        $("#user_id").select2({
+            placeholder: "Chon nhan vien",
+            allowClear: true
+        });
     });
+        
 </script>
 <script type="text/javascript">
     $(function () {

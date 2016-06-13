@@ -57,14 +57,7 @@ class Test extends CI_Controller {
 //        $string = "<span>ádasdsa \n dasdads";
 //        echo $this->typography->nl2br_except_pre($string);
         
-        $this->load->view('test', $this->data);
-        $sections = array(
-            'config'  => TRUE,
-            'queries' => TRUE,
-            'benchmarks' => TRUE
-        );
 
-        print_r($this->output->set_profiler_sections($sections));
     }
     
     public function ajax(){

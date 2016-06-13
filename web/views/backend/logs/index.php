@@ -31,7 +31,7 @@
                     <tr>
                         <td><a href="<?php echo base_url('acp/logs/show/'.$row['id']); ?>"><?php echo $row['id'];?></a></td>
                         <td><?php echo $row['action_key_'];?></td>
-                        <td><?php echo '['.$row['id'].'] ' . $row['username'] .' - '. $row['fullname'];?></td>
+                        <td><?php echo '['.$row['user_id'].'] ' . $row['username'] .' - '. $row['fullname'];?></td>
                         <td><?php echo '['.$row['os'].'] ' . $row['browser'];?></td>
                         <td><?php echo $row['ip'];?></td>
                         <td><?php echo $row['created_at_'];?></td>
