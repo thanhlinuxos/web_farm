@@ -32,7 +32,7 @@ class User_model extends MY_Model
             $data['image_'] = base_url('uploads/user/thumbnail/'.$data['image']);
         }
         if(is_numeric($data['branch_id'])) {
-            $branch = $this->branch_model->get_by($data['branch_id']);
+            $branch = $this->branch_model->get_by_id($data['branch_id']);
             $data['branch_name'] = $branch ? $branch['name'] : '';
         }
         $data['gender_'] = $this->lang->line('user_gender_'.$data['gender']);
