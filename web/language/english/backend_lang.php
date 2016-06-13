@@ -1,6 +1,7 @@
 <?php
 //Common
 $lang['id'] = 'ID';
+$lang['created_at'] = 'Created At';
 
 //Button
 $lang['btn_add'] = 'Add';
@@ -153,3 +154,11 @@ $lang['logs_os'] = 'OS';
 $lang['logs_created_at'] = 'Created At';
 $lang['logs_info'] = 'Logs infomation';
 $lang['logs_server'] = 'Server Logs';
+
+// Whisper
+$lang['whisper_id'] = 'ID Tin nhắn';
+$lang['whisper_send'] = 'Người gửi';
+$lang['whisper_receive'] = 'Người nhận';
+$lang['whisper_content'] = 'Nội dung';
+$lang['whisper_is_read_0'] = 'Chưa đọc';
+$lang['whisper_is_read_1'] = 'Đã đọc';

@@ -106,6 +106,7 @@ $route['acp/whisper'] = 'backend/whisper';
 $route['acp/whisper/page'] = 'backend/whisper';
 $route['acp/whisper/page/(:num)'] = 'backend/whisper';
 $route['acp/whisper/add'] = 'backend/whisper/add';
+$route['acp/whisper/show/(:num)'] = 'backend/whisper/show/$1';
 $route['acp/whisper/delete/(:num)'] = 'backend/whisper/delete/$1'; 
 
 $route['acp/migration'] = 'backend/migrate';

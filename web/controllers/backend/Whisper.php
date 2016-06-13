@@ -8,6 +8,26 @@ class Whisper extends MY_Controller {
     }
     public function index()
     {
+        $USER_LOGIN = $this->session->userdata('user_login');
+        $condition = array(
+            'select' => 'send_id',
+            'distinct' => TRUE,
+            'where' => array('receive_id' => $USER_LOGIN['id']),
+            'sort_by' => 'id DESC'
+        );
+        
+        $config = $this->pagination_mylib->bootstrap_configs();
+        $config['base_url'] = base_url('acp/whisper/page');
+        $config['total_rows'] = count($this->whisper_model->get_rows($condition));
+        $config['per_page'] = $this->data['per_page'];
+        $config['uri_segment'] = 4;
+        $config['use_page_numbers'] = TRUE;
+        $this->pagination->initialize($config);
+        
+        $condition['limit'] = $config['per_page'];
+        $condition['offset']= $this->uri->segment(4) ? ($this->uri->segment(4) - 1)*$config['per_page'] : 0;
+        
+        $this->data['rows'] = $this->whisper_model->get_rows($condition);
         $this->load->view('backend/layout/header', $this->data);
         $this->load->view('backend/whisper/index', $this->data);
         $this->load->view('backend/layout/footer', $this->data);
@@ -34,6 +54,14 @@ class Whisper extends MY_Controller {
         $this->load->view('backend/layout/footer', $this->data);
     }
     
+    public function show($id = 0)
+    {
+        
+        $this->load->view('backend/layout/header', $this->data);
+        $this->load->view('backend/whisper/show', $this->data);
+        $this->load->view('backend/layout/footer', $this->data);
+    }
+
     public function delete()
     {
         

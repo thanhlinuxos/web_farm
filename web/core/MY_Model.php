@@ -56,13 +56,29 @@ class MY_Model extends CI_Model
             show_error("CRUD : __construct() must have table name");
         }
     }
-
+    
     /**
+     * Get data from DB or Cache
+     * @param Numberic
+     * @output a row
+     */
+    public function get_by_id($id = NULL)
+    {
+//        if(cache) {
+//            load cache
+//        } else {
+//            get
+//            create cache
+//        }
+        return $this->get_by($id);
+    }
+
+        /**
      * Get one row
      * @param Array OR Numberic
      * @output a row
      */
-    public function get_by($conditions = array()) {
+    public function get_by($conditions = array(), $latest = FALSE) {
         if(is_numeric($conditions)) {
             $this->db->where($this->key, $conditions);
             $this->db->where('deleted', 0);
@@ -80,7 +96,10 @@ class MY_Model extends CI_Model
         } else {
             show_error("Method: get_by() CRUD : Param must be ARRAY OR NUMBERIC and NOT empty!");
         }
-          
+        
+        if($latest) {
+            $this->db->order_by('id DESC');
+        }
         $query = $this->db->get($this->table);
         return $query->row_array();
     }
@@ -131,9 +150,16 @@ class MY_Model extends CI_Model
         }
 
         if (isset($input['where'])) {
-            if((is_array($input['where']) && count($input['where']) > 0) || (is_string($input['where']) && $input['where'])) {
+            if(is_array($input['where']) && count($input['where']) > 0) {
+                if (!isset($input['deleted'])) {
+                    $conditions['deleted'] = 0;
+                }
                 $this->db->where($input['where']);
-                $this->db->where('deleted', 0);
+            } else if(is_string($input['where']) && $input['where']) {
+                $this->db->where($input['where']);
+                if(strpos($input['where'], 'deleted') === FALSE) {
+                    $this->db->where('deleted', 0);
+                }
             } else {
                 show_error("Method: get_row() CRUD : Param WHERE must be ARRAY OR STRING and NOT empty!");
             }
