@@ -16,5 +16,9 @@ class Branch_model extends MY_Model
         );
     }
     
-    
+    public function convert_data($data = array())
+    {
+        
+        return $data;
+    }
 }

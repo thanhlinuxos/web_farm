@@ -17,6 +17,7 @@ class Branch extends MY_Controller {
         $config['use_page_numbers'] = TRUE;
         $this->pagination->initialize($config);
         $conditions = array(
+            'select' => 'id',
             'where' => array('deleted' => 0),
             'sort_by' => 'id DESC',
             'limit' => $config['per_page'],

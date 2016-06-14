@@ -135,8 +135,6 @@
                 <input type="hidden" name="<?php echo  $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash();?>" />
             </div>
         </div>
-            
-        
     </div>
     <div class="col-xs-8" id="user_permission">
         <table class="table table-striped table-hover table-bordered">

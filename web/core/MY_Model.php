@@ -35,20 +35,24 @@ class MY_Model extends CI_Model
      */
     private function initialize($table = null) {
         $this->CI = &get_instance();
-
         $this->CI->load->database();
 
         if (!is_null($table)) {
+            $this->load->driver('cache', array('adapter' => 'apc', 'backup' => 'file', 'key_prefix' => 'mc_'));
             $this->table = $this->db->dbprefix($table);
-
-            $this->fields = $this->db->list_fields($this->table);
-
-            $fields = $this->db->field_data($this->table);
-
+            
+            if(!$this->fields = $this->cache->get($this->table . '_list_fields')) {
+                $this->fields = $this->db->list_fields($this->table);
+                $this->cache->save($this->table . '_list_fields', $this->fields, 36000);
+            }
+            if(!$fields = $this->cache->get($this->table . '_fields')) {
+                $fields = $this->db->field_data($this->table);
+                $this->cache->save($this->table . '_fields', $fields, 36000);
+            }
+            
             foreach ($fields as $row) {
                 if ($row->primary_key) {
                     $this->key = $row->name;
-
                     break;
                 }
             }//foreach
@@ -56,7 +60,7 @@ class MY_Model extends CI_Model
             show_error("CRUD : __construct() must have table name");
         }
     }
-    
+
     /**
      * Get data from DB or Cache
      * @param Numberic
@@ -64,7 +68,6 @@ class MY_Model extends CI_Model
      */
     public function get_by_id($id = 0)
     {
-        $this->load->driver('cache', array('adapter' => 'apc', 'backup' => 'file', 'key_prefix' => 'memcached_'));
         if($this->cache->get($this->table . '_' . $id)) {
             $row = $this->cache->get($this->table . '_' . $id);
         } else {
@@ -311,10 +314,13 @@ class MY_Model extends CI_Model
      * Update data
      * @return boolean
      */
-    public function update($o, $where = array()) {
+    public function update($o, $where = array()) 
+    {
         if (!is_array($where) || count($where) == 0) {
             if (isset($o[$this->key])) {
                 $this->db->where($this->key, $o[$this->key]);
+                // Clear cache
+                $this->cache->delete($this->table . '_' . $o[$this->key]);
                 unset($o[$this->key]);
             } else {
                 show_error('Method: update() CRUD : Can not found value key for update');
@@ -326,6 +332,11 @@ class MY_Model extends CI_Model
                 }
             }
             $this->db->where($where);
+            // Clear cache
+            $row = $this->get_by($where);
+            if($row) {
+                $this->cache->delete($this->table . '_' . $row['id']);
+            }
         }
 
         $data = array();
@@ -354,7 +365,6 @@ class MY_Model extends CI_Model
      */
     public function delete($conditions = array())
     {
-        $this->load->driver('cache', array('adapter' => 'apc', 'backup' => 'file', 'key_prefix' => 'memcached_'));
         if(is_numeric($conditions)) {
             $this->db->where($this->key, $conditions);
             // Clear cache

@@ -19,3 +19,11 @@ $hook['display_override'] = array(
     'filepath' => 'hooks',
     'params' => ''
 );
+
+$hook['post_controller_constructor'] = array(
+    'class' => '',
+    'function' => 'validation_request',
+    'filename' => 'validation_request.php',
+    'filepath' => 'hooks',
+    'params' => ''
+);

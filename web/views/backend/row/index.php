@@ -19,7 +19,7 @@
             <?php
                 foreach($rows as $row)
                 {
-                    $row = $this->row_model->convert_data($row);
+                    $row = $this->row_model->convert_data($this->row_model->get_by_id($row['id']));
                     $total_tree = $this->tree_model->get_rows(array('select' => 'COUNT(id)', 'where' => array('row_id' => $row['id'], 'deleted' => 0)));
             ?>
                     <tr>
