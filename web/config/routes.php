@@ -10,6 +10,21 @@ $route['logout'] = 'frontend/auth/logout';
 $route['change_password'] = 'frontend/auth/change_password';
 $route['deny'] = 'frontend/auth/deny';
 
+//User
+$route['user'] = 'frontend/user';
+$route['user/page'] = 'frontend/user';
+$route['user/page/(:num)'] = 'frontend/user';
+$route['user/add'] = 'frontend/user/add';
+$route['user/edit/(:num)'] = 'frontend/user/edit/$1';
+$route['user/show/(:num)'] = 'frontend/user/show/$1';
+$route['user/delete/(:num)'] = 'frontend/user/delete/$1'; 
+$route['user/delete_multi'] = 'frontend/user/delete_multi';
+$route['user/search'] = 'frontend/user/search';
+$route['user/search/page'] = 'frontend/user/search';
+$route['user/search/page/(:num)'] = 'frontend/user/search';
+$route['user/short_list'] = 'frontend/user/short_list';
+
+
 /******************** ACP *************************/
 $route['acp'] = 'backend/dashboard';
 $route['acp/login'] = 'backend/auth/login';

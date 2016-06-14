@@ -196,7 +196,10 @@ class User extends MY_Controller {
                 }
                 $post['permission'] = serialize($tmp);
             }
-            
+            else 
+            {
+                $post['permission'] = '';
+            }
             if ($this->form_validation->run() == TRUE)
             {
                 $success = TRUE;
@@ -223,6 +226,7 @@ class User extends MY_Controller {
                     {
                         $post['password'] = $user['password'];
                     }
+                   
                     $result = $this->user_model->update($post);
                     if($result)
                     {

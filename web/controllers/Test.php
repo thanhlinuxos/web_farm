@@ -57,17 +57,19 @@ class Test extends CI_Controller {
 //        $string = "<span>ádasdsa \n dasdads";
 //        echo $this->typography->nl2br_except_pre($string);
         
-        $this->load->library('zip');
-        $name = 'mydata1.txt';
-        $data = 'A Data String!';
-
-        $this->zip->add_data($name, $data);
-
-        // Write the zip file to a folder on your server. Name it "my_backup.zip"
-        $this->zip->archive(FCPATH . 'zip/my_backup.zip'); 
-
-        // Download the file to your desktop. Name it "my_backup.zip"
-        $this->zip->download('my_backup.zip');
+//        $this->load->library('zip');
+//        $name = 'mydata1.txt';
+//        $data = 'A Data String!';
+//
+//        $this->zip->add_data($name, $data);
+//
+//        // Write the zip file to a folder on your server. Name it "my_backup.zip"
+//        $this->zip->archive(FCPATH . 'zip/my_backup.zip'); 
+//
+//        // Download the file to your desktop. Name it "my_backup.zip"
+//        $this->zip->download('my_backup.zip');
+        $t = $this->load->view('test', $this->data, TRUE);
+        echo $t;
     }
     
     public function ajax(){
