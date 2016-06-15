@@ -29,4 +29,26 @@ class MY_Controller extends CI_Controller
         $this->user_model->check_permission($this->router->fetch_class(), $this->router->fetch_method());
         $this->data['menu_active'] = $this->router->fetch_class();
     }
+    
+    /**
+     * 
+     * @param type $method
+     * @param type $params
+     */
+//    public function _remap($method, $params = array())
+//    {
+//        echo $method; 
+//        print_r($params);
+//        exit;
+//    }
+    
+    /**
+     * Get last output
+     * @param type $output
+     */
+//    public function _output($output)
+//    {
+//        var_dump($output);
+//        exit;
+//    }
 }

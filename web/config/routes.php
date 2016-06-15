@@ -107,6 +107,8 @@ $route['acp/logs/search/page'] = 'backend/logs/search';
 $route['acp/logs/search/page/(:num)'] = 'backend/logs/search';
 $route['acp/logs/show/(:num)'] = 'backend/logs/show/$1';
 $route['acp/logs/server'] = 'backend/logs/server';
+$route['acp/logs/clean_cached'] = 'backend/logs/clean_cached';
+
 //Tree
 $route['acp/tree'] = 'backend/tree';
 $route['acp/tree/page'] = 'backend/tree';
@@ -126,7 +128,10 @@ $route['acp/whisper/delete/(:num)'] = 'backend/whisper/delete/$1';
 
 $route['acp/migration'] = 'backend/migrate';
 $route['acp/unit_test'] = 'backend/unit_test';
-//Default router
+
+// Default router
 $route['test'] = 'test';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+// $route['products/(:num)']['DELETE'] = 'product/delete/$1';
+// GET, PUT, POST, DELETE, PATCH

@@ -18,7 +18,7 @@
         <script type="text/javascript" src="<?php echo base_url('vendor/select2/js/select2.min.js'); ?>"></script>
         <script type="text/javascript" src="<?php echo base_url('assets/frontend/js/script.js'); ?>"></script>
         <!--[if lt IE 9]>
-            <script src="<?php echo base_url('vendor/bootstrap/js/html5shiv.js'); ?>" type="text/javascript"></script>
+            <script src="<?php echo base_url('vendor/bootstrap/js/html5shiv.min.js'); ?>" type="text/javascript"></script>
             <script src="<?php echo base_url('vendor/bootstrap/js/respond.min.js'); ?>" type="text/javascript"></script>
         <![endif]-->
     </head>

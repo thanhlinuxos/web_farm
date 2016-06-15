@@ -25,7 +25,7 @@ class Test extends CI_Controller {
             //'group_by' => 'fullname',
 //        ));
 //        echo $this->db->last_query();
-        //$this->load->view('test', $this->data);
+        $this->load->view('test', $this->data);
         
         //  Create object of Simple_html_dom class
 //        $html = new Simple_html_dom();
@@ -56,11 +56,12 @@ class Test extends CI_Controller {
 //        $this->load->library('typography');
 //        $string = "<span>ádasdsa \n dasdads";
 //        echo $this->typography->nl2br_except_pre($string);
-        
-
+       
     }
     
     public function ajax(){
         $this->load->view('ajax');
     }
+    
+    
 }

@@ -49,7 +49,7 @@ class User extends MY_Controller {
         $count_all = $this->user_model->get_query("SELECT COUNT(id) FROM th_users WHERE $sql_like $sql_where deleted = 0", FALSE);
         //Pagination
         $config = $this->pagination_mylib->bootstrap_configs();
-        $config['base_url'] = base_url('acp/user/search/page');
+        $config['base_url'] = base_url('user/search/page');
         $config['total_rows'] = $count_all['COUNT(id)'];
         $config['per_page'] = $this->data['per_page'];
         $config['uri_segment'] = 4;
@@ -131,7 +131,7 @@ class User extends MY_Controller {
         $user = $this->user_model->get_by($id);
         if(!$user){
             $this->session->set_flashdata('msg_error', $this->lang->line('user_not_exist'));
-            redirect(base_url('acp/user'));
+            redirect(base_url('user'));
         }
         $this->data['row'] = $this->user_model->convert_data($user);
         $this->load->view('frontend/layout/header', $this->data);

@@ -117,7 +117,7 @@ class User extends MY_Controller {
                 //Continue
                 if($success) {
                     //More data
-                    $post['password'] = md5(md5($post['password']));
+                    $post['password'] = password_hash($post['password'], PASSWORD_DEFAULT);// md5(md5($post['password']));
                     $post['change_password'] = 1;
                     $post['created_at'] = time();
 
@@ -220,7 +220,7 @@ class User extends MY_Controller {
                     $post['id'] = $user['id'];
                     if($post['password'] != '')
                     {
-                        $post['password'] = md5(md5($post['password']));
+                        $post['password'] = password_hash($post['password'], PASSWORD_DEFAULT); //md5(md5($post['password']));
                         $post['change_password'] = 1;
                     }
                     else
