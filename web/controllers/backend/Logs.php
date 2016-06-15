@@ -94,9 +94,11 @@ class Logs extends MY_Controller {
     
     public function server()
     {
-        $this->load->helper('file');
+        $this->load->helper(array('file', 'directory'));
         $this->load->library('typography');
-        
+        if($this->input->get('date')) {
+            $this->session->set_userdata('logs_server_search', $this->input->get('date'));
+        }
         if($this->input->post('submit'))
         {
             $this->session->set_userdata('logs_server_search', $this->input->post('date'));
@@ -112,6 +114,7 @@ class Logs extends MY_Controller {
         }
         
         $this->data['row'] = array('logs' => $this->typography->nl2br_except_pre($logs), 'date' => $date);
+        $this->data['logs_map'] = directory_map(LOGSPATH);
         $this->load->view('backend/layout/header', $this->data);
         $this->load->view('backend/logs/server', $this->data);
         $this->load->view('backend/layout/footer', $this->data);
