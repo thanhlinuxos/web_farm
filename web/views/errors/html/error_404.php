@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
     <head>
-        <title>Không tìm thấy</title>
+        <title>Không tìm thấy trang!</title>
         <meta name="keywords" content="404 error, not found" />
         <link href="/assets/404/css/style.css" rel="stylesheet" type="text/css"  media="all" />
     </head>
@@ -11,17 +11,18 @@
             <!---start-header---->
             <div class="header">
                 <div class="logo">
-                    <h1><a href="#">Ohh</a></h1>
+                    <h1><a href="#">Ố ồ ...</a></h1>
                 </div>
             </div>
             <!---End-header---->
             <!--start-content------>
             <div class="content">
                 <img src="/assets/404/images/error-img.png" title="error" />
-                <p><span><label>O</label>hh.....</span>You Requested the page that is no longer There.</p>
+                    <p><span>Ố ồ.....</span>Trang bạn truy cập không tồn tại hoặc đã bị xóa...</p>
+<!--                <p><span><label>O</label>hh.....</span>You Requested the page that is no longer There.</p>-->
                 <a href="http://web_farm.local">Back To Home</a>
                 <div class="copy-right">
-                    <p>&#169 All rights Reserved | Designed by <a href="http://w3layouts.com/">W3Layouts</a></p>
+                    <p>&#169 Copy right 2016</p>
                 </div>
             </div>
             <!--End-Cotent------>
