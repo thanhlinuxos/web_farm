@@ -50,7 +50,8 @@
                                     <small class='help-block pull-left'><?php echo $msg; ?></small>
                                     <button type="submit" name="submit" value="submit" class="btn btn-primary pull-right">
                                         <i class="glyphicon glyphicon-log-in"></i> <?php echo $this->lang->line('auth_login'); ?>
-                                    </button>                          
+                                    </button>
+                                    <input type="hidden" name="<?php echo  $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash();?>" />
                                 </div>
                             </div>
                         </form>

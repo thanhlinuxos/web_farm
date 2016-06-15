@@ -124,6 +124,7 @@
                                             <div class="row">
                                                 <div class="col-sm-6 col-sm-offset-3">
                                                     <input type="submit" name="submit" class="form-control btn btn-register" value="Change Now">
+                                                    <input type="hidden" name="<?php echo  $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash();?>" />
                                                 </div>
                                             </div>
                                         </div>

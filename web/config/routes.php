@@ -10,6 +10,21 @@ $route['logout'] = 'frontend/auth/logout';
 $route['change_password'] = 'frontend/auth/change_password';
 $route['deny'] = 'frontend/auth/deny';
 
+//User
+$route['user'] = 'frontend/user';
+$route['user/page'] = 'frontend/user';
+$route['user/page/(:num)'] = 'frontend/user';
+$route['user/add'] = 'frontend/user/add';
+$route['user/edit/(:num)'] = 'frontend/user/edit/$1';
+$route['user/show/(:num)'] = 'frontend/user/show/$1';
+$route['user/delete/(:num)'] = 'frontend/user/delete/$1'; 
+$route['user/delete_multi'] = 'frontend/user/delete_multi';
+$route['user/search'] = 'frontend/user/search';
+$route['user/search/page'] = 'frontend/user/search';
+$route['user/search/page/(:num)'] = 'frontend/user/search';
+$route['user/short_list'] = 'frontend/user/short_list';
+
+
 /******************** ACP *************************/
 $route['acp'] = 'backend/dashboard';
 $route['acp/login'] = 'backend/auth/login';
@@ -91,6 +106,8 @@ $route['acp/logs/search'] = 'backend/logs/search';
 $route['acp/logs/search/page'] = 'backend/logs/search';
 $route['acp/logs/search/page/(:num)'] = 'backend/logs/search';
 $route['acp/logs/show/(:num)'] = 'backend/logs/show/$1';
+$route['acp/logs/server'] = 'backend/logs/server';
+$route['acp/logs/clean_cached'] = 'backend/logs/clean_cached';
 
 //Tree
 $route['acp/tree'] = 'backend/tree';
@@ -101,7 +118,20 @@ $route['acp/tree/edit/(:num)'] = 'backend/tree/edit/$1';
 $route['acp/tree/show/(:num)'] = 'backend/tree/show/$1';
 $route['acp/tree/delete/(:num)'] = 'backend/tree/delete/$1'; 
 
-//Default router
+// Whisper
+$route['acp/whisper'] = 'backend/whisper';
+$route['acp/whisper/page'] = 'backend/whisper';
+$route['acp/whisper/page/(:num)'] = 'backend/whisper';
+$route['acp/whisper/add'] = 'backend/whisper/add';
+$route['acp/whisper/show/(:num)'] = 'backend/whisper/show/$1';
+$route['acp/whisper/delete/(:num)'] = 'backend/whisper/delete/$1'; 
+
+$route['acp/migration'] = 'backend/migrate';
+$route['acp/unit_test'] = 'backend/unit_test';
+
+// Default router
 $route['test'] = 'test';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+// $route['products/(:num)']['DELETE'] = 'product/delete/$1';
+// GET, PUT, POST, DELETE, PATCH

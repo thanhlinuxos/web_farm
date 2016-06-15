@@ -21,6 +21,7 @@ class User extends MY_Controller {
         $config['use_page_numbers'] = TRUE;
         $this->pagination->initialize($config);
         $conditions = array(
+            'select' => 'id',
             'where' => array('deleted' => 0),
             'sort_by' => 'id DESC',
             'limit' => $config['per_page'],
@@ -56,7 +57,7 @@ class User extends MY_Controller {
         $this->pagination->initialize($config);
         //List
         $offset = $this->uri->segment(5) ? ($this->uri->segment(5) - 1)*$config['per_page'] : 0;
-        $this->data['rows'] = $this->user_model->get_query("SELECT * FROM th_users WHERE $sql_like $sql_where deleted = 0 LIMIT ".$config['per_page']." OFFSET " . $offset);
+        $this->data['rows'] = $this->user_model->get_query("SELECT id FROM th_users WHERE $sql_like $sql_where deleted = 0 LIMIT ".$config['per_page']." OFFSET " . $offset);
 
         $this->data['branches'] = $this->branch_model->get_rows();
         $this->load->view('backend/layout/header', $this->data);
@@ -116,19 +117,20 @@ class User extends MY_Controller {
                 //Continue
                 if($success) {
                     //More data
-                    $post['password'] = md5(md5($post['password']));
+                    $post['password'] = password_hash($post['password'], PASSWORD_DEFAULT);// md5(md5($post['password']));
                     $post['change_password'] = 1;
                     $post['created_at'] = time();
 
                     $result = $this->user_model->insert($post);
                     if($result)
                     {
+                        $user_id = $this->user_model->insert_id();
                         //Logs
-                        $user = $this->user_model->get_by($this->user_model->insert_id());
+                        $user = $this->user_model->get_by($user_id);
                         $this->logs_model->write('user_add', $user);
                         //Redirect
-                        $this->session->set_flashdata('msg_success', $this->lang->line('user_has_been_updated'));
-                        redirect('/acp/user/show/'.$this->user_model->insert_id());
+                        $this->session->set_flashdata('msg_success', $this->lang->line('user_has_been_created'));
+                        redirect('/acp/user/show/'.$user_id);
                     }                
                 }
             }
@@ -195,7 +197,10 @@ class User extends MY_Controller {
                 }
                 $post['permission'] = serialize($tmp);
             }
-            
+            else 
+            {
+                $post['permission'] = '';
+            }
             if ($this->form_validation->run() == TRUE)
             {
                 $success = TRUE;
@@ -215,13 +220,14 @@ class User extends MY_Controller {
                     $post['id'] = $user['id'];
                     if($post['password'] != '')
                     {
-                        $post['password'] = md5(md5($post['password']));
+                        $post['password'] = password_hash($post['password'], PASSWORD_DEFAULT); //md5(md5($post['password']));
                         $post['change_password'] = 1;
                     }
                     else
                     {
                         $post['password'] = $user['password'];
                     }
+                   
                     $result = $this->user_model->update($post);
                     if($result)
                     {

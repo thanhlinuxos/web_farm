@@ -62,7 +62,7 @@ class Auth extends CI_Controller {
         $this->load->helper('captcha');
         
         $vals = array('word' => random_string('numeric', 6),
-                        'img_path' => FCPATH . 'capcha/',
+                        'img_path' => CAPTCHAPATH,
                         'img_url' => base_url('capcha'),
                         'font_path' => FCPATH . 'vendor/font/captcha/captcha5.ttf',
                         'img_width' => 160,
@@ -83,7 +83,7 @@ class Auth extends CI_Controller {
     {
         //Logs
         $this->logs_model->write('auth_logout_from_sytem', array('page' => 'Admin'));
-        $this->user_model->backend_logout();
+        $this->user_model->logout();
         $this->load->view('backend/auth/loading', array('msg' => $this->lang->line('auth_logout_from_sytem'), 'url' => base_url('acp/login')));
     }
     

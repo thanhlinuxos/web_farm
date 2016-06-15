@@ -20,6 +20,7 @@ class Land extends MY_Controller {
         $config['use_page_numbers'] = TRUE;
         $this->pagination->initialize($config);
         $conditions = array(
+            'select' => 'id',
             'where' => array('deleted' => 0),
             'sort_by' => 'id DESC',
             'limit' => $config['per_page'],
@@ -58,7 +59,7 @@ class Land extends MY_Controller {
         $this->pagination->initialize($config);
         //list
         $offset = $this->uri->segment(5) ? ($this->uri->segment(5) - 1)*$config['per_page'] : 0;
-        $this->data['rows'] = $this->land_model->get_query("SELECT * FROM th_lands WHERE $sql_like $sql_where deleted = 0 LIMIT ".$config['per_page']." OFFSET " . $offset);
+        $this->data['rows'] = $this->land_model->get_query("SELECT id FROM th_lands WHERE $sql_like $sql_where deleted = 0 LIMIT ".$config['per_page']." OFFSET " . $offset);
 
         $this->data['branches'] = $this->branch_model->get_rows(array('where' => array('deleted' => 0), 'sort_by' => 'id ASC'));
         $this->load->view('backend/layout/header', $this->data);
@@ -100,12 +101,13 @@ class Land extends MY_Controller {
                     $result = $this->land_model->insert($post);
                     if($result)
                     {
+                        $land_id = $this->land_model->insert_id();
                         //Logs
-                        $land = $this->land_model->get_by($this->land_model->insert_id());
+                        $land = $this->land_model->get_by($land_id);
                         $this->logs_model->write('land_add', $land);
                         //Redirect
                         $this->session->set_flashdata('msg_success', $this->lang->line('land_has_been_created'));
-                        redirect('/acp/land/show/'.$land['id']);
+                        redirect('/acp/land/show/'.$land_id);
                     }                
                 }
                 $this->data['row'] = $this->land_model->convert_data($post);

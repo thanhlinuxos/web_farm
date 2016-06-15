@@ -94,6 +94,7 @@
                             <div><input type="text" name="capcha" class="form-control input-lg capcha_input" value="" placeholder="CAPCHA"></div>
                             <?php echo $msg; ?>
                             <button type="submit" name="submit" value="submit" class="btn btn-lg btn-primary btn-block">Login</button> 
+                            <input type="hidden" name="<?php echo  $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash();?>" />
                             <div>
                                 <a href="#">Criar conta</a> or <a href="#">Esqueci minha senha</a>
                             </div>

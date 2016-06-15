@@ -27,7 +27,7 @@
             <?php
                 foreach($rows as $row)
                 {
-                    $row = $this->user_model->convert_data($row);
+                    $row = $this->user_model->convert_data($this->user_model->get_by_id($row['id']));
             ?>
                     <tr>
                         <td><a href="<?php echo base_url('acp/user/show/'.$row['id']); ?>"><?php echo $row['id']?></a></td>

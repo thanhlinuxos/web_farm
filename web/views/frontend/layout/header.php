@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>GYAO System</title>
+        <title>GYAO Universal</title>
         <link href="<?php echo base_url('vendor/bootstrap/css/bootstrap.min.css'); ?>" rel="stylesheet">
         <link href="<?php echo base_url('vendor/bootstrap/css/bootstrap-theme.min.css'); ?>" rel="stylesheet">
         <link href="<?php echo base_url('vendor/bootstrap/css/bootstrap-toggle.min.css'); ?>" rel="stylesheet">
@@ -18,7 +18,7 @@
         <script type="text/javascript" src="<?php echo base_url('vendor/select2/js/select2.min.js'); ?>"></script>
         <script type="text/javascript" src="<?php echo base_url('assets/frontend/js/script.js'); ?>"></script>
         <!--[if lt IE 9]>
-            <script src="<?php echo base_url('vendor/bootstrap/js/html5shiv.js'); ?>" type="text/javascript"></script>
+            <script src="<?php echo base_url('vendor/bootstrap/js/html5shiv.min.js'); ?>" type="text/javascript"></script>
             <script src="<?php echo base_url('vendor/bootstrap/js/respond.min.js'); ?>" type="text/javascript"></script>
         <![endif]-->
     </head>
@@ -77,7 +77,7 @@
         </nav>
         <div class="container-fluid">
             <div class="wraper">
-
+                <?php $this->load->view('frontend/layout/_flash'); ?>
 
 
 

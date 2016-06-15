@@ -2,7 +2,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>GYAO System</title>
+        <title>GYAO Universal</title>
         <link href="<?php echo base_url('vendor/bootstrap/css/bootstrap.min.css'); ?>" rel="stylesheet">
         <link href="<?php echo base_url('vendor/bootstrap/css/bootstrap-theme.min.css'); ?>" rel="stylesheet">
         <link href="<?php echo base_url('vendor/bootstrap/css/bootstrap-toggle.min.css'); ?>" rel="stylesheet">
@@ -17,7 +17,7 @@
         <script type="text/javascript" src="<?php echo base_url('vendor/select2/js/select2.min.js'); ?>"></script>
         <script type="text/javascript" src="<?php echo base_url('assets/backend/js/script.js'); ?>"></script>
         <!--[if lt IE 9]>
-            <script src="<?php echo base_url('vendor/bootstrap/js/html5shiv.js'); ?>" type="text/javascript"></script>
+            <script src="<?php echo base_url('vendor/bootstrap/js/html5shiv.min.js'); ?>" type="text/javascript"></script>
             <script src="<?php echo base_url('vendor/bootstrap/js/respond.min.js'); ?>" type="text/javascript"></script>
         <![endif]-->
     </head>
@@ -27,6 +27,7 @@
                 <?php $USER_LOGIN = $this->session->userdata('user_login'); ?>
                 Xin chao: <?php echo $USER_LOGIN['fullname']; ?>
                 <div class="pull-right">
+                    <a href="#"><img src="/assets/backend/img/icon/dialog.png" width="35" /></a>
                     <a class="btn btn-success" href="<?php echo base_url('dashboard');?>"><span class="glyphicon glyphicon-log-out"></span> UCP</a>
                     <a class="btn btn-default" href="<?php echo base_url('acp/logout'); ?>">
                         <span class="glyphicon glyphicon-log-out"></span> <?php echo $this->lang->line('auth_logout'); ?>
@@ -66,12 +67,13 @@
                                     <li class="<?php if($menu_active == 'tree') echo 'active'; ?>"><a href="<?php echo base_url('acp/tree')?>">Tree</a></li>
                                 </ul>
                             </li>
-                            <li class="dropdown <?php if(in_array($menu_active, array('logs'))) echo 'active'; ?>">
+                            <li class="dropdown <?php if(in_array($menu_active, array('logs', 'whisper'))) echo 'active'; ?>">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                     System <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li class="<?php if($menu_active == 'logs') echo 'active'; ?>"><a href="<?php echo base_url('acp/logs')?>">Logs</a></li>
+                                    <li class="<?php if($menu_active == 'whisper') echo 'active'; ?>"><a href="<?php echo base_url('acp/whisper')?>">Whisper</a></li>
                                 </ul>
                             </li>
                         </ul>

@@ -18,7 +18,7 @@
         </tr>
         <tr>
             <td class="col-sm-2 text-right active"><strong><?php echo $this->lang->line('logs_content'); ?>: </strong></td>
-            <td class="col-sm-10"><?php echo $row['content'];?></td>
+            <td class="col-sm-10"><?php echo $row['content_'];?></td>
         </tr>
         <tr>
             <td class="col-sm-2 text-right active"><strong><?php echo $this->lang->line('logs_ip'); ?>: </strong></td>
@@ -27,6 +27,10 @@
         <tr>
             <td class="col-sm-2 text-right active"><strong><?php echo $this->lang->line('logs_browser'); ?>: </strong></td>
             <td class="col-sm-10"><?php echo $row['browser'];?></td>
+        </tr>
+        <tr>
+            <td class="col-sm-2 text-right active"><strong><?php echo $this->lang->line('logs_os'); ?>: </strong></td>
+            <td class="col-sm-10"><?php echo $row['os'];?></td>
         </tr>
         <tr>
             <td class="col-sm-2 text-right active"><strong><?php echo $this->lang->line('logs_created_at'); ?>: </strong></td>

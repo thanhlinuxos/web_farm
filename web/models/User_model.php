@@ -32,7 +32,7 @@ class User_model extends MY_Model
             $data['image_'] = base_url('uploads/user/thumbnail/'.$data['image']);
         }
         if(is_numeric($data['branch_id'])) {
-            $branch = $this->branch_model->get_by($data['branch_id']);
+            $branch = $this->branch_model->get_by_id($data['branch_id']);
             $data['branch_name'] = $branch ? $branch['name'] : '';
         }
         $data['gender_'] = $this->lang->line('user_gender_'.$data['gender']);
@@ -45,7 +45,7 @@ class User_model extends MY_Model
     
     public function check_permission($controller, $action)
     {
-        if($controller == 'dashboard' || in_array($action, array('search', 'sortable', 'li_list'))) {
+        if(in_array($controller, array('dashboard', 'whisper', 'unit_test')) || in_array($action, array('search', 'sortable', 'li_list', 'clean_cached'))) {
             return TRUE;
         }
         $user_login = $this->session->userdata('user_login');
@@ -69,13 +69,13 @@ class User_model extends MY_Model
         
         $user_login = $this->session->userdata('user_login');
         $user = $this->get_by(array('id' => $user_login['id']));
-        if($user['password'] != md5(md5($old_password)))
+        if(password_verify($user['password'], $old_password)) //$user['password'] != md5(md5($old_password))
         {
             $result['msg'] = $this->lang->line('auth_password_not_available');
         }
         else
         {
-            $user['password'] = md5(md5($new_password));
+            $user['password'] = password_hash($new_password, PASSWORD_DEFAULT); //md5(md5($new_password));
             $user['change_password'] = 0;
             $this->update($user);
             $user_login['change_pass'] = 0;
@@ -84,6 +84,11 @@ class User_model extends MY_Model
         }
         
         return $result;
+    }
+    
+    public function logout()
+    {
+        $this->session->sess_destroy();
     }
     
     /******************* BACKEND *********************/
@@ -134,7 +139,7 @@ class User_model extends MY_Model
             {
                 $result['msg'] = $this->lang->line('user_has_been_locked');
             }
-            elseif($user['password'] != md5(md5($input['p'])))
+            elseif(password_verify($input['p'], $user['password']) === FALSE) //($user['password'] != md5(md5($input['p'])))
             {
                 $user['login_fail'] += 1;
                 $this->update($user);
@@ -168,10 +173,7 @@ class User_model extends MY_Model
         return $result;
     }
     
-    public function backend_logout()
-    {
-        $this->session->sess_destroy();
-    }
+    
     
     /******************* FRONTEND *********************/
     public function frontend_is_login()
@@ -213,7 +215,7 @@ class User_model extends MY_Model
             {
                  $result['msg'] = $this->lang->line('user_has_been_locked');
             }
-            elseif($user['password'] != md5(md5($input['p'])))
+            elseif(password_verify($input['p'], $user['password'])=== FALSE)
             {
                 $user['login_fail'] += 1;
                 $this->update($user);
@@ -244,10 +246,5 @@ class User_model extends MY_Model
             }
         } 
         return $result;
-    }
-    
-    public function frontend_logout()
-    {
-        $this->session->sess_destroy();
     }
 }

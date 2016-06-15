@@ -26,6 +26,7 @@
             <button type="submit" name="submit" value="submit" class="btn btn-default">
                 <span class="glyphicon glyphicon-search"></span> <?php echo $this->lang->line('btn_search');?>
             </button>
+            <input type="hidden" name="<?php echo  $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash();?>" />
         </div>
     </form>
 </div>

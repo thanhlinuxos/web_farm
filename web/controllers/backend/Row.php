@@ -17,6 +17,7 @@ class Row extends MY_Controller {
         $config['use_page_numbers'] = TRUE;
         $this->pagination->initialize($config);
         $conditions = array(
+            'select' => 'id',
             'where' => array('deleted' => 0),
             'sort_by' => 'id DESC',
             'limit' => $config['per_page'],
@@ -57,7 +58,7 @@ class Row extends MY_Controller {
         $this->pagination->initialize($config);
         //list
         $offset = $this->uri->segment(5) ? ($this->uri->segment(5) - 1)*$config['per_page'] : 0;
-        $this->data['rows'] = $this->row_model->get_query("SELECT * FROM th_rows WHERE $sql_like $sql_where deleted = 0 LIMIT ".$config['per_page']." OFFSET " . $offset);
+        $this->data['rows'] = $this->row_model->get_query("SELECT id FROM th_rows WHERE $sql_like $sql_where deleted = 0 LIMIT ".$config['per_page']." OFFSET " . $offset);
 
         $this->data['duples'] = $this->duple_model->get_rows(array('where' => array('deleted' => 0), 'sort_by' => 'id ASC'));
         $this->load->view('backend/layout/header', $this->data);
@@ -80,12 +81,13 @@ class Row extends MY_Controller {
                 $result = $this->row_model->insert($post);
                 if($result)
                 {
+                    $row_id = $this->row_model->insert_id();
                     //Logs
-                    $row = $this->row_model->get_by($this->row_model->insert_id());
+                    $row = $this->row_model->get_by($row_id);
                     $this->logs_model->write('row_add', $row);
                     //Redirect
                     $this->session->set_flashdata('msg_success', $this->lang->line('row_has_been_created'));
-                    redirect('/acp/row/show/'.$row['id']);
+                    redirect('/acp/row/show/'.$row_id);
                 }
             }
         }

@@ -21,7 +21,7 @@
             <?php
                 foreach($rows as $row)
                 {   
-                    $row = $this->land_model->convert_data($row);
+                    $row = $this->land_model->convert_data($this->land_model->get_by_id($row['id']));
                     $total_duple = $this->duple_model->get_rows(array('select' => 'COUNT(id)', 'where' => array('land_id' => $row['id'], 'deleted' => 0)));
             ?>
                     <tr>

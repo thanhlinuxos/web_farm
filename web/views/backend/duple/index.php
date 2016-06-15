@@ -19,7 +19,7 @@
             <?php
                 foreach($rows as $row)
                 {
-                    $row = $this->duple_model->convert_data($row);
+                    $row = $this->duple_model->convert_data($this->duple_model->get_by_id($row['id']));
                     $total_row = $this->row_model->get_rows(array('select' => 'COUNT(id)', 'where' => array('duple_id' => $row['id'], 'deleted' => 0)));
             ?>
                     <tr>

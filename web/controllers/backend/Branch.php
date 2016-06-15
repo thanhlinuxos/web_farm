@@ -17,6 +17,7 @@ class Branch extends MY_Controller {
         $config['use_page_numbers'] = TRUE;
         $this->pagination->initialize($config);
         $conditions = array(
+            'select' => 'id',
             'where' => array('deleted' => 0),
             'sort_by' => 'id DESC',
             'limit' => $config['per_page'],
@@ -41,12 +42,13 @@ class Branch extends MY_Controller {
                 $result = $this->branch_model->insert($post);
                 if($result)
                 {
+                    $branch_id = $this->branch_model->insert_id();
                     //Logs
-                    $branch = $this->branch_model->get_by($this->branch_model->insert_id());
+                    $branch = $this->branch_model->get_by($branch_id);
                     $this->logs_model->write('branch_add', $branch);
                     //Redirect   
                     $this->session->set_flashdata('msg_success', $this->lang->line('branch_has_been_created'));
-                    redirect('/acp/branch/show/'.$this->branch_model->insert_id());
+                    redirect('/acp/branch/show/'.$branch_id);
                 }
             }
         }

@@ -2,6 +2,7 @@
 /nbproject
 /system
 /uploads
-/vendor
 /composer.json
 /web/cache/*
+/web/logs/*
+/zip/*
