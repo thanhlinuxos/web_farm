@@ -19,6 +19,7 @@
             <?php
                 foreach($rows as $row)
                 {
+                    $row = $this->branch_model->convert_data($this->branch_model->get_by_id($row['id']));
                     $total_land = $this->land_model->get_rows(array('select' => 'COUNT(id)', 'where' => array('branch_id' => $row['id'], 'deleted' => 0)));
             ?>
                     <tr>
