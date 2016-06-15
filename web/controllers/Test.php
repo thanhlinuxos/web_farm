@@ -58,7 +58,6 @@ class Test extends CI_Controller {
 //        echo $this->typography->nl2br_except_pre($string);
         
 
-
     }
     
     public function ajax(){
