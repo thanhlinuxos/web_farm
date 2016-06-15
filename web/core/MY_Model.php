@@ -38,7 +38,7 @@ class MY_Model extends CI_Model
         $this->CI->load->database();
 
         if (!is_null($table)) {
-            $this->load->driver('cache', array('adapter' => 'apc', 'backup' => 'file', 'key_prefix' => 'mc_'));
+            $this->load->driver('cache', array('adapter' => 'memcached', 'backup' => 'file', 'key_prefix' => 'mc_')); //
             $this->table = $this->db->dbprefix($table);
             
             if(!$this->fields = $this->cache->get($this->table . '_list_fields')) {
@@ -391,7 +391,6 @@ class MY_Model extends CI_Model
     
     public function clean_cached()
     {
-        $this->load->driver('cache', array('adapter' => 'apc', 'backup' => 'file', 'key_prefix' => 'memcached_'));
         return $this->cache->clean();
     }
 

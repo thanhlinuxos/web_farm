@@ -116,4 +116,9 @@ class Logs extends MY_Controller {
         $this->load->view('backend/logs/server', $this->data);
         $this->load->view('backend/layout/footer', $this->data);
     }
+    
+    public function clean_cached()
+    {
+        var_dump($this->logs_model->clean_cached());
+    }
 }
