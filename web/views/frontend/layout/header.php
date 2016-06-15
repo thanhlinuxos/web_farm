@@ -77,7 +77,7 @@
         </nav>
         <div class="container-fluid">
             <div class="wraper">
-
+                <?php $this->load->view('frontend/layout/_flash'); ?>
 
 
 

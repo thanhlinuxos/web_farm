@@ -40,6 +40,7 @@
                     echo 'PROCESS TIME: <strong>' . $this->benchmark->elapsed_time(). '</strong> - MEMORY USAGE: <strong>' . $this->benchmark->memory_usage().'</strong>';
                 ?>
             </div>
+            <?php $this->load->view('frontend/layout/_modal'); ?>
         </div> <!-- /container-fluid -->
     </body>
 </html>
