@@ -210,7 +210,7 @@ class Land extends MY_Controller {
         $land = $this->land_model->get_by($id);
         if(!$land){
             if( $this->input->method(TRUE) == 'POST') {
-                $this->output_mylib->response(array('success' => FALSE, 'msg' => $this->lang->line('land_not_exist')));
+                $this->output->response(array('success' => FALSE, 'msg' => $this->lang->line('land_not_exist')));
             } else {
                 $this->session->set_flashdata('msg_error', $this->lang->line('land_not_exist'));
                 redirect(base_url('acp/land'));
@@ -227,7 +227,7 @@ class Land extends MY_Controller {
                     $this->duple_model->update($duple);
                 }
             }
-            $this->output_mylib->response(array('success' => TRUE, 'msg' => 'Sap xep doi thanh cong'));
+            $this->output->response(array('success' => TRUE, 'msg' => 'Sap xep doi thanh cong'));
         }
         $this->data['land'] = $land;
         $this->data['duples'] = $this->duple_model->get_rows(array('where' => array('land_id' => $id), 'sort_by' => 'ordinal ASC'));
