@@ -250,6 +250,12 @@ class MY_Model extends CI_Model
         return $query->result_array();
     }
     
+    /**
+     * Get data with string query
+     * @param type $str
+     * @param type $type
+     * @return boolean
+     */
     public function get_query($str = '', $type = TRUE)
     {
         if($str != '')
@@ -259,32 +265,6 @@ class MY_Model extends CI_Model
             return $type ? $query->result_array() : $query->row_array();
         }
         return FALSE;
-    }
-
-    /**
-     * Get sum
-     * return @numberic
-     */
-    public function get_sum($field = '', $where = null) {
-        if ($field == '') {
-            return false;
-        }
-
-        if (!in_array($field, $this->fields)) {
-            show_error("Method: get_sum() CRUD : '$field' not in fields of table '$this->table'");
-        }
-
-        if (!is_null($where)) {
-            $this->db->where($where);
-        }
-
-        $this->db->select_sum($field);
-
-        $query = $this->db->get($this->table);
-
-        $row = $query->row_array();
-
-        return $row[$field];
     }
 
     /**

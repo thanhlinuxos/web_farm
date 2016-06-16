@@ -10,6 +10,11 @@
         <link href="<?php echo base_url('vendor/select2/css/select2.min.css'); ?>" rel="stylesheet">
         <link href="<?php echo base_url('assets/frontend/css/custom.css'); ?>" rel="stylesheet">
         <link href="<?php echo base_url('vendor/jquery/ui/jquery-ui.min.css'); ?>" rel="stylesheet">
+        <script type="text/javascript">
+            var LANG = <?php echo json_encode($this->lang->language); ?>;
+            var REGIONAL = "<?php echo substr($this->session->userdata('language'), 0, 2);?>";
+            var BASE_URL = "<?php echo base_url(); ?>";
+        </script>
         <script type="text/javascript" src="<?php echo base_url('vendor/jquery/jquery-2.2.3.min.js'); ?>"></script>
         <script type="text/javascript" src="<?php echo base_url('vendor/jquery/ui/jquery-ui.min.js'); ?>"></script>
         <script type="text/javascript" src="<?php echo base_url('vendor/jquery/ui/jquery-ui-i18n.js'); ?>"></script>

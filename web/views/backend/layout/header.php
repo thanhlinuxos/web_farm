@@ -9,6 +9,11 @@
         <link href="<?php echo base_url('vendor/select2/css/select2.min.css'); ?>" rel="stylesheet">
         <link href="<?php echo base_url('assets/backend/css/custom.css'); ?>" rel="stylesheet">
         <link href="<?php echo base_url('vendor/jquery/ui/jquery-ui.min.css'); ?>" rel="stylesheet">
+        <script type="text/javascript">
+            var LANG = <?php echo json_encode($this->lang->language); ?>;
+            var REGIONAL = "<?php echo substr($this->session->userdata('language'), 0, 2);?>";
+            var BASE_URL = "<?php echo base_url(); ?>";
+        </script>
         <script type="text/javascript" src="<?php echo base_url('vendor/jquery/jquery-2.2.3.min.js'); ?>"></script>
         <script type="text/javascript" src="<?php echo base_url('vendor/jquery/ui/jquery-ui.min.js'); ?>"></script>
         <script type="text/javascript" src="<?php echo base_url('vendor/jquery/ui/jquery-ui-i18n.js'); ?>"></script>
@@ -27,6 +32,7 @@
                 <?php $USER_LOGIN = $this->session->userdata('user_login'); ?>
                 Xin chao: <?php echo $USER_LOGIN['fullname']; ?>
                 <div class="pull-right">
+                    <button type="button" class="btn btn-warning" onclick="clean_cached()">Clean Cache</button>
                     <a href="#"><img src="/assets/backend/img/icon/dialog.png" width="35" /></a>
                     <a class="btn btn-success" href="<?php echo base_url('dashboard');?>"><span class="glyphicon glyphicon-log-out"></span> UCP</a>
                     <a class="btn btn-default" href="<?php echo base_url('acp/logout'); ?>">

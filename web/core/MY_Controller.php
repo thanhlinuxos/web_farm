@@ -19,12 +19,16 @@ class MY_Controller extends CI_Controller
     public function __construct() {
         parent::__construct();
         
+        if(!$language = $this->session->userdata('language')) {
+            $language = 'vietnamese';
+            $this->session->set_userdata('language', 'vietnamese');
+        }
         if($this->uri->segment(1) == 'acp') {
             $this->user_model->backend_is_login();
-            $this->lang->load('backend');
+            $this->lang->load('backend', $language);
         } else {
             $this->user_model->frontend_is_login();
-            $this->lang->load('frontend');
+            $this->lang->load('frontend', $language);
         }
         $this->user_model->check_permission($this->router->fetch_class(), $this->router->fetch_method());
         $this->data['menu_active'] = $this->router->fetch_class();

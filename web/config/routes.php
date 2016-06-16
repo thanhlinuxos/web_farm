@@ -107,7 +107,6 @@ $route['acp/logs/search/page'] = 'backend/logs/search';
 $route['acp/logs/search/page/(:num)'] = 'backend/logs/search';
 $route['acp/logs/show/(:num)'] = 'backend/logs/show/$1';
 $route['acp/logs/server'] = 'backend/logs/server';
-$route['acp/logs/clean_cached'] = 'backend/logs/clean_cached';
 
 //Tree
 $route['acp/tree'] = 'backend/tree';
@@ -128,6 +127,7 @@ $route['acp/whisper/delete/(:num)'] = 'backend/whisper/delete/$1';
 
 $route['acp/migration'] = 'backend/migrate';
 $route['acp/unit_test'] = 'backend/unit_test';
+$route['acp/dashboard/clean_cached'] = 'backend/dashboard/clean_cached';
 
 // Default router
 $route['test'] = 'test';
