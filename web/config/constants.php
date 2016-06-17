@@ -94,3 +94,4 @@ define('ZIPPATH', FCPATH . 'zip/');
 define('CAPTCHAPATH', FCPATH . 'capcha/');
 define('LOGSPATH', FCPATH . 'web/logs/');
 define('BARCODEPATH', FCPATH . 'barcode/');
+define('BACKUPPATH', FCPATH . 'backup/');

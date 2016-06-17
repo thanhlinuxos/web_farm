@@ -8,75 +8,47 @@ class Test_model extends MY_Model
     }
     public function test()
     {
-        $this->load->dbforge();
-        
-        if ($this->db->table_exists('logs_' . date('Y')))
+        $this->load->dbutil();
+        $dbs = $this->dbutil->list_databases();
+
+        foreach ($dbs as $db)
         {
-            echo 'Table exits <br>';
+            echo $db . '<br>';
         }
+        var_dump($this->dbutil->database_exists('web_farm')); //true or false
+        echo '<br>';
         
-        $fields = array(
-            'id' => array(
-                'type' => 'INT',
-                'constraint' => 10,
-                'unsigned' => TRUE,
-                'auto_increment' => TRUE
-            ),
-            'action_key' => array(
-                'type' => 'VARCHAR',
-                'constraint' => '50',
-                'null' => TRUE,
-            ),
-            'content' => array(
-                'type' => 'TEXT',
-                'null' => TRUE,
-            ),
-            'ip' => array(
-                'type' => 'VARCHAR',
-                'constraint' => '20',
-                'null' => TRUE,
-            ),
-            'browser' => array(
-                'type' => 'TEXT',
-                'null' => TRUE,
-            ),
-            'os' => array(
-                'type' => 'VARCHAR',
-                'constraint' => '20',
-                'null' => TRUE,
-            ),
-            'user_id' => array(
-                'type' => 'SMALLINT',
-                'constraint' => '5',
-                'default' => '0',
-                'unsigned' => TRUE,
-            ),
-            'username' => array(
-                'type' => 'VARCHAR',
-                'constraint' => '50',
-                'null' => TRUE,
-            ),
-            'fullname' => array(
-                'type' => 'VARCHAR',
-                'constraint' => '50',
-                'null' => TRUE,
-            ),
-            'created_at' => array(
-                'type' => 'INT',
-                'constraint' => '10',
-                'default' => '0',
-                'unsigned' => TRUE,
-            ),
-            'deleted' => array(
-                'type' => 'INT',
-                'constraint' => '10',
-                'default' => '0',
-                'unsigned' => TRUE,
-            )
-        );
-        $this->dbforge->add_field($fields);
-        $this->dbforge->add_key('id', TRUE);
+        // CSV
+//        $query = $this->db->query("SELECT * FROM th_users");
+//        $delimiter = ",";
+//        $newline = "\r\n";
+//        $enclosure = '"';
+//        echo $this->dbutil->csv_from_result($query, $delimiter, $newline, $enclosure);
         
-        var_dump($this->dbforge->create_table('logs_' . date('Y'), TRUE, array('ENGINE' => 'InnoDB')));
+        // XML
+//        $query = $this->db->query("SELECT * FROM th_users");
+//        $config = array (
+//            'root'          => 'root',
+//            'element'       => 'element',
+//            'newline'       => "\n",
+//            'tab'           => "\t"
+//        );
+//        echo $this->dbutil->xml_from_result($query, $config);
+        
+        // BACKUP
+//        $prefs = array(
+//                'tables'        => array('table1', 'table2'),   // Array of tables to backup.
+//                'ignore'        => array(),                     // List of tables to omit from the backup
+//                'format'        => 'txt',                       // gzip, zip, txt
+//                'filename'      => 'mybackup.sql',              // File name - NEEDED ONLY WITH ZIP FILES
+//                'add_drop'      => TRUE,                        // Whether to add DROP TABLE statements to backup file
+//                'add_insert'    => TRUE,                        // Whether to add INSERT data to backup file
+//                'newline'       => "\n"                         // Newline character used in backup file
+//        );
+//        $backup = $this->dbutil->backup($prefs);
+//        $this->load->helper('file');
+//        write_file(BACKUPPATH . '/'.date('Y-m-d_H-i').'.gz', $backup);
+//        $this->load->helper('download');
+//        force_download('mybackup.gz', $backup);
     }
 }
