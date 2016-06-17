@@ -13,6 +13,8 @@ class Test extends CI_Controller {
     
     public function index()
     {
+        $this->load->model('test_model');
+        $this->test_model->test();
 //        $this->user_model->get_rows(array(
 //            'joins' => array(
 //                            array('th_branches', 'th_branches.id = th_users.branch_id'),
@@ -25,7 +27,7 @@ class Test extends CI_Controller {
             //'group_by' => 'fullname',
 //        ));
 //        echo $this->db->last_query();
-        $this->load->view('test', $this->data);
+//        $this->load->view('test', $this->data);
         
         //  Create object of Simple_html_dom class
 //        $html = new Simple_html_dom();

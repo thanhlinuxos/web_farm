@@ -4,6 +4,19 @@
 <!-- Search Form -->
 <div class="row form-group">
     <form name="search-form" method="POST" action="<?php echo base_url('acp/logs/search'); ?>">
+        <div class="col-sm-1">
+            <select class="form-control" id="table_name" name="table_name">
+                <?php
+                foreach ($table_list as $table) {
+                ?>
+                    <option value="<?php echo $table ?>" <?php echo set_select('table_name', $table, $logs_search['table_name'] == $table); ?>>
+                        <?php echo str_replace('logs_', '', $table) ?>
+                    </option>
+                <?php
+                }
+                ?>
+            </select>
+        </div>    
         <div class="col-sm-2">
             <select class="form-control" id="action_key" name="action_key">
                 <option value="">---</option>
