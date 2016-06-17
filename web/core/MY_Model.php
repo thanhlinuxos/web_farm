@@ -168,8 +168,8 @@ class MY_Model extends CI_Model
         // string or array(field1 => value1, field2 => value2, ...)
         if (isset($input['where'])) {
             if(is_array($input['where']) && count($input['where']) > 0) {
-                if (!isset($input['deleted'])) {
-                    $conditions['deleted'] = 0;
+                if (!isset($input['where']['deleted'])) {
+                    $input['where']['deleted'] = 0;
                 }
                 $this->db->where($input['where']);
             } else if(is_string($input['where']) && $input['where']) {
@@ -180,6 +180,8 @@ class MY_Model extends CI_Model
             } else {
                 show_error("Method: get_row() CRUD : Param WHERE must be ARRAY OR STRING and NOT empty!");
             }
+        } else {
+            $this->db->where('deleted', 0);
         }
         // WHERE IN
         // string field and array(value1, value2, ...)
@@ -289,8 +291,18 @@ class MY_Model extends CI_Model
      * @return number
      */
     public function count_all($where = null) {
-        if (!is_null($where)) {
+        if(is_array($where)) {
+            if(!isset($where['deleted'])) {
+                $where['deleted'] = 0;
+            }
             $this->db->where($where);
+        } else if(is_string($where)) {
+            if(strpos($where, 'deleted') === FALSE) {
+                $this->db->where('deleted', 0);
+            }
+            $this->db->where($where);
+        } else {
+            $this->db->wherewhere('deleted', 0);
         }
         return $this->db->count_all_results($this->table);
     }
