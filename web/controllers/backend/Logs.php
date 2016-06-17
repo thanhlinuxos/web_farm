@@ -1,14 +1,15 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 class Logs extends MY_Controller {
-
+    
+    // TODO: Dang tim kiem o nam 2015 ma luu logs thi se insert sai table
     public function __construct() {
         parent::__construct();
         $this->data['per_page'] = 100;
     }
     public function index()
     {
-        $this->session->set_userdata('logs_search', array('user_id' => '', 'action_key' => '', 'from_date' => '', 'to_date' => ''));
+        $this->session->set_userdata('logs_search', array('table_name' => 'logs_'.date('Y'), 'user_id' => '', 'action_key' => '', 'from_date' => '', 'to_date' => ''));
         $config = $this->pagination_mylib->bootstrap_configs();
         $config['base_url'] = base_url('acp/logs/page');
         $config['total_rows'] = $this->logs_model->count_all(array('deleted' => 0));
@@ -24,6 +25,7 @@ class Logs extends MY_Controller {
         );
 
         $this->data['rows'] = $this->logs_model->get_rows($conditions);
+        $this->data['table_list'] = $this->logs_model->table_list();
         $this->data['actions'] = $this->logs_model->get_rows(array('select' => 'action_key', 'distinct' => TRUE, 'sort_by' => 'action_key ASC'));
         $this->data['users'] = $this->logs_model->get_rows(array('select' => 'user_id, username, fullname', 'distinct' => TRUE, 'sort_by' => 'username ASC'));
         $this->load->view('backend/layout/header', $this->data);
@@ -36,7 +38,7 @@ class Logs extends MY_Controller {
         if($this->input->post('submit'))
         {
             $post = $this->input->post();
-            $this->session->set_userdata('logs_search', array('user_id' => $post['user_id'], 'action_key' => $post['action_key'], 'from_date' => $post['from_date'], 'to_date' => $post['to_date']));
+            $this->session->set_userdata('logs_search', array('table_name' => $post['table_name'], 'user_id' => $post['user_id'], 'action_key' => $post['action_key'], 'from_date' => $post['from_date'], 'to_date' => $post['to_date']));
         }
         
         $logs_search = $this->session->userdata('logs_search');
@@ -57,7 +59,7 @@ class Logs extends MY_Controller {
             $sql .= "created_at <= '".$to_date."' AND ";
         }
         //Count
-        $count_all = $this->logs_model->get_query("SELECT COUNT(id) FROM th_logs WHERE $sql deleted = 0", FALSE);
+        $count_all = $this->logs_model->get_query("SELECT COUNT(id) FROM ".$this->db->dbprefix.$logs_search['table_name']." WHERE $sql deleted = 0", FALSE);
         //Pagination
         $config = $this->pagination_mylib->bootstrap_configs();
         $config['base_url'] = base_url('acp/logs/search/page');
@@ -68,7 +70,8 @@ class Logs extends MY_Controller {
         $this->pagination->initialize($config);
         //List
         $offset = $this->uri->segment(5) ? ($this->uri->segment(5) - 1)*$config['per_page'] : 0;
-        $this->data['rows'] = $this->logs_model->get_query("SELECT * FROM th_logs WHERE $sql deleted = 0 ORDER BY id DESC LIMIT ".$config['per_page']." OFFSET " . $offset);
+        $this->data['rows'] = $this->logs_model->get_query("SELECT * FROM ".$this->db->dbprefix.$logs_search['table_name']." WHERE $sql deleted = 0 ORDER BY id DESC LIMIT ".$config['per_page']." OFFSET " . $offset);
+        $this->data['table_list'] = $this->logs_model->table_list();
         $this->data['actions'] = $this->logs_model->get_rows(array('select' => 'action_key', 'distinct' => TRUE, 'sort_by' => 'action_key ASC'));
         $this->data['users'] = $this->logs_model->get_rows(array('select' => 'user_id, username, fullname', 'distinct' => TRUE, 'sort_by' => 'username ASC'));
         
