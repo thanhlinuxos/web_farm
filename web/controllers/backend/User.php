@@ -46,7 +46,7 @@ class User extends MY_Controller {
         $sql_like = $user_search['keyword'] ? "(`username` LIKE '%".$user_search['keyword']."%' ESCAPE '!' OR  `fullname` LIKE '%".$user_search['keyword']."%' ESCAPE '!' ) AND " : '';
         $sql_where = $user_search['branch_id'] ? "branch_id = '".$user_search['branch_id']."' AND " : '';
         //Count
-        $count_all = $this->user_model->get_query("SELECT COUNT(id) FROM th_users WHERE $sql_like $sql_where deleted = 0", FALSE);
+        $count_all = $this->user_model->get_query("SELECT COUNT(id) FROM ".$this->db->dbprefix."users WHERE $sql_like $sql_where deleted = 0", FALSE);
         //Pagination
         $config = $this->pagination_mylib->bootstrap_configs();
         $config['base_url'] = base_url('acp/user/search/page');
@@ -57,7 +57,7 @@ class User extends MY_Controller {
         $this->pagination->initialize($config);
         //List
         $offset = $this->uri->segment(5) ? ($this->uri->segment(5) - 1)*$config['per_page'] : 0;
-        $this->data['rows'] = $this->user_model->get_query("SELECT id FROM th_users WHERE $sql_like $sql_where deleted = 0 LIMIT ".$config['per_page']." OFFSET " . $offset);
+        $this->data['rows'] = $this->user_model->get_query("SELECT id FROM ".$this->db->dbprefix."users WHERE $sql_like $sql_where deleted = 0 LIMIT ".$config['per_page']." OFFSET " . $offset);
 
         $this->data['branches'] = $this->branch_model->get_rows();
         $this->load->view('backend/layout/header', $this->data);

@@ -25,13 +25,13 @@ img{max-width:100%;}
  */
 body{
 	background: url(../images/bg1.png);
-	font-family: "Century Gothic",Arial, Helvetica, sans-serif;
+	font-family: "Times New Roman", Georgia, Serif;
 	}
 .content p{
 	margin: 18px 0px 45px 0px;
 }
 .content p{
-	font-family: "Century Gothic";
+	font-family: "Times New Roman";
 	font-size:2em;
 	color:#666;
 	text-align:center;
@@ -45,7 +45,7 @@ body{
 }
 .content a{
 	color:#fff;
-	font-family: "Century Gothic";
+	font-family: "Times New Roman";
 	background: #666666; /* Old browsers */
 	background: -moz-linear-gradient(top,  #666666 0%, #666666 100%); /* FF3.6+ */
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#666666), color-stop(100%,#666666)); /* Chrome,Safari4+ */
@@ -68,7 +68,7 @@ body{
 }
 .logo h1{
 	font-size:2em;
-	font-family: "Century Gothic";
+	font-family: "Times New Roman";
 	background: #666666; /* Old browsers */
 	background: -moz-linear-gradient(top,  #666666 0%, #666666 100%); /* FF3.6+ */
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#666666), color-stop(100%,#666666)); /* Chrome,Safari4+ */

@@ -29,3 +29,6 @@
     border-radius: 4px;
     box-shadow: none;
 }
+.ui-datepicker-title {
+    color: #000;
+}

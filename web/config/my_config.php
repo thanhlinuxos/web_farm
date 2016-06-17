@@ -53,5 +53,6 @@ $config = array(
             'materials' => 'index|add|show|edit',
         ),
         'employee' => array()
-    ) 
+    ),
+    'cache' => array('adapter' => 'memcached', 'backup' => 'file', 'key_prefix' => 'mc_')
 );
