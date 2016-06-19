@@ -39,6 +39,7 @@ class Branch extends MY_Controller {
             
             if($this->form_validation->run() == TRUE)
             {
+                $post['created_at'] = now();
                 $result = $this->branch_model->insert($post);
                 if($result)
                 {

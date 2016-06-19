@@ -35,20 +35,26 @@ class Whisper extends MY_Controller {
     
     public function add()
     {
+        $user_login = $this->session->userdata['user_login'];
         $this->data['row'] = $this->whisper_model->default_value();
         if($this->input->post('submit'))
         {
             $post = $this->input->post();
-            $this->form_validation->set_rules('receive[]', $this->lang->line('branch_name'), 'required');
-            $this->form_validation->set_rules('content', $this->lang->line('branch_name'), 'required');
+            $this->form_validation->set_rules('receive[]', $this->lang->line('whisper_receive'), 'required');
+            $this->form_validation->set_rules('content', $this->lang->line('whisper_content'), 'required');
             if($this->form_validation->run() == TRUE)
             {
-                
+                $result = $this->whisper_model->insert_data($post);
+                if($result) {
+                    //Redirect
+                    $this->session->set_flashdata('msg_success', $this->lang->line('whisper_sent_successfully'));
+                    redirect(base_url('acp/whisper'));
+                }
             }
             
             $this->data['row'] = $post;
         }
-        $this->data['users'] = $this->user_model->get_rows(array('select' => 'id, fullname, username', 'where' => array('group !=' => 'employee')));
+        $this->data['users'] = $this->user_model->get_rows(array('select' => 'id, fullname, username', 'where' => array('id !=' => $user_login['id'], 'group !=' => 'employee', 'type' => 'web')));
         $this->load->view('backend/layout/header', $this->data);
         $this->load->view('backend/whisper/add', $this->data);
         $this->load->view('backend/layout/footer', $this->data);

@@ -162,3 +162,4 @@ $lang['whisper_receive'] = 'Người nhận';
 $lang['whisper_content'] = 'Nội dung';
 $lang['whisper_is_read_0'] = 'Chưa đọc';
 $lang['whisper_is_read_1'] = 'Đã đọc';
+$lang['whisper_sent_successfully'] = 'Tin nhắn đã gửi thành công!';

@@ -2,7 +2,9 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 class Logs extends MY_Controller {
     
-    // TODO: Dang tim kiem o nam 2015 ma luu logs thi se insert sai table
+    // TODO: 
+    // - Dang tim kiem o nam 2015 ma luu logs thi se insert sai table
+    // - Tooltip trong trang Mine
     public function __construct() {
         parent::__construct();
         $this->data['per_page'] = 100;
@@ -92,6 +94,29 @@ class Logs extends MY_Controller {
         
         $this->load->view('backend/layout/header', $this->data);
         $this->load->view('backend/logs/show', $this->data);
+        $this->load->view('backend/layout/footer', $this->data);
+    }
+    
+    public function mine()
+    {
+        $user_login = $this->session->userdata('user_login');
+        $config = $this->pagination_mylib->bootstrap_configs();
+        $config['base_url'] = base_url('acp/logs/mine/page');
+        $config['total_rows'] = $this->logs_model->count_all(array('user_id' => $user_login['id']));
+        $config['per_page'] = $this->data['per_page'];
+        $config['uri_segment'] = 5;
+        $config['use_page_numbers'] = TRUE;
+        $this->pagination->initialize($config);
+        $conditions = array(
+            'where' => array('user_id' => $user_login['id']),
+            'sort_by' => 'id DESC',
+            'limit' => $config['per_page'],
+            'offset' => $this->uri->segment(5) ? ($this->uri->segment(5) - 1)*$config['per_page'] : 0
+        );
+
+        $this->data['rows'] = $this->logs_model->get_rows($conditions);
+        $this->load->view('backend/layout/header', $this->data);
+        $this->load->view('backend/logs/mine', $this->data);
         $this->load->view('backend/layout/footer', $this->data);
     }
     

@@ -7,8 +7,9 @@
         <link href="<?php echo base_url('vendor/bootstrap/css/bootstrap-theme.min.css'); ?>" rel="stylesheet">
         <link href="<?php echo base_url('vendor/bootstrap/css/bootstrap-toggle.min.css'); ?>" rel="stylesheet">
         <link href="<?php echo base_url('vendor/select2/css/select2.min.css'); ?>" rel="stylesheet">
-        <link href="<?php echo base_url('assets/backend/css/custom.css'); ?>" rel="stylesheet">
         <link href="<?php echo base_url('vendor/jquery/ui/jquery-ui.min.css'); ?>" rel="stylesheet">
+        <link href="<?php echo base_url('vendor/font-awesome/css/font-awesome.min.css'); ?>" rel="stylesheet">
+        <link href="<?php echo base_url('assets/backend/css/custom.css'); ?>" rel="stylesheet">
         <script type="text/javascript">
             var LANG = <?php echo json_encode($this->lang->language); ?>;
             var REGIONAL = "<?php echo substr($this->session->userdata('language'), 0, 2);?>";
@@ -32,8 +33,11 @@
                 <?php $USER_LOGIN = $this->session->userdata('user_login'); ?>
                 Xin chao: <?php echo $USER_LOGIN['fullname']; ?>
                 <div class="pull-right">
+                    <a class="btn btn-default" href="<?php echo base_url('acp/logs/mine'); ?>">
+                        My History
+                    </a>
                     <button type="button" class="btn btn-warning" onclick="clean_cached()">Clean Cache</button>
-                    <a href="#"><img src="/assets/backend/img/icon/dialog.png" width="35" /></a>
+                    <a href="<?php echo base_url('acp/whisper');?>"><img src="/assets/backend/img/icon/dialog.png" width="35" /></a>
                     <a class="btn btn-success" href="<?php echo base_url('dashboard');?>"><span class="glyphicon glyphicon-log-out"></span> UCP</a>
                     <a class="btn btn-default" href="<?php echo base_url('acp/logout'); ?>">
                         <span class="glyphicon glyphicon-log-out"></span> <?php echo $this->lang->line('auth_logout'); ?>
@@ -54,7 +58,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="#">Farm</a>
+                        <a class="navbar-brand" href="#">GYAO</a>
                     </div>
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">

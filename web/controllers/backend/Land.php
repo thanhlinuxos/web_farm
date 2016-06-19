@@ -98,6 +98,7 @@ class Land extends MY_Controller {
                 }
                 //Continue
                 if($success) {
+                    $post['created_at'] = now();
                     $result = $this->land_model->insert($post);
                     if($result)
                     {

@@ -28,4 +28,21 @@ class Whisper_model extends MY_Model
         
         return $data;
     }
+    
+    public function insert_data($input = array())
+    {
+        $user_login = $this->session->userdata['user_login'];
+        $data = array();
+        $tmp = array(
+            'send_id' => $user_login['id'],
+            'content' => $input['content'],
+            'created_at' => now()
+        );
+        foreach ($input['receive'] as $receive) {
+            $tmp['receive_id'] = $receive;
+            $data[] = $tmp;
+        }
+       
+        return $this->insert_batch($data);
+    }
 }
