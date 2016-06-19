@@ -109,7 +109,7 @@ class Branch extends MY_Controller {
             $this->session->set_flashdata('msg_success', $this->lang->line('branch_not_exist'));
             redirect(base_url('acp/branch'));
         }
-        $result = $this->branch_model->delete($id);
+        $result = $this->branch_model->delete_data($id);
         if($result) {
             //Logs
             $this->logs_model->write('branch_delete', $branch);

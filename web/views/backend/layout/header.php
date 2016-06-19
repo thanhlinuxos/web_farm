@@ -33,15 +33,16 @@
                 <?php $USER_LOGIN = $this->session->userdata('user_login'); ?>
                 Xin chao: <?php echo $USER_LOGIN['fullname']; ?>
                 <div class="pull-right">
-                    <a class="btn btn-default" href="<?php echo base_url('acp/logs/mine'); ?>">
-                        My History
-                    </a>
-                    <button type="button" class="btn btn-warning" onclick="clean_cached()">Clean Cache</button>
-                    <a href="<?php echo base_url('acp/whisper');?>"><img src="/assets/backend/img/icon/dialog.png" width="35" /></a>
-                    <a class="btn btn-success" href="<?php echo base_url('dashboard');?>"><span class="glyphicon glyphicon-log-out"></span> UCP</a>
-                    <a class="btn btn-default" href="<?php echo base_url('acp/logout'); ?>">
-                        <span class="glyphicon glyphicon-log-out"></span> <?php echo $this->lang->line('auth_logout'); ?>
-                    </a>
+                    <ul class="list-inline">
+                        <li><a href="<?php echo base_url('acp/whisper');?>"><img src="/assets/backend/img/icon/dialog.png" width="35" /></a></li>
+                        <li><a class="btn btn-default" href="<?php echo base_url('acp/logs/mine'); ?>">My History</a></li>
+                        <li><button type="button" class="btn btn-warning" onclick="clean_cached()">Clean Cache</button></li>                   
+                        <li><a class="btn btn-success" href="<?php echo base_url('dashboard');?>"><span class="glyphicon glyphicon-log-out"></span> UCP</a></li>
+                        <li><a class="btn btn-default" href="<?php echo base_url('acp/logout'); ?>">
+                                <span class="glyphicon glyphicon-log-out"></span> <?php echo $this->lang->line('auth_logout'); ?>
+                            </a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
