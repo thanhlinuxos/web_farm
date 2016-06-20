@@ -24,8 +24,10 @@
 </table>
 <div class="row">
     <div class="col-sm-12 text-center">
-        <a href="<?php echo base_url('acp/branch'); ?>" class="btn btn-default btn-md"><?php echo $this->lang->line('btn_back'); ?></a>
-        <a href="<?php echo base_url('acp/branch/edit/' . $row['id']); ?>" class="btn btn-warning btn-md"><?php echo $this->lang->line('btn_edit'); ?></a>
-        <a href="<?php echo base_url('acp/branch/delete/' . $row['id']); ?> " class="btn btn-danger btn-md" onclick="return confirm('Are you sure?');"><?php echo $this->lang->line('btn_delete'); ?></a>
+        <ul class="list-inline">
+            <li><a href="<?php echo base_url('acp/branch'); ?>" class="btn btn-default btn-md"><?php echo $this->lang->line('btn_back'); ?></a></li>
+            <li><a href="<?php echo base_url('acp/branch/edit/' . $row['id']); ?>" class="btn btn-warning btn-md"><?php echo $this->lang->line('btn_edit'); ?></a></li>
+            <li><a href="<?php echo base_url('acp/branch/delete/' . $row['id']); ?> " class="btn btn-danger btn-md" onclick="return confirm('Are you sure?');"><?php echo $this->lang->line('btn_delete'); ?></a></li>
+        </ul>
     </div> 
 </div>
