@@ -11,6 +11,13 @@ class Test extends CI_Controller {
         require_once APPPATH . 'third_party/simple_html_dom.php';
     }
     
+    public function parse_smileys()
+    {
+        $this->load->helper('smiley');
+        $post = $this->input->post();
+        $this->output->response(array('str' => parse_smileys($post['str'], base_url('assets/smileys') . '/')));
+    }
+
     public function index()
     {
         $this->load->helper('smiley');
