@@ -53,7 +53,7 @@ class Logs_model extends MY_Model
                 $this->session->set_userdata('logs_search', $logs_search);
                 
                 $user_login = $this->session->userdata('user_login');
-                $this->load->library('user_agent');
+                
                 if ($this->agent->is_browser()) {
                     $agent = $this->agent->browser().' '.$this->agent->version();
                 } else if($this->agent->is_robot()) {
