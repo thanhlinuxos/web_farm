@@ -37,11 +37,15 @@
                         <td><?php echo $row['axis_y'];?></td>
                         <td><img src="<?php echo $row['image_'];?>" width="70"></td>
                         <td>
-                            <a href="<?php echo base_url('acp/land/sortable/'.$row['id']);?>" class="btn btn-info btn-xs <?php if($total_duple[0]['COUNT(id)'] < 2) echo 'disabled'; ?>"><?php echo $this->lang->line('land_sortable'); ?></a>
-                            <a href="<?php echo base_url('acp/land/edit/'.$row['id']);?>" class="btn btn-warning btn-xs"><?php echo $this->lang->line('btn_edit'); ?></a>
-                            <button class="btn btn-danger btn-xs" onclick="delete_confirm('Delete Land', 'Are you sure?', 'acp/land/delete/<?php echo $row['id'];?>')">
-                                <?php echo $this->lang->line('btn_delete'); ?>
-                            </button>
+                            <ul class="list-inline">
+                                <li><a href="<?php echo base_url('acp/land/sortable/'.$row['id']);?>" class="btn btn-info btn-xs <?php if($total_duple[0]['COUNT(id)'] < 2) echo 'disabled'; ?>"><?php echo $this->lang->line('land_sortable'); ?></a></li>
+                                <li><a href="<?php echo base_url('acp/land/edit/'.$row['id']);?>" class="btn btn-warning btn-xs"><?php echo $this->lang->line('btn_edit'); ?></a></li>
+                                <li>
+                                    <button class="btn btn-danger btn-xs" onclick="delete_confirm('Delete Land', 'Are you sure?', 'acp/land/delete/<?php echo $row['id'];?>')">
+                                        <?php echo $this->lang->line('btn_delete'); ?>
+                                    </button>
+                                </li>
+                            </ul>    
                         </td>
                     </tr>
             <?php

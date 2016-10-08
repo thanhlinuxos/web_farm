@@ -38,6 +38,7 @@
             <div style="margin-top: 10px; color: #029f5b;">
                 <?php
                     echo 'PROCESS TIME: <strong>' . $this->benchmark->elapsed_time(). '</strong> - MEMORY USAGE: <strong>' . $this->benchmark->memory_usage().'</strong>';
+                    echo ' - YOUR PC: <strong>' . $this->agent->platform() . '</strong> - YOUR BROWSER: <strong>' . $this->agent->browser() .' '. $this->agent->version().'</strong>';
                 ?>
             </div>
         </div> <!-- /container -->

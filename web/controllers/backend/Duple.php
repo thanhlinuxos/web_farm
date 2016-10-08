@@ -90,7 +90,8 @@ class Duple extends MY_Controller {
             $this->form_validation->set_rules('ordinal', $this->lang->line('duple_ordinal'), 'required');
             if ($this->form_validation->run() == TRUE)
             {
-                $post['ordinal'] = $post['ordinal'] ? $post['ordinal'] :$this->duple_model->next_id(); 
+                $post['ordinal'] = $post['ordinal'] ? $post['ordinal'] :$this->duple_model->next_id();
+                $post['created_at'] = now();
                 $result = $this->duple_model->insert($post);
                 if($result)
                 {

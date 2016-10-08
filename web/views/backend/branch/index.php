@@ -33,10 +33,14 @@
                         <td><?php echo $row['address'];?></td>
                         <td><?php echo $row['phone'];?></td>
                         <td>
-                            <a href="<?php echo base_url('acp/branch/edit/'.$row['id']);?>" class="btn btn-warning btn-xs"><?php echo $this->lang->line('btn_edit'); ?></a>
-                            <button class="btn btn-danger btn-xs" onclick="delete_confirm('Delete Branch', 'Are you sure?', 'acp/branch/delete/<?php echo $row['id'];?>')">
-                                <?php echo $this->lang->line('btn_delete'); ?>
-                            </button>
+                            <ul class="list-inline">
+                                <li><a href="<?php echo base_url('acp/branch/edit/'.$row['id']);?>" class="btn btn-warning btn-xs"><?php echo $this->lang->line('btn_edit'); ?></a></li>
+                                <li>
+                                    <button class="btn btn-danger btn-xs" onclick="delete_confirm('Delete Branch', 'Are you sure?', 'acp/branch/delete/<?php echo $row['id'];?>')">
+                                        <?php echo $this->lang->line('btn_delete'); ?>
+                                    </button>
+                                </li>
+                            </ul>  
                         </td>
                     </tr>
             <?php

@@ -36,8 +36,8 @@
                                     if(count($v)) {
                                         echo "<ul class='nav collapse' id='submenu-".str_replace('\\', '', $key)."-".str_replace('\\', '', $k)."' role='menu' aria-labelledby='btn-".str_replace('\\', '', $key)."-".str_replace('\\', '', $k)."'>";
                                         foreach ($v as $file) {
-                                            $date = explode('-', str_replace(array('.txt','log-'), '', $file));
-                                            echo "<li><a href='".  base_url('acp/logs/server?date='.$date[2].'-'.$date[1].'-'.$date[0])."'>------ ".$file."</a></li>";
+                                            $date = str_replace(array('.txt','log-'), '', $file);
+                                            echo "<li><a href='".  base_url('acp/logs/server?date='. nice_date($date, 'd-m-Y')) ."'>------ ".$file."</a></li>";
                                         }
                                         echo "</ul>";
                                     }

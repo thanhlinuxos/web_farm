@@ -77,7 +77,8 @@ class Row extends MY_Controller {
             $this->form_validation->set_rules('name', $this->lang->line('row_name'), 'required');
             if ($this->form_validation->run() == TRUE)
             {
-                $post['ordinal'] = $post['ordinal'] ? $post['ordinal'] :$this->row_model->next_id(); 
+                $post['ordinal'] = $post['ordinal'] ? $post['ordinal'] :$this->row_model->next_id();
+                $post['created_at'] = now();
                 $result = $this->row_model->insert($post);
                 if($result)
                 {
