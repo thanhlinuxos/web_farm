@@ -2,7 +2,7 @@
 
 if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-function compress() {
+function compress() {  
     $CI = & get_instance();
     $buffer = $CI->output->get_output();
     $buffer = minify_html($buffer);

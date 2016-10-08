@@ -47,7 +47,7 @@ class Row extends MY_Controller {
         $sql_like = $row_search['keyword']?"(`name` LIKE '%".$row_search['keyword']."%' ESCAPE '!' ) AND " : "";
         $sql_where = $row_search['duple_id'] ? "duple_id = '".$row_search['duple_id']."' AND " : '';
         //Count
-        $count_all = $this->row_model->get_query("SELECT COUNT(id) FROM th_rows WHERE $sql_like $sql_where deleted = 0", FALSE);
+        $count_all = $this->row_model->get_query("SELECT COUNT(id) FROM ".$this->db->dbprefix."rows WHERE $sql_like $sql_where deleted = 0", FALSE);
          //Pagination
         $config = $this->pagination_mylib->bootstrap_configs();
         $config['base_url'] = base_url('acp/row/search/page');
@@ -58,7 +58,7 @@ class Row extends MY_Controller {
         $this->pagination->initialize($config);
         //list
         $offset = $this->uri->segment(5) ? ($this->uri->segment(5) - 1)*$config['per_page'] : 0;
-        $this->data['rows'] = $this->row_model->get_query("SELECT id FROM th_rows WHERE $sql_like $sql_where deleted = 0 LIMIT ".$config['per_page']." OFFSET " . $offset);
+        $this->data['rows'] = $this->row_model->get_query("SELECT id FROM ".$this->db->dbprefix."rows WHERE $sql_like $sql_where deleted = 0 LIMIT ".$config['per_page']." OFFSET " . $offset);
 
         $this->data['duples'] = $this->duple_model->get_rows(array('where' => array('deleted' => 0), 'sort_by' => 'id ASC'));
         $this->load->view('backend/layout/header', $this->data);
@@ -77,7 +77,8 @@ class Row extends MY_Controller {
             $this->form_validation->set_rules('name', $this->lang->line('row_name'), 'required');
             if ($this->form_validation->run() == TRUE)
             {
-                $post['ordinal'] = $post['ordinal'] ? $post['ordinal'] :$this->row_model->next_id(); 
+                $post['ordinal'] = $post['ordinal'] ? $post['ordinal'] :$this->row_model->next_id();
+                $post['created_at'] = now();
                 $result = $this->row_model->insert($post);
                 if($result)
                 {

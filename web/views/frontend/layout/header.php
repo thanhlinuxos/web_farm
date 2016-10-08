@@ -10,6 +10,11 @@
         <link href="<?php echo base_url('vendor/select2/css/select2.min.css'); ?>" rel="stylesheet">
         <link href="<?php echo base_url('assets/frontend/css/custom.css'); ?>" rel="stylesheet">
         <link href="<?php echo base_url('vendor/jquery/ui/jquery-ui.min.css'); ?>" rel="stylesheet">
+        <script type="text/javascript">
+            var LANG = <?php echo json_encode($this->lang->language); ?>;
+            var REGIONAL = "<?php echo substr($this->session->userdata('language'), 0, 2);?>";
+            var BASE_URL = "<?php echo base_url(); ?>";
+        </script>
         <script type="text/javascript" src="<?php echo base_url('vendor/jquery/jquery-2.2.3.min.js'); ?>"></script>
         <script type="text/javascript" src="<?php echo base_url('vendor/jquery/ui/jquery-ui.min.js'); ?>"></script>
         <script type="text/javascript" src="<?php echo base_url('vendor/jquery/ui/jquery-ui-i18n.js'); ?>"></script>
@@ -56,21 +61,25 @@
                         </li>
                     </ul>
                     <div class="pull-right padding-top-7">
-                        <span class="well well-sm">Xin chao: <a href="#"><?php echo $user_login['fullname']; ?></a></span>
-                        <?php
-                        if($user_login['group'] == 'admin' && $user_login['is_admin']) {
-                        ?>
-                        <span>
-                            <select class="branch-select-box">
-                              <option>Tay Ninh</option>
-                              <option>Vinh Long</option>
-                            </select>
-                        </span>
-                        <a class="btn btn-success" href="<?php echo base_url('acp');?>"><span class="glyphicon glyphicon-log-out"></span> ACP</a>
-                        <?php
-                        }
-                        ?>
-                        <a class="btn btn-default" href="<?php echo base_url('logout');?>"><span class="glyphicon glyphicon-log-out"></span> Thoát</a>
+                        <ul class="list-inline">
+                            <li><span class="well well-sm">Xin chao: <a href="#"><?php echo $user_login['fullname']; ?></a></span></li>
+                            <?php
+                            if($user_login['group'] == 'admin' && $user_login['is_admin']) {
+                            ?>
+                            <li>
+                                <span>
+                                    <select class="branch-select-box">
+                                      <option>Tay Ninh</option>
+                                      <option>Vinh Long</option>
+                                    </select>
+                                </span>
+                            </li>    
+                            <li><a class="btn btn-success" href="<?php echo base_url('acp');?>"><span class="glyphicon glyphicon-log-out"></span> ACP</a></li>
+                            <?php
+                            }
+                            ?>
+                            <li><a class="btn btn-default" href="<?php echo base_url('logout');?>"><span class="glyphicon glyphicon-log-out"></span> Thoát</a></li>
+                        </ul>   
                     </div>
                 </div><!--/.nav-collapse -->
             </div>

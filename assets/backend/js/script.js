@@ -5,10 +5,6 @@
 if (typeof jQuery === 'undefined') {
   throw new Error('Requires jQuery')
 }
-
-var REGIONAL = 'vi';
-var BASE_URL = 'http://web_farm.local/';
-
 function ajax_short_list(url, num)
 {
     $.ajax({
@@ -51,8 +47,29 @@ function delete_confirm(title, msg, url)
     $('#btnModalOk').on('click', function (){
         window.location = BASE_URL + url;
         $('#myModal').modal('hide');
-     });
+    });
 };
+
+function clean_cached()
+{
+    $('#myModalLabel').html('Clean cache');
+    $('#myModalBody').html('Are You Sure?');
+    $('#btnModalOk').show();
+    $('#myModal').modal('show');
+    $('#btnModalOk').on('click', function (){
+        $.ajax({
+            url: BASE_URL + 'acp/dashboard/clean_cached',
+            method: "GET",
+            success: function(response, textStatus) {
+                var data = JSON.parse(response);
+                $('#myModalLabel').html('Clean cache');
+                $('#myModalBody').html(data.msg);
+                $('#btnModalOk').hide();
+                $('#myModal').modal('show');
+            }
+        });
+    }); 
+}
 
 function get_land_li(branch_id) {
     $.ajax({

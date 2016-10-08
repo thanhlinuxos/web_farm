@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 class User extends MY_Controller {
-
+// TODO: add user_type: system | web
     public function __construct() {
         parent::__construct();
         $this->data['per_page'] = 25;
@@ -15,14 +15,14 @@ class User extends MY_Controller {
         //Get config for pagination
         $config = $this->pagination_mylib->bootstrap_configs();
         $config['base_url'] = base_url('acp/user/page');
-        $config['total_rows'] = $this->user_model->count_all(array('deleted' => 0));
+        $config['total_rows'] = $this->user_model->count_all(array('type' => 'web'));
         $config['per_page'] = $this->data['per_page'];
         $config['uri_segment'] = 4;
         $config['use_page_numbers'] = TRUE;
         $this->pagination->initialize($config);
         $conditions = array(
             'select' => 'id',
-            'where' => array('deleted' => 0),
+            'where' => array('type' => 'web'),
             'sort_by' => 'id DESC',
             'limit' => $config['per_page'],
             'offset' => $this->uri->segment(4) ? ($this->uri->segment(4) - 1)*$config['per_page'] : 0
@@ -46,7 +46,7 @@ class User extends MY_Controller {
         $sql_like = $user_search['keyword'] ? "(`username` LIKE '%".$user_search['keyword']."%' ESCAPE '!' OR  `fullname` LIKE '%".$user_search['keyword']."%' ESCAPE '!' ) AND " : '';
         $sql_where = $user_search['branch_id'] ? "branch_id = '".$user_search['branch_id']."' AND " : '';
         //Count
-        $count_all = $this->user_model->get_query("SELECT COUNT(id) FROM th_users WHERE $sql_like $sql_where deleted = 0", FALSE);
+        $count_all = $this->user_model->get_query("SELECT COUNT(id) FROM ".$this->db->dbprefix."users WHERE $sql_like $sql_where type = 'web' AND deleted = 0", FALSE);
         //Pagination
         $config = $this->pagination_mylib->bootstrap_configs();
         $config['base_url'] = base_url('acp/user/search/page');
@@ -57,7 +57,7 @@ class User extends MY_Controller {
         $this->pagination->initialize($config);
         //List
         $offset = $this->uri->segment(5) ? ($this->uri->segment(5) - 1)*$config['per_page'] : 0;
-        $this->data['rows'] = $this->user_model->get_query("SELECT id FROM th_users WHERE $sql_like $sql_where deleted = 0 LIMIT ".$config['per_page']." OFFSET " . $offset);
+        $this->data['rows'] = $this->user_model->get_query("SELECT id FROM ".$this->db->dbprefix."users WHERE $sql_like $sql_where type = 'web' AND deleted = 0 LIMIT ".$config['per_page']." OFFSET " . $offset);
 
         $this->data['branches'] = $this->branch_model->get_rows();
         $this->load->view('backend/layout/header', $this->data);

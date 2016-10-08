@@ -21,4 +21,13 @@ class Branch_model extends MY_Model
         
         return $data;
     }
+    
+    public function delete_data($id)
+    {
+        // Check User
+        
+        // Check Land
+        
+        return $this->delete($id);
+    }
 }

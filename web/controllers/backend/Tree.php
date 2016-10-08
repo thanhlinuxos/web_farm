@@ -42,6 +42,7 @@ class Tree extends MY_Controller {
             
             if($this->form_validation->run() == TRUE)
             {
+                $post['created_at'] = now();
                 $result = $this->tree_model->create_tree($post);
                 if($result)
                 {

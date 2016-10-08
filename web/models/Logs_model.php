@@ -3,7 +3,15 @@ class Logs_model extends MY_Model
 {
     public function __construct()
     {
-        parent::__construct('logs');
+        $this->load->dbforge();
+        $table = 'logs_' . date('Y');
+        if (!$this->db->table_exists($table)) {
+            $this->create_table($table);
+        }
+        $logs_search = $this->session->userdata('logs_search');
+        $table_name = isset($logs_search['table_name']) ? $logs_search['table_name'] : $table;
+        // Construct
+        parent::__construct($table_name);
     }
     
     public function convert_data($data = array())
@@ -40,15 +48,19 @@ class Logs_model extends MY_Model
             }
             
             if($write) {
+                $logs_search = $this->session->userdata('logs_search');
+                $logs_search['table_name'] = 'logs_'.date('Y');
+                $this->session->set_userdata('logs_search', $logs_search);
+                
                 $user_login = $this->session->userdata('user_login');
-                $this->load->library('user_agent');
+                
                 if ($this->agent->is_browser()) {
                     $agent = $this->agent->browser().' '.$this->agent->version();
-                } elseif ($this->agent->is_robot()) {
+                } else if($this->agent->is_robot()) {
                     $agent = $this->agent->robot();
-                } elseif ($this->agent->is_mobile()) {
+                } else if($this->agent->is_mobile()) {
                     $agent = $this->agent->mobile();
-                } else{
+                } else {
                     $agent = 'Unidentified User Agent';
                 }
                 $data = array(
@@ -69,5 +81,96 @@ class Logs_model extends MY_Model
         }
         
         return FALSE;
+    }
+    
+    public function table_list()
+    {
+        $list = array();
+        $this->load->driver('cache', $this->config->item('cache'));
+        
+        if(!$tables = $this->cache->get($this->db->database . '_list_tables')) {
+            $tables = $this->db->list_tables();
+            $this->cache->save($this->db->database . '_list_tables', $tables, 36000);
+        }
+            
+        foreach ($tables as $table)
+        {
+            if(strpos($table, $this->db->dbprefix('logs')) !== FALSE) {
+                $list[] = str_replace($this->db->dbprefix, '', $table);
+            }
+        }
+        arsort($list);
+        return $list;
+    }
+
+    private function create_table($table_name = NULL)
+    {
+        if($table_name !== NULL)
+        {
+            $fields = array(
+                'id' => array(
+                    'type' => 'INT',
+                    'constraint' => 10,
+                    'unsigned' => TRUE,
+                    'auto_increment' => TRUE
+                ),
+                'action_key' => array(
+                    'type' => 'VARCHAR',
+                    'constraint' => '50',
+                    'null' => TRUE,
+                ),
+                'content' => array(
+                    'type' => 'TEXT',
+                    'null' => TRUE,
+                ),
+                'ip' => array(
+                    'type' => 'VARCHAR',
+                    'constraint' => '20',
+                    'null' => TRUE,
+                ),
+                'browser' => array(
+                    'type' => 'TEXT',
+                    'null' => TRUE,
+                ),
+                'os' => array(
+                    'type' => 'VARCHAR',
+                    'constraint' => '20',
+                    'null' => TRUE,
+                ),
+                'user_id' => array(
+                    'type' => 'SMALLINT',
+                    'constraint' => '5',
+                    'default' => '0',
+                    'unsigned' => TRUE,
+                ),
+                'username' => array(
+                    'type' => 'VARCHAR',
+                    'constraint' => '50',
+                    'null' => TRUE,
+                ),
+                'fullname' => array(
+                    'type' => 'VARCHAR',
+                    'constraint' => '50',
+                    'null' => TRUE,
+                ),
+                'created_at' => array(
+                    'type' => 'INT',
+                    'constraint' => '10',
+                    'default' => '0',
+                    'unsigned' => TRUE,
+                ),
+                'deleted' => array(
+                    'type' => 'INT',
+                    'constraint' => '10',
+                    'default' => '0',
+                    'unsigned' => TRUE,
+                )
+            );
+            $this->dbforge->add_field($fields);
+            $this->dbforge->add_key('id', TRUE);
+            $this->dbforge->create_table($table_name, TRUE, array('ENGINE' => 'InnoDB'));
+            // Clean cache
+            $this->cache->delete($this->db->database . '_list_tables');
+        }
     }
 }

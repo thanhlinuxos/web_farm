@@ -44,10 +44,14 @@
                         <td><?php echo $row['gender_']?></td>
                         <td><?php echo $row['status_']?></td>
                         <td>
-                            <a href="<?php echo base_url('acp/user/edit/'.$row['id']);?>" class="btn btn-warning btn-xs"><?php echo $this->lang->line('btn_edit'); ?></a>
-                            <button class="btn btn-danger btn-xs" onclick="delete_confirm('Delete User', 'Are you sure?', 'acp/user/delete/<?php echo $row['id'];?>')">
-                                <?php echo $this->lang->line('btn_delete'); ?>
-                            </button>
+                            <ul class="list-inline">
+                                <li><a href="<?php echo base_url('acp/user/edit/'.$row['id']);?>" class="btn btn-warning btn-xs"><?php echo $this->lang->line('btn_edit'); ?></a></li>
+                                <li>
+                                    <button class="btn btn-danger btn-xs" onclick="delete_confirm('Delete User', 'Are you sure?', 'acp/user/delete/<?php echo $row['id'];?>')">
+                                        <?php echo $this->lang->line('btn_delete'); ?>
+                                    </button>
+                                </li>
+                            </ul>
                         </td>
                     </tr>
             <?php

@@ -22,30 +22,39 @@
     <div class="col-sm-3">
         <nav>
             <ul class="nav">
-                <li>
-                    <a href="#" id="btn-1" data-toggle="collapse" data-target="#submenu1" aria-expanded="true"><strong>2016</strong><span class="caret"></span></a>
-                    <ul class="nav collapse" id="submenu1" role="menu" aria-labelledby="btn-1">
-                        <li>
-                            <a href="#" id="btn-2" data-toggle="collapse" data-target="#submenu2" aria-expanded="false"><strong>--- 06</strong><span class="caret"></span></a>
-                            <ul class="nav collapse" id="submenu2" role="menu" aria-labelledby="btn-2">
-                                <li><a href="#"><strong>------ log-2016-06-10</strong></a></li>
-                                <li><a href="#">------ log-2016-06-11</a></li>
-                                <li><a href="#">------ log-2016-06-12</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#">--- 07</a></li>
-                        <li><a href="#">--- 08</a></li>
-                    </ul>
-                </li>
-                <li><a href="#">2017</a></li>
-                <li><a href="#">2018</a></li>
+                <?php
+                foreach ($logs_map as $key => $values) {
+                    if(is_string($key)) {
+                        echo "<li>";
+                        echo "<a href='#' id='btn-".str_replace('\\', '', $key)."' data-toggle='collapse' data-target='#submenu-".str_replace('\\', '', $key)."' aria-expanded='true'>".str_replace('\\', '/', $key)."</a>";
+                        if(count($values)) {
+                            echo "<ul class='nav collapse' id='submenu-".str_replace('\\', '', $key)."' role='menu' aria-labelledby='btn-".str_replace('\\', '', $key)."'>";
+                            foreach ($values as $k => $v) {
+                                if(is_string($k)) {
+                                    echo "<li>";
+                                    echo "<a href='#' id='btn-".str_replace('\\', '', $key)."-".str_replace('\\', '', $k)."' data-toggle='collapse' data-target='#submenu-".str_replace('\\', '', $key)."-".str_replace('\\', '', $k)."' aria-expanded='false'>--- ".str_replace('\\', '/', $k)."</a>";
+                                    if(count($v)) {
+                                        echo "<ul class='nav collapse' id='submenu-".str_replace('\\', '', $key)."-".str_replace('\\', '', $k)."' role='menu' aria-labelledby='btn-".str_replace('\\', '', $key)."-".str_replace('\\', '', $k)."'>";
+                                        foreach ($v as $file) {
+                                            $date = str_replace(array('.txt','log-'), '', $file);
+                                            echo "<li><a href='".  base_url('acp/logs/server?date='. nice_date($date, 'd-m-Y')) ."'>------ ".$file."</a></li>";
+                                        }
+                                        echo "</ul>";
+                                    }
+                                    echo "</li>";
+                                }
+                            }
+                            echo "</ul>";
+                        }                        
+                        echo "</li>";
+                    }
+                }
+                ?>
+               
             </ul>
         </nav>
     </div>
 </div>
-
-
-
 <div class="row">
     <div class="col-sm-12 text-center">
         <a href="<?php echo base_url('acp/logs'); ?>" class="btn btn-default btn-md"><?php echo $this->lang->line('btn_back'); ?></a>

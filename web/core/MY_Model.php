@@ -38,7 +38,7 @@ class MY_Model extends CI_Model
         $this->CI->load->database();
 
         if (!is_null($table)) {
-            $this->load->driver('cache', array('adapter' => 'memcached', 'backup' => 'file', 'key_prefix' => 'mc_')); //
+            $this->load->driver('cache', $this->config->item('cache'));
             $this->table = $this->db->dbprefix($table);
             
             if(!$this->fields = $this->cache->get($this->table . '_list_fields')) {
@@ -168,8 +168,8 @@ class MY_Model extends CI_Model
         // string or array(field1 => value1, field2 => value2, ...)
         if (isset($input['where'])) {
             if(is_array($input['where']) && count($input['where']) > 0) {
-                if (!isset($input['deleted'])) {
-                    $conditions['deleted'] = 0;
+                if (!isset($input['where']['deleted'])) {
+                    $input['where']['deleted'] = 0;
                 }
                 $this->db->where($input['where']);
             } else if(is_string($input['where']) && $input['where']) {
@@ -180,6 +180,8 @@ class MY_Model extends CI_Model
             } else {
                 show_error("Method: get_row() CRUD : Param WHERE must be ARRAY OR STRING and NOT empty!");
             }
+        } else {
+            $this->db->where('deleted', 0);
         }
         // WHERE IN
         // string field and array(value1, value2, ...)
@@ -250,6 +252,12 @@ class MY_Model extends CI_Model
         return $query->result_array();
     }
     
+    /**
+     * Get data with string query
+     * @param type $str
+     * @param type $type
+     * @return boolean
+     */
     public function get_query($str = '', $type = TRUE)
     {
         if($str != '')
@@ -259,32 +267,6 @@ class MY_Model extends CI_Model
             return $type ? $query->result_array() : $query->row_array();
         }
         return FALSE;
-    }
-
-    /**
-     * Get sum
-     * return @numberic
-     */
-    public function get_sum($field = '', $where = null) {
-        if ($field == '') {
-            return false;
-        }
-
-        if (!in_array($field, $this->fields)) {
-            show_error("Method: get_sum() CRUD : '$field' not in fields of table '$this->table'");
-        }
-
-        if (!is_null($where)) {
-            $this->db->where($where);
-        }
-
-        $this->db->select_sum($field);
-
-        $query = $this->db->get($this->table);
-
-        $row = $query->row_array();
-
-        return $row[$field];
     }
 
     /**
@@ -309,8 +291,18 @@ class MY_Model extends CI_Model
      * @return number
      */
     public function count_all($where = null) {
-        if (!is_null($where)) {
+        if(is_array($where)) {
+            if(!isset($where['deleted'])) {
+                $where['deleted'] = 0;
+            }
             $this->db->where($where);
+        } else if(is_string($where)) {
+            if(strpos($where, 'deleted') === FALSE) {
+                $this->db->where('deleted', 0);
+            }
+            $this->db->where($where);
+        } else {
+            $this->db->wherewhere('deleted', 0);
         }
         return $this->db->count_all_results($this->table);
     }
